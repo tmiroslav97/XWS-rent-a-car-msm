@@ -7,6 +7,7 @@ import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Builder
@@ -35,6 +36,9 @@ public class User implements UserDetails {
 
     @Column(name = DbColumnConstants.LASTNAME)
     private String lastName;
+
+    @Column(name= DbColumnConstants.LASTPASSWORDRESETDATE)
+    private Timestamp lastPasswordResetDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = DbTableConstants.USERAUTHORITY,
