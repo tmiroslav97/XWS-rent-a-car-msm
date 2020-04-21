@@ -13,39 +13,40 @@ class HttpBaseClient {
 
     setInterceptor = () => {
         this.client.interceptors.request.use(config => {
-            const token = window.localStorage.getItem('token');
+            const token = window.localStorage.getItem("token");
 
-            if(!!token){
-                Object.assign(config.headers,{
+            if (!!token) {
+                Object.assign(config.headers, {
                     Authorization: `Bearer ${token}`
                 });
             }
+
+            return config;
         });
 
-        this.client.interceptors.response.use(function (response){
+        this.client.interceptors.response.use(function (response) {
             return response;
-        },function(error){
-            const { status, data, config }  = error.response;
-            //if(status === 401){
+        }, function (error) {
+            const { status, data, config } = error.response;
+            //if (status === 401) {
                 //history.push('/unauthorized');
             //}
             
             throw error;
         });
-
     };
 
-    attachHeaders(headers){
+    attachHeaders(headers) {
         Object.assign(this.client.defaults.headers, headers);
-    };
-    
-    detachHeaders(headerKey){
-        delete this.client.defaults.headers[headerKey];
-    };
+    }
 
-    getApiClient(){
+    detachHeader(headerKey) {
+        delete this.client.defaults.headers[headerKey];
+    }
+
+    getApiClient() {
         return this.client;
-    };
+    }
 
 };
 

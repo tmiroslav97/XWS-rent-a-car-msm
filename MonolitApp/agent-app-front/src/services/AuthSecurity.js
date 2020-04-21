@@ -10,14 +10,14 @@ const FINALPOINTS = {
 class AuthSecurity extends HttpBaseClient {
 
     login = async payload => {
-        const data = await this.getApiClient().post(
+        const response  = await this.getApiClient().post(
             FINALPOINTS.LOGIN,
             payload
         );
         
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('token', response.data);
 
-        return data ;
+        return response.data;
     };
 
 };
