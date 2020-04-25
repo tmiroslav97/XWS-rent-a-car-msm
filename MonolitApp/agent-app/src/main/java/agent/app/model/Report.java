@@ -32,5 +32,5 @@ public class Report {
     private Car car;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private PublisherUser publisher;
+    private PublisherUser publisherUser;
 }

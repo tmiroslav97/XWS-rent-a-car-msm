@@ -16,8 +16,8 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = DbTableConstants.MESSAGE)
-public class Message {
+@Table(name = DbTableConstants.CAROCCUPATIONTERMS)
+public class CarOccupationTerms {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,17 +28,17 @@ public class Message {
             @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
             @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
     })
-    @Column(name = DbColumnConstants.SENDDATE, nullable = false)
-    private DateTime sendDate;
+    @Column(name = DbColumnConstants.STARTDATE, nullable = false)
+    private DateTime startDate;
 
-    @Column(name = DbColumnConstants.CONTENT, nullable = false)
-    private String content;
+    @Temporal(TemporalType.DATE)
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
+            @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
+            @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
+    })
+    @Column(name = DbColumnConstants.ENDDATE, nullable = false)
+    private DateTime endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Request request;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PublisherUser owner;
-
-
+    private Ad ad;
 }
