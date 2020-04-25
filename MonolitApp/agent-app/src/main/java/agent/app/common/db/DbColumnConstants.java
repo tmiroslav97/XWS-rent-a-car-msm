@@ -47,4 +47,5 @@ public class DbColumnConstants {
     public static final String OBLIGED = "obliged";
     public static final String CANCELEDCNT = "canceledCnt";
     public static final String SENDDATE = "sendDate";
+    public static final String COVERPHOTO = "coverPhoto";
 }

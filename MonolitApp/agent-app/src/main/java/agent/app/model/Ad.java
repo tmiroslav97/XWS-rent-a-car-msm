@@ -30,6 +30,9 @@ public class Ad {
     @Column(name = DbColumnConstants.LOCATION, nullable = false)
     private String location;
 
+    @Column(name = DbColumnConstants.COVERPHOTO, nullable = false)
+    private String coverPhoto;
+
     @Enumerated(EnumType.STRING)
     @Column(name = DbColumnConstants.DISTANCELIMITFLAG, nullable = false)
     private DistanceLimitEnum distanceLimitFlag;
@@ -58,7 +61,7 @@ public class Ad {
     private Boolean enabled;
 
     @Column(name = DbColumnConstants.RENTCNT, nullable = false)
-    private Long rentCnt;
+    private Long rentCnt = 0L;
 
     @OneToOne(fetch = FetchType.EAGER)
     private Car car;
