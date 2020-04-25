@@ -6,9 +6,11 @@ import agent.app.dto.AdCreateDTO;
 import agent.app.dto.AdPageDTO;
 import agent.app.model.Ad;
 import agent.app.model.Car;
+import agent.app.model.PriceList;
 import agent.app.repository.AdRepository;
 import agent.app.service.intf.AdService;
 import agent.app.service.intf.CarService;
+import agent.app.service.intf.PriceListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +29,9 @@ public class AdServiceImpl implements AdService {
 
     @Autowired
     private CarService carService;
+
+    @Autowired
+    private PriceListService priceListService;
 
     @Override
     public Ad findById(Long id) {
@@ -54,8 +59,14 @@ public class AdServiceImpl implements AdService {
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
         ad.setCar(car);
 
+        //pravljenje novog cenovnika
+        PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
+        ad.setPriceList(priceList);
+        ad = save(ad);
 
-        return null;
+        //dodavanje u vec postojeci cenovnik
+        //napraviti polje u PriceList-i
+        return ad;
     }
 
     @Override

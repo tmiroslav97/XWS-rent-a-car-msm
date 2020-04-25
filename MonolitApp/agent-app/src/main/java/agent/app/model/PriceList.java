@@ -2,10 +2,7 @@ package agent.app.model;
 
 import agent.app.common.db.DbColumnConstants;
 import agent.app.common.db.DbTableConstants;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -18,6 +15,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
+@Builder
 @Table(name = DbTableConstants.PRICELIST)
 public class PriceList {
 
