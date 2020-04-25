@@ -15,5 +15,4 @@ public class AdPageDTO {
     private String location;
     private Float price;
 
-
 }

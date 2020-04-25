@@ -1,5 +1,6 @@
 package agent.app.service.intf;
 
+import agent.app.dto.AdPageDTO;
 import agent.app.model.Ad;
 import java.util.List;
 
@@ -8,4 +9,6 @@ public interface AdService {
     List<Ad> findAll();
     Ad save(Ad ad);
     void delete(Long id);
+
+    AdPageDTO findAllPageAd(Integer pageCnt, Integer adCnt, String sortStr);
 }
