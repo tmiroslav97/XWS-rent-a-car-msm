@@ -30,15 +30,15 @@ const LoginPage = () => {
     return (
         <Container>
             <Row>
-                <Col md={{ span: 5, offset: 3 }} xs={12}>
+                <Col md={{ span: 3, offset: 3 }} xs={12}>
                     <h2 className="border-bottom">Login</h2>
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 5, offset: 3 }} xs={12}>
+                <Col md={{ span: 3, offset: 3 }} xs={12}>
                     <Form noValidate validated={validated} id="logForm" onSubmit={handleLogin}>
                         <Form.Row>
-                            <Form.Group as={Col} md="6">
+                            <Form.Group>
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control required type="email" id="txtEmail" placeholder="Enter email"
                                     onChange={({ currentTarget }) => {
@@ -47,7 +47,7 @@ const LoginPage = () => {
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
-                            <Form.Group as={Col} md="6">
+                            <Form.Group>
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control required type="password" id="txtPass" pattern=".{5,25}" placeholder="Password"
                                     onChange={({ currentTarget }) => {

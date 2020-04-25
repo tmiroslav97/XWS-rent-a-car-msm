@@ -1,6 +1,7 @@
 package agent.app.controller;
 
 import agent.app.authentication.JwtAuthenticationRequest;
+import agent.app.dto.SignUpDTO;
 import agent.app.service.intf.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,4 +26,8 @@ public class AuthenticationController {
         return new ResponseEntity<>(authenticationService.login(authenticationRequest), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+    public ResponseEntity<String> signUp(@RequestBody SignUpDTO signUpDTO){
+        return new ResponseEntity<>(authenticationService.signUp(signUpDTO), HttpStatus.OK);
+    }
 }
