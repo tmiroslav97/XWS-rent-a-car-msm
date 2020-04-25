@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import store from './store';
 import AppRouter from './AppRouter';
-import NavBar from './pages/NavBar';
+import NavBar from './components/NavBar';
 
 export const history = createBrowserHistory();
 

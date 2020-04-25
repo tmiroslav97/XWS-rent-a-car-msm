@@ -1,6 +1,8 @@
 import { take, put, call, select } from 'redux-saga/effects';
 import { history } from '../../index';
 
+import AuthSecurity from '../../services/AuthSecurity';
+
 import {
     LOGIN
 } from './constants';
@@ -11,6 +13,8 @@ import {
 
 export function* loginUser(){
     const { payload } = yield take(LOGIN);
-    //data = yield call(ime_servisa.funkcija);
+    const data = yield call(AuthSecurity.login, payload);    
     yield put(putToken(data));
+
+    history.push('/');
 }

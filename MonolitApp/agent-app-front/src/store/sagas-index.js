@@ -21,7 +21,7 @@ export default function* rootSaga() {
             } catch (e) {
               //yield put(putErrorMsg(e.message));
               //yield put(putErrorMsg(null));
-              console.log(e.message);
+              console.log(e.data);
             }
           }
         })
