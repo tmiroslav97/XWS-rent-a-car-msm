@@ -18,5 +18,12 @@ public class DbColumnConstants {
     public static final String CDW = "cdw";
     public static final String ANDROIDFLAG = "androidFlag";
     public static final String TOKEN = "token";
+    public static final String ADDRESS = "address";
+    public static final String PMB = "pmb";
+    public static final String FIRMNAME = "firmName";
+    public static final String DESCRIPTION = "description";
+    public static final String DISTANCETRAVELED = "distanceTraveled";
+    public static final String PUBLISHER = "publisher";
+
 
 }
