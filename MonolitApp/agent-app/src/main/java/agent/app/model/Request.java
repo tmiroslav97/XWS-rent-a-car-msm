@@ -58,7 +58,7 @@ public class Request {
     @Column(name = DbColumnConstants.LOCATION, nullable = false)
     private String location;
 
-    @Column(name = DbColumnConstants.LOCATION, nullable = false)
+    @Column(name = DbColumnConstants.BUNDLE, nullable = false)
     private Boolean bundle;
 
     @ManyToMany(fetch = FetchType.LAZY)

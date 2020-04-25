@@ -47,7 +47,7 @@ public class Ad {
     @Column(name = DbColumnConstants.RATINGNUM, nullable = false)
     private Long ratingNum = 0L;
 
-    @Column(name = DbColumnConstants.RATINGNUM, nullable = false)
+    @Column(name = DbColumnConstants.RATINGCOUNT, nullable = false)
     private Long ratingCnt = 0L;
 
     @Column(name = DbColumnConstants.DELETED, nullable = false)
