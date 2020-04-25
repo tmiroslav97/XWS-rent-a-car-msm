@@ -2,6 +2,7 @@ package agent.app.service.impl;
 
 import agent.app.model.User;
 import agent.app.repository.UserRepository;
+import agent.app.service.intf.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService, UserService {
     protected final Log LOGGER = LogFactory.getLog(getClass());
 
     @Autowired
@@ -35,5 +38,25 @@ public class CustomUserDetailsService implements UserDetailsService {
             System.out.println();
             return user;
         }
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseGet(null);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
     }
 }
