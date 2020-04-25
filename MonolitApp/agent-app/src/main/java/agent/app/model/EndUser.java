@@ -10,8 +10,6 @@ public class EndUser extends PublisherUser {
 
     private Boolean obliged;
 
-    private Set<Ad> ads;
-
     private Set<Request> requests;
 
     private Integer canceledCnt;

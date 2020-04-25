@@ -1,43 +1,27 @@
 package agent.app.model;
 
-
 import agent.app.common.db.DbColumnConstants;
 import agent.app.common.db.DbTableConstants;
-import agent.app.model.enumeration.RequestStatusEnum;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.util.Set;
 
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-@Builder
 @Entity
-@Table(name = DbTableConstants.REQUEST)
-public class Request {
+@Table(name = DbTableConstants.CAROCCUPATIONTERMS)
+public class CarOccupationTerms {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = DbColumnConstants.STATUS, nullable = false)
-    private RequestStatusEnum status;
-
-    @Temporal(TemporalType.DATE)
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
-            @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
-            @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
-    })
-    @Column(name = DbColumnConstants.SUBMITDATE, nullable = false)
-    private DateTime submitDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private EndUser endUser;
 
     @Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
@@ -55,13 +39,6 @@ public class Request {
     @Column(name = DbColumnConstants.ENDDATE, nullable = false)
     private DateTime endDate;
 
-    @Column(name = DbColumnConstants.LOCATION, nullable = false)
-    private String location;
-
-    @Column(name = DbColumnConstants.LOCATION, nullable = false)
-    private Boolean bundle;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Ad> ads;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Ad ad;
 }

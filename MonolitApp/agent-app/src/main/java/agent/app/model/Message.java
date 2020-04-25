@@ -12,8 +12,7 @@ public class Message {
 
     private Request request;
 
-    private PublisherUser sender;
+    private PublisherUser owner;
 
-    private PublisherUser reciever;
 
 }
