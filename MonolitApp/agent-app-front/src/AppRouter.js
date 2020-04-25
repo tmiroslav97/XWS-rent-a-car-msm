@@ -9,6 +9,9 @@ const AppRouter = () => {
     <Switch>
       <Route exact path="/" component={HomePage}/>
       <Route exact path="/login" component={LoginPage}/>
+
+      <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
+      <Redirect from="*" to="/page-not-found" />
     </Switch>
   );
 }

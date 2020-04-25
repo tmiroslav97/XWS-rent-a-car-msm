@@ -1,5 +1,4 @@
 import HttpBaseClient from './HttpBaseClient';
-import { history } from '../index';
 
 const FINALPOINTS = {
     LOGIN: '/auth/login',

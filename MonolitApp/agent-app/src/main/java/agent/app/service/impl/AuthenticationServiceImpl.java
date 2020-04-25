@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -37,9 +38,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         User user = (User) authentication.getPrincipal();
-        List<String> roles = (List<String>) user.getAuthorities().stream().map(authority -> authority.getName());
+        List<String> roles =  user.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList());
         String jwt = tokenUtils.generateToken(user.getEmail(), roles);
-
         return jwt;
     }
 }
