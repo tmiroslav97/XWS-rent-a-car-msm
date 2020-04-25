@@ -1,17 +1,23 @@
 package agent.app.service.impl;
 
+
 import agent.app.converter.AdConverter;
 import agent.app.dto.AdCreateDTO;
+import agent.app.dto.AdPageDTO;
 import agent.app.model.Ad;
 import agent.app.model.Car;
 import agent.app.repository.AdRepository;
 import agent.app.service.intf.AdService;
 import agent.app.service.intf.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
+
 
 @Service
 public class AdServiceImpl implements AdService {
@@ -47,6 +53,27 @@ public class AdServiceImpl implements AdService {
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
         ad.setCar(car);
+
+
+        return null;
+    }
+
+    @Override
+    public AdPageDTO findAllPageAd(Integer pageCnt, Integer adCnt, String sortStr) {
+        Pageable pageable;
+        if(sortStr.equals("-")){
+            pageable = PageRequest.of(pageCnt, adCnt);
+        }else{
+            String par[] = sortStr.split(" ");
+            if(par[1].equals("opadajuce")) {
+                pageable = PageRequest.of(pageCnt, adCnt, Sort.by(par[0]).descending());
+            }else{
+                pageable = PageRequest.of(pageCnt, adCnt, Sort.by(par[0]).ascending());
+            }
+
+        }
+
+        Page<Ad> ads =  adRepository.findAll(pageable);
 
 
 
