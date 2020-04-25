@@ -4,6 +4,8 @@ import agent.app.common.db.DbColumnConstants;
 import agent.app.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -38,7 +40,12 @@ public class User implements UserDetails {
     private String lastName;
 
     @Column(name= DbColumnConstants.LASTPASSWORDRESETDATE)
-    private Timestamp lastPasswordResetDate;
+    @Temporal(TemporalType.DATE)
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
+            @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
+            @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
+    })
+    private DateTime lastPasswordResetDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = DbTableConstants.USERAUTHORITY,
