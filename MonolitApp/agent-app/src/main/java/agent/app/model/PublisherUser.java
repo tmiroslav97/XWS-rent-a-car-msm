@@ -23,15 +23,15 @@ public class PublisherUser extends User {
    private Set<Ad> ads = new HashSet<>();
 
    @OneToMany(mappedBy = "publisherUser", fetch = FetchType.LAZY)
-   private Set<PriceList> priceLists;
+   private Set<PriceList> priceLists = new HashSet<>();
 
    @OneToMany(mappedBy = "publisherUser", fetch = FetchType.LAZY)
-   private Set<Comment> comments;
+   private Set<Comment> comments = new HashSet<>();
 
    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
-   private Set<Message> inbox;
+   private Set<Message> inbox = new HashSet<>();
 
-   @OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY)
-   private Set<Report> reports;
+   @OneToMany(mappedBy = "publisherUser", fetch = FetchType.LAZY)
+   private Set<Report> reports = new HashSet<>();
 
 }

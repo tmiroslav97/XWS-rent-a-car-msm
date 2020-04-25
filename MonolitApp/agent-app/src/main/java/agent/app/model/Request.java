@@ -9,6 +9,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @ToString
@@ -62,6 +63,9 @@ public class Request {
     private Boolean bundle;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Ad> ads;
+    private Set<Ad> ads = new HashSet<>();
+
+    @OneToMany(mappedBy = "request",fetch = FetchType.LAZY)
+    private Set<Message> messages = new HashSet<>();
 
 }

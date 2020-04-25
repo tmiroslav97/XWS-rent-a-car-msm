@@ -43,6 +43,8 @@ public class DbColumnConstants {
     public static final String FIRMNAME = "firmName";
     public static final String DESCRIPTION = "description";
     public static final String DISTANCETRAVELED = "distanceTraveled";
-
-
+    public static final String ADLIMITNUM = "adLimitNum";
+    public static final String OBLIGED = "obliged";
+    public static final String CANCELEDCNT = "canceledCnt";
+    public static final String SENDDATE = "sendDate";
 }

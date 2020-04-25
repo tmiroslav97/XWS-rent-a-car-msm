@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @ToString
@@ -63,10 +64,10 @@ public class Ad {
     private Car car;
 
     @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY)
-    private Set<CarOccupationTerms> carOccupationTerms;
+    private Set<CarOccupationTerms> carOccupationTerms = new HashSet<>();
 
     @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY )
-    private Set<Comment> comments;
+    private Set<Comment> comments = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private PublisherUser publisherUser;
@@ -75,10 +76,10 @@ public class Ad {
     private PriceList priceList;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<DiscountList> discountLists;
+    private Set<DiscountList> discountLists = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Request> requests;
+    private Set<Request> requests = new HashSet<>();
 
 
 

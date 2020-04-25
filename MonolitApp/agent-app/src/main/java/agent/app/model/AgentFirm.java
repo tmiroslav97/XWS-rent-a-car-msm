@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CollectionId;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -29,5 +30,5 @@ public class AgentFirm extends PublisherUser {
     private String firmName;
 
     @OneToMany(mappedBy = "agentFirm", fetch = FetchType.LAZY)
-    private Set<DiscountList> discountLists;
+    private Set<DiscountList> discountLists = new HashSet<>();
 }

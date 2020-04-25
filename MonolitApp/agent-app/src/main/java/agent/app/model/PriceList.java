@@ -10,6 +10,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -42,7 +43,7 @@ public class PriceList {
    private PublisherUser publisherUser;
 
    @OneToMany(mappedBy = "priceList", fetch = FetchType.LAZY)
-   private Set<Ad> ads;
+   private Set<Ad> ads = new HashSet<>();
    
  
 }

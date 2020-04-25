@@ -10,6 +10,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -46,6 +47,6 @@ public class DiscountList {
     private AgentFirm agentFirm;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Ad> ads;
+    private Set<Ad> ads = new HashSet<>();
 
 }
