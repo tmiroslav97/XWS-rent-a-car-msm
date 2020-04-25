@@ -61,7 +61,7 @@ public class Ad {
     private Boolean enabled;
 
     @Column(name = DbColumnConstants.RENTCNT, nullable = false)
-    private Long rentCnt;
+    private Long rentCnt = 0L;
 
     @OneToOne(fetch = FetchType.EAGER)
     private Car car;
