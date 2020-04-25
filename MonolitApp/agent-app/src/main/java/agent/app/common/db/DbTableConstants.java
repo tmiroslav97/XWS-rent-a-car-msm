@@ -7,5 +7,8 @@ public class DbTableConstants {
     public static final String CAR = "car";
     public static final String CARMODELCODEBOOK = "carModelCodebook";
     public static final String CARTYPECODEBOOK = "carTypeCodebook";
+    public static final String GEARBOXTYPECODEBOOK = "gearboxTypeCodebook";
+    public static final String FUELTYPECODEBOOK = "fuelTypeCodebook";
+
 
 }

@@ -1,5 +1,6 @@
 package agent.app.model;
 
+
 import agent.app.common.db.DbColumnConstants;
 import agent.app.common.db.DbTableConstants;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = DbTableConstants.FUELTYPECODEBOOK)
-public class FuelTypeCodebook {
+@Table(name = DbTableConstants.GEARBOXTYPECODEBOOK)
+public class GearboxTypeCodebook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
