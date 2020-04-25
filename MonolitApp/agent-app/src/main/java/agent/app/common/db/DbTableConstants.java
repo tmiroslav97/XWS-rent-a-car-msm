@@ -5,4 +5,7 @@ public class DbTableConstants {
     public static final String AUTHORITY = "authority";
     public static final String USERAUTHORITY = "userAuthority";
     public static final String CAR = "car";
+    public static final String CARMODELCODEBOOK = "carModelCodebook";
+    public static final String CARTYPECODEBOOK = "carTypeCodebook";
+
 }
