@@ -10,6 +10,6 @@ import java.awt.print.Pageable;
 @Repository
 public interface AdRepository extends JpaRepository<Ad,Long> {
 
-    Page<Ad> findAll(Pageable pageable);
+
 
 }

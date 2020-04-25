@@ -1,6 +1,7 @@
 package agent.app.converter;
 
 import agent.app.dto.AdCreateDTO;
+import agent.app.dto.AdPageDTO;
 import agent.app.model.Ad;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -26,6 +27,14 @@ public class AdConverter {
                 .rentCnt(0L)
                 .ratingCnt(0L)
                 .ratingNum(0L)
+                .build();
+    }
+
+    public static AdPageDTO toCreateAdPageDTOFromAd(Ad ad){
+        return AdPageDTO.builder()
+                .name(ad.getName())
+                .location(ad.getLocation())
+                .coverPhoto(ad.getCoverPhoto())
                 .build();
     }
 }
