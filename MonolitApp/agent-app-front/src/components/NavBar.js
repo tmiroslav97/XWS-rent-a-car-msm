@@ -23,7 +23,7 @@ const NavBar = () => {
                 </Nav>
                 <Nav className="ml-auto">
                     {token == null && <Nav.Link href="#" onClick={() => { history.push('/login') }}>Login</Nav.Link>}
-                    {token == null && <Nav.Link href="#" onClick={() => { history.push('/reg') }}>Sign up</Nav.Link>}
+                    {token == null && <Nav.Link href="#" onClick={() => { history.push('/sign-up') }}>Sign up</Nav.Link>}
                     {token != null && <Nav.Link href="#" onClick={() =>  handleSignOut()}>Sign out</Nav.Link>}
                 </Nav>
 

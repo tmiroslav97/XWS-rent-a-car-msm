@@ -1,7 +1,13 @@
 import {
     LOGIN,
-    PUT_TOKEN
+    PUT_TOKEN,
+    REGISTER_USER
 } from './constants';
+
+export const registerUser = payload => ({
+    type: REGISTER_USER,
+    payload
+});
 
 export const putToken = payload => ({
     type: PUT_TOKEN,
