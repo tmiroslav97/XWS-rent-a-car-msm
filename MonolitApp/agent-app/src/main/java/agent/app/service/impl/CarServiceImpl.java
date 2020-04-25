@@ -1,5 +1,7 @@
 package agent.app.service.impl;
 
+import agent.app.converter.CarConverter;
+import agent.app.dto.CarCreateDTO;
 import agent.app.model.Car;
 import agent.app.repository.CarRepository;
 import agent.app.service.intf.CarService;
@@ -28,5 +30,12 @@ public class CarServiceImpl implements CarService {
     @Override
     public void delete(Long id) {
         carRepository.delete(finById(id));
+    }
+
+    @Override
+    public Car createCar(CarCreateDTO carCreateDTO) {
+       Car car = CarConverter.toCreateCarFromRequest(carCreateDTO);
+       car = this.carRepository.save(car);
+       return car;
     }
 }
