@@ -2,7 +2,6 @@ package agent.app.dto;
 
 import agent.app.model.enumeration.DistanceLimitEnum;
 import lombok.*;
-import org.joda.time.DateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,13 +9,14 @@ import org.joda.time.DateTime;
 @Setter
 @Builder
 @ToString
-public class AdPageDTO {
+public class AdCreateDTO {
 
     private String name;
     private String coverPhoto;
     private String location;
-    private Float price;
-
-
+    private DistanceLimitEnum distanceLimitFlag;
+    private Float distanceLimit;
+    private CarCreateDTO carCreateDTO;
+    private PriceListCreateDTO priceListCreateDTO;
 
 }
