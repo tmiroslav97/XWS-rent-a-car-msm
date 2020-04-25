@@ -5,6 +5,7 @@ import agent.app.model.User;
 import agent.app.security.TokenUtils;
 import agent.app.service.intf.AuthenticationService;
 
+import agent.app.service.intf.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
 
     @Override
     public String login(JwtAuthenticationRequest jwtAuthenticationRequest) {

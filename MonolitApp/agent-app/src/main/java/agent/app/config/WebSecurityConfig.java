@@ -3,7 +3,7 @@ package agent.app.config;
 import agent.app.authentication.RestAuthenticationEntryPoint;
 import agent.app.authentication.TokenAuthenticationFilter;
 import agent.app.security.TokenUtils;
-import agent.app.service.impl.CustomUserDetailsService;
+import agent.app.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    private CustomUserDetailsService jwtUserDetailsService;
+    private UserServiceImpl jwtUserDetailsService;
 
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
