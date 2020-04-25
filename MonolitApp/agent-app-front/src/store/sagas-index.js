@@ -1,4 +1,4 @@
-import { all, spawn, call, put} from 'redux-saga/effects';
+import { all, spawn, call } from 'redux-saga/effects';
 import flatten from 'lodash/flatten';
 
 import * as userSaga from './user/saga';

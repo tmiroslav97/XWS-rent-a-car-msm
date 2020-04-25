@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { AGENTAPP_BASE } from '../common/agentapp-api';
-import { history } from '../index';
 
 class HttpBaseClient {
 
@@ -27,7 +26,7 @@ class HttpBaseClient {
         this.client.interceptors.response.use(function (response) {
             return response;
         }, function (error) {
-            const { status, data, config } = error.response;
+            //const { status, data, config } = error.response;
             //if (status === 401) {
                 //history.push('/unauthorized');
             //}
