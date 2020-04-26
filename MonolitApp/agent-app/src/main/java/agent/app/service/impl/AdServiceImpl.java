@@ -63,7 +63,6 @@ public class AdServiceImpl implements AdService {
             //pravljenje novog cenovnika
             PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
             ad.setPriceList(priceList);
-
         }else{
             //dodavanje vec postojeceg cenovnika
             PriceList priceList = priceListService.findById(adCreateDTO.getPriceListCreateDTO().getId());

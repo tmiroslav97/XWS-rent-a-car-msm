@@ -2,10 +2,7 @@ package agent.app.model;
 
 import agent.app.common.db.DbColumnConstants;
 import agent.app.common.db.DbTableConstants;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -15,9 +12,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Setter
 @Getter
+@ToString
+@Builder
 @Entity
 @Table(name = DbTableConstants.CAROCCUPATIONTERMS)
-public class CarOccupationTerms {
+public class CarCalendarTerm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -67,7 +67,7 @@ public class Ad {
     private Car car;
 
     @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY)
-    private Set<CarOccupationTerms> carOccupationTerms = new HashSet<>();
+    private Set<CarCalendarTerm> carCalendarTerms = new HashSet<>();
 
     @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY )
     private Set<Comment> comments = new HashSet<>();
