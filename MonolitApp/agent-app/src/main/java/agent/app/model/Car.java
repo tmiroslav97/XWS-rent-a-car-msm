@@ -24,12 +24,12 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.YEAR, nullable = false)
     @Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
             @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
             @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
     })
+    @Column(name = DbColumnConstants.YEAR, nullable = false)
     private DateTime year;
 
     @Column(name = DbColumnConstants.CARMANUFACTURER, nullable = false)

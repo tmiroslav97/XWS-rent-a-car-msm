@@ -3,6 +3,8 @@ package agent.app.dto;
 import agent.app.model.enumeration.DistanceLimitEnum;
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,5 +20,6 @@ public class AdCreateDTO {
     private Float distanceLimit;
     private CarCreateDTO carCreateDTO;
     private PriceListCreateDTO priceListCreateDTO;
+    private List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList;
 
 }

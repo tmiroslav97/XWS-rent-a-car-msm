@@ -24,7 +24,7 @@ public class AdConverter {
                 .discountLists(new HashSet<>())
                 .requests(new HashSet<>())
                 .comments(new HashSet<>())
-                .carOccupationTerms(new HashSet<>())
+                .carCalendarTerms(new HashSet<>())
                 .rentCnt(0L)
                 .ratingCnt(0L)
                 .ratingNum(0L)
