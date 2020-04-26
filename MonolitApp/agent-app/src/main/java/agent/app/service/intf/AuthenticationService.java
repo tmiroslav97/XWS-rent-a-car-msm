@@ -5,5 +5,5 @@ import agent.app.dto.SignUpDTO;
 
 public interface AuthenticationService {
     String login(JwtAuthenticationRequest jwtAuthenticationRequest);
-    String signUp(SignUpDTO signUpDTO);
+    Integer signUp(SignUpDTO signUpDTO);
 }
