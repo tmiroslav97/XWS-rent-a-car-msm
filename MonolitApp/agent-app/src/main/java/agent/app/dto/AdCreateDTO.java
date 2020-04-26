@@ -14,7 +14,7 @@ public class AdCreateDTO {
     private String name;
     private String coverPhoto;
     private String location;
-    private DistanceLimitEnum distanceLimitFlag;
+    private String distanceLimitFlag;
     private Float distanceLimit;
     private CarCreateDTO carCreateDTO;
     private PriceListCreateDTO priceListCreateDTO;
