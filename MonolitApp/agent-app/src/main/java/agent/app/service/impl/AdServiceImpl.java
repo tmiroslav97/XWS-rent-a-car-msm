@@ -70,7 +70,7 @@ public class AdServiceImpl implements AdService {
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
         ad.setCar(car);
 
-        if(adCreateDTO.getPriceListCreateDTO().getId().equals(null)){
+        if(adCreateDTO.getPriceListCreateDTO().getId() == null){
             //pravljenje novog cenovnika
             PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
             ad.setPriceList(priceList);

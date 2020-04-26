@@ -10,7 +10,7 @@ import org.joda.time.DateTime;
 @ToString
 public class CarCalendarTermCreateDTO {
 
-    private DateTime startDate;
-    private DateTime endDate;
+    private String startDate;
+    private String endDate;
 
 }
