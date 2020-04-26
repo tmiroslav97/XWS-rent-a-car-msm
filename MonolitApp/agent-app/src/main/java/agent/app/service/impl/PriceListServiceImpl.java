@@ -2,6 +2,7 @@ package agent.app.service.impl;
 
 import agent.app.converter.PriceListConverter;
 import agent.app.dto.PriceListCreateDTO;
+import agent.app.model.Ad;
 import agent.app.model.PriceList;
 import agent.app.repository.PriceListRepository;
 import agent.app.service.intf.PriceListService;
@@ -17,12 +18,6 @@ public class PriceListServiceImpl implements PriceListService {
     @Autowired
     PriceListRepository priceListRepository;
 
-
-    @Override
-    public List<PriceList> findByDate(DateTime date) {
-
-        return priceListRepository.findByDate(date);
-    }
 
     @Override
     public PriceList save(PriceList priceList) {
