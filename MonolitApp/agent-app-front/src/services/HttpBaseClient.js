@@ -30,7 +30,7 @@ class HttpBaseClient {
             //if (status === 401) {
                 //history.push('/unauthorized');
             //}
-            
+            //console.log(error.response.data);
             throw error;
         });
     };
