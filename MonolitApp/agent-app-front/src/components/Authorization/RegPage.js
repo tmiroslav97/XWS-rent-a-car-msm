@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import {registerUser } from '../store/user/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../../index';
+import { registerUser } from '../../store/user/actions';
+import { tokenSelector } from '../../store/user/selectors';
 
 const RegPage = () => {
     const dispatch = useDispatch();
+    const token = useSelector(tokenSelector);
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [password2, setPassword2] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
 
+    if (token != null) {
+        history.push('/');
+    }
 
     const handleRegister = () => {
         dispatch(

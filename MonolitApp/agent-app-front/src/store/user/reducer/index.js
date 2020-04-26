@@ -5,7 +5,7 @@ import {
 import * as computationFunctions from './computation-functions';
 
 const initialState = {
-    token: null
+    token: localStorage.getItem('token')
 };
 
 const userReducer = (state = initialState, {type, payload}) => {

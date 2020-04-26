@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../store/user/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../../index';
+import { loginUser } from '../../store/user/actions';
+import { tokenSelector } from '../../store/user/selectors';
+
 
 const LoginPage = () => {
+    const token = useSelector(tokenSelector);
     const dispatch = useDispatch();
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [validated, setValidated] = useState(false);
 
+
+    if (token != null) {
+        history.push('/');
+    }
 
     const handleLogin = (event) => {
         const form = event.currentTarget;

@@ -5,7 +5,7 @@ import { tokenSelector } from '../store/user/selectors';
 import jwt_decode from 'jwt-decode';
 
 const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
-    const token = localStorage.getItem('token');;
+    const token = useSelector(tokenSelector);
 
 
     function hasRightRole() {
