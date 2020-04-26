@@ -22,12 +22,19 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<String> login(@RequestBody JwtAuthenticationRequest authenticationRequest){
+    public ResponseEntity<String> login(@RequestBody JwtAuthenticationRequest authenticationRequest) {
         return new ResponseEntity<>(authenticationService.login(authenticationRequest), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
-    public ResponseEntity<String> signUp(@RequestBody SignUpDTO signUpDTO){
-        return new ResponseEntity<>(authenticationService.signUp(signUpDTO), HttpStatus.OK);
+    public ResponseEntity<String> signUp(@RequestBody SignUpDTO signUpDTO) {
+        Integer retVal = authenticationService.signUp(signUpDTO);
+        if (retVal == 1) {
+            return new ResponseEntity<>("Postojeci email.", HttpStatus.BAD_REQUEST);
+        } else if (retVal == 2) {
+            return new ResponseEntity<>("Uspjesna registracija!", HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("Nepoznat zahtjev", HttpStatus.BAD_REQUEST);
+        }
     }
 }
