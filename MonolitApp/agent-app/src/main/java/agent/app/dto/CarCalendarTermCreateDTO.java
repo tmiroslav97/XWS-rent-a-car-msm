@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 @Setter
 @Getter
 @ToString
-public class CarOccupationTermsCreateDTO {
+public class CarCalendarTermCreateDTO {
 
     private DateTime startDate;
     private DateTime endDate;

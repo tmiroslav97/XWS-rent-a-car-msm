@@ -56,6 +56,7 @@ public class AdServiceImpl implements AdService {
     @Override
     public Ad createAd(AdCreateDTO adCreateDTO) {
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
+
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
         ad.setCar(car);
 
@@ -70,6 +71,9 @@ public class AdServiceImpl implements AdService {
                 ad.setPriceList(priceList);
             }
         }
+
+
+
         ad = save(ad);
 
         return ad;
