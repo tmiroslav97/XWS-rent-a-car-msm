@@ -5,7 +5,7 @@ import { tokenSelector } from '../store/user/selectors';
 import jwt_decode from 'jwt-decode';
 
 const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
-    const token = localStorage.getItem('token');;
+    const token = useSelector(tokenSelector);
 
 
     function hasRightRole() {
@@ -13,14 +13,13 @@ const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
             return true;
         }
 
-        var roles = [];
+        var role = null;
 
         if (token != null) {
-            roles = jwt_decode(token).role;
+            role = jwt_decode(token).role;
         }
 
-        const role = roles.filter(val => accessRole.includes(val));
-        return role.length > 0;
+        return accessRole.includes(role);
     }
 
     return (

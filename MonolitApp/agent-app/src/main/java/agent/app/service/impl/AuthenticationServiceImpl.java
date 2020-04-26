@@ -54,33 +54,37 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         User user = (User) authentication.getPrincipal();
-        List<String> roles =  user.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList());
-        String jwt = tokenUtils.generateToken(user.getEmail(), roles);
+        List<String> roles = user.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList());
+        String jwt = tokenUtils.generateToken(user.getEmail(), roles.get(0));
         return jwt;
     }
 
     @Override
-    public String signUp(SignUpDTO signUpDTO) {
-        List<Authority> auths = authorityService.findByName("ROLE_PATIENT");
-        EndUser endUser = EndUser.endUserBuilder()
-                .email(signUpDTO.getEmail())
-                .firstName(signUpDTO.getFirstName())
-                .lastName(signUpDTO.getLastName())
-                .deleted(false)
-                .enabled(true)
-                .password(passwordEncoder.encode(signUpDTO.getPassword()))
-                .canceledCnt(0)
-                .adLimitNum(3)
-                .obliged(false)
-                .ads(new HashSet<>())
-                .authorities(auths)
-                .priceLists(new HashSet<>())
-                .comments(new HashSet<>())
-                .inbox(new HashSet<>())
-                .reports(new HashSet<>())
-                .requests(new HashSet<>())
-                .build();
-        userService.save(endUser);
-        return "Uspjesna registracija!";
+    public Integer signUp(SignUpDTO signUpDTO) {
+        if (userService.existsByEmail(signUpDTO.getEmail())) {
+            return 1;
+        } else {
+            List<Authority> auths = authorityService.findByName("ROLE_USER");
+            EndUser endUser = EndUser.endUserBuilder()
+                    .email(signUpDTO.getEmail())
+                    .firstName(signUpDTO.getFirstName())
+                    .lastName(signUpDTO.getLastName())
+                    .deleted(false)
+                    .enabled(true)
+                    .password(passwordEncoder.encode(signUpDTO.getPassword()))
+                    .canceledCnt(0)
+                    .adLimitNum(3)
+                    .obliged(false)
+                    .ads(new HashSet<>())
+                    .authorities(auths)
+                    .priceLists(new HashSet<>())
+                    .comments(new HashSet<>())
+                    .inbox(new HashSet<>())
+                    .reports(new HashSet<>())
+                    .requests(new HashSet<>())
+                    .build();
+            userService.save(endUser);
+            return 2;
+        }
     }
 }
