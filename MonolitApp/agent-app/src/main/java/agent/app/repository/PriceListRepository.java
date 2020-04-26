@@ -12,10 +12,5 @@ import java.util.List;
 @Repository
 public interface PriceListRepository extends JpaRepository<PriceList,Long> {
 
-    @Query("select pl from PriceList pl where pl.startDate<=(?2) and pl.endDate>=(?2)")
-    List<PriceList> findByDate(DateTime date);
-
-
-
 
 }

@@ -8,8 +8,7 @@ public class PriceListConverter {
     public static PriceList toCreatePriceListFromRequest(PriceListCreateDTO priceListCreateDTO){
 
         return PriceList.builder()
-                .startDate(priceListCreateDTO.getStartDate())
-                .endDate(priceListCreateDTO.getEndDate())
+                .creationDate(priceListCreateDTO.getCreationDate())
                 .pricePerKm(priceListCreateDTO.getPricePerKm())
                 .pricePerKmCDW(priceListCreateDTO.getPricePerKmCDW())
                 .build();
