@@ -2,13 +2,17 @@ package agent.app.service.impl;
 
 
 import agent.app.converter.AdConverter;
+import agent.app.converter.CarCalendarTermConverter;
 import agent.app.dto.AdCreateDTO;
 import agent.app.dto.AdPageDTO;
+import agent.app.dto.CarCalendarTermCreateDTO;
 import agent.app.model.Ad;
 import agent.app.model.Car;
+import agent.app.model.CarCalendarTerm;
 import agent.app.model.PriceList;
 import agent.app.repository.AdRepository;
 import agent.app.service.intf.AdService;
+import agent.app.service.intf.CarCalendarTermService;
 import agent.app.service.intf.CarService;
 import agent.app.service.intf.PriceListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +36,9 @@ public class AdServiceImpl implements AdService {
 
     @Autowired
     private PriceListService priceListService;
+
+    @Autowired
+    private CarCalendarTermService carCalendarTermService;
 
     @Override
     public Ad findById(Long id) {
@@ -71,8 +78,12 @@ public class AdServiceImpl implements AdService {
                 ad.setPriceList(priceList);
             }
         }
-
-
+        List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
+        for(CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList){
+            CarCalendarTerm carCalendarTerm = CarCalendarTermConverter.toCreateCarCalendarTermFromRequest(carCalendarTermCreateDTO);
+            carCalendarTerm = carCalendarTermService.save(carCalendarTerm);
+            ad.getCarCalendarTerms().add(carCalendarTerm);
+        }
 
         ad = save(ad);
 
