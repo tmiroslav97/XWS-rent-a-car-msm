@@ -21,6 +21,7 @@ public class DbColumnConstants {
     public static final String CREATIONDATE = "creationDate";
     public static final String PRICEPERKM = "pricePerKm";
     public static final String PRICEPERCWD = "pricePerCwd";
+    public static final String PRICEPERDAY = "pricePerDay";
     public static final String DISCOUNT = "discount";
     public static final String STATUS = "status";
     public static final String SUBMITDATE = "submitDate";

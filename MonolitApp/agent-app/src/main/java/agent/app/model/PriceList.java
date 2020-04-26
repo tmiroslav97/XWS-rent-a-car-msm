@@ -31,7 +31,10 @@ public class PriceList {
    @Column(name = DbColumnConstants.CREATIONDATE, nullable = false)
    private DateTime creationDate;
 
-   @Column(name = DbColumnConstants.PRICEPERKM, nullable = false)
+   @Column(name = DbColumnConstants.PRICEPERDAY, nullable = false)
+   private Float pricePerDay;
+
+   @Column(name = DbColumnConstants.PRICEPERKM)
    private Float pricePerKm;
 
    @Column(name = DbColumnConstants.PRICEPERCWD)

@@ -14,5 +14,6 @@ public class PriceListCreateDTO {
     private DateTime creationDate;
     private Float pricePerKm;
     private Float pricePerKmCDW;
+    private Float pricePerDay;
     private Long id;
 }

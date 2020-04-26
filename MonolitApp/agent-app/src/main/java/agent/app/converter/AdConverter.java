@@ -3,6 +3,7 @@ package agent.app.converter;
 import agent.app.dto.AdCreateDTO;
 import agent.app.dto.AdPageDTO;
 import agent.app.model.Ad;
+import agent.app.model.enumeration.DistanceLimitEnum;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
@@ -15,7 +16,7 @@ public class AdConverter {
                 .name(adCreateDTO.getName())
                 .location(adCreateDTO.getLocation())
                 .coverPhoto(adCreateDTO.getCoverPhoto())
-                .distanceLimitFlag(adCreateDTO.getDistanceLimitFlag())
+                .distanceLimitFlag(DistanceLimitEnum.valueOf(adCreateDTO.getDistanceLimitFlag()))
                 .distanceLimit(adCreateDTO.getDistanceLimit())
                 .publishedDate(new DateTime(DateTimeZone.UTC))
                 .deleted(false)
