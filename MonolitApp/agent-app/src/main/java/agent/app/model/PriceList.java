@@ -28,16 +28,8 @@ public class PriceList {
            @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
            @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
    })
-   @Column(name = DbColumnConstants.STARTDATE, nullable = false)
-   private DateTime startDate;
-
-   @Temporal(TemporalType.DATE)
-   @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
-           @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
-           @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
-   })
-   @Column(name = DbColumnConstants.ENDDATE, nullable = false)
-   private DateTime endDate;
+   @Column(name = DbColumnConstants.CREATIONDATE, nullable = false)
+   private DateTime creationDate;
 
    @Column(name = DbColumnConstants.PRICEPERKM, nullable = false)
    private Float pricePerKm;

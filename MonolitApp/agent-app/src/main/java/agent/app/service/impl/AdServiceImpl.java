@@ -59,13 +59,20 @@ public class AdServiceImpl implements AdService {
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
         ad.setCar(car);
 
-        //pravljenje novog cenovnika
-        PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
-        ad.setPriceList(priceList);
+        if(adCreateDTO.getPriceListCreateDTO().getId().equals(null)){
+            //pravljenje novog cenovnika
+            PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
+            ad.setPriceList(priceList);
+
+        }else{
+            //dodavanje vec postojeceg cenovnika
+            PriceList priceList = priceListService.findById(adCreateDTO.getPriceListCreateDTO().getId());
+            if(priceList != null){
+                ad.setPriceList(priceList);
+            }
+        }
         ad = save(ad);
 
-        //dodavanje u vec postojeci cenovnik
-        //napraviti polje u PriceList-i
         return ad;
     }
 

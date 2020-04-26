@@ -11,8 +11,8 @@ import org.joda.time.DateTime;
 @Setter
 @Getter
 public class PriceListCreateDTO {
-    private DateTime startDate;
-    private DateTime endDate;
+    private DateTime creationDate;
     private Float pricePerKm;
     private Float pricePerKmCDW;
+    private Long id;
 }
