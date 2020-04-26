@@ -3,6 +3,7 @@ package agent.app.service.impl;
 
 import agent.app.converter.AdConverter;
 import agent.app.dto.AdCreateDTO;
+import agent.app.dto.AdPageContentDTO;
 import agent.app.dto.AdPageDTO;
 import agent.app.model.Ad;
 import agent.app.model.Car;
@@ -11,6 +12,7 @@ import agent.app.repository.AdRepository;
 import agent.app.service.intf.AdService;
 import agent.app.service.intf.CarService;
 import agent.app.service.intf.PriceListService;
+import javafx.util.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -77,25 +80,28 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public AdPageDTO findAllPageAd(Integer pageCnt, Integer adCnt, String sortStr) {
+    public AdPageContentDTO findAllPageAd(Integer page, Integer size, String sort) {
         Pageable pageable;
-        if(sortStr.equals("-")){
-            pageable = PageRequest.of(pageCnt, adCnt);
+        if(sort.equals("-")){
+            pageable = PageRequest.of(page, size);
         }else{
-            String par[] = sortStr.split(" ");
+            String par[] = sort.split(" ");
             if(par[1].equals("opadajuce")) {
-                pageable = PageRequest.of(pageCnt, adCnt, Sort.by(par[0]).descending());
+                pageable = PageRequest.of(page, size, Sort.by(par[0]).descending());
             }else{
-                pageable = PageRequest.of(pageCnt, adCnt, Sort.by(par[0]).ascending());
+                pageable = PageRequest.of(page, size, Sort.by(par[0]).ascending());
             }
 
         }
 
-        Page<Ad> ads =  adRepository.findAll(pageable);
+        Page<Ad> ads =  adRepository.findAllByDeleted(false, pageable);
+        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
+                .totalPages(ads.getTotalPages())
+                .ads(ret)
+                .build();
 
-
-
-        return null;
+        return adPageContentDTO;
     }
 
 

@@ -36,6 +36,7 @@ public class AdConverter {
                 .name(ad.getName())
                 .location(ad.getLocation())
                 .coverPhoto(ad.getCoverPhoto())
+                .price(ad.getPriceList().getPricePerDay())
                 .build();
     }
 }
