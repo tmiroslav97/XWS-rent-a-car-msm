@@ -49,13 +49,13 @@ const LoginPage = () => {
                         <Form.Row>
                             <Form.Group>
                                 <Form.Label>Lozinka</Form.Label>
-                                <Form.Control required type="password" id="txtPass" pattern=".{5,25}" placeholder="Password"
+                                <Form.Control required type="password" id="txtPass" pattern=".{5,25}" placeholder="Lozinka"
                                     onChange={({ currentTarget }) => {
                                         setPassword(currentTarget.value);
                                     }} />
                                 <Form.Control.Feedback type="invalid">
                                     min 5 max 25 karaktera
-                            </Form.Control.Feedback>
+                                </Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>

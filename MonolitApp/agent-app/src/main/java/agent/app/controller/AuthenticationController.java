@@ -30,7 +30,7 @@ public class AuthenticationController {
     public ResponseEntity<String> signUp(@RequestBody SignUpDTO signUpDTO) {
         Integer retVal = authenticationService.signUp(signUpDTO);
         if (retVal == 1) {
-            return new ResponseEntity<>("Postojeci email.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Email je zauzet.", HttpStatus.BAD_REQUEST);
         } else if (retVal == 2) {
             return new ResponseEntity<>("Uspjesna registracija!", HttpStatus.CREATED);
         } else {
