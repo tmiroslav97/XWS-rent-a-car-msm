@@ -55,7 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         User user = (User) authentication.getPrincipal();
         List<String> roles = user.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList());
-        String jwt = tokenUtils.generateToken(user.getEmail(), roles);
+        String jwt = tokenUtils.generateToken(user.getEmail(), roles.get(0));
         return jwt;
     }
 
@@ -64,7 +64,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (userService.existsByEmail(signUpDTO.getEmail())) {
             return 1;
         } else {
-            List<Authority> auths = authorityService.findByName("ROLE_PATIENT");
+            List<Authority> auths = authorityService.findByName("ROLE_USER");
             EndUser endUser = EndUser.endUserBuilder()
                     .email(signUpDTO.getEmail())
                     .firstName(signUpDTO.getFirstName())
