@@ -64,7 +64,7 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Ad createAd(AdCreateDTO adCreateDTO) {
+    public Integer createAd(AdCreateDTO adCreateDTO) {
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
 
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
@@ -90,7 +90,7 @@ public class AdServiceImpl implements AdService {
 
         ad = save(ad);
 
-        return ad;
+        return 1;
     }
 
     @Override

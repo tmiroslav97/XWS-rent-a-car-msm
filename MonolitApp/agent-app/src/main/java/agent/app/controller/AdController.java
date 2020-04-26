@@ -23,7 +23,13 @@ public class AdController {
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createAd(@RequestBody AdCreateDTO adCreateDTO){
-        return new ResponseEntity<>(adService.createAd(adCreateDTO), HttpStatus.CREATED);
+        Integer flag = adService.createAd(adCreateDTO);
+        if(flag == 1){
+            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @RequestMapping(value = "{?page,size,sort}", method = RequestMethod.GET)
