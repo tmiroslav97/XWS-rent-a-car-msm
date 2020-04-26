@@ -14,4 +14,5 @@ public class AdPageContentDTO {
     private Integer totalPages;
     List<AdPageDTO> ads;
 
+
 }
