@@ -68,20 +68,28 @@ public class AdServiceImpl implements AdService {
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
 
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
+        if(car == null){
+            return 2;
+        }
         ad.setCar(car);
 
         if(adCreateDTO.getPriceListCreateDTO().getId() == null){
             //pravljenje novog cenovnika
             PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
+            if(priceList == null){
+                return 3;
+            }
             ad.setPriceList(priceList);
         }else{
             //dodavanje vec postojeceg cenovnika
             PriceList priceList = priceListService.findById(adCreateDTO.getPriceListCreateDTO().getId());
-            if(priceList != null){
-                ad.setPriceList(priceList);
+            if(priceList == null){
+                return 4;
             }
+            ad.setPriceList(priceList);
         }
         List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
+
         for(CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList){
             CarCalendarTerm carCalendarTerm = CarCalendarTermConverter.toCreateCarCalendarTermFromRequest(carCalendarTermCreateDTO);
             carCalendarTerm = carCalendarTermService.save(carCalendarTerm);

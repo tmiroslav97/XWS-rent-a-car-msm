@@ -26,6 +26,12 @@ public class AdController {
         Integer flag = adService.createAd(adCreateDTO);
         if(flag == 1){
             return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+        }else if(flag == 2){
+            return new ResponseEntity<>("Desila se greska prilikom kreiranja automobila.", HttpStatus.BAD_REQUEST);
+        }else if(flag == 3) {
+            return new ResponseEntity<>("Desila se greska prilikom kreiranja cenovnika.", HttpStatus.BAD_REQUEST);
+        }else if(flag == 4){
+            return new ResponseEntity<>("Desila se greska prilikom dodavanja vec postojeceg cenovnika.", HttpStatus.BAD_REQUEST);
         }else{
             return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
         }
