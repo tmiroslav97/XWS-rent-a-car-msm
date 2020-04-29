@@ -8,6 +8,7 @@ import LoginPage from './components/Authorization/LoginPage';
 import RegPage from './components/Authorization/RegPage';
 import AgentFirmHomePage from './components/AgentFirm/AgentFirmHomePage';
 import EndUserHomePage from './components/EndUser/EndUserHomePage';
+import CreatedAd from './components/Ad/CreatedAd';
 
 
 const AppRouter = () => {
@@ -22,6 +23,7 @@ const AppRouter = () => {
 
 
       <PrivateRoute exact path="/agent-firm" component={AgentFirmHomePage} accessRole={["ROLE_AGENT"]} />
+      <PrivateRoute exact path="/createdAd" component={CreatedAd} accessRole={["ROLE_AGENT"]} />
 
       <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
       <Redirect from="*" to="/page-not-found" />
