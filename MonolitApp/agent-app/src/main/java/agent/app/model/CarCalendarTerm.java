@@ -15,7 +15,7 @@ import javax.persistence.*;
 @ToString
 @Builder
 @Entity
-@Table(name = DbTableConstants.CAROCCUPATIONTERMS)
+@Table(name = DbTableConstants.CARCALENDARTERM)
 public class CarCalendarTerm {
 
     @Id
