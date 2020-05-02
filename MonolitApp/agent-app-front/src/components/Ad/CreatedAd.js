@@ -76,7 +76,7 @@ const CreatedAd = () => {
                             <Col>
                                 <Form.Group as={Col} controlId="formBasicName">
                                     <Form.Label>Naziv oglasa</Form.Label>
-                                    <Form.Control required type="text" placeholder="Naziv oglasa"
+                                    <Form.Control  type="text" placeholder="Naziv oglasa"
                                         onChange={({ currentTarget }) => {
                                         }} />
                                 </Form.Group>
@@ -92,7 +92,7 @@ const CreatedAd = () => {
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicLocation">
                                     <Form.Label>Lokacija</Form.Label>
-                                    <Form.Control required type="text" placeholder="Lokacija"
+                                    <Form.Control  type="text" placeholder="Lokacija"
                                         onChange={({ currentTarget }) => {
                                             setLocation(currentTarget.value);
                                         }} />
@@ -106,7 +106,7 @@ const CreatedAd = () => {
                                 {distanceLimitFlag ?
                                     <Form.Group as={Col} controlId="formBasicDistanceLimit">
                                         <Form.Label>Unesi kilometrazu</Form.Label>
-                                        <Form.Control required type="text" placeholder="kilometraza"
+                                        <Form.Control  type="text" placeholder="kilometraza"
                                             onChange={({ currentTarget }) => {
                                                 setDistanceLimit(currentTarget.value);
                                             }} />
@@ -118,42 +118,42 @@ const CreatedAd = () => {
                             <Col>
                                 <Form.Group as={Col} controlId="formBasicCarManufacturer">
                                     <Form.Label>Proizvodjac</Form.Label>
-                                    <Form.Control required type="text" placeholder="Proizvodjac"
+                                    <Form.Control  type="text" placeholder="Proizvodjac"
                                         onChange={({ currentTarget }) => {
                                             setCarManufacturer(currentTarget.value);
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicCarModel">
                                     <Form.Label>Model</Form.Label>
-                                    <Form.Control required type="text" placeholder="Model"
+                                    <Form.Control  type="text" placeholder="Model"
                                         onChange={({ currentTarget }) => {
                                             setCarModel(currentTarget.value);
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicCarType">
                                     <Form.Label>Tip</Form.Label>
-                                    <Form.Control required type="text" placeholder="Tip"
+                                    <Form.Control  type="text" placeholder="Tip"
                                         onChange={({ currentTarget }) => {
                                             setCarType(currentTarget.value);
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicYear">
                                     <Form.Label>Godina proizvodnje</Form.Label>
-                                    <Form.Control required type="text" placeholder="Godina proizvodnje"
+                                    <Form.Control  type="text" placeholder="Godina proizvodnje"
                                         onChange={({ currentTarget }) => {
                                             setYear(currentTarget.value);
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicMileage">
                                     <Form.Label>Predjeni kilometri</Form.Label>
-                                    <Form.Control required type="number" placeholder="Predjeni kilometri"
+                                    <Form.Control  type="number" placeholder="Predjeni kilometri"
                                         onChange={({ currentTarget }) => {
                                             setMileage(currentTarget.value);
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicGearboxType">
                                     <Form.Label>Menjac</Form.Label>
-                                    <Form.Control required type="text" placeholder="Menjac"
+                                    <Form.Control  type="text" placeholder="Menjac"
                                         onChange={({ currentTarget }) => {
                                             setGearboxType(currentTarget.value);
                                         }} />
@@ -164,14 +164,14 @@ const CreatedAd = () => {
                             <Col>
                                 <Form.Group as={Col} controlId="formBasicFuelType">
                                     <Form.Label>Tip goriva</Form.Label>
-                                    <Form.Control required type="text" placeholder="Tip goriva"
+                                    <Form.Control  type="text" placeholder="Tip goriva"
                                         onChange={({ currentTarget }) => {
                                             setFuelType(currentTarget.value);
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicChildrenSeatNum">
                                     <Form.Label>Broj sedista za decu</Form.Label>
-                                    <Form.Control required type="number" placeholder="Broj sedista za decu"
+                                    <Form.Control  type="number" placeholder="Broj sedista za decu"
                                         onChange={({ currentTarget }) => {
                                             setChildrenSeatNum(currentTarget.value);
                                         }} />
@@ -190,28 +190,28 @@ const CreatedAd = () => {
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicCarManufacturer">
                                     <Form.Label>Check box za biranje vec postojeceg cenovnika</Form.Label>
-                                    <Form.Control required type="number" placeholder="Cena po danu"
+                                    <Form.Control  type="number" placeholder="Cena po danu"
                                         onChange={({ currentTarget }) => {
                                             setId(currentTarget.value);
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicCarManufacturer">
                                     <Form.Label>Cena po kilometru</Form.Label>
-                                    <Form.Control required type="number" placeholder="Cena po kilometru"
+                                    <Form.Control  type="number" placeholder="Cena po kilometru"
                                         onChange={({ currentTarget }) => {
                                             setPricePerKm(currentTarget.value);
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicCarManufacturer">
                                     <Form.Label>Cena po kilometru (CDW)</Form.Label>
-                                    <Form.Control required type="number" placeholder="Cena po kilometru (CDW)"
+                                    <Form.Control  type="number" placeholder="Cena po kilometru (CDW)"
                                         onChange={({ currentTarget }) => {
                                             setPricePerKmCDW(currentTarget.value);
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicCarManufacturer">
                                     <Form.Label>Cena po danu</Form.Label>
-                                    <Form.Control required type="number" placeholder="Cena po danu"
+                                    <Form.Control  type="number" placeholder="Cena po danu"
                                         onChange={({ currentTarget }) => {
                                             setPricePerDay(currentTarget.value);
                                         }} />

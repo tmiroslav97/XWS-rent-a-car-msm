@@ -20,8 +20,8 @@ export function* createdAd(){
     if (role === 'ROLE_AGENT') {
         console.log("nestoooooo");
         const data = yield call(AuthSecurity.createdAd, payload); 
-        yield put(putSuccessMsg(data));
-        yield put(putSuccessMsg(null));
+        // yield put(putSuccessMsg(data));
+        // yield put(putSuccessMsg(null));
         history.push('/');
     } 
 }

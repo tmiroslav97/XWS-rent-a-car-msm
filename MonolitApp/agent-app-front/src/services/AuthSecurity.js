@@ -33,7 +33,8 @@ class AuthSecurity extends HttpBaseClient {
             FINALPOINTS.CREATED_AD,
             payload
         );
-        return response;
+        
+        return response.data;
     };
 
 };
