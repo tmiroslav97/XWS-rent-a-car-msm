@@ -1,7 +1,7 @@
 import HttpBaseClient from './HttpBaseClient';
 
 const FINALPOINTS = {
-    CREATED_AD: '/ad/createdAd'
+    CREATED_AD: '/ad'
 };
 
 class AdServices extends HttpBaseClient {

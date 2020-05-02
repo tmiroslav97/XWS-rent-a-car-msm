@@ -8,7 +8,7 @@ const CreatedAd = () => {
     const [name, setName] = useState();
     const [coverPhoto, setCoverPhoto] = useState();
     const [location, setLocation] = useState();
-    const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
+    const [distanceLimitFlag, setDistanceLimitFlag] = useState("1");
     const [distanceLimit, setDistanceLimit] = useState(null);
     //car
     const [carManufacturer, setCarManufacturer] = useState();
@@ -60,7 +60,23 @@ const CreatedAd = () => {
             );
             // setValidated(false);
         // }
-    }
+    };
+
+    const handleDistanceLimitFlag = (event) => {
+        const form = event.target.checked;
+        console.log(form);
+
+        if(form === false){  
+            setDistanceLimitFlag("1");
+        }else if (form === true) {
+            setDistanceLimitFlag("0");
+        }
+        console.log(distanceLimitFlag)
+        
+
+
+    };
+    
 
     return (
         <Container>
@@ -80,7 +96,7 @@ const CreatedAd = () => {
                                         onChange={({ currentTarget }) => {
                                         }} />
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicName">
+                                <Form.Group as={Col} controlId="formBasicCoverPhoto">
                                     <Form.File id="formcheck-api-regular">
                                         <Form.File.Label>Slika</Form.File.Label>
                                         <Form.File.Input onChange={({ currentTarget }) => {
@@ -98,12 +114,10 @@ const CreatedAd = () => {
                                         }} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formBasicDistanceLimitFlag">
-                                    <Form.Check type="checkbox" label="Da li je ogranicena kilometraza?"
-                                        onChange={({ currentTarget }) => {
-                                            setDistanceLimitFlag(currentTarget.value);
-                                        }} />
+                                    <Form.Check type="checkbox" label="Da li je ogranicena kilometraza?"  
+                                        onChange={handleDistanceLimitFlag}  />
                                 </Form.Group>
-                                {distanceLimitFlag ?
+                                {distanceLimitFlag === "0" ?
                                     <Form.Group as={Col} controlId="formBasicDistanceLimit">
                                         <Form.Label>Unesi kilometrazu</Form.Label>
                                         <Form.Control  type="text" placeholder="kilometraza"
