@@ -4,7 +4,6 @@ const FINALPOINTS = {
     LOGIN: '/auth/login',
     REGISTRATION: '/auth/sign-up',
     CHANGE_PASSWORD: '/auth/change-pass',
-    CREATED_AD: '/ad/createdAd'
 };
 
 class AuthSecurity extends HttpBaseClient {
@@ -25,15 +24,6 @@ class AuthSecurity extends HttpBaseClient {
             FINALPOINTS.REGISTRATION,
             payload
         );
-        return response.data;
-    };
-
-    createdAd = async payload => {
-        const response = await this.getApiClient().post(
-            FINALPOINTS.CREATED_AD,
-            payload
-        );
-        
         return response.data;
     };
 
