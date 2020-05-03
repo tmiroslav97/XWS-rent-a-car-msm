@@ -8,24 +8,26 @@ import LoginContainter from './containers/Authorization/LoginContainer';
 import RegPage from './components/Authorization/RegPage';
 import AgentFirmHomePage from './components/AgentFirm/AgentFirmHomePage';
 import EndUserHomePage from './components/EndUser/EndUserHomePage';
-
+import { Container } from 'react-bootstrap';
 
 const AppRouter = () => {
   const token = useSelector(tokenSelector);
   return (
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route exact path="/login" render={props => token == null ? (<LoginContainter {...props} />) : (<Redirect to="/" />)} />
-      <Route exact path="/sign-up" render={props => token == null ? (<RegPage {...props} />) : (<Redirect to="/" />)} />
+    <Container>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/login" render={props => token == null ? (<LoginContainter {...props} />) : (<Redirect to="/" />)} />
+        <Route exact path="/sign-up" render={props => token == null ? (<RegPage {...props} />) : (<Redirect to="/" />)} />
 
-      <PrivateRoute exact path="/enduser" component={EndUserHomePage} accessRole={["ROLE_USER"]} />
+        <PrivateRoute exact path="/enduser" component={EndUserHomePage} accessRole={["ROLE_USER"]} />
 
 
-      <PrivateRoute exact path="/agent-firm" component={AgentFirmHomePage} accessRole={["ROLE_AGENT"]} />
+        <PrivateRoute exact path="/agent-firm" component={AgentFirmHomePage} accessRole={["ROLE_AGENT"]} />
 
-      <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
-      <Redirect from="*" to="/page-not-found" />
-    </Switch>
+        <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
+        <Redirect from="*" to="/page-not-found" />
+      </Switch>
+    </Container>
   );
 }
 
