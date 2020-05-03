@@ -11,7 +11,6 @@ const InformationToasts = () => {
     const { addToast } = useToasts();
 
     useEffect(() => {
-        console.log('asd');
         if (error != null) {
             addToast(error, {
                 appearance: 'error',

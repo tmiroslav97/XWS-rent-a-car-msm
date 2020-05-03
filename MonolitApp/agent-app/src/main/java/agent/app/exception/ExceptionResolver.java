@@ -16,4 +16,5 @@ public class ExceptionResolver {
         headers.setContentType(MediaType.TEXT_PLAIN);
         return new ResponseEntity<String>(exception.getMessage(), headers, HttpStatus.NOT_FOUND);
     }
+
 }
