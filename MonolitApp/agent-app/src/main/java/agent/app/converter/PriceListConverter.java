@@ -12,8 +12,7 @@ import java.util.Date;
 public class PriceListConverter {
 
     public static PriceList toCreatePriceListFromRequest(PriceListCreateDTO priceListCreateDTO){
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
-        DateTime dt = dtf.parseDateTime(priceListCreateDTO.getCreationDate());
+        DateTime dt = DateAPI.DateTimeFromDateString(priceListCreateDTO.getCreationDate());
 
         return PriceList.builder()
                 .creationDate(dt)

@@ -9,8 +9,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class CarConverter {
     public static Car toCreateCarFromRequest(CarCreateDTO carCreateDTO){
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
-        DateTime dt = dtf.parseDateTime(carCreateDTO.getYear());
+        DateTime dt = DateAPI.DateTimeFromString(carCreateDTO.getYear());
         return Car.builder()
                 .year(dt)
                 .carManufacturer(carCreateDTO.getCarManufacturer())
