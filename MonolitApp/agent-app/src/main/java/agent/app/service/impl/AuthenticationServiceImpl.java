@@ -28,8 +28,6 @@ import java.util.stream.Collectors;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
-
     @Autowired
     private TokenUtils tokenUtils;
 

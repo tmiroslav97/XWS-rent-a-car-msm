@@ -1,5 +1,6 @@
 package agent.app.service.impl;
 
+import agent.app.exception.NotFoundException;
 import agent.app.model.EndUser;
 import agent.app.repository.EndUserRepository;
 import agent.app.service.intf.EndUserService;
@@ -14,7 +15,7 @@ public class EndUserImpl implements EndUserService {
 
     @Override
     public EndUser findById(Long id) {
-        return endUserRepository.findById(id).orElseGet(null);
+        return endUserRepository.findById(id).orElseThrow(() -> new NotFoundException("Krajnji korisnik sa zadatim id- em nije pronadjen"));
     }
 
     @Override
