@@ -44,8 +44,9 @@ const CreatedAdContainer = ()=> {
     };
 
     const handleDistanceLimitFlag = (event) => {
+        event.preventDefault();
+        console.log("check");
         const check = event.target.checked;
-        console.log(check);
 
         if(check === false){  
             setDistanceLimitFlag("UNLIMITED");

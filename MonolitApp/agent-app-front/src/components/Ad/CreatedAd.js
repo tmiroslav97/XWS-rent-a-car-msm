@@ -30,10 +30,10 @@ const CreatedAd = (props) => {
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Lokacija</Form.Label>
-                                    <Form.Control required name="location" id="textLocation" type="text" placeholder="Lokacija"/>
+                                    <Form.Control required name="location" id="txtLocation" type="text" placeholder="Lokacija"/>
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <Form.Check name="distanceLimitFlag" id="checkboxDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"  
+                                    <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"  
                                         onChange={props.handleDistanceLimitFlag} />
                                 </Form.Group>
                                 {props.distanceLimitFlag === "LIMITED" ?
@@ -85,10 +85,10 @@ const CreatedAd = (props) => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <Form.Check name="cdw" id="checkboxCDW" type="checkbox" label="Da li poseduje CDW?" />
+                                    <Form.Check name="cdw" id="chbCDW" type="checkbox" label="Da li poseduje CDW?" />
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <Form.Check name="androidFlag" id="checkboxAndroidFlag" type="checkbox" label="Da li poseduje android uredjaj?"/>
+                                    <Form.Check name="androidFlag" id="chbAndroidFlag" type="checkbox" label="Da li poseduje android uredjaj?"/>
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Check box za biranje vec postojeceg cenovnika</Form.Label>
