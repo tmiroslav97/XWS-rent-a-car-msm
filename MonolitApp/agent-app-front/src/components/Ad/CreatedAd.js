@@ -36,7 +36,7 @@ const CreatedAd = (props) => {
                                     <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"  
                                         onChange={props.handleDistanceLimitFlag} />
                                 </Form.Group>
-                                {props.distanceLimitFlag === "LIMITED" ?
+                                {props.distanceLimitFlag ?
                                     <Form.Group as={Col}>
                                         <Form.Label>Unesi kilometrazu</Form.Label>
                                         <Form.Control name="distanceLimit" id="txtDistanceLimit"  type="text" placeholder="kilometraza"/>

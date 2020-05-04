@@ -6,7 +6,7 @@ import { createdAd } from '../../store/ad/actions';
 const CreatedAdContainer = ()=> {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
-    const [distanceLimitFlag, setDistanceLimitFlag] = useState("UNLIMITED");
+    const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
 
     const handleCreatedAd = (event) => {
         event.preventDefault();
@@ -44,23 +44,15 @@ const CreatedAdContainer = ()=> {
     };
 
     const handleDistanceLimitFlag = (event) => {
-        event.preventDefault();
-        console.log("check");
         const check = event.target.checked;
-
-        if(check === false){  
-            setDistanceLimitFlag("UNLIMITED");
-        }else if (check === true) {
-            setDistanceLimitFlag("LIMITED");
-        }
-        console.log(distanceLimitFlag)
+        setDistanceLimitFlag(event.target.checked);
     };
 
     return(
         <CreatedAd onSubmit={handleCreatedAd} 
         validated={validated}
-        handleDistanceLimitFlag={handleDistanceLimitFlag}
-        distanceLimitFlag={distanceLimitFlag}/>
+        distanceLimitFlag={distanceLimitFlag}
+        handleDistanceLimitFlag={handleDistanceLimitFlag}/>
     )
 }
 
