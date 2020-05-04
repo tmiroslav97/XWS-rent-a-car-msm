@@ -18,7 +18,7 @@ public class AdConverter {
                 .name(adCreateDTO.getName())
                 .location(adCreateDTO.getLocation())
                 .coverPhoto(adCreateDTO.getCoverPhoto())
-                .distanceLimitFlag(DistanceLimitEnum.valueOf(adCreateDTO.getDistanceLimitFlag()))
+                .distanceLimitFlag(DistanceLimitEnum.LIMITED)
                 .distanceLimit(adCreateDTO.getDistanceLimit())
                 .publishedDate(new DateTime(DateTimeZone.UTC))
                 .deleted(false)

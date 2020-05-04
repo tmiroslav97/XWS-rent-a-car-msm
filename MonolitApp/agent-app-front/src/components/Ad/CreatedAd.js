@@ -8,13 +8,13 @@ const CreatedAd = () => {
     const [name, setName] = useState();
     const [coverPhoto, setCoverPhoto] = useState();
     const [location, setLocation] = useState();
-    const [distanceLimitFlag, setDistanceLimitFlag] = useState("1");
+    const [distanceLimitFlag, setDistanceLimitFlag] = useState("UNLIMITED");
     const [distanceLimit, setDistanceLimit] = useState(null);
     //car
     const [carManufacturer, setCarManufacturer] = useState();
     const [carModel, setCarModel] = useState();
     const [carType, setCarType] = useState();
-    const [year, setYear] = useState();
+    const [year, setYear] = useState("2016-05-19T12:00:00.000Z");
     const [mileage, setMileage] = useState();
     const [gearboxType, setGearboxType] = useState();
     const [fuelType, setFuelType] = useState();
@@ -67,9 +67,9 @@ const CreatedAd = () => {
         console.log(form);
 
         if(form === false){  
-            setDistanceLimitFlag("1");
+            setDistanceLimitFlag("UNLIMITED");
         }else if (form === true) {
-            setDistanceLimitFlag("0");
+            setDistanceLimitFlag("LIMITED");
         }
         console.log(distanceLimitFlag)
         
@@ -86,7 +86,7 @@ const CreatedAd = () => {
                 </Col>
             </Row>
             <Row>
-                <Col >
+                <Col>
                     <Form id="createdAdFrom" onSubmit={handleCreatedAd} >
                         <Form.Row>
                             <Col>
@@ -117,7 +117,7 @@ const CreatedAd = () => {
                                     <Form.Check type="checkbox" label="Da li je ogranicena kilometraza?"  
                                         onChange={handleDistanceLimitFlag}  />
                                 </Form.Group>
-                                {distanceLimitFlag === "0" ?
+                                {distanceLimitFlag === "LIMITED" ?
                                     <Form.Group as={Col} controlId="formBasicDistanceLimit">
                                         <Form.Label>Unesi kilometrazu</Form.Label>
                                         <Form.Control  type="text" placeholder="kilometraza"
