@@ -3,9 +3,6 @@ import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 
 const CreatedAd = (props) => {
    
-
-
-
     return (
         <Container>
             <Row>
@@ -37,7 +34,7 @@ const CreatedAd = (props) => {
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Check name="distanceLimitFlag" id="checkboxDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"  
-                                        onChange={props.hendleDistanceLimitFlag} />
+                                        onChange={props.handleDistanceLimitFlag} />
                                 </Form.Group>
                                 {props.distanceLimitFlag === "LIMITED" ?
                                     <Form.Group as={Col}>
@@ -83,9 +80,9 @@ const CreatedAd = (props) => {
                                 <Form.Group as={Col}>
                                     <Form.Label>Broj sedista za decu</Form.Label>
                                     <Form.Control required name="childrenSeatNum" id="numChildrenSeatNum" type="number" pattern=".{0,8}" placeholder="Broj sedista za decu" />
-                                    <Form.Conrol.Feedback type="invalid"> 
+                                    <Form.Control.Feedback type="invalid"> 
                                         min 0 max 8 sedista
-                                    </Form.Conrol.Feedback>
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Check name="cdw" id="checkboxCDW" type="checkbox" label="Da li poseduje CDW?" />
