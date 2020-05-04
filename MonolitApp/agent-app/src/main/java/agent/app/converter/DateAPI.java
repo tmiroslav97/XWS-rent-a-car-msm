@@ -15,7 +15,7 @@ public class DateAPI {
     }
 
     public static DateTime DateTimeFromString(String date){
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.fffZ");
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss'Z'");
         return dtf.parseDateTime(date);
     }
 
