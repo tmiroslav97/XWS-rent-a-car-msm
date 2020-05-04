@@ -1,38 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { registerUser } from '../../store/user/actions';
 
-const RegPage = () => {
-    const dispatch = useDispatch();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [password2, setPassword2] = useState();
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
-    const [validated, setValidated] = useState(false);
-
-    const handleRegister = (event) => {
-        const form = event.currentTarget;
-        event.preventDefault();
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-            setValidated(true);
-        } else {
-            dispatch(
-                registerUser({
-                    email,
-                    password,
-                    password2,
-                    firstName,
-                    lastName
-                })
-            );
-            setValidated(false);
-        }
-    };
-
-
+const RegPage = (props) => {
 
     return (
         <Container>
@@ -43,60 +12,42 @@ const RegPage = () => {
             </Row>
             <Row>
                 <Col md={{ span: 5, offset: 3 }} xs={12}>
-                    <Form noValidate validated={validated} id="logForm" onSubmit={handleRegister}>
+                    <Form noValidate validated={props.validated} id="regForm" onSubmit={props.onSubmit}>
                         <Form.Row>
-                            <Form.Group as={Col} md="6" controlId="formBasicEmail">
+                            <Form.Group as={Col} md={8}>
                                 <Form.Label>E-mail adresa</Form.Label>
-                                <Form.Control required type="email" placeholder="E-mail"
-                                    onChange={({ currentTarget }) => {
-                                        setEmail(currentTarget.value);
-                                    }} />
-                                <Form.Text className="text-muted">
-                                    Nikad necemo prikazivati tvoj e-mail nekome
-                                </Form.Text>
+                                <Form.Control required type="email" name="email" id="txtEmail" placeholder="E-mail" />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
-                            <Form.Group as={Col} controlId="formBasicPassword">
+                            <Form.Group as={Col}>
                                 <Form.Label>Lozinka</Form.Label>
-                                <Form.Control required type="password" pattern=".{5,25}" placeholder="Lozinka"
-                                    onChange={({ currentTarget }) => {
-                                        setPassword(currentTarget.value);
-                                    }} />
+                                <Form.Control required type="password" name="password" id="txtPassword" pattern=".{5,25}" placeholder="Lozinka" />
                                 <Form.Control.Feedback type="invalid">
                                     min 5 max 25 karaktera
                                 </Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formConfirmPassword">
+                            <Form.Group as={Col}>
                                 <Form.Label>Potvrdi lozinku</Form.Label>
-                                <Form.Control required type="password" pattern=".{5,25}" placeholder="Potvrdi lozinku"
-                                    onChange={({ currentTarget }) => {
-                                        setPassword2(currentTarget.value);
-                                    }} />
+                                <Form.Control required type="password" name="password2" id="txtPassword2" pattern=".{5,25}" placeholder="Potvrdi lozinku" />
                                 <Form.Control.Feedback type="invalid">
                                     min 5 max 25 karaktera
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
-                            <Form.Group as={Col} controlId="formFirstName">
+                            <Form.Group as={Col}>
                                 <Form.Label>Ime</Form.Label>
-                                <Form.Control required type="text" placeholder="Ime"
-                                    onChange={({ currentTarget }) => {
-                                        setFirstName(currentTarget.value);
-                                    }} />
+                                <Form.Control required type="text" name="firstName" id="txtFirstName" placeholder="Ime" />
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formLastName">
+                            <Form.Group as={Col}>
                                 <Form.Label>Prezime</Form.Label>
-                                <Form.Control required type="text" placeholder="Prezime"
-                                    onChange={({ currentTarget }) => {
-                                        setLastName(currentTarget.value);
-                                    }} />
+                                <Form.Control required type="text" name="lastName" id="txtLastName" placeholder="Prezime" />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
-                            <Form.Group as={Col} controlId="btnSignUp">
-                                <Button variant="primary" id="btnLogin" type="submit">
+                            <Form.Group as={Col}>
+                                <Button variant="primary" id="btnSignUp" type="submit">
                                     Registruj se
                                 </Button>
                             </Form.Group>
