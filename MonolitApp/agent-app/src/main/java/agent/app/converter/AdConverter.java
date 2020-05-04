@@ -12,11 +12,13 @@ import java.util.HashSet;
 public class AdConverter {
 
     public static Ad toCreateAdFromRequest(AdCreateDTO adCreateDTO){
+        System.out.println("nesto");
+        System.out.println(adCreateDTO.getDistanceLimitFlag());
         return Ad.builder()
                 .name(adCreateDTO.getName())
                 .location(adCreateDTO.getLocation())
                 .coverPhoto(adCreateDTO.getCoverPhoto())
-                .distanceLimitFlag(DistanceLimitEnum.valueOf(adCreateDTO.getDistanceLimitFlag()))
+                .distanceLimitFlag(DistanceLimitEnum.LIMITED)
                 .distanceLimit(adCreateDTO.getDistanceLimit())
                 .publishedDate(new DateTime(DateTimeZone.UTC))
                 .deleted(false)
