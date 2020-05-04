@@ -27,7 +27,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(authenticationService.login(authenticationRequest), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+    @RequestMapping(value = "/sign-up", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> signUp(@RequestBody SignUpDTO signUpDTO) {
         Integer retVal = authenticationService.signUp(signUpDTO);
         if (retVal == 1) {
