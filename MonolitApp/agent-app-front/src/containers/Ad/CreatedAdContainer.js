@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import CreatedAd from '../../components/Ad/CreatedAd';
 import { createdAd } from '../../store/ad/actions';
 
-const CreatedAdContainer = ()=> {
+const CreatedAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
@@ -18,25 +18,25 @@ const CreatedAdContainer = ()=> {
         } else {
             dispatch(
                 createdAd({
-                    "name": data.get('name'), 
+                    "name": data.get('name'),
                     "coverPhoto": data.get('coverPhoto'),
                     "location": data.get('location'),
                     "distanceLimitFlag": data.get('distanceLimitFlag'),
-                    "distanceLimit" : data.get('distanceLimit'),
-                    "carManufacturer":data.get('carManufacturer'),
-                    "carModel":data.get('carModel'),
-                    "carType":data.get('carType'),
+                    "distanceLimit": data.get('distanceLimit'),
+                    "carManufacturer": data.get('carManufacturer'),
+                    "carModel": data.get('carModel'),
+                    "carType": data.get('carType'),
                     "year": data.get('year'),
-                    "mileage":data.get('mileage'),
-                    "gearboxType":data.get('gearboxType'),
-                    "fuelType":data.get('fuelType'),
-                    "childrenSeatNum":data.get('childrenSeatNum'),
-                    "cdw":data.get('cdw'),
-                    "androidFlag":data.get('androidFlag'),
-                    "pricePerKm":data.get('pricePerKm'),
-                    "pricePerKmCDW":data.get('pricePerKmCDW'),
-                    "pricePerDay":data.get('pricePerDay'),
-                    "id":data.get('id')
+                    "mileage": data.get('mileage'),
+                    "gearboxType": data.get('gearboxType'),
+                    "fuelType": data.get('fuelType'),
+                    "childrenSeatNum": data.get('childrenSeatNum'),
+                    "cdw": data.get('cdw'),
+                    "androidFlag": data.get('androidFlag'),
+                    "pricePerKm": data.get('pricePerKm'),
+                    "pricePerKmCDW": data.get('pricePerKmCDW'),
+                    "pricePerDay": data.get('pricePerDay'),
+                    "id": data.get('id')
                 })
             );
             setValidated(false);
@@ -44,15 +44,14 @@ const CreatedAdContainer = ()=> {
     };
 
     const handleDistanceLimitFlag = (event) => {
-        const check = event.target.checked;
         setDistanceLimitFlag(event.target.checked);
     };
 
-    return(
-        <CreatedAd onSubmit={handleCreatedAd} 
-        validated={validated}
-        distanceLimitFlag={distanceLimitFlag}
-        handleDistanceLimitFlag={handleDistanceLimitFlag}/>
+    return (
+        <CreatedAd onSubmit={handleCreatedAd}
+            validated={validated}
+            distanceLimitFlag={distanceLimitFlag}
+            handleDistanceLimitFlag={handleDistanceLimitFlag} />
     )
 }
 
