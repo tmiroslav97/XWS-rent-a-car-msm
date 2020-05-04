@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { tokenSelector } from './store/user/selectors';
 import PrivateRoute from './authorization/PrivateRoute';
-import HomePage from './components/HomePage';
+import HomePage from './containers/HomePage';
 import LoginContainter from './containers/Authorization/LoginContainer';
 import RegPage from './components/Authorization/RegPage';
 import AgentFirmHomePage from './components/AgentFirm/AgentFirmHomePage';

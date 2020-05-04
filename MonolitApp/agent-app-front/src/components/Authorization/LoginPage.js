@@ -12,7 +12,7 @@ const LoginPage = (props) => {
             </Row>
             <Row>
                 <Col md={{ span: 3, offset: 3 }} xs={12}>
-                    <Form noValidate validated={props.validated} id="logForm" onSubmit={props.handleLogin}>
+                    <Form noValidate validated={props.validated} id="logForm" onSubmit={props.onSubmit}>
                         <Form.Row>
                             <Form.Group>
                                 <Form.Label>E-mail</Form.Label>

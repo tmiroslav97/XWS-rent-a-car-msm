@@ -28,7 +28,7 @@ const LoginContainer = () => {
     };
 
     return (
-        <LoginPage handleLogin={handleLogin} validated={validated} />
+        <LoginPage onSubmit={handleLogin} validated={validated} />
     )
 
 }
