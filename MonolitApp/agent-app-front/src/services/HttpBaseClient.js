@@ -28,10 +28,11 @@ class HttpBaseClient {
         }, function (error) {
             //const { status, data, config } = error.response;
             //if (status === 401) {
-                //history.push('/unauthorized');
-            //}
-            //console.log(error.response.data);
-            throw error;
+                //return error.response;
+            //}else{
+                //throw error;
+            //}  
+            throw error;          
         });
     };
 
