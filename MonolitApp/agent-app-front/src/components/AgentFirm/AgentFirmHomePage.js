@@ -9,7 +9,7 @@ const AgentFirmHomePage = () => {
             <Row>
                 <Col md={{ span:10, offset: 1 }} xs={12}>
                     <center><h1>AgentFirm Homepage</h1></center>
-                    <Link to="/createdAd">Dodaj oglas</Link>
+                    <Link to="/createAd">Dodaj oglas</Link>
                 </Col>
             </Row>
         </Container>
