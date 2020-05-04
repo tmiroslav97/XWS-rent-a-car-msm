@@ -15,7 +15,7 @@ public interface AdService {
     void delete(Long id);
     Ad createAd(AdCreateDTO adCreateDTO);
     AdPageContentDTO findAllPageAd(Integer page, Integer size, String sort);
-
+//    AdSearchDTO findAllSearchAdd(Integer page, Integer size, String sort)
 
 
 }

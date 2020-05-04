@@ -2,6 +2,8 @@ package agent.app.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -10,7 +12,8 @@ import lombok.*;
 @Setter
 public class AdSearchDTO {
 
-    AdOrdinarySearchDTO adOrdinarySearchDTO;
-    AdAdvancedSearchDTO adAdvancedSearchDTO;
+    List<AdOrdinarySearchDTO> adOrdinarySearchDTO;
+    List<AdAdvancedSearchDTO> adAdvancedSearchDTO;
+    private Integer totalPages;
 
 }
