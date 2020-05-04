@@ -1,6 +1,5 @@
 import { take, put, call } from 'redux-saga/effects';
 import { history } from '../../index';
-import jwt_decode from 'jwt-decode';
 
 import AdServices from '../../services/AdServices';
 

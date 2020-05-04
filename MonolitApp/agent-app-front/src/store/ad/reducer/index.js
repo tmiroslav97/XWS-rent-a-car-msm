@@ -1,5 +1,3 @@
-
-
 import * as computationFunctions from './computation-functions';
 
 const initialState = {

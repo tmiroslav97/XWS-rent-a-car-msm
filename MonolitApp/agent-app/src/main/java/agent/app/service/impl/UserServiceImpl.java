@@ -1,33 +1,22 @@
 package agent.app.service.impl;
 
+import agent.app.exception.NotFoundException;
 import agent.app.model.User;
 import agent.app.repository.UserRepository;
 import agent.app.service.intf.UserService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserDetailsService, UserService {
-    protected final Log LOGGER = LogFactory.getLog(getClass());
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -42,7 +31,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElseGet(null);
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("Korisnik sa zadatim id- em nije pronadjen"));
     }
 
     @Override
