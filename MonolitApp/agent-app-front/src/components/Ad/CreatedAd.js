@@ -1,82 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
-import { createdAd } from '../../store/ad/actions';
 
-const CreatedAd = () => {
-    const dispatch = useDispatch();
-    const [name, setName] = useState();
-    const [coverPhoto, setCoverPhoto] = useState();
-    const [location, setLocation] = useState();
-    const [distanceLimitFlag, setDistanceLimitFlag] = useState("UNLIMITED");
-    const [distanceLimit, setDistanceLimit] = useState(null);
-    //car
-    const [carManufacturer, setCarManufacturer] = useState();
-    const [carModel, setCarModel] = useState();
-    const [carType, setCarType] = useState();
-    const [year, setYear] = useState("2016-05-19T12:00:00.000Z");
-    const [mileage, setMileage] = useState();
-    const [gearboxType, setGearboxType] = useState();
-    const [fuelType, setFuelType] = useState();
-    const [childrenSeatNum, setChildrenSeatNum] = useState();
-    const [cdw, setCdw] = useState(false);
-    const [androidFlag, setAndroidFlag] = useState(false);
-    //pricelist
-    const [pricePerKm, setPricePerKm] = useState(null);
-    const [pricePerKmCDW, setPricePerKmCDW] = useState(null);
-    const [pricePerDay, setPricePerDay] = useState(null);
-    const [id, setId] = useState(null);
-    //carCalendarTerm 
-
-    const handleCreatedAd = (event) => {
-        const form = event.currentTarget;
-        event.preventDefault();
-        // if (form.checkValidity() === false) {
-        //     event.stopPropagation();
-        //     setValidated(true);
-        // } else {
-            dispatch(
-                createdAd({
-                    name, 
-                    coverPhoto,
-                    location,
-                    distanceLimitFlag,
-                    distanceLimit,
-                    carManufacturer,
-                    carModel,
-                    carType,
-                    year,
-                    mileage,
-                    gearboxType,
-                    fuelType,
-                    childrenSeatNum,
-                    cdw,
-                    androidFlag,
-                    pricePerKm,
-                    pricePerKmCDW,
-                    pricePerDay,
-                    id
-                })
-            );
-            // setValidated(false);
-        // }
-    };
-
-    const handleDistanceLimitFlag = (event) => {
-        const form = event.target.checked;
-        console.log(form);
-
-        if(form === false){  
-            setDistanceLimitFlag("UNLIMITED");
-        }else if (form === true) {
-            setDistanceLimitFlag("LIMITED");
-        }
-        console.log(distanceLimitFlag)
-        
+const CreatedAd = (props) => {
+   
 
 
-    };
-    
 
     return (
         <Container>
@@ -87,150 +15,105 @@ const CreatedAd = () => {
             </Row>
             <Row>
                 <Col>
-                    <Form id="createdAdFrom" onSubmit={handleCreatedAd} >
+                    <Form id="createdAdFrom" onSubmit={props.onSubmit} noValidate validated={props.validated}>
                         <Form.Row>
                             <Col>
-                                <Form.Group as={Col} controlId="formBasicName">
+                                <Form.Group as={Col}>
                                     <Form.Label>Naziv oglasa</Form.Label>
-                                    <Form.Control  type="text" placeholder="Naziv oglasa"
-                                        onChange={({ currentTarget }) => {
-                                        }} />
+                                    <Form.Control required name="name" type="text" id="txtName" placeholder="Naziv oglasa"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicCoverPhoto">
-                                    <Form.File id="formcheck-api-regular">
+                                <Form.Group as={Col}>
+                                    <Form.File>
+                                        {/* <Form.Label>Naziv oglasa</Form.Label>
+                                        <Form.Control required name="coverPhoto" type="file" id="fileCoverPhoto" placeholder="Naziv oglasa"/> */}
                                         <Form.File.Label>Slika</Form.File.Label>
-                                        <Form.File.Input onChange={({ currentTarget }) => {
-                                            setCoverPhoto(currentTarget.value);
-                                        }} />
-
+                                        <Form.File.Input name="coverPhoto" id="fileCoverPhoto" placeholder="Naziv oglasa"/>
                                     </Form.File>
 
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicLocation">
+                                <Form.Group as={Col}>
                                     <Form.Label>Lokacija</Form.Label>
-                                    <Form.Control  type="text" placeholder="Lokacija"
-                                        onChange={({ currentTarget }) => {
-                                            setLocation(currentTarget.value);
-                                        }} />
+                                    <Form.Control required name="location" id="textLocation" type="text" placeholder="Lokacija"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicDistanceLimitFlag">
-                                    <Form.Check type="checkbox" label="Da li je ogranicena kilometraza?"  
-                                        onChange={handleDistanceLimitFlag}  />
+                                <Form.Group as={Col}>
+                                    <Form.Check name="distanceLimitFlag" id="checkboxDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"  
+                                        onChange={props.hendleDistanceLimitFlag} />
                                 </Form.Group>
-                                {distanceLimitFlag === "LIMITED" ?
-                                    <Form.Group as={Col} controlId="formBasicDistanceLimit">
+                                {props.distanceLimitFlag === "LIMITED" ?
+                                    <Form.Group as={Col}>
                                         <Form.Label>Unesi kilometrazu</Form.Label>
-                                        <Form.Control  type="text" placeholder="kilometraza"
-                                            onChange={({ currentTarget }) => {
-                                                setDistanceLimit(currentTarget.value);
-                                            }} />
+                                        <Form.Control name="distanceLimit" id="txtDistanceLimit"  type="text" placeholder="kilometraza"/>
                                     </Form.Group>
                                     : null
                                 }
-
                             </Col>
+
                             <Col>
-                                <Form.Group as={Col} controlId="formBasicCarManufacturer">
+                                <Form.Group as={Col}>
                                     <Form.Label>Proizvodjac</Form.Label>
-                                    <Form.Control  type="text" placeholder="Proizvodjac"
-                                        onChange={({ currentTarget }) => {
-                                            setCarManufacturer(currentTarget.value);
-                                        }} />
+                                    <Form.Control required name="carManufacturer" id="txtCarManufacturer" type="text" placeholder="Proizvodjac"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicCarModel">
+                                <Form.Group as={Col}>
                                     <Form.Label>Model</Form.Label>
-                                    <Form.Control  type="text" placeholder="Model"
-                                        onChange={({ currentTarget }) => {
-                                            setCarModel(currentTarget.value);
-                                        }} />
+                                    <Form.Control required name="carModel" id="txtCarModel" type="text" placeholder="Model"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicCarType">
+                                <Form.Group as={Col}>
                                     <Form.Label>Tip</Form.Label>
-                                    <Form.Control  type="text" placeholder="Tip"
-                                        onChange={({ currentTarget }) => {
-                                            setCarType(currentTarget.value);
-                                        }} />
+                                    <Form.Control required name="carType" id="txtCarType" type="text" placeholder="Tip"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicYear">
+                                <Form.Group as={Col}>
                                     <Form.Label>Godina proizvodnje</Form.Label>
-                                    <Form.Control  type="text" placeholder="Godina proizvodnje"
-                                        onChange={({ currentTarget }) => {
-                                            setYear(currentTarget.value);
-                                        }} />
+                                    <Form.Control required name="year" id="dateYear" type="date" placeholder="Godina proizvodnje"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicMileage">
+                                <Form.Group as={Col}>
                                     <Form.Label>Predjeni kilometri</Form.Label>
-                                    <Form.Control  type="number" placeholder="Predjeni kilometri"
-                                        onChange={({ currentTarget }) => {
-                                            setMileage(currentTarget.value);
-                                        }} />
+                                    <Form.Control required name="mileage" id="numMileage" type="number" placeholder="Predjeni kilometri"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicGearboxType">
+                                <Form.Group as={Col}>
                                     <Form.Label>Menjac</Form.Label>
-                                    <Form.Control  type="text" placeholder="Menjac"
-                                        onChange={({ currentTarget }) => {
-                                            setGearboxType(currentTarget.value);
-                                        }} />
+                                    <Form.Control required name="gearboxType" id="txtGearboxType" type="text" placeholder="Menjac"/>
                                 </Form.Group>
-                                
-
                             </Col>
+
                             <Col>
-                                <Form.Group as={Col} controlId="formBasicFuelType">
+                                <Form.Group as={Col}>
                                     <Form.Label>Tip goriva</Form.Label>
-                                    <Form.Control  type="text" placeholder="Tip goriva"
-                                        onChange={({ currentTarget }) => {
-                                            setFuelType(currentTarget.value);
-                                        }} />
+                                    <Form.Control required name="fuelType" id="txtFuelType" type="text" placeholder="Tip goriva"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicChildrenSeatNum">
+                                <Form.Group as={Col}>
                                     <Form.Label>Broj sedista za decu</Form.Label>
-                                    <Form.Control  type="number" placeholder="Broj sedista za decu"
-                                        onChange={({ currentTarget }) => {
-                                            setChildrenSeatNum(currentTarget.value);
-                                        }} />
+                                    <Form.Control required name="childrenSeatNum" id="numChildrenSeatNum" type="number" pattern=".{0,8}" placeholder="Broj sedista za decu" />
+                                    <Form.Conrol.Feedback type="invalid"> 
+                                        min 0 max 8 sedista
+                                    </Form.Conrol.Feedback>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicChildrenSeatNum">
-                                    <Form.Check type="checkbox" label="Da li poseduje CDW?"
-                                        onChange={({ currentTarget }) => {
-                                            setCdw(currentTarget.value);
-                                        }} />
+                                <Form.Group as={Col}>
+                                    <Form.Check name="cdw" id="checkboxCDW" type="checkbox" label="Da li poseduje CDW?" />
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicChildrenSeatNum">
-                                    <Form.Check type="checkbox" label="Da li poseduje android uredjaj?"
-                                        onChange={({ currentTarget }) => {
-                                            setAndroidFlag(currentTarget.value);
-                                        }} />
+                                <Form.Group as={Col}>
+                                    <Form.Check name="androidFlag" id="checkboxAndroidFlag" type="checkbox" label="Da li poseduje android uredjaj?"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicCarManufacturer">
+                                <Form.Group as={Col}>
                                     <Form.Label>Check box za biranje vec postojeceg cenovnika</Form.Label>
-                                    <Form.Control  type="number" placeholder="Cena po danu"
-                                        onChange={({ currentTarget }) => {
-                                            setId(currentTarget.value);
-                                        }} />
+                                    <Form.Control name="id" id="selectId" placeholder="Cena po danu" as="select" type="text">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </Form.Control>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicCarManufacturer">
+                                <Form.Group as={Col}>
                                     <Form.Label>Cena po kilometru</Form.Label>
-                                    <Form.Control  type="number" placeholder="Cena po kilometru"
-                                        onChange={({ currentTarget }) => {
-                                            setPricePerKm(currentTarget.value);
-                                        }} />
+                                    <Form.Control name="pricePerKm" id="numPricePerKm" type="number" placeholder="Cena po kilometru" />
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicCarManufacturer">
+                                <Form.Group as={Col}>
                                     <Form.Label>Cena po kilometru (CDW)</Form.Label>
-                                    <Form.Control  type="number" placeholder="Cena po kilometru (CDW)"
-                                        onChange={({ currentTarget }) => {
-                                            setPricePerKmCDW(currentTarget.value);
-                                        }} />
+                                    <Form.Control name="pricePerKmCDW" id="numPricePerKmCDW" type="number" placeholder="Cena po kilometru (CDW)" />
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formBasicCarManufacturer">
+                                <Form.Group as={Col}>
                                     <Form.Label>Cena po danu</Form.Label>
-                                    <Form.Control  type="number" placeholder="Cena po danu"
-                                        onChange={({ currentTarget }) => {
-                                            setPricePerDay(currentTarget.value);
-                                        }} />
+                                    <Form.Control name="pricePerDay" id="numPricePerDay" type="number" placeholder="Cena po danu"/>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="btnCreatedAd">
+                                <Form.Group as={Col}>
                                     <Button variant="primary" id="btnCreatedAd" type="submit">
                                         Dodaj
                                     </Button>
