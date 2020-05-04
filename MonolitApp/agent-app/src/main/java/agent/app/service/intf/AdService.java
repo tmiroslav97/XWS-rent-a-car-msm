@@ -13,7 +13,7 @@ public interface AdService {
     List<Ad> findAll();
     Ad save(Ad ad);
     void delete(Long id);
-    Ad createAd(AdCreateDTO adCreateDTO);
+    Integer createAd(AdCreateDTO adCreateDTO);
     AdPageContentDTO findAllPageAd(Integer page, Integer size, String sort);
 //    AdSearchDTO findAllSearchAdd(Integer page, Integer size, String sort)
 

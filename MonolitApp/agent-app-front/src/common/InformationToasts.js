@@ -17,7 +17,7 @@ const InformationToasts = () => {
                 autoDismiss: true,
             });
         }
-    }, [error]);
+    });
 
     useEffect(() => {
         if (success != null) {
@@ -26,7 +26,7 @@ const InformationToasts = () => {
                 autoDismiss: true,
             });
         }
-    }, [success]);
+    });
 
     useEffect(() => {
         if (warn != null) {
@@ -35,7 +35,7 @@ const InformationToasts = () => {
                 autoDismiss: true,
             });
         }
-    }, [warn]);
+    });
 
     useEffect(() => {
         if (info != null) {
@@ -44,7 +44,7 @@ const InformationToasts = () => {
                 autoDismiss: true,
             });
         }
-    }, [info]);
+    });
 
     return (
         <div id="toastMsg">

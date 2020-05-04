@@ -1,5 +1,6 @@
 package agent.app.config;
 
+import agent.app.authentication.CustomAuthenticationFailureHandler;
 import agent.app.authentication.RestAuthenticationEntryPoint;
 import agent.app.authentication.TokenAuthenticationFilter;
 import agent.app.security.TokenUtils;
@@ -70,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
-        web.ignoring().antMatchers(HttpMethod.POST, "/auth/registration");
+        web.ignoring().antMatchers(HttpMethod.POST, "/auth/sign-up");
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js", "/**/assets/**");
     }

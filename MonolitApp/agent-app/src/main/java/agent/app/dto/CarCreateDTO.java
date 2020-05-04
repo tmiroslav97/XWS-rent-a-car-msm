@@ -10,7 +10,7 @@ import org.joda.time.DateTime;
 @Builder
 @ToString
 public class CarCreateDTO {
-    private DateTime year;
+    private String year;
     private String carManufacturer;
     private String carModel;
     private String gearboxType;

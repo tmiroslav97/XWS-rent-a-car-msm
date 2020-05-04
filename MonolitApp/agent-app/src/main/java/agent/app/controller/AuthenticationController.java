@@ -4,6 +4,7 @@ import agent.app.authentication.JwtAuthenticationRequest;
 import agent.app.dto.SignUpDTO;
 import agent.app.service.intf.AuthenticationService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> login(@RequestBody JwtAuthenticationRequest authenticationRequest) {
         return new ResponseEntity<>(authenticationService.login(authenticationRequest), HttpStatus.OK);
     }

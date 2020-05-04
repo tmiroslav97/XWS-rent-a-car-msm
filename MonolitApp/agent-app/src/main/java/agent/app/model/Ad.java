@@ -37,7 +37,7 @@ public class Ad {
     @Column(name = DbColumnConstants.DISTANCELIMITFLAG, nullable = false)
     private DistanceLimitEnum distanceLimitFlag;
 
-    @Column(name = DbColumnConstants.DISTANCELIMIT, nullable = false)
+    @Column(name = DbColumnConstants.DISTANCELIMIT)
     private Float distanceLimit;
 
     @Temporal(TemporalType.DATE)
