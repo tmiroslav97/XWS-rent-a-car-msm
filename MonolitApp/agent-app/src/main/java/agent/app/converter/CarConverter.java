@@ -12,7 +12,7 @@ public class CarConverter {
         DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
         DateTime dt = dtf.parseDateTime(carCreateDTO.getYear());
         return Car.builder()
-                .year(new DateTime(DateTimeZone.UTC))
+                .year(dt)
                 .carManufacturer(carCreateDTO.getCarManufacturer())
                 .carModel(carCreateDTO.getCarModel())
                 .gearboxType(carCreateDTO.getGearboxType())

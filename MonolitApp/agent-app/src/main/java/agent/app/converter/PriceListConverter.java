@@ -16,8 +16,7 @@ public class PriceListConverter {
         DateTime dt = dtf.parseDateTime(priceListCreateDTO.getCreationDate());
 
         return PriceList.builder()
-//                .creationDate(dt)
-                .creationDate(new DateTime(DateTimeZone.UTC))
+                .creationDate(dt)
                 .pricePerKm(priceListCreateDTO.getPricePerKm())
                 .pricePerKmCDW(priceListCreateDTO.getPricePerKmCDW())
                 .pricePerDay(priceListCreateDTO.getPricePerDay())
