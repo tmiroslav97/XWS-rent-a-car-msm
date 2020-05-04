@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import store from './store';
 import AppRouter from './AppRouter';
-import NavBar from './components/NavBar';
+import NavBar from './containers/NavBar';
 import InformationToasts from './common/InformationToasts';
 import { ToastProvider } from 'react-toast-notifications';
 

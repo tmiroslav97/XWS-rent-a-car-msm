@@ -1,0 +1,1 @@
+export const CREATED_AD ='createdAd';
