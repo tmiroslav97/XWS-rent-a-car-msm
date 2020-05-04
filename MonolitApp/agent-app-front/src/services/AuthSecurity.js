@@ -3,7 +3,7 @@ import HttpBaseClient from './HttpBaseClient';
 const FINALPOINTS = {
     LOGIN: '/auth/login',
     REGISTRATION: '/auth/sign-up',
-    CHANGE_PASSWORD: '/auth/change-pass'
+    CHANGE_PASSWORD: '/auth/change-pass',
 };
 
 class AuthSecurity extends HttpBaseClient {

@@ -2,6 +2,7 @@ import { all, spawn, call, put } from 'redux-saga/effects';
 import flatten from 'lodash/flatten';
 
 import * as userSaga from './user/saga';
+import * as adSaga from './ad/saga';
 
 import {
   putErrorMsg
@@ -10,7 +11,8 @@ import {
 export default function* rootSaga() {
   let sagas = flatten(
     [
-      userSaga
+      userSaga,
+      adSaga
     ].map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
   );
 

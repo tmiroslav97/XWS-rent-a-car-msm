@@ -11,7 +11,7 @@ import org.joda.time.DateTime;
 @Setter
 @Getter
 public class PriceListCreateDTO {
-    private DateTime creationDate;
+    private String creationDate;
     private Float pricePerKm;
     private Float pricePerKmCDW;
     private Float pricePerDay;
