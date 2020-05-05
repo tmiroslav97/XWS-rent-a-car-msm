@@ -44,7 +44,7 @@ public class FuelTypeController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editCarType(@RequestBody FuelType fuelType) {
+    public ResponseEntity<?> editFuelType(@RequestBody FuelType fuelType) {
         Integer flag = fuelTypeService.editFuelType(fuelType);
         if (flag == 1) {
             return new ResponseEntity<>("Tip pogonskog goriva uspjesno izmjenjen.", HttpStatus.CREATED);
@@ -55,7 +55,7 @@ public class FuelTypeController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteCarType(@RequestBody Long id) {
+    public ResponseEntity<?> deleteFuelType(@RequestBody Long id) {
         Integer flag = fuelTypeService.deleteById(id);
         if (flag == 1) {
             return new ResponseEntity<>("Tip pogonskog goriva uspjesno obrisan.", HttpStatus.CREATED);
