@@ -20,11 +20,12 @@ const CreatedAd = (props) => {
                                     <Form.Control required name="name" type="text" id="txtName" placeholder="Naziv oglasa" />
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <Form.File>
-                                        {/* <Form.Label>Naziv oglasa</Form.Label>
-                                        <Form.Control required name="coverPhoto" type="file" id="fileCoverPhoto" placeholder="Naziv oglasa"/> */}
-                                        <Form.File.Label>Slika</Form.File.Label>
-                                        <Form.File.Input name="coverPhoto" id="fileCoverPhoto" placeholder="Naziv oglasa" />
+                                    <Form.File.Label>Slike</Form.File.Label>
+                                    <Form.File
+                                        name="coverPhoto" id="fileCoverPhoto" placeholder="Slike"
+                                        label="Slike"
+                                        custom
+                                    >
                                     </Form.File>
 
                                 </Form.Group>
@@ -33,8 +34,15 @@ const CreatedAd = (props) => {
                                     <Form.Control required name="location" id="txtLocation" type="text" placeholder="Lokacija" />
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"
-                                        onChange={props.handleDistanceLimitFlag} />
+                                    <Form.Check
+                                        name="distanceLimitFlag"
+                                        type="switch"
+                                        id="custom-switch"
+                                        label="Da li je ogranicena kilometraza?"
+                                        onChange={props.handleDistanceLimitFlag}
+                                    />
+                                    {/* <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"
+                                        onChange={props.handleDistanceLimitFlag} /> */}
                                 </Form.Group>
                                 {props.distanceLimitFlag ?
                                     <Form.Group as={Col}>
@@ -48,15 +56,27 @@ const CreatedAd = (props) => {
                             <Col>
                                 <Form.Group as={Col}>
                                     <Form.Label>Proizvodjac</Form.Label>
-                                    <Form.Control required name="carManufacturer" id="txtCarManufacturer" type="text" placeholder="Proizvodjac" />
+                                    <Form.Control as="select" value="Choose..." required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac">
+                                        <option>Choose...</option>
+                                        <option>...</option>
+                                    </Form.Control>
+                                    {/* <Form.Control required name="carManufacturer" id="txtCarManufacturer" type="combobox" placeholder="Proizvodjac" /> */}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Model</Form.Label>
-                                    <Form.Control required name="carModel" id="txtCarModel" type="text" placeholder="Model" />
+                                    <Form.Control as="select" value="Choose..." required name="carModel" id="txtCarModel" placeholder="Model">
+                                        <option>Choose...</option>
+                                        <option>...</option>
+                                    </Form.Control>
+                                    {/* <Form.Control required name="carModel" id="txtCarModel" type="text" placeholder="Model" /> */}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Tip</Form.Label>
-                                    <Form.Control required name="carType" id="txtCarType" type="text" placeholder="Tip" />
+                                    <Form.Control as="select" value="Choose..." required name="carType" id="txtCarType" placeholder="Tip" >
+                                        <option>Choose...</option>
+                                        <option>...</option>
+                                    </Form.Control>
+                                    {/* <Form.Control required name="carType" id="txtCarType" type="text" placeholder="Tip" /> */}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Godina proizvodnje</Form.Label>
@@ -80,15 +100,28 @@ const CreatedAd = (props) => {
                                 <Form.Group as={Col}>
                                     <Form.Label>Broj sedista za decu</Form.Label>
                                     <Form.Control required name="childrenSeatNum" id="numChildrenSeatNum" type="number" pattern=".{0,8}" placeholder="Broj sedista za decu" />
+                                    {/* <Form.Control type="range" min="0" max="8" custom /> */}
                                     <Form.Control.Feedback type="invalid">
                                         min 0 max 8 sedista
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <Form.Check name="cdw" id="chbCDW" type="checkbox" label="Da li poseduje CDW?" />
+                                    {/* <Form.Check name="cdw" id="chbCDW" type="checkbox" label="Da li poseduje CDW?" /> */}
+                                    <Form.Check
+                                        name="cdw"
+                                        type="switch"
+                                        id="custom-switch"
+                                        label="Da li poseduje CDW?"
+                                    />
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <Form.Check name="androidFlag" id="chbAndroidFlag" type="checkbox" label="Da li poseduje android uredjaj?" />
+                                    <Form.Check
+                                        name="androidFlag"
+                                        type="switch"
+                                        id="custom-switch"
+                                        label="Da li poseduje android uredjaj?"
+                                    />
+                                    {/* <Form.Check name="androidFlag" id="chbAndroidFlag" type="checkbox" label="Da li poseduje android uredjaj?" /> */}
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Check box za biranje vec postojeceg cenovnika</Form.Label>

@@ -11,7 +11,7 @@ const AgentFirmHomePage = () => {
                     <center><h1>AgentFirm Homepage</h1></center>
                 </Col>
             </Row>
-            <Row style={{ margin: '10px', height:'100px' }}>
+            <Row style={{ margin: '10px' }}>
                 <Col>
                     <Card style={{ width: '300px', margin: '0 auto', alignItem: 'center' }}>
                         <Card.Body style={{ alignItem: 'center', fontSize: '20px' }}>
@@ -34,7 +34,7 @@ const AgentFirmHomePage = () => {
                     </Card>
                 </Col>
             </Row>
-            <Row style={{ margin: '10px', height:'100px' }}>
+            <Row style={{ margin: '10px' }}>
                 <Col>
                     <Card style={{ width: '300px', margin: '0 auto', alignItem: 'center' }}>
                         <Card.Body style={{ alignItem: 'center', fontSize: '20px' }}>
