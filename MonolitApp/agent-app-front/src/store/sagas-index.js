@@ -3,6 +3,8 @@ import flatten from 'lodash/flatten';
 
 import * as userSaga from './user/saga';
 import * as adSaga from './ad/saga';
+import * as codebookSaga from './codebook/saga';
+
 
 import {
   putErrorMsg
@@ -12,7 +14,8 @@ export default function* rootSaga() {
   let sagas = flatten(
     [
       userSaga,
-      adSaga
+      adSaga,
+      codebookSaga
     ].map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
   );
 

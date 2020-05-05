@@ -26,3 +26,17 @@ export function putInfo(state, payload) {
         info: payload
     };
 }
+
+export function putNextPage(state, payload) {
+    return {
+        ...state,
+        nextPage: payload
+    };
+}
+
+export function putTotalPageCnt(state, payload) {
+    return {
+        ...state,
+        totalPageCnt: payload
+    };
+}

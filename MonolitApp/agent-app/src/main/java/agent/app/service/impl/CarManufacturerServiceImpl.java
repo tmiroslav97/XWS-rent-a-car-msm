@@ -1,11 +1,16 @@
 package agent.app.service.impl;
 
+import agent.app.dto.CarManufacturerDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.CarManufacturer;
 import agent.app.repository.CarManufacturerRepository;
 import agent.app.service.intf.CarManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -25,6 +30,18 @@ public class CarManufacturerServiceImpl implements CarManufacturerService {
     @Override
     public List<CarManufacturer> findAll() {
         return carManufacturerRepository.findAll();
+    }
+
+    @Override
+    public CarManufacturerDTO findAll(Integer page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("name").ascending());
+        Page<CarManufacturer> carManufacturerPage = carManufacturerRepository.findAll(pageable);
+        CarManufacturerDTO carManufacturerDTO = CarManufacturerDTO.builder()
+                .totalPageCnt(carManufacturerPage.getTotalPages())
+                .carManufacturers(carManufacturerPage.getContent())
+                .build();
+
+        return carManufacturerDTO;
     }
 
     @Override
