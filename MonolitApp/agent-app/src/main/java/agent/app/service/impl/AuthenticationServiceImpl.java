@@ -61,6 +61,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public Integer signUp(SignUpDTO signUpDTO) {
         if (userService.existsByEmail(signUpDTO.getEmail())) {
             return 1;
+        } else if (!signUpDTO.getPassword().equals(signUpDTO.getPassword2())) {
+            return 2;
         } else {
             List<Authority> auths = authorityService.findByName("ROLE_USER");
             EndUser endUser = EndUser.endUserBuilder()
@@ -82,7 +84,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     .requests(new HashSet<>())
                     .build();
             userService.save(endUser);
-            return 2;
+            return 3;
         }
     }
 }
