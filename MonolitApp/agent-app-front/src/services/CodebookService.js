@@ -14,7 +14,7 @@ class CodebookService extends HttpBaseClient {
                 }
             }
         );
-        console.log(response);
+        
         return response.data;
     };
 

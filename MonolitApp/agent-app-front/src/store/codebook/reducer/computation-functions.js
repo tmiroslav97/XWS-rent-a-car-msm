@@ -4,11 +4,3 @@ export function putCarManufacturers(state, payload) {
         carManufacturers: payload
     };
 }
-
-export function putIsFetchCodebook(state, payload) {
-    return {
-        ...state,
-        isFetchCodebook: payload
-    };
-}
-  
