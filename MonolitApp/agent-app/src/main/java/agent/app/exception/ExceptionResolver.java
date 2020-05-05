@@ -17,4 +17,11 @@ public class ExceptionResolver {
         return new ResponseEntity<String>(exception.getMessage(), headers, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ExistsException.class)
+    public ResponseEntity<?> existsException(ExistsException exception) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        return new ResponseEntity<String>(exception.getMessage(), headers, HttpStatus.BAD_REQUEST);
+    }
+
 }
