@@ -33,6 +33,8 @@ public class AuthenticationController {
         if (retVal == 1) {
             return new ResponseEntity<>("Email je zauzet.", HttpStatus.BAD_REQUEST);
         } else if (retVal == 2) {
+            return new ResponseEntity<>("Lozinke se ne poklapaju.", HttpStatus.BAD_REQUEST);
+        } else if (retVal == 3) {
             return new ResponseEntity<>("Uspjesna registracija!", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Nepoznat zahtjev", HttpStatus.BAD_REQUEST);
