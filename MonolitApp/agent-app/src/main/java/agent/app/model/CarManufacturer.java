@@ -2,6 +2,7 @@ package agent.app.model;
 
 import agent.app.common.db.DbColumnConstants;
 import agent.app.common.db.DbTableConstants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class CarManufacturer {
     @Column(name = DbColumnConstants.NAME, unique = true, nullable = false)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "carManufacturer", fetch = FetchType.LAZY)
     private Set<CarModel> carModels = new HashSet<>();
 }
