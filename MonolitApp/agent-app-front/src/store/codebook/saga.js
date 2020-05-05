@@ -13,13 +13,17 @@ import {
 } from './actions';
 
 import {
-    putSuccessMsg
+    putSuccessMsg,
+    putTotalPageCnt,
+    putNextPage
 } from '../common/actions';
 
 export function* fetchCarManufacturersPaginated() {
-    yield take(FETCH_CAR_MANUFACTURERS);
+    const { payload } = yield take(FETCH_CAR_MANUFACTURERS);
     yield put(putIsFetchCodebook(false));
-    const data = call(CodebookService.fetchCarManufacturersPaginated);
-    yield put(putCarManufacturers(data.putCarManufacturers));
+    const data = yield call(CodebookService.fetchCarManufacturersPaginated, payload);
+    yield put(putCarManufacturers(data.carManufacturers));
+    yield put(putNextPage(payload.nextPage));
+    yield put(putTotalPageCnt(data.totalPageCnt));
     yield put(putIsFetchCodebook(true));
 }

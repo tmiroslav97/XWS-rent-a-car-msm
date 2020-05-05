@@ -1,7 +1,7 @@
 export function putCarManufacturers(state, payload) {
     return {
         ...state,
-        carManufactuerers: payload
+        carManufacturers: payload
     };
 }
 

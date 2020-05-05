@@ -20,8 +20,12 @@ public class CarManufacturerController {
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(carManufacturerService.findAll(), HttpStatus.OK);
+    public ResponseEntity<?> getAll(@RequestParam(value = "nextPage", required = false) Integer nextPage) {
+        if (nextPage != null) {
+            return new ResponseEntity<>(carManufacturerService.findAll(nextPage), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(carManufacturerService.findAll(), HttpStatus.OK);
+        }
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")

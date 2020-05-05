@@ -9,10 +9,10 @@ const PaginationContainer = (props) => {
 
     let items = [];
 
-    for (let i = 1; i <= totalPageCnt; i++) {
+    for (let i = 0; i < totalPageCnt; i++) {
         items.push(
             <Pagination.Item key={i} active={i === props.nextPage}>
-                {i}
+                {i + 1}
             </Pagination.Item>
         );
     }
@@ -23,15 +23,19 @@ const PaginationContainer = (props) => {
         let clicked = event.target.text;
         if (clicked != undefined && totalPageCnt > 0) {
             if (clicked.includes('First')) {
-                props.setNextPage(1);
+                props.setNextPage(0);
             } else if (clicked.includes('Last')) {
-                props.setNextPage(totalPageCnt);
+                props.setNextPage(totalPageCnt - 1);
             } else if (clicked.includes('Next')) {
-                props.setNextPage(props.nextPage + 1);
+                if (props.nextPage < totalPageCnt - 1) {
+                    props.setNextPage(props.nextPage + 1);
+                }
             } else if (clicked.includes('Previous')) {
-                props.setNextPage(props.nextPage - 1);
+                if (props.nextPage > 0) {
+                    props.setNextPage(props.nextPage - 1);
+                }
             } else {
-                props.setNextPage(props.nextPage);
+                props.setNextPage(clicked-1);
             }
         }
     }
