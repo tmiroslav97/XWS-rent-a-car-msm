@@ -1,6 +1,5 @@
 package agent.app.controller;
 
-import agent.app.model.CarManufacturer;
 import agent.app.model.CarType;
 import agent.app.service.intf.CarTypeService;
 import org.springframework.http.HttpStatus;

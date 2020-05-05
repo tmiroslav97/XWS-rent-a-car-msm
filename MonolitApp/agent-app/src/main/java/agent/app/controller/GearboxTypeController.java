@@ -1,7 +1,7 @@
 package agent.app.controller;
 
-import agent.app.model.FuelType;
-import agent.app.service.intf.FuelTypeService;
+import agent.app.model.GearboxType;
+import agent.app.service.intf.GearboxTypeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,33 +9,33 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/fuel-type", produces = MediaType.APPLICATION_JSON_VALUE)
-public class FuelTypeController {
+@RequestMapping(value = "/gb-type", produces = MediaType.APPLICATION_JSON_VALUE)
+public class GearboxTypeController {
 
-    private final FuelTypeService fuelTypeService;
+    private final GearboxTypeService gearboxTypeService;
 
-    public FuelTypeController(FuelTypeService fuelTypeService) {
-        this.fuelTypeService = fuelTypeService;
+    public GearboxTypeController(GearboxTypeService gearboxTypeService) {
+        this.gearboxTypeService = gearboxTypeService;
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(fuelTypeService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(gearboxTypeService.findAll(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getFuelType(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(fuelTypeService.findById(id), HttpStatus.OK);
+    public ResponseEntity<?> getGearboxType(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(gearboxTypeService.findById(id), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createFuelType(@RequestBody String name) {
-        Integer flag = fuelTypeService.createFuelType(name);
+    public ResponseEntity<?> createGearboxType(@RequestBody String name) {
+        Integer flag = gearboxTypeService.createGearboxType(name);
         if (flag == 1) {
-            return new ResponseEntity<>("Tip pogonskog goriva uspjesno kreiran.", HttpStatus.CREATED);
+            return new ResponseEntity<>("Tip mjenjaca uspjesno kreiran.", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Desila se nepoznata greska.", HttpStatus.BAD_REQUEST);
         }
@@ -43,10 +43,10 @@ public class FuelTypeController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editFuelType(@RequestBody FuelType fuelType) {
-        Integer flag = fuelTypeService.editFuelType(fuelType);
+    public ResponseEntity<?> editGearboxType(@RequestBody GearboxType gearboxType) {
+        Integer flag = gearboxTypeService.editGearboxType(gearboxType);
         if (flag == 1) {
-            return new ResponseEntity<>("Tip pogonskog goriva uspjesno izmjenjen.", HttpStatus.CREATED);
+            return new ResponseEntity<>("Tip mjenjaca uspjesno izmjenjen.", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Desila se nepoznata greska.", HttpStatus.BAD_REQUEST);
         }
@@ -54,10 +54,10 @@ public class FuelTypeController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteFuelType(@RequestBody Long id) {
-        Integer flag = fuelTypeService.deleteById(id);
+    public ResponseEntity<?> deleteGearboxType(@RequestBody Long id) {
+        Integer flag = gearboxTypeService.deleteById(id);
         if (flag == 1) {
-            return new ResponseEntity<>("Tip pogonskog goriva uspjesno obrisan.", HttpStatus.CREATED);
+            return new ResponseEntity<>("Tip mjenjaca uspjesno obrisan.", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Desila se nepoznata greska.", HttpStatus.BAD_REQUEST);
         }
