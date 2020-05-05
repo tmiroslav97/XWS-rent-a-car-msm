@@ -15,8 +15,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = DbTableConstants.GEARBOXTYPECODEBOOK)
-public class GearboxTypeCodebook {
+@Table(name = DbTableConstants.GEARBOXTYPE)
+public class GearboxType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

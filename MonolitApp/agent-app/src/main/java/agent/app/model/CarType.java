@@ -12,8 +12,8 @@ import javax.persistence.*;
 @Setter
 @Builder
 @Entity
-@Table(name = DbTableConstants.CARTYPECODEBOOK)
-public class CarTypeCodebook {
+@Table(name = DbTableConstants.CARTYPE)
+public class CarType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -14,8 +14,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = DbTableConstants.FUELTYPECODEBOOK)
-public class FuelTypeCodebook {
+@Table(name = DbTableConstants.FUELTYPE)
+public class FuelType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
