@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Container, Carousel } from 'react-bootstrap';
+import AdCard from "../components/Ad/AdCard";
 
 const HomePage = () => {
     return (
@@ -43,6 +44,7 @@ const HomePage = () => {
                             </Carousel.Caption>
                         </Carousel.Item>
                     </Carousel>
+                    <AdCard/>
                 </Col>
             </Row>
         </Container>

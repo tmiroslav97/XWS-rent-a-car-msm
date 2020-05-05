@@ -10,6 +10,7 @@ import RegContainer from './containers/Authorization/RegContainer';
 import AgentFirmHomePage from './components/AgentFirm/AgentFirmHomePage';
 import EndUserHomePage from './components/EndUser/EndUserHomePage';
 import CreatedAdContainer from './containers/Ad/CreatedAdContainer';
+import AdListContainer from './components/Ad/AdCard';
 
 const AppRouter = () => {
   const token = useSelector(tokenSelector);
