@@ -40,7 +40,7 @@ public class CarManufacturerServiceImpl implements CarManufacturerService {
     @Override
     public Integer editCarManufacturer(CarManufacturer carManufacturer) {
         this.findById(carManufacturer.getId());
-        this.save(carManufacturer);
+        carManufacturerRepository.save(carManufacturer);
         return 1;
     }
 

@@ -35,7 +35,7 @@ public class CarModelServiceImpl implements CarModelService {
     @Override
     public Integer editCarModel(CarModel carModel) {
         this.findById(carModel.getId());
-        this.save(carModel);
+        carModelRepository.save(carModel);
         return 1;
     }
 
