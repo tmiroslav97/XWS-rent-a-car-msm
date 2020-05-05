@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Pagination } from 'react-bootstrap'
 import PaginationComponent from '../../components/Pagination/PaginationComponent';
+import { totalPageCntSelector } from '../../store/common/selectors';
 
 const PaginationContainer = (props) => {
+    const totalPageCnt = useSelector(totalPageCntSelector);
 
     let items = [];
 
-    for (let i = 1; i <= props.totalPageCnt; i++) {
+    for (let i = 1; i <= totalPageCnt; i++) {
         items.push(
             <Pagination.Item key={i} active={i === props.nextPage}>
                 {i}
@@ -18,11 +21,11 @@ const PaginationContainer = (props) => {
     const handlePagination = (event) => {
         event.preventDefault();
         let clicked = event.target.text;
-        if (clicked != undefined && props.totalPageCnt > 0) {
+        if (clicked != undefined && totalPageCnt > 0) {
             if (clicked.includes('First')) {
                 props.setNextPage(1);
             } else if (clicked.includes('Last')) {
-                props.setNextPage(props.totalPageCnt);
+                props.setNextPage(totalPageCnt);
             } else if (clicked.includes('Next')) {
                 props.setNextPage(props.nextPage + 1);
             } else if (clicked.includes('Previous')) {

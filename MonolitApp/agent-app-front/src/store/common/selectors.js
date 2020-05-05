@@ -5,5 +5,5 @@ export const successSelector = state => state[reducer].success;
 export const warnSeletor = state => state[reducer].warn;
 export const infoSelector = state => state[reducer].info;
 
-export const totalPageCnt = state => state[reducer].totalPageCnt;
-export const nextPage = state => state[reducer].nextPage;
+export const totalPageCntSelector = state => state[reducer].totalPageCnt;
+export const nextPageSelector = state => state[reducer].nextPage;

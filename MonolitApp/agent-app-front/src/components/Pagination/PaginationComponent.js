@@ -6,7 +6,7 @@ const PaginationComponent = (props) => {
     return (
         <Container>
             <Row>
-                <Col md={{ span: 3, offset: 3 }} xs={12}>
+                <Col xs={12}>
                     <Pagination onClick={props.onClick} className="pagination justify-content-center mb-5">
                         <Pagination.First />
                         <Pagination.Prev />

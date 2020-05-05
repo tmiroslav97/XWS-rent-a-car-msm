@@ -6,10 +6,9 @@ const FINALPOINTS = {
 
 class CodebookService extends HttpBaseClient {
 
-    fetchCarManufacturersPaginated = async => {
+    fetchCarManufacturersPaginated = async payload => {
         const response = await this.getApiClient().get(
-            FINALPOINTS.FETCH_CAR_MANUFACTURERS,
-            payload
+            FINALPOINTS.FETCH_CAR_MANUFACTURERS
         );
 
         return response.data;
