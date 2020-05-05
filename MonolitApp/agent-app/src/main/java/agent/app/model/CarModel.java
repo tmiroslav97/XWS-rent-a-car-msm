@@ -2,10 +2,7 @@ package agent.app.model;
 
 import agent.app.common.db.DbColumnConstants;
 import agent.app.common.db.DbTableConstants;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,9 +10,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
-@Table(name = DbTableConstants.FUELTYPECODEBOOK)
-public class FuelTypeCodebook {
+@Table(name = DbTableConstants.CARMODEL)
+public class CarModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +22,6 @@ public class FuelTypeCodebook {
     @Column(name = DbColumnConstants.NAME, unique = true, nullable = false)
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CarManufacturer carManufacturer;
 }

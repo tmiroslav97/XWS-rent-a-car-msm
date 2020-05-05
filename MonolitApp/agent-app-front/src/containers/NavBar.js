@@ -28,7 +28,8 @@ const NavBar = () => {
                 <Nav className="mr-auto">
                     <Nav.Link onClick={() => { history.push('/') }}>Pocetna stranica</Nav.Link>
                     {token != null && role != null && role === 'ROLE_AGENT' && <Nav.Link href="#" onClick={() => { history.push('/agent-firm') }}>Admin panel</Nav.Link>}
-                    {token != null && role != null && role === 'ROLE_USER' && <Nav.Link href="#" onClick={() => { history.push('/enduser') }}>Admin panel</Nav.Link>}
+                    {token != null && role != null && role === 'ROLE_USER' && <Nav.Link href="#" onClick={() => { history.push('/end-user') }}>Admin panel</Nav.Link>}
+                    {token != null && role != null && role === 'ROLE_ADMIN' && <Nav.Link href="#" onClick={() => { history.push('/admin') }}>Admin panel</Nav.Link>}
                 </Nav>
                 <Nav className="ml-auto">
                     {token == null && <Nav.Link href="#" onClick={() => { history.push('/login') }}>Prijava</Nav.Link>}
