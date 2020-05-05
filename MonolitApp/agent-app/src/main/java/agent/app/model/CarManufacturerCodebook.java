@@ -5,6 +5,8 @@ import agent.app.common.db.DbTableConstants;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,8 +14,8 @@ import javax.persistence.*;
 @Setter
 @Builder
 @Entity
-@Table(name = DbTableConstants.CARMODELCODEBOOK)
-public class CarModelCodebook {
+@Table(name = DbTableConstants.CARMANUFACTURERCODEBOOK)
+public class CarManufacturerCodebook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +24,6 @@ public class CarModelCodebook {
     @Column(name = DbColumnConstants.NAME, unique = true, nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private CarManufacturerCodebook carManufacturerCodebook;
+    @OneToMany(mappedBy = "carManufacturerCodebook", fetch = FetchType.LAZY)
+    private Set<CarModelCodebook> carModelCodebooks = new HashSet<>();
 }
