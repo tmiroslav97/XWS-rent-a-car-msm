@@ -9,7 +9,7 @@ public interface CarManufacturerService {
 
     List<CarManufacturer> findAll();
 
-    Integer createCarManufacturer(CarManufacturer carManufacturer);
+    Integer createCarManufacturer(String name);
 
     Integer editCarManufacturer(CarManufacturer carManufacturer);
 

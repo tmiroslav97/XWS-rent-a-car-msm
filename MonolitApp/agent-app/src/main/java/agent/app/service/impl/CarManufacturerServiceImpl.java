@@ -8,6 +8,7 @@ import agent.app.service.intf.CarManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -27,7 +28,11 @@ public class CarManufacturerServiceImpl implements CarManufacturerService {
     }
 
     @Override
-    public Integer createCarManufacturer(CarManufacturer carManufacturer) {
+    public Integer createCarManufacturer(String name) {
+        CarManufacturer carManufacturer = CarManufacturer.builder()
+                .name(name)
+                .carModels(new HashSet<>())
+                .build();
         this.save(carManufacturer);
         return 1;
     }

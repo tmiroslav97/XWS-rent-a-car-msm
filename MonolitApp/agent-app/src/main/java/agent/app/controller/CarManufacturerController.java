@@ -1,7 +1,7 @@
 package agent.app.controller;
 
-import agent.app.model.CarModel;
-import agent.app.service.intf.CarModelService;
+import agent.app.model.CarManufacturer;
+import agent.app.service.intf.CarManufacturerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,33 +9,33 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/car-model", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CarModelController {
+@RequestMapping(value = "/car-man", produces = MediaType.APPLICATION_JSON_VALUE)
+public class CarManufacturerController {
 
-    private final CarModelService carModelService;
+    private final CarManufacturerService carManufacturerService;
 
-    public CarModelController(CarModelService carModelService) {
-        this.carModelService = carModelService;
+    public CarManufacturerController(CarManufacturerService carManufacturerService) {
+        this.carManufacturerService = carManufacturerService;
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(carModelService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(carManufacturerService.findAll(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getCarModel(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(carModelService.findById(id), HttpStatus.OK);
+    public ResponseEntity<?> getCarManufacturer(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(carManufacturerService.findById(id), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createCarModel(@RequestBody CarModel carModel) {
-        Integer flag = carModelService.createCarModel(carModel);
+    public ResponseEntity<?> createCarManufacturer(@RequestBody String name) {
+        Integer flag = carManufacturerService.createCarManufacturer(name);
         if (flag == 1) {
-            return new ResponseEntity<>("Model automobila uspjesno kreiran.", HttpStatus.CREATED);
+            return new ResponseEntity<>("Proizvodjac automobila uspjesno kreiran.", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Desila se nepoznata greska.", HttpStatus.BAD_REQUEST);
         }
@@ -43,10 +43,10 @@ public class CarModelController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editCarModel(@RequestBody CarModel carModel) {
-        Integer flag = carModelService.editCarModel(carModel);
+    public ResponseEntity<?> editCarManufacturer(@RequestBody CarManufacturer carManufacturer) {
+        Integer flag = carManufacturerService.editCarManufacturer(carManufacturer);
         if (flag == 1) {
-            return new ResponseEntity<>("Model automobila uspjesno izmjenjen.", HttpStatus.CREATED);
+            return new ResponseEntity<>("Proizvodjac automobila uspjesno izmjenjen.", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Desila se nepoznata greska.", HttpStatus.BAD_REQUEST);
         }
@@ -54,13 +54,12 @@ public class CarModelController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteCarModel(@RequestBody Long id) {
-        Integer flag = carModelService.deleteById(id);
+    public ResponseEntity<?> deleteCarManufacturer(@RequestBody Long id) {
+        Integer flag = carManufacturerService.deleteById(id);
         if (flag == 1) {
-            return new ResponseEntity<>("Model automobila uspjesno obrisan.", HttpStatus.CREATED);
+            return new ResponseEntity<>("Proizvodjac automobila uspjesno obrisan.", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Desila se nepoznata greska.", HttpStatus.BAD_REQUEST);
         }
     }
-
 }
