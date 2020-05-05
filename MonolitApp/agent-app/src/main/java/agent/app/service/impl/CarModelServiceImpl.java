@@ -18,7 +18,7 @@ public class CarModelServiceImpl implements CarModelService {
 
     @Override
     public CarModel findById(Long id) {
-        return carModelRepository.findById(id).orElseThrow(() -> new NotFoundException("Model auta iz sifarnika ne postoji."));
+        return carModelRepository.findById(id).orElseThrow(() -> new NotFoundException("Model automobila ne postoji u sifarniku."));
     }
 
     @Override
@@ -28,9 +28,6 @@ public class CarModelServiceImpl implements CarModelService {
 
     @Override
     public Integer createCarModel(CarModel carModel) {
-        if (carModelRepository.existsByName(carModel.getName())) {
-            throw new ExistsException(String.format("Model auta iz sifarnika sa imenom '%s' vec postoji", carModel.getName()));
-        }
         this.save(carModel);
         return 1;
     }
@@ -56,6 +53,10 @@ public class CarModelServiceImpl implements CarModelService {
 
     @Override
     public CarModel save(CarModel carModel) {
+        if (carModelRepository.existsByName(carModel.getName())) {
+            throw new ExistsException(String.format("Model automobila sa imenom '%s' vec postoji u sifarniku", carModel.getName()));
+        }
+
         return carModelRepository.save(carModel);
     }
 }
