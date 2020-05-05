@@ -1,19 +1,20 @@
 package agent.app.model;
 
+
 import agent.app.common.db.DbColumnConstants;
 import agent.app.common.db.DbTableConstants;
 import lombok.*;
 
 import javax.persistence.*;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
 @Entity
-@Table(name = DbTableConstants.CARTYPECODEBOOK)
-public class CarTypeCodebook {
+@Table(name = DbTableConstants.GEARBOXTYPE)
+public class GearboxType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +22,5 @@ public class CarTypeCodebook {
 
     @Column(name = DbColumnConstants.NAME, unique = true, nullable = false)
     private String name;
+
 }
