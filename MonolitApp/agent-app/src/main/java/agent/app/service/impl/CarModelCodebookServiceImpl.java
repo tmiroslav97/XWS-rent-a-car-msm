@@ -27,7 +27,7 @@ public class CarModelCodebookServiceImpl implements CarModelCodebookService {
     }
 
     @Override
-    public Integer addCarModelCodebook(CarModelCodebook carModelCodebook) {
+    public Integer createCarModelCodebook(CarModelCodebook carModelCodebook) {
         if (carModelCodebookRepository.existsByName(carModelCodebook.getName())) {
             throw new ExistsException(String.format("Model auta iz sifarnika sa imenom '%s' vec postoji", carModelCodebook.getName()));
         }

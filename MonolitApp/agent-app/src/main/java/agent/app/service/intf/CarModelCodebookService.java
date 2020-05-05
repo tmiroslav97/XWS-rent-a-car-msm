@@ -9,7 +9,7 @@ public interface CarModelCodebookService {
 
     List<CarModelCodebook> findAll();
 
-    Integer addCarModelCodebook(CarModelCodebook carModelCodebook);
+    Integer createCarModelCodebook(CarModelCodebook carModelCodebook);
 
     Integer editCarModelCodebook(CarModelCodebook carModelCodebook);
 
