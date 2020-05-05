@@ -16,10 +16,10 @@ import {
     putSuccessMsg
 } from '../common/actions';
 
-export function* signOut() {
+export function* fetchCarManufacturersPaginated() {
     yield take(FETCH_CAR_MANUFACTURERS);
     yield put(putIsFetchCodebook(false));
-    const data = call(CodebookService.fetchCarManufacturers);
+    const data = call(CodebookService.fetchCarManufacturersPaginated);
     yield put(putCarManufacturers(data.putCarManufacturers));
     yield put(putIsFetchCodebook(true));
 }
