@@ -33,7 +33,9 @@ export function* loginUser() {
     if (role === 'ROLE_AGENT') {
         history.push('/agent-firm');
     } else if (role === 'ROLE_USER') {
-        history.push('/enduser');
+        history.push('/end-user');
+    } else if (role === 'ROLE_ADMIN') {
+        history.push('/admin');
     } else {
         history.push('/');
     }

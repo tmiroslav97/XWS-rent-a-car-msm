@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Pagination } from 'react-bootstrap'
 
-const Pagination = (props) => {
+const PaginationComponent = (props) => {
 
     return (
         <Container>
@@ -20,4 +20,4 @@ const Pagination = (props) => {
     );
 }
 
-export default Pagination;
+export default PaginationComponent;

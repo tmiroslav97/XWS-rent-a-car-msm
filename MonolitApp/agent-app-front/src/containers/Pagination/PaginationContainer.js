@@ -1,8 +1,8 @@
 import React from 'react';
-import { Container, Row, Col, Pagination } from 'react-bootstrap'
-import PaginationComponent from '../../components/Pagination/Pagination';
+import { Pagination } from 'react-bootstrap'
+import PaginationComponent from '../../components/Pagination/PaginationComponent';
 
-const Pagination = (props) => {
+const PaginationContainer = (props) => {
 
     let items = [];
 
@@ -38,4 +38,4 @@ const Pagination = (props) => {
     );
 }
 
-export default Pagination;
+export default PaginationContainer;
