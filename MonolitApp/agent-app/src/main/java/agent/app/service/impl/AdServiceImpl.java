@@ -7,6 +7,8 @@ import agent.app.dto.AdCreateDTO;
 import agent.app.dto.AdPageContentDTO;
 import agent.app.dto.AdPageDTO;
 import agent.app.dto.CarCalendarTermCreateDTO;
+import agent.app.exception.ExistsException;
+import agent.app.exception.NotFoundException;
 import agent.app.model.Ad;
 import agent.app.model.Car;
 import agent.app.model.CarCalendarTerm;
@@ -45,22 +47,33 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ad findById(Long id) {
-        return adRepository.findById(id).orElseGet(null);
+        return adRepository.findById(id).orElseThrow(()-> new NotFoundException("Oglas ne postoi."));
     }
 
     @Override
     public List<Ad> findAll() {
+
         return adRepository.findAll();
     }
 
     @Override
     public Ad save(Ad ad) {
+        if(adRepository.existsById(ad.getId())){
+            throw new ExistsException(String.format("Oglas vec postoji."));
+        }
         return adRepository.save(ad);
     }
 
     @Override
-    public void delete(Long id) {
-        adRepository.delete(findById(id));
+    public void delete(Ad ad) {
+        adRepository.delete(ad);
+    }
+
+    @Override
+    public Integer deleteById(Long id) {
+        Ad ad = this.findById(id);
+        this.delete(ad);
+        return 1;
     }
 
     @Override
