@@ -33,8 +33,8 @@ public class CarManufacturerServiceImpl implements CarManufacturerService {
     }
 
     @Override
-    public CarManufacturerDTO findAll(Integer page) {
-        Pageable pageable = PageRequest.of(page, 10, Sort.by("name").ascending());
+    public CarManufacturerDTO findAll(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
         Page<CarManufacturer> carManufacturerPage = carManufacturerRepository.findAll(pageable);
         CarManufacturerDTO carManufacturerDTO = CarManufacturerDTO.builder()
                 .totalPageCnt(carManufacturerPage.getTotalPages())

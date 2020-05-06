@@ -10,7 +10,7 @@ public interface CarManufacturerService {
 
     List<CarManufacturer> findAll();
 
-    CarManufacturerDTO findAll(Integer page);
+    CarManufacturerDTO findAll(Integer page, Integer size);
 
     Integer createCarManufacturer(String name);
 
