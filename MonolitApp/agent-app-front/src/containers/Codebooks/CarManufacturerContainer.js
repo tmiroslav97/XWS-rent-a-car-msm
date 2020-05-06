@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row, Col, Spinner } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
+import PaginationSize from '../../components/Pagination/PaginationSize';
 import CarManufacturerComponent from '../../components/Codebooks/CarManufacturerComponent';
 import { carManufacturersSelector } from '../../store/codebook/selectors';
 import { fetchCarManufacturers } from '../../store/codebook/actions';
@@ -11,14 +12,16 @@ const CarManufacturerContainer = () => {
     const carManufacturers = useSelector(carManufacturersSelector);
     const isFetchCarManufacturers = carManufacturers.isFetch;
     const [nextPage, setNextPage] = useState(carManufacturers.nextPage);
+    const [size, setSize] = useState(carManufacturers.size);
 
     useEffect(() => {
         dispatch(
             fetchCarManufacturers({
-                nextPage
+                nextPage,
+                size
             })
         );
-    }, [nextPage]);
+    }, [nextPage, size]);
 
     if (!isFetchCarManufacturers) {
         return <div className="d-flex justify-content-center">
@@ -33,6 +36,11 @@ const CarManufacturerContainer = () => {
             <Row>
                 <Col md={{ span: 8, offset: 2 }} xs={12}>
                     <h2 className="border-bottom">Sifarnik proizvodjaca automobila</h2>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={{span:12, offset: 3 }} xs={12}>
+                    <PaginationSize size={size} setSize={setSize} />
                 </Col>
             </Row>
             <Row>

@@ -19,6 +19,7 @@ export function* fetchCarManufacturersPaginated() {
         'data': data.carManufacturers,
         'totalPageCnt': data.totalPageCnt,
         'nextPage': payload.nextPage,
+        'size': payload.size,
         'isFetch': true
     }));
 }

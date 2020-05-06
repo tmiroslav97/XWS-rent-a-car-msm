@@ -9,6 +9,7 @@ const initialState = {
         data: [],
         totalPageCnt: 0,
         nextPage: 0,
+        size: 10,
         isFetch: false
     },
     fuelTypes: []
