@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<app.name>agentApp</app.name>
 	</properties>
 
 	<dependencies>
@@ -93,6 +94,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>${app.name}</finalName>
 	</build>
 
 </project>
