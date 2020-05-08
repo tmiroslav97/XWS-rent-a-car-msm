@@ -6,39 +6,51 @@ import { createdAd } from '../../store/ad/actions';
 const CreatedAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
+    const [coverPhoto, setCoverPhoto] = useState();
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
+    const [cdw, setCdw] = useState(false);
+    const [androidFlag, setAndroidFlag] = useState(false);
+    const [coverPhotoName, setCoverPhotoName] = useState('Dodaj sliku');
 
     const handleCreatedAd = (event) => {
         event.preventDefault();
         const form = event.target;
-        const data = new FormData(event.target);
+
+        let data = {
+            'name': form.name.value,
+            'coverPhoto': null,
+            'location': form.location.value,
+            'distanceLimitFlag': distanceLimitFlag,
+            'distanceLimit': form.distanceLimit.value,
+            'carCreateDTO': {
+                'carManufacturer': form.carManufacturer.value,
+                'carModel': form.carModel.value,
+                'carType': form.carType.value,
+                'year': form.year.value,
+                'mileage': form.mileage.value,
+                'gearboxType': form.gearboxType.value,
+                'fuelType': form.fuelType.value,
+                'childrenSeatNum': form.childrenSeatNum.value,
+                'cdw': cdw,
+                'androidFlag': androidFlag,
+            },
+            'priceListCreateDTO': {
+                'pricePerKm': form.pricePerKm.value,
+                'pricePerKmCDW': form.pricePerKmCDW.value,
+                'pricePerDay': form.pricePerDay.value,
+                'id': null,
+                // 'id': form.id.value,
+            },
+            'carCalendarTermCreateDTOList': null
+        }
+        let formData = new FormData(form);
+        formData.append('data', JSON.stringify(data));
+
         if (form.checkValidity() === false) {
             event.stopPropagation();
             setValidated(true);
         } else {
-            dispatch(
-                createdAd({
-                    "name": data.get('name'),
-                    "coverPhoto": data.get('coverPhoto'),
-                    "location": data.get('location'),
-                    "distanceLimitFlag": data.get('distanceLimitFlag'),
-                    "distanceLimit": data.get('distanceLimit'),
-                    "carManufacturer": data.get('carManufacturer'),
-                    "carModel": data.get('carModel'),
-                    "carType": data.get('carType'),
-                    "year": data.get('year'),
-                    "mileage": data.get('mileage'),
-                    "gearboxType": data.get('gearboxType'),
-                    "fuelType": data.get('fuelType'),
-                    "childrenSeatNum": data.get('childrenSeatNum'),
-                    "cdw": data.get('cdw'),
-                    "androidFlag": data.get('androidFlag'),
-                    "pricePerKm": data.get('pricePerKm'),
-                    "pricePerKmCDW": data.get('pricePerKmCDW'),
-                    "pricePerDay": data.get('pricePerDay'),
-                    "id": data.get('id')
-                })
-            );
+            dispatch(createdAd(formData));
             setValidated(false);
         }
     };
@@ -47,11 +59,30 @@ const CreatedAdContainer = () => {
         setDistanceLimitFlag(event.target.checked);
     };
 
+    const handleCDW = (event) => {
+        setCdw(event.target.checked);
+    };
+
+    const handleAndroidFlag = (event) => {
+        setAndroidFlag(event.target.checked);
+    };
+
+    const onPhotoChange = (event) => {
+        setCoverPhoto(event.target.files[0]);
+        setCoverPhotoName(event.target.files[0].name);
+    };
+
     return (
         <CreatedAd onSubmit={handleCreatedAd}
             validated={validated}
             distanceLimitFlag={distanceLimitFlag}
-            handleDistanceLimitFlag={handleDistanceLimitFlag} />
+            cdw={cdw}
+            androidFlag={androidFlag}
+            coverPhotoName = {coverPhotoName}
+            handleDistanceLimitFlag={handleDistanceLimitFlag}
+            onPhotoChange={onPhotoChange}
+            handleAndroidFlag={handleAndroidFlag}
+            handleCDW={handleCDW} />
     )
 }
 
