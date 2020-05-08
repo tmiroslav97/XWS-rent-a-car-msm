@@ -10,3 +10,4 @@ VALUES ('tomic@tomic.com', 'Tomke', 'Faker', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.Nakwj
 
 INSERT INTO user_authority(user_id, authority_id)
 VALUES (1,2);
+
