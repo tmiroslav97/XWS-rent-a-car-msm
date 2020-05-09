@@ -30,11 +30,16 @@ const AdListContainer = () => {
     }
 
 
+
     return(
+       
         <Container>
-            <Row>
-                <AdCard ads={ads.data}></AdCard>
-            </Row>
+          
+            
+          
+                
+                <AdCard ads={ads.data}/>    
+          
             <Row>
                 <PaginationContainer setNextPage={setNextPage} totalPageCnt={ads.totalPageCnt} nextPage={nextPage}></PaginationContainer>
             </Row>

@@ -1,28 +1,35 @@
 import React from 'react';
-import {Container, Row, Col, Card, Button} from 'react-bootstrap';
-import {Link} from "react-router-dom"; 
+import {Row, Col, Card, Button} from 'react-bootstrap';
+
 
 const AdCard = (props) => {
+
+
     return(
-        <Container>
-            <Row>
-                <Col>
-                    <Card>
-                        <Card.Header>Naziv oglasa</Card.Header>
+        props.ads.map((variant, idx) => (
+            <>
+                    <br />
+                    <Card
+                         key={idx}
+                         border="primary" 
+                       
+                    >
+                        <Card.Header>{variant.name}</Card.Header>
                         <Card.Body>
                             <Row>
                                <Col md={2}>
-                                    <Card.Img variant="top"  src="holder.js/100px180" />
+                                    <Card.Img variant="top"  src="img/rent2.png" />
                                </Col>
                                 <Col>
+                              
                                     <Card.Text>
-                                        {props.ads}
+                                       {idx}     
                                     </Card.Text>
-                                   {/* <Link>Vise detalja > </Link> */}
+                                    <Card.Link href="#">Vise detalja ></Card.Link>
                                 </Col>
                                 <Col>
                                     <Card.Text>
-                                        dsadasdadas
+                                        {variant.location}
                                     </Card.Text>
                                 </Col>
                                 <Col md={2}>
@@ -31,9 +38,10 @@ const AdCard = (props) => {
                             </Row>           
                         </Card.Body>
                     </Card>
-                 </Col>
-             </Row>
-         </Container>      
+                    <br />
+                    </>
+            ))
+       
     );
 }
 

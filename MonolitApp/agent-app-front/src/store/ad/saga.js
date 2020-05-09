@@ -30,9 +30,12 @@ export function* createdAd(){
 }
 
 export function* fetchAds() {
+    console.log("sagaaaa");
+
     const { payload } = yield take(FETCH_ADS);
     yield put(putAds({ 'isFetch': false }));
-    const data = yield call(AdServices.fetchAds, payload);
+    const data = yield call(AdServices.fetchAdsPaginated, payload);
+    console.log(data);
     yield put(putAds({
         'data': data.ads,
         'totalPageCnt': data.totalPageCnt,

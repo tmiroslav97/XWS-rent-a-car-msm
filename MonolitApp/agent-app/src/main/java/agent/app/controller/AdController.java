@@ -5,6 +5,7 @@ import agent.app.service.intf.AdService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,10 +49,12 @@ public class AdController {
 //                                         @PathVariable("sort") String sort) {
 //        return new ResponseEntity<>(adService.findAllPageAd(page, size, sort), HttpStatus.OK);
 //    }
-
-    @RequestMapping(method = RequestMethod.GET)
+@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+@RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage) {
+
         if (nextPage != null) {
+            System.out.println("ima 1 str");
             return new ResponseEntity<>(adService.findAllPageAd(nextPage), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(adService.findAll(), HttpStatus.OK);

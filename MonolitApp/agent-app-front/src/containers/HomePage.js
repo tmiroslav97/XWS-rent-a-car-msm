@@ -45,7 +45,7 @@ const HomePage = () => {
                             </Carousel.Caption>
                         </Carousel.Item>
                     </Carousel>
-                    <AdListContainer></AdListContainer>
+                    {/* <AdListContainer></AdListContainer> */}
                 </Col>
             </Row>
         </Container>

@@ -2,7 +2,7 @@ import HttpBaseClient from './HttpBaseClient';
 
 const FINALPOINTS = {
     CREATED_AD: '/ad',
-    FETCH_ADS: '/ads'
+    FETCH_ADS: '/ad'
 };
 
 class AdServices extends HttpBaseClient {
@@ -24,7 +24,7 @@ class AdServices extends HttpBaseClient {
                 }
             }
         );
-        
+
         return response.data;
     };
 }
