@@ -4,8 +4,13 @@ import { history } from '../../index';
 import AdServices from '../../services/AdServices';
 
 import {
-    CREATED_AD
+    CREATED_AD,
+    FETCH_ADS
 } from './constants';
+
+import {
+    putAds
+} from './actions';
 
 import {
     putSuccessMsg
@@ -22,5 +27,17 @@ export function* createdAd(){
     yield put(putSuccessMsg(null));
     history.push('/');
     
+}
+
+export function* fetchAds() {
+    const { payload } = yield take(FETCH_ADS);
+    yield put(putAds({ 'isFetch': false }));
+    const data = yield call(AdServices.fetchAds, payload);
+    yield put(putAds({
+        'data': data.ads,
+        'totalPageCnt': data.totalPageCnt,
+        'nextPage': payload.nextPage,
+        'isFetch': true
+    }));
 }
 

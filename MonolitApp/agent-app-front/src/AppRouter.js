@@ -11,6 +11,7 @@ import AgentFirmHomePage from './components/AgentFirm/AgentFirmHomePage';
 import EndUserHomePage from './components/EndUser/EndUserHomePage';
 import CreatedAdContainer from './containers/Ad/CreatedAdContainer';
 import CarManufacturerContainer from './containers/Codebooks/CarManufacturerContainer';
+import AdListContainer from './containers/Ad/AdListContainer';
 import AdminHomePage from './components/Administrator/AdminHomePage';
 
 const AppRouter = () => {

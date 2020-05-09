@@ -43,10 +43,19 @@ public class AdController {
 
     }
 
-    @RequestMapping(value = "{?page,size,sort}", method = RequestMethod.GET)
-    public ResponseEntity<?> findAllPageAd(@PathVariable("page") Integer page,@PathVariable("size") Integer size,
-                                         @PathVariable("sort") String sort) {
-        return new ResponseEntity<>(adService.findAllPageAd(page, size, sort), HttpStatus.OK);
+//    @RequestMapping(value = "{?page,size,sort}", method = RequestMethod.GET)
+//    public ResponseEntity<?> findAllPageAd(@PathVariable("page") Integer page,@PathVariable("size") Integer size,
+//                                         @PathVariable("sort") String sort) {
+//        return new ResponseEntity<>(adService.findAllPageAd(page, size, sort), HttpStatus.OK);
+//    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage) {
+        if (nextPage != null) {
+            return new ResponseEntity<>(adService.findAllPageAd(nextPage), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(adService.findAll(), HttpStatus.OK);
+        }
     }
 
 }

@@ -102,19 +102,21 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public AdPageContentDTO findAllPageAd(Integer page, Integer size, String sort) {
-        Pageable pageable;
-        if(sort.equals("-")){
-            pageable = PageRequest.of(page, size);
-        }else{
-            String par[] = sort.split(" ");
-            if(par[1].equals("opadajuce")) {
-                pageable = PageRequest.of(page, size, Sort.by(par[0]).descending());
-            }else{
-                pageable = PageRequest.of(page, size, Sort.by(par[0]).ascending());
-            }
+    public AdPageContentDTO findAllPageAd(Integer page) {
 
-        }
+//        Pageable pageable;
+//        if(sort.equals("-")){
+//            pageable = PageRequest.of(page, size);
+//        }else{
+//            String par[] = sort.split(" ");
+//            if(par[1].equals("opadajuce")) {
+//                pageable = PageRequest.of(page, size, Sort.by(par[0]).descending());
+//            }else{
+//                pageable = PageRequest.of(page, size, Sort.by(par[0]).ascending());
+//            }
+//
+//        }
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("name").ascending());
 
         Page<Ad> ads =  adRepository.findAllByDeleted(false, pageable);
         List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());

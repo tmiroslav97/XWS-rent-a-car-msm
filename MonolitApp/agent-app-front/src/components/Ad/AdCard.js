@@ -1,12 +1,12 @@
 import React from 'react';
-import { Row, Col, Card, Button} from 'react-bootstrap';
+import {Container, Row, Col, Card, Button} from 'react-bootstrap';
 import {Link} from "react-router-dom"; 
 
 const AdCard = (props) => {
     return(
-        // <Container>
-        //     <Row>
-        //         <Col>
+        <Container>
+            <Row>
+                <Col>
                     <Card>
                         <Card.Header>Naziv oglasa</Card.Header>
                         <Card.Body>
@@ -16,18 +16,14 @@ const AdCard = (props) => {
                                </Col>
                                 <Col>
                                     <Card.Text>
-                                        <Row>
-                                        <Col>
-                                            Nesto o oglasu npr: predjeni km, godina  
-                                        </Col>
-                                        <Col>
-                                            tip mjenjaca
-                                            gorivo
-                                            broj sjedista
-                                        </Col>
-                                        </Row>
+                                        {props.ads}
                                     </Card.Text>
-                                   <Link>Vise detalja ></Link>
+                                   {/* <Link>Vise detalja > </Link> */}
+                                </Col>
+                                <Col>
+                                    <Card.Text>
+                                        dsadasdadas
+                                    </Card.Text>
                                 </Col>
                                 <Col md={2}>
                                     <Button variant="outline-success">Rezervisi</Button>{' '}
@@ -35,9 +31,9 @@ const AdCard = (props) => {
                             </Row>           
                         </Card.Body>
                     </Card>
-        //         </Col>
-        //     </Row>
-        // </Container>      
+                 </Col>
+             </Row>
+         </Container>      
     );
 }
 
