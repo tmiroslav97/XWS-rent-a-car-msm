@@ -2,6 +2,7 @@ package agent.app.controller;
 
 import agent.app.model.CarManufacturer;
 import agent.app.service.intf.CarManufacturerService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class CarManufacturerController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<?> createCarManufacturer(@RequestBody String name) {
         Integer flag = carManufacturerService.createCarManufacturer(name);
         if (flag == 1) {

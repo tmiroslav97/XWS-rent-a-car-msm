@@ -20,6 +20,9 @@ class CodebookService extends HttpBaseClient {
     };
 
     addCarManufacturer = async payload => {
+        this.attachHeaders({
+            "Content-Type": "text/plain;charset=UTF-8"
+        });
         const response = await this.getApiClient().post(
             FINALPOINTS.CAR_MANUFACTURER_BASE,
             payload
