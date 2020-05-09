@@ -20,7 +20,9 @@ const CarManufacturerComponent = (props) => {
                                     return (
                                         <tr key={carManufacturer.id}>
                                             <td>{carManufacturer.name}</td>
-                                            <td align="right"><Button>Izmjeni</Button></td>
+                                            <td align="right">
+                                                <Button variant="outline-success" onClick={() => { props.setShow(true); props.setSelectedItem(carManufacturer); }}>Izmjeni</Button>
+                                            </td>
                                         </tr>
                                     );
                                 })
