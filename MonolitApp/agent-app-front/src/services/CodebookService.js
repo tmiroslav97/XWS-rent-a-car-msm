@@ -1,19 +1,28 @@
 import HttpBaseClient from './HttpBaseClient';
 
 const FINALPOINTS = {
-    FETCH_CAR_MANUFACTURERS: '/car-man'
+    CAR_MANUFACTURER_BASE: '/car-man',
 };
 
 class CodebookService extends HttpBaseClient {
 
     fetchCarManufacturersPaginated = async payload => {
         const response = await this.getApiClient().get(
-            FINALPOINTS.FETCH_CAR_MANUFACTURERS, {
+            FINALPOINTS.CAR_MANUFACTURER_BASE, {
             params: {
                 nextPage: payload.nextPage,
                 size: payload.size
             }
         }
+        );
+
+        return response.data;
+    };
+
+    addCarManufacturer = async payload => {
+        const response = await this.getApiClient().post(
+            FINALPOINTS.CAR_MANUFACTURER_BASE,
+            payload
         );
 
         return response.data;
