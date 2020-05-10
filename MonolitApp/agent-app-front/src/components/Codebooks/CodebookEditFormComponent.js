@@ -10,6 +10,11 @@ const CodebookAdFormComponent = (props) => {
                     <Form noValidate validated={props.validated} id="editCMForm" onSubmit={props.onSubmit}>
                         <Form.Row>
                             <Form.Group as={Col}>
+                                <Form.Control required type="hidden" name="id" id="txtID" defaultValue={props.selectedItem.id} />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col}>
                                 <Form.Label>Naziv</Form.Label>
                                 <Form.Control required type="text" name="name" id="txtName" defaultValue={props.selectedItem.name} placeholder="Proizvodjac" />
                             </Form.Group>
