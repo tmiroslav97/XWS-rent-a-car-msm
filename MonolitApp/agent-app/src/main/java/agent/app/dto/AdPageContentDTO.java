@@ -11,9 +11,6 @@ import java.util.List;
 @Builder
 @ToString
 public class AdPageContentDTO {
-
     private Integer totalPageCnt;
     List<AdPageDTO> ads;
-
-
 }

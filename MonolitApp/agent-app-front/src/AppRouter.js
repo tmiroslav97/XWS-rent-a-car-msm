@@ -22,7 +22,6 @@ const AppRouter = () => {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" render={props => token == null ? (<LoginContainter {...props} />) : (<Redirect to="/" />)} />
         <Route exact path="/sign-up" render={props => token == null ? (<RegContainer {...props} />) : (<Redirect to="/" />)} />
-
         <PrivateRoute exact path="/end-user" component={EndUserHomePage} accessRole={["ROLE_USER"]} />
 
         <PrivateRoute exact path="/admin" component={AdminHomePage} accessRole={["ROLE_ADMIN"]} />

@@ -31,6 +31,9 @@ const AdCard = (props) => {
                                     <Card.Text>
                                         {variant.location}
                                     </Card.Text>
+                                    <Card.Text>
+                                        {variant.price}
+                                    </Card.Text>
                                 </Col>
                                 <Col md={2}>
                                     <Button variant="outline-success">Rezervisi</Button>{' '}

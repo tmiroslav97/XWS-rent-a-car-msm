@@ -116,11 +116,14 @@ public class AdServiceImpl implements AdService {
 //            }
 //
 //        }
-        Pageable pageable = PageRequest.of(page, 5, Sort.by("name").ascending());
+        Pageable pageable = PageRequest.of(page, 2, Sort.by("name").ascending());
 
         Page<Ad> ads =  adRepository.findAllByDeleted(false, pageable);
 
         System.out.println(ads.getSize());
+        for(Ad a : ads){
+            System.out.println(a);
+        }
         List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
         AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
                 .totalPageCnt(ads.getTotalPages())
