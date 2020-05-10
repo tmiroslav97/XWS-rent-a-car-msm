@@ -20,26 +20,28 @@ const CreatedAd = (props) => {
                                     <Form.Control required name="name" type="text" id="txtName" placeholder="Naziv oglasa" defaultValue="oglas" />
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <Form.File.Label>Dodaj sliku</Form.File.Label>
-                                    <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike" custom label={props.coverPhotoName}
-                                        onChange={props.onPhotoChange}
-                                    >
+                                    <Form.Label>Dodaj sliku</Form.Label>
+                                    
+                                    <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike" label={props.coverPhotoName}
+                                        onChange={props.onPhotoChange} //custom
+                                    > 
                                     </Form.File>
+
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Lokacija</Form.Label>
                                     <Form.Control required name="location" id="txtLocation" type="text" placeholder="Lokacija" defaultValue="lokacija" />
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    {/* <Form.Check
+                                    <Form.Check
                                         name="distanceLimitFlag"
                                         type="switch"
                                         id="custom-switch"
                                         label="Da li je ogranicena kilometraza?"
                                         onChange={props.handleDistanceLimitFlag}
-                                    /> */}
-                                    <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?" 
-                                        onChange={props.handleDistanceLimitFlag} />
+                                    />
+                                    {/* <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?" 
+                                        onChange={props.handleDistanceLimitFlag} /> */}
                                 </Form.Group>
                                 {props.distanceLimitFlag ?
                                     <Form.Group as={Col}>

@@ -11,7 +11,8 @@ const CreatedAdContainer = () => {
     const [distanceLimit, setDistanceLimit] = useState();
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
-    const [coverPhotoName, setCoverPhotoName] = useState('Dodaj sliku');
+    const [coverPhotoName, setCoverPhotoName] = useState("");
+    const [photos, setPhotos] = useState([]);
 
     const handleCreatedAd = (event) => {
         event.preventDefault();
@@ -70,8 +71,41 @@ const CreatedAdContainer = () => {
     };
 
     const onPhotoChange = (event) => {
-        setCoverPhoto(event.target.files[0]);
-        setCoverPhotoName(event.target.files[0].name);
+        
+        if (event.target.files != null) {
+            let p = photos;
+            let name = event.target.files[0].name;
+            let flag = 0;
+            let slike = [];
+            p.map((photo) => {
+                slike.push(photo.photo);
+                if (photo.photoName === name) {
+                    flag = 1;
+                    console.log("Isti fajl");
+                }
+                
+            })
+            if (flag != 1) {
+                p.push(
+                    {
+                        photoName: event.target.files[0].name,
+                        photo: event.target.files[0]
+                    }
+                )
+                slike.push(event.target.files[0]);
+                setPhotos(p);
+            }
+            let nazivi = "";
+           
+            p.map((photo) => {
+                nazivi += " " + photo.photoName;
+            })
+            console.log(nazivi);
+            console.log(slike);
+            setCoverPhoto(slike);
+            setCoverPhotoName(nazivi);
+        }
+
     };
 
     return (
@@ -80,7 +114,7 @@ const CreatedAdContainer = () => {
             distanceLimitFlag={distanceLimitFlag}
             cdw={cdw}
             androidFlag={androidFlag}
-            coverPhotoName = {coverPhotoName}
+            coverPhotoName={coverPhotoName}
             handleDistanceLimitFlag={handleDistanceLimitFlag}
             onPhotoChange={onPhotoChange}
             handleAndroidFlag={handleAndroidFlag}
