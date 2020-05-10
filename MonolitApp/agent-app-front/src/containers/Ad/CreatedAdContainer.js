@@ -102,7 +102,7 @@ const CreatedAdContainer = () => {
             })
             console.log(nazivi);
             console.log(slike);
-            setCoverPhoto(slike);
+            setCoverPhoto(event.target.files[0]);
             setCoverPhotoName(nazivi);
         }
 

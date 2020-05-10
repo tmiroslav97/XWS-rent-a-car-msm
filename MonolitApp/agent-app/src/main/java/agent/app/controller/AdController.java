@@ -29,25 +29,20 @@ public class AdController {
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> createAd(@RequestParam(value="coverPhoto", required = true) MultipartFile[] coverPhotos, @RequestParam(value="data", required = true)  String data) throws IOException{
+    public ResponseEntity<?> createAd(@RequestParam(value="coverPhoto", required = true) MultipartFile coverPhoto, @RequestParam(value="data", required = true)  String data) throws IOException{
         System.out.println("-----------------------UPLOAD FILE---------------------");
+        File file = new File("photos");
+        String direktorijum = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
+        System.out.println(direktorijum);
+        File convertFile = new File(direktorijum.toString());
+        convertFile.createNewFile();
+        FileOutputStream fout = new FileOutputStream(convertFile);
+        fout.write(coverPhoto.getBytes());
+        fout.close();
+
         System.out.println(data.toString());
         AdCreateDTO adCreateDTO = objectMapper.readValue(data, AdCreateDTO.class);
-        System.out.println(coverPhotos.length);
-        for(MultipartFile coverPhoto : coverPhotos){
-            System.out.println("-----------------------UPLOAD FILE");
-            File file = new File("photos");
-            String direktorijum = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
-            System.out.println(direktorijum);
-            File convertFile = new File(direktorijum.toString());
-            convertFile.createNewFile();
-            FileOutputStream fout = new FileOutputStream(convertFile);
-            fout.write(coverPhoto.getBytes());
-            fout.close();
-
-            adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
-        }
-
+        adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
         Integer flag = adService.createAd(adCreateDTO);
         if(flag == 1){
             return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
