@@ -2,7 +2,6 @@ package agent.app.controller;
 
 import agent.app.dto.AdCreateDTO;
 import agent.app.service.intf.AdService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 
 @RestController
 @RequestMapping(value = "/ad",  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -28,12 +26,15 @@ public class AdController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
+
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createAd(@RequestParam(value="coverPhoto", required = true) MultipartFile coverPhoto, @RequestParam(value="data", required = true)  String data) throws IOException{
         System.out.println("-----------------------UPLOAD FILE---------------------");
-
-        File convertFile = new File("C://Users//Svetlana//Desktop//Projekat//XWSProjekatMSM//MonolitApp//agent-app//photos//" + coverPhoto.getOriginalFilename());
+        File file = new File("photos");
+        String direktorijum = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
+        System.out.println(direktorijum);
+        File convertFile = new File(direktorijum.toString());
         convertFile.createNewFile();
         FileOutputStream fout = new FileOutputStream(convertFile);
         fout.write(coverPhoto.getBytes());
@@ -44,17 +45,7 @@ public class AdController {
         adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
         Integer flag = adService.createAd(adCreateDTO);
         if(flag == 1){
-            System.out.println("nesto 1");
             return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
-        }else if(flag == 2){
-            System.out.println("nesto 2");
-            return new ResponseEntity<>("Desila se greska prilikom kreiranja automobila.", HttpStatus.BAD_REQUEST);
-        }else if(flag == 3) {
-            System.out.println("nesto 3");
-            return new ResponseEntity<>("Desila se greska prilikom kreiranja cenovnika.", HttpStatus.BAD_REQUEST);
-        }else if(flag == 4){
-            System.out.println("nesto 4");
-            return new ResponseEntity<>("Desila se greska prilikom dodavanja vec postojeceg cenovnika.", HttpStatus.BAD_REQUEST);
         }else{
             return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
         }

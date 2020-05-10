@@ -9,10 +9,7 @@ import agent.app.dto.AdPageDTO;
 import agent.app.dto.CarCalendarTermCreateDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
-import agent.app.model.Ad;
-import agent.app.model.Car;
-import agent.app.model.CarCalendarTerm;
-import agent.app.model.PriceList;
+import agent.app.model.*;
 import agent.app.repository.AdRepository;
 import agent.app.service.intf.AdService;
 import agent.app.service.intf.CarCalendarTermService;
@@ -52,15 +49,17 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public List<Ad> findAll() {
-
         return adRepository.findAll();
     }
 
     @Override
     public Ad save(Ad ad) {
-        if(adRepository.existsById(ad.getId())){
-            throw new ExistsException(String.format("Oglas vec postoji."));
+        if(ad.getId() != null){
+            if(adRepository.existsById(ad.getId())){
+                throw new ExistsException(String.format("Oglas vec postoji."));
+            }
         }
+
         return adRepository.save(ad);
     }
 
@@ -81,24 +80,15 @@ public class AdServiceImpl implements AdService {
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
 
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
-        if(car == null){
-            return 2;
-        }
         ad.setCar(car);
 
-        if(adCreateDTO.getPriceListCreateDTO().getId() == null){
+        if(adCreateDTO.getPriceListCreateDTO().getId() == 0){
             //pravljenje novog cenovnika
             PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
-            if(priceList == null){
-                return 3;
-            }
             ad.setPriceList(priceList);
         }else{
             //dodavanje vec postojeceg cenovnika
             PriceList priceList = priceListService.findById(adCreateDTO.getPriceListCreateDTO().getId());
-            if(priceList == null){
-                return 4;
-            }
             ad.setPriceList(priceList);
         }
 
@@ -111,8 +101,7 @@ public class AdServiceImpl implements AdService {
             }
         }
 
-
-        ad = save(ad);
+        ad = this.save(ad);
 
         return 1;
     }

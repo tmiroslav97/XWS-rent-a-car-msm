@@ -8,6 +8,7 @@ const CreatedAdContainer = () => {
     const [validated, setValidated] = useState(false);
     const [coverPhoto, setCoverPhoto] = useState();
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
+    const [distanceLimit, setDistanceLimit] = useState();
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
     const [coverPhotoName, setCoverPhotoName] = useState('Dodaj sliku');
@@ -18,10 +19,10 @@ const CreatedAdContainer = () => {
 
         let data = {
             'name': form.name.value,
-            'coverPhoto': null,
+            'coverPhoto': coverPhotoName,
             'location': form.location.value,
             'distanceLimitFlag': distanceLimitFlag,
-            'distanceLimit': form.distanceLimit.value,
+            'distanceLimit': distanceLimit,
             'carCreateDTO': {
                 'carManufacturer': form.carManufacturer.value,
                 'carModel': form.carModel.value,
@@ -38,7 +39,7 @@ const CreatedAdContainer = () => {
                 'pricePerKm': form.pricePerKm.value,
                 'pricePerKmCDW': form.pricePerKmCDW.value,
                 'pricePerDay': form.pricePerDay.value,
-                'id': null,
+                'id': 0,
                 // 'id': form.id.value,
             },
             'carCalendarTermCreateDTOList': null
@@ -57,6 +58,7 @@ const CreatedAdContainer = () => {
 
     const handleDistanceLimitFlag = (event) => {
         setDistanceLimitFlag(event.target.checked);
+        setDistanceLimit(null);
     };
 
     const handleCDW = (event) => {
