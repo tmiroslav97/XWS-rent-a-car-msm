@@ -5,8 +5,8 @@ import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import CarManufacturerComponent from '../../components/Codebooks/CarManufacturerComponent';
 import { carManufacturersSelector } from '../../store/codebook/selectors';
-import { fetchCarManufacturers, addCarManufacturer } from '../../store/codebook/actions';
-import FormModalContainer from './FormModalContainer';
+import { fetchCarManufacturers, addCarManufacturer, editCarManufacturer } from '../../store/codebook/actions';
+import FormModalContainer from '../Common/FormModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
 import CodebookEditFormComponent from '../../components/Codebooks/CodebookEditFormComponent';
 
@@ -68,7 +68,12 @@ const CarManufacturerContainer = () => {
             event.stopPropagation();
             setValidated(true);
         } else {
-
+            dispatch(
+                editCarManufacturer({
+                    "id": data.get('id'),
+                    "name": data.get('name')
+                })
+            );
             setValidated(false);
             setShowEditForm(false);
         }

@@ -31,6 +31,14 @@ class CodebookService extends HttpBaseClient {
         return response.data;
     };
 
+    editCarManufacturer = async payload => {
+        const response = await this.getApiClient().put(
+            FINALPOINTS.CAR_MANUFACTURER_BASE,
+            payload
+        );
+
+        return response.data;
+    };
 
 };
 

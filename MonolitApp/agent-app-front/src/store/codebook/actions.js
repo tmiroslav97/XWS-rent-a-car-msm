@@ -1,8 +1,14 @@
 import {
     FETCH_CAR_MANUFACTURERS,
     PUT_CAR_MANUFACTURERS,
-    ADD_CAR_MANUFACTURER
+    ADD_CAR_MANUFACTURER,
+    EDIT_CAR_MANUFACTURER
 } from './constants';
+
+export const editCarManufacturer = payload => ({
+    type: EDIT_CAR_MANUFACTURER,
+    payload
+});
 
 export const addCarManufacturer = payload => ({
     type: ADD_CAR_MANUFACTURER,
