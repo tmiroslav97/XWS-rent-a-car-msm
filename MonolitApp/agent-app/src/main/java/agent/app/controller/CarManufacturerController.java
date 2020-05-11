@@ -58,8 +58,8 @@ public class CarManufacturerController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteCarManufacturer(@RequestBody Long id) {
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteCarManufacturer(@RequestParam(value = "id") Long id) {
         Integer flag = carManufacturerService.deleteById(id);
         if (flag == 1) {
             return new ResponseEntity<>("Proizvodjac automobila uspjesno obrisan.", HttpStatus.CREATED);

@@ -5,8 +5,9 @@ import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import CarTypeComponent from '../../components/Codebooks/CarTypeComponent';
 import { carTypesSelector } from '../../store/codebook/selectors';
-import { fetchCarTypes, addCarType, editCarType } from '../../store/codebook/actions';
+import { fetchCarTypes, addCarType, editCarType, deleteCarType } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
+import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
 import CodebookEditFormComponent from '../../components/Codebooks/CodebookEditFormComponent';
 
@@ -19,6 +20,7 @@ const CarTypeContainer = () => {
     const [validated, setValidated] = useState(false);
     const [showAdForm, setShowAdForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
 
     useEffect(() => {
@@ -79,14 +81,28 @@ const CarTypeContainer = () => {
         }
     };
 
-    const handleDelete = () => {
+    const handleDeleteCarType = () => {
+        setShowDeleteModal(false);
+        dispatch(
+            deleteCarType(selectedItem)
+        );
+    };
 
+    const handleEdit = (carType) => {
+        setSelectedItem(carType);
+        setShowEditForm(true);
+    };
+
+    const handleDelete = (id) => {
+        setSelectedItem(id);
+        setShowDeleteModal(true);
     };
 
     return (
         <Container>
             <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Tip automobila'} footer={false} onSubmit={handleAdCarType} validated={validated} component={CodebookAdFormComponent} ></FormModalContainer>
             <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Tip automobila'} footer={false} onSubmit={handleEditCarType} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} ></FormModalContainer>
+            <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteCarType}></DeleteModalContainer>
             <Row>
                 <Col md={{ span: 8, offset: 2 }} xs={12}>
                     <h2 className="border-bottom">Sifarnik tipova automobila</h2>
@@ -103,7 +119,7 @@ const CarTypeContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <CarTypeComponent carTypes={carTypes.data} setShow={setShowEditForm} setSelectedItem={setSelectedItem} handleDelete={handleDelete}></CarTypeComponent>
+                <CarTypeComponent carTypes={carTypes.data} handleEdit={handleEdit} handleDelete={handleDelete}></CarTypeComponent>
             </Row>
             <Row>
                 <PaginationContainer setNextPage={setNextPage} totalPageCnt={carTypes.totalPageCnt} nextPage={nextPage}></PaginationContainer>

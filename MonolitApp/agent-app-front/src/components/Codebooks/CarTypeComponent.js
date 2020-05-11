@@ -22,10 +22,10 @@ const CarTypeComponent = (props) => {
                                         <tr key={carType.id}>
                                             <td>{carType.name}</td>
                                             <td align="right">
-                                                <Button variant="outline-success" onClick={() => { props.setShow(true); props.setSelectedItem(carType); }}>Izmjeni</Button>
+                                                <Button variant="outline-success" onClick={() => { props.handleEdit(carType); }}>Izmjeni</Button>
                                             </td>
                                             <td align="right">
-                                                <Button variant="outline-danger" onClick={props.handleDelete(carType.id)}>Obrisi</Button>
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carType.id) }}>Obrisi</Button>
                                             </td>
                                         </tr>
                                     );
@@ -35,7 +35,7 @@ const CarTypeComponent = (props) => {
                     </Table>
                 </Col>
             </Row>
-        </Container>
+        </Container >
     );
 }
 

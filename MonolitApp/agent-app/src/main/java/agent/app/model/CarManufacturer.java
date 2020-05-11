@@ -26,6 +26,6 @@ public class CarManufacturer {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "carManufacturer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "carManufacturer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CarModel> carModels = new HashSet<>();
 }

@@ -42,9 +42,8 @@ class CodebookService extends HttpBaseClient {
 
     deleteCarType = async payload => {
         const response = await this.getApiClient().delete(
-            FINALPOINTS.CAR_TYPE_BASE,
-            payload, {
-            headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
+            FINALPOINTS.CAR_TYPE_BASE, {
+            params: { 'id': payload }
         }
         );
 
@@ -86,9 +85,8 @@ class CodebookService extends HttpBaseClient {
 
     deleteCarManufacturer = async payload => {
         const response = await this.getApiClient().delete(
-            FINALPOINTS.CAR_MANUFACTURER_BASE,
-            payload, {
-            headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
+            FINALPOINTS.CAR_MANUFACTURER_BASE, {
+            params: { 'id': payload }
         }
         );
 

@@ -57,8 +57,8 @@ public class CarTypeController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteCarType(@RequestBody Long id) {
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteCarType(@RequestParam(value = "id") Long id) {
         Integer flag = carTypeService.deleteById(id);
         if (flag == 1) {
             return new ResponseEntity<>("Tip automobila uspjesno obrisan.", HttpStatus.CREATED);

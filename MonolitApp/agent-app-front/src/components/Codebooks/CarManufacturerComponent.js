@@ -22,10 +22,10 @@ const CarManufacturerComponent = (props) => {
                                         <tr key={carManufacturer.id}>
                                             <td>{carManufacturer.name}</td>
                                             <td align="right">
-                                                <Button variant="outline-success" onClick={() => { props.setShow(true); props.setSelectedItem(carManufacturer); }}>Izmjeni</Button>
+                                                <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
                                             </td>
                                             <td align="right">
-                                                <Button variant="outline-danger" onClick={props.handleDelete(carManufacturer.id)}>Obrisi</Button>
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obrisi</Button>
                                             </td>
                                         </tr>
                                     );

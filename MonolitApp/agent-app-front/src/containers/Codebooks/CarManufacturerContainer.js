@@ -5,20 +5,22 @@ import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import CarManufacturerComponent from '../../components/Codebooks/CarManufacturerComponent';
 import { carManufacturersSelector } from '../../store/codebook/selectors';
-import { fetchCarManufacturers, addCarManufacturer, editCarManufacturer } from '../../store/codebook/actions';
+import { fetchCarManufacturers, addCarManufacturer, editCarManufacturer, deleteCarManufacturer } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
+import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
 import CodebookEditFormComponent from '../../components/Codebooks/CodebookEditFormComponent';
 
 const CarManufacturerContainer = () => {
     const dispatch = useDispatch();
     const carManufacturers = useSelector(carManufacturersSelector);
-    const isFetchCarManufacturers = carManufacturers.isFetch;
+    const isFetch = carManufacturers.isFetch;
     const [nextPage, setNextPage] = useState(carManufacturers.nextPage);
     const [size, setSize] = useState(carManufacturers.size);
     const [validated, setValidated] = useState(false);
     const [showAdForm, setShowAdForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
 
     useEffect(() => {
@@ -31,14 +33,13 @@ const CarManufacturerContainer = () => {
     }, [nextPage, size]);
 
 
-    if (!isFetchCarManufacturers) {
+    if (!isFetch) {
         return <div className="d-flex justify-content-center">
             <Spinner animation="border" role="status">
                 <span className="sr-only">Loading...</span>
             </Spinner>
         </div>;
     }
-
 
     const handleAddCarManufacturer = (event) => {
         event.preventDefault();
@@ -79,8 +80,21 @@ const CarManufacturerContainer = () => {
         }
     };
 
-    const handleDelete = (event) => {
+    const handleDeleteCarManufacturer = () => {
+        setShowDeleteModal(false);
+        dispatch(
+            deleteCarManufacturer(selectedItem)
+        );
+    };
 
+    const handleEdit = (carManufacturer) => {
+        setSelectedItem(carManufacturer);
+        setShowEditForm(true);
+    };
+
+    const handleDelete = (id) => {
+        setSelectedItem(id);
+        setShowDeleteModal(true);
     };
 
 
@@ -88,6 +102,7 @@ const CarManufacturerContainer = () => {
         <Container>
             <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Proizvodjac automobila'} footer={false} onSubmit={handleAddCarManufacturer} validated={validated} component={CodebookAdFormComponent} ></FormModalContainer>
             <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Proizvodjac automobila'} footer={false} onSubmit={handleEditCarManufaturer} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} ></FormModalContainer>
+            <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteCarManufacturer}></DeleteModalContainer>
             <Row>
                 <Col md={{ span: 8, offset: 2 }} xs={12}>
                     <h2 className="border-bottom">Sifarnik proizvodjaca automobila</h2>
@@ -104,7 +119,7 @@ const CarManufacturerContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <CarManufacturerComponent carManufacturers={carManufacturers.data} setShow={setShowEditForm} setSelectedItem={setSelectedItem} handleDelete={handleDelete}></CarManufacturerComponent>
+                <CarManufacturerComponent carManufacturers={carManufacturers.data} handleEdit={handleEdit} handleDelete={handleDelete}></CarManufacturerComponent>
             </Row>
             <Row>
                 <PaginationContainer setNextPage={setNextPage} totalPageCnt={carManufacturers.totalPageCnt} nextPage={nextPage}></PaginationContainer>

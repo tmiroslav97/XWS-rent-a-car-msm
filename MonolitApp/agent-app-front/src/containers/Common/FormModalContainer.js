@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap'
 
-const FormModalContainer = ({ component: Component, selectedItem =null, footer = true, ...props }) => {
+const FormModalContainer = ({ component: Component, selectedItem = null, footer = true, ...props }) => {
 
   return (
 
