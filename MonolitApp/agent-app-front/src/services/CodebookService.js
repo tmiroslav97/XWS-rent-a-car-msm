@@ -5,7 +5,7 @@ const FINALPOINTS = {
     CAR_TYPE_BASE: '/car-type',
     FUEL_TYPE_BASE: '/fuel-type',
     GEARBOX_TYPE_BASE: '/gb-type',
-    CAR_MODEL_BASE: '/gb-type'
+    CAR_MODEL_BASE: '/car-model'
 };
 
 class CodebookService extends HttpBaseClient {
@@ -33,9 +33,7 @@ class CodebookService extends HttpBaseClient {
     addCarModel = async payload => {
         const response = await this.getApiClient().post(
             FINALPOINTS.CAR_MODEL_BASE,
-            payload, {
-            headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
-        }
+            payload
         );
         return response.data;
     };

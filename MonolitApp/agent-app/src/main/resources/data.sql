@@ -68,3 +68,12 @@ INSERT INTO car_type(id, name)
 VALUES (3, 'Coupe');
 INSERT INTO car_type(id, name)
 VALUES (4, 'SUV');
+
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (1, 'A4', 3);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (2, 'A6', 3);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (3, 'A8', 3);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (4, 'A3', 3);

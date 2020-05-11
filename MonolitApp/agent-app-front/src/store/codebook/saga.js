@@ -57,7 +57,7 @@ export function* fetchAllCarModels() {
     yield put(putCarModels({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchAllCarModels, payload);
     yield put(putCarModels({
-        'data': data.carModels,
+        'data': data,
         'isFetch': true
     }));
 }
@@ -132,7 +132,7 @@ export function* fetchAllGearboxTypes() {
     yield put(putGearboxTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchAllGearboxTypes, payload);
     yield put(putGearboxTypes({
-        'data': data.gearboxTypes,
+        'data': data,
         'isFetch': true
     }));
 }
@@ -207,7 +207,7 @@ export function* fetchAllFuelTypes() {
     yield put(putFuelTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchAllFuelTypes, payload);
     yield put(putFuelTypes({
-        'data': data.fuelTypes,
+        'data': data,
         'isFetch': true
     }));
 }
@@ -282,7 +282,7 @@ export function* fetchAllCarTypes() {
     yield put(putCarTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchAllCarTypes, payload);
     yield put(putCarTypes({
-        'data': data.carTypes,
+        'data': data,
         'isFetch': true
     }));
 }
@@ -357,7 +357,7 @@ export function* fetchAllCarManufacturers() {
     yield put(putCarManufacturers({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchAllCarManufacturers, payload);
     yield put(putCarManufacturers({
-        'data': data.carManufacturers,
+        'data': data,
         'isFetch': true
     }));
 }

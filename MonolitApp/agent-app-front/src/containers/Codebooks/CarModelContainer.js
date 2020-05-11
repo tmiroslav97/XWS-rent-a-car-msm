@@ -31,13 +31,12 @@ const CarModelContainer = () => {
                 size
             })
         );
-    }, [nextPage, size]);
-
-    useEffect(() => {
         dispatch(
             fetchAllCarManufacturers()
         );
-    });
+    }, [nextPage, size]);
+
+
 
     if (!isFetch) {
         return <div className="d-flex justify-content-center">
@@ -59,7 +58,7 @@ const CarModelContainer = () => {
             dispatch(
                 addCarModel({
                     "name": data.get('name'),
-                    "selCarMan": data.get('selCarMan')
+                    "carManufacturer": data.get('selCarMan')
 
                 })
             );
@@ -81,7 +80,7 @@ const CarModelContainer = () => {
                 editCarModel({
                     "id": data.get('id'),
                     "name": data.get('name'),
-                    "selCarMan": data.get('selCarMan')
+                    "carManufacturer": data.get('selCarMan')
                 })
             );
             setValidated(false);
@@ -118,12 +117,12 @@ const CarModelContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 2, offset: 3 }} xs={12}>
+                <Col md={{ span: 2, offset: 2 }} xs={12}>
                     <Button variant="outline-primary" onClick={() => setShowAdForm(true)}>Dodaj</Button>
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 12, offset: 3 }} xs={12}>
+                <Col md={{ span: 12, offset: 2 }} xs={12}>
                     <PaginationSize size={size} setSize={setSize} />
                 </Col>
             </Row>
