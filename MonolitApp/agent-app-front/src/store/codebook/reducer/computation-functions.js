@@ -4,3 +4,10 @@ export function putCarManufacturers(state, payload) {
         carManufacturers: payload
     };
 }
+
+export function putCarTypes(state, payload) {
+    return {
+        ...state,
+        carTypes: payload
+    };
+}

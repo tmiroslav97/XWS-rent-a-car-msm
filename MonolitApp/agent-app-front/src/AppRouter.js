@@ -11,6 +11,7 @@ import AgentFirmHomePage from './components/AgentFirm/AgentFirmHomePage';
 import EndUserHomePage from './components/EndUser/EndUserHomePage';
 import CreatedAdContainer from './containers/Ad/CreatedAdContainer';
 import CarManufacturerContainer from './containers/Codebooks/CarManufacturerContainer';
+import CarTypeContainer from './containers/Codebooks/CarTypeContainer';
 import AdminHomePage from './components/Administrator/AdminHomePage';
 
 const AppRouter = () => {
@@ -26,6 +27,7 @@ const AppRouter = () => {
 
         <PrivateRoute exact path="/admin" component={AdminHomePage} accessRole={["ROLE_ADMIN"]} />
         <PrivateRoute exact path="/admin/car-man" component={CarManufacturerContainer} accessRole={["ROLE_ADMIN"]} />
+        <PrivateRoute exact path="/admin/car-type" component={CarTypeContainer} accessRole={["ROLE_ADMIN"]} />
 
         <PrivateRoute exact path="/agent-firm" component={AgentFirmHomePage} accessRole={["ROLE_AGENT"]} />
         <PrivateRoute exact path="/createAd" component={CreatedAdContainer} accessRole={["ROLE_AGENT", "ROLE_USER"]} />
