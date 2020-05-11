@@ -40,6 +40,17 @@ class CodebookService extends HttpBaseClient {
         return response.data;
     };
 
+    deleteCarType = async payload => {
+        const response = await this.getApiClient().delete(
+            FINALPOINTS.CAR_TYPE_BASE,
+            payload, {
+            headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
+        }
+        );
+
+        return response.data;
+    };
+
     //for car manufacturers
     fetchCarManufacturersPaginated = async payload => {
         const response = await this.getApiClient().get(
@@ -68,6 +79,17 @@ class CodebookService extends HttpBaseClient {
         const response = await this.getApiClient().put(
             FINALPOINTS.CAR_MANUFACTURER_BASE,
             payload
+        );
+
+        return response.data;
+    };
+
+    deleteCarManufacturer = async payload => {
+        const response = await this.getApiClient().delete(
+            FINALPOINTS.CAR_MANUFACTURER_BASE,
+            payload, {
+            headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
+        }
         );
 
         return response.data;
