@@ -3,13 +3,20 @@ import {
     PUT_CAR_MANUFACTURERS,
     ADD_CAR_MANUFACTURER,
     EDIT_CAR_MANUFACTURER,
+    DELETE_CAR_MANUFACTURER,
     FETCH_CAR_TYPES,
     PUT_CAR_TYPES,
     ADD_CAR_TYPE,
-    EDIT_CAR_TYPE
+    EDIT_CAR_TYPE,
+    DELETE_CAR_TYPE
 } from './constants';
 
 //for car types
+export const deleteCarType = payload => ({
+    type: DELETE_CAR_TYPE,
+    payload
+});
+
 export const editCarType = payload => ({
     type: EDIT_CAR_TYPE,
     payload
@@ -30,6 +37,11 @@ export const putCarTypes = payload => ({
     payload
 });
 //for car manufacturers
+export const deleteCarManufacturer = payload => ({
+    type: DELETE_CAR_MANUFACTURER,
+    payload
+});
+
 export const editCarManufacturer = payload => ({
     type: EDIT_CAR_MANUFACTURER,
     payload
