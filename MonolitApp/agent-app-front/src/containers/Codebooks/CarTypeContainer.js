@@ -79,6 +79,9 @@ const CarTypeContainer = () => {
         }
     };
 
+    const handleDelete = () => {
+
+    };
 
     return (
         <Container>
@@ -100,7 +103,7 @@ const CarTypeContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <CarTypeComponent carTypes={carTypes.data} setShow={setShowEditForm} setSelectedItem={setSelectedItem}></CarTypeComponent>
+                <CarTypeComponent carTypes={carTypes.data} setShow={setShowEditForm} setSelectedItem={setSelectedItem} handleDelete={handleDelete}></CarTypeComponent>
             </Row>
             <Row>
                 <PaginationContainer setNextPage={setNextPage} totalPageCnt={carTypes.totalPageCnt} nextPage={nextPage}></PaginationContainer>

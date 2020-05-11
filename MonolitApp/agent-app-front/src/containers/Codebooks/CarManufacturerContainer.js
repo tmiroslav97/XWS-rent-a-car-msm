@@ -79,6 +79,10 @@ const CarManufacturerContainer = () => {
         }
     };
 
+    const handleDelete = (event) => {
+
+    };
+
 
     return (
         <Container>
@@ -100,7 +104,7 @@ const CarManufacturerContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <CarManufacturerComponent carManufacturers={carManufacturers.data} setShow={setShowEditForm} setSelectedItem={setSelectedItem}></CarManufacturerComponent>
+                <CarManufacturerComponent carManufacturers={carManufacturers.data} setShow={setShowEditForm} setSelectedItem={setSelectedItem} handleDelete={handleDelete}></CarManufacturerComponent>
             </Row>
             <Row>
                 <PaginationContainer setNextPage={setNextPage} totalPageCnt={carManufacturers.totalPageCnt} nextPage={nextPage}></PaginationContainer>

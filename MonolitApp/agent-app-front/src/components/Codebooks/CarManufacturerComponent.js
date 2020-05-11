@@ -11,7 +11,8 @@ const CarManufacturerComponent = (props) => {
                         <thead>
                             <tr>
                                 <th>Naziv</th>
-                                <th>Akcija</th>
+                                <th className="text-right">Izmjena</th>
+                                <th className="text-right">Brisanje</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -22,6 +23,9 @@ const CarManufacturerComponent = (props) => {
                                             <td>{carManufacturer.name}</td>
                                             <td align="right">
                                                 <Button variant="outline-success" onClick={() => { props.setShow(true); props.setSelectedItem(carManufacturer); }}>Izmjeni</Button>
+                                            </td>
+                                            <td align="right">
+                                                <Button variant="outline-danger" onClick={props.handleDelete(carManufacturer.id)}>Obrisi</Button>
                                             </td>
                                         </tr>
                                     );
