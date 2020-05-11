@@ -10,7 +10,7 @@ const FormModalContainer = ({ component: Component, selectedItem = null, footer 
         <Modal.Title>{props.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Component onSubmit={props.onSubmit} validated={props.validated} selectedItem={selectedItem}></Component>
+        <Component onSubmit={props.onSubmit} validated={props.validated} data={props.data} selectedItem={selectedItem}></Component>
       </Modal.Body>
       {footer &&
         <Modal.Footer>

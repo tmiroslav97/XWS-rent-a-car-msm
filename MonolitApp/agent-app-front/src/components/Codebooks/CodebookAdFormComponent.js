@@ -14,6 +14,22 @@ const CodebookAdFormComponent = (props) => {
                                 <Form.Control required type="text" name="name" id="txtName" placeholder="Naziv" />
                             </Form.Group>
                         </Form.Row>
+                        {props.data &&
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Naziv</Form.Label>
+                                    <Form.Control as="select" name="selCarMan" id="selCarManID" required>
+                                        {
+                                            props.data.map((item) => {
+                                                return (
+                                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                                );
+                                            })
+                                        }
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                        }
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Button variant="primary" id="btnAdd" type="submit">
