@@ -25,7 +25,7 @@ const CarManufacturerComponent = (props) => {
                                                 <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
                                             </td>
                                             <td align="right">
-                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obrisi</Button>
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
                                             </td>
                                         </tr>
                                     );

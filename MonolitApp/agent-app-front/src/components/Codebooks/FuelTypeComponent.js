@@ -25,7 +25,7 @@ const FuelTypeComponent = (props) => {
                                                 <Button variant="outline-success" onClick={() => { props.handleEdit(fuelType); }}>Izmjeni</Button>
                                             </td>
                                             <td align="right">
-                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(fuelType.id); }}>Obrisi</Button>
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(fuelType.id); }}>Obriši</Button>
                                             </td>
                                         </tr>
                                     );

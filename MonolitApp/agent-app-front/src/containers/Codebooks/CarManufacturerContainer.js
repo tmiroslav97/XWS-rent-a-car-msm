@@ -100,12 +100,12 @@ const CarManufacturerContainer = () => {
 
     return (
         <Container>
-            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Proizvodjac automobila'} footer={false} onSubmit={handleAddCarManufacturer} validated={validated} component={CodebookAdFormComponent} ></FormModalContainer>
-            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Proizvodjac automobila'} footer={false} onSubmit={handleEditCarManufaturer} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} ></FormModalContainer>
-            <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteCarManufacturer}></DeleteModalContainer>
+            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Proizvođač automobila'} footer={false} onSubmit={handleAddCarManufacturer} validated={validated} component={CodebookAdFormComponent} ></FormModalContainer>
+            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Proizvođač automobila'} footer={false} onSubmit={handleEditCarManufaturer} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} ></FormModalContainer>
+            <DeleteModalContainer show={showDeleteModal} msg={'(Postoje povezani modeli automobila sa ovim entitetom)'} setShow={setShowDeleteModal} onDelete={handleDeleteCarManufacturer}></DeleteModalContainer>
             <Row>
                 <Col md={{ span: 8, offset: 2 }} xs={12}>
-                    <h2 className="border-bottom">Sifarnik proizvodjaca automobila</h2>
+                    <h2 className="border-bottom">Šifarnik proizvođača automobila</h2>
                 </Col>
             </Row>
             <Row>

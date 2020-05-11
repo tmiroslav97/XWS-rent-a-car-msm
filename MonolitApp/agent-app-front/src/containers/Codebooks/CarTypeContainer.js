@@ -105,7 +105,7 @@ const CarTypeContainer = () => {
             <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteCarType}></DeleteModalContainer>
             <Row>
                 <Col md={{ span: 8, offset: 2 }} xs={12}>
-                    <h2 className="border-bottom">Sifarnik tipova automobila</h2>
+                    <h2 className="border-bottom">Šifarnik tipova automobila</h2>
                 </Col>
             </Row>
             <Row>

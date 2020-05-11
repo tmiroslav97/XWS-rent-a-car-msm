@@ -7,7 +7,7 @@ const CodebookAdFormComponent = (props) => {
         <Container>
             <Row>
                 <Col md={12} xs={12}>
-                    <Form noValidate validated={props.validated} id="adCMForm" onSubmit={props.onSubmit}>
+                    <Form noValidate validated={props.validated} id="addCBForm" onSubmit={props.onSubmit}>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>Naziv</Form.Label>
@@ -17,7 +17,7 @@ const CodebookAdFormComponent = (props) => {
                         {props.data &&
                             <Form.Row>
                                 <Form.Group as={Col}>
-                                    <Form.Label>Naziv</Form.Label>
+                                    <Form.Label>Naziv proizvođača</Form.Label>
                                     <Form.Control as="select" name="selCarMan" id="selCarManID" required>
                                         {
                                             props.data.map((item) => {

@@ -25,7 +25,7 @@ const GearboxTypeComponent = (props) => {
                                                 <Button variant="outline-success" onClick={() => { props.handleEdit(gearboxType); }}>Izmjeni</Button>
                                             </td>
                                             <td align="right">
-                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(gearboxType.id); }}>Obrisi</Button>
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(gearboxType.id); }}>Obriši</Button>
                                             </td>
                                         </tr>
                                     );

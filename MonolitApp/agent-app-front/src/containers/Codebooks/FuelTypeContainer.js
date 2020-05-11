@@ -105,7 +105,7 @@ const FuelTypeContainer = () => {
             <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteFuelType}></DeleteModalContainer>
             <Row>
                 <Col md={{ span: 8, offset: 2 }} xs={12}>
-                    <h2 className="border-bottom">Sifarnik tipova pogonskog goriva</h2>
+                    <h2 className="border-bottom">Šifarnik tipova pogonskog goriva</h2>
                 </Col>
             </Row>
             <Row>

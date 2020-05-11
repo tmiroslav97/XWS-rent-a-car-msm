@@ -105,7 +105,7 @@ const GearboxTypeContainer = () => {
             <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteGearboxType}></DeleteModalContainer>
             <Row>
                 <Col md={{ span: 8, offset: 2 }} xs={12}>
-                    <h2 className="border-bottom">Sifarnik tipova mjenjaca</h2>
+                    <h2 className="border-bottom">Šifarnik tipova mjenjača</h2>
                 </Col>
             </Row>
             <Row>

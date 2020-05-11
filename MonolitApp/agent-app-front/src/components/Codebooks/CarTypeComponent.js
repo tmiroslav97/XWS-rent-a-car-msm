@@ -25,7 +25,7 @@ const CarTypeComponent = (props) => {
                                                 <Button variant="outline-success" onClick={() => { props.handleEdit(carType); }}>Izmjeni</Button>
                                             </td>
                                             <td align="right">
-                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carType.id) }}>Obrisi</Button>
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carType.id) }}>Obriši</Button>
                                             </td>
                                         </tr>
                                     );
