@@ -47,7 +47,7 @@ export function* addCarType() {
     const temp = yield select(carTypesSelector);
     yield put(putCarTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
-    yield put(putCarManufacturers({
+    yield put(putCarTypes({
         'data': data.carTypes,
         'totalPageCnt': data.totalPageCnt,
         'nextPage': temp.nextPage,

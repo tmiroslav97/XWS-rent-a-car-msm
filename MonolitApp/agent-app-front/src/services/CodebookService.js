@@ -6,7 +6,7 @@ const FINALPOINTS = {
 };
 
 class CodebookService extends HttpBaseClient {
-    
+
     //for car types
     fetchCarTypesPaginated = async payload => {
         const response = await this.getApiClient().get(
@@ -22,14 +22,12 @@ class CodebookService extends HttpBaseClient {
     };
 
     addCarType = async payload => {
-        this.attachHeaders({
-            "Content-Type": "text/plain;charset=UTF-8"
-        });
         const response = await this.getApiClient().post(
             FINALPOINTS.CAR_TYPE_BASE,
-            payload
+            payload, {
+            headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
+        }
         );
-
         return response.data;
     };
 
@@ -57,14 +55,12 @@ class CodebookService extends HttpBaseClient {
     };
 
     addCarManufacturer = async payload => {
-        this.attachHeaders({
-            "Content-Type": "text/plain;charset=UTF-8"
-        });
         const response = await this.getApiClient().post(
             FINALPOINTS.CAR_MANUFACTURER_BASE,
-            payload
+            payload, {
+            headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
+        }
         );
-
         return response.data;
     };
 

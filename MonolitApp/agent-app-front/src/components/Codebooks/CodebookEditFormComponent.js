@@ -16,7 +16,7 @@ const CodebookAdFormComponent = (props) => {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>Naziv</Form.Label>
-                                <Form.Control required type="text" name="name" id="txtName" defaultValue={props.selectedItem.name} placeholder="Proizvodjac" />
+                                <Form.Control required type="text" name="name" id="txtName" defaultValue={props.selectedItem.name} placeholder="Naziv" />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
