@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container } from 'react-bootstrap';
+import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image } from 'react-bootstrap';
 
 const CreatedAd = (props) => {
 
@@ -88,8 +88,8 @@ const CreatedAd = (props) => {
                                             label="Da li je ogranicena kilometraza?"
                                             onChange={props.handleDistanceLimitFlag}
                                         /> */}
-                                        <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?" 
-                                        onChange={props.handleDistanceLimitFlag} />
+                                        <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"
+                                            onChange={props.handleDistanceLimitFlag} />
                                     </Form.Group>
                                     {props.distanceLimitFlag ?
                                         <Form.Group as={Col}>
@@ -120,7 +120,7 @@ const CreatedAd = (props) => {
                                             <option>...</option>
                                         </Form.Control>
                                     </Form.Group>
-                                    
+
 
                                 </Col>
                                 <Col>
@@ -152,7 +152,7 @@ const CreatedAd = (props) => {
                                         /> */}
                                         <Form.Check name="androidFlag" id="chbAndroidFlag" type="checkbox" label="Da li poseduje android uredjaj?" onChange={props.handleAndroidFlag} />
                                     </Form.Group>
-                                    
+
                                 </Col>
                             </Form.Row>
 
@@ -162,6 +162,7 @@ const CreatedAd = (props) => {
                         {props.buttonLabel === 3 ?
                             <Form.Row>
                                 <Col>
+                                
                                     <Form.Group as={Col}>
                                         <Form.Label>Check box za biranje vec postojeceg cenovnika</Form.Label>
                                         <Form.Control name="id" id="selectId" placeholder="Cena po danu" as="select" type="text" >
@@ -170,23 +171,24 @@ const CreatedAd = (props) => {
                                             <option>3</option>
                                         </Form.Control>
                                     </Form.Group>
-                                    <Form.Group as={Col}>
-                                        <Form.Label>Cena po kilometru</Form.Label>
-                                        <Form.Control name="pricePerKm" id="numPricePerKm" type="number" placeholder="Cena po kilometru" defaultValue="12" />
-                                    </Form.Group>
-                                    <Form.Group as={Col}>
-                                        <Form.Label>Cena po kilometru (CDW)</Form.Label>
-                                        <Form.Control name="pricePerKmCDW" id="numPricePerKmCDW" type="number" placeholder="Cena po kilometru (CDW)" defaultValue="12" />
-                                    </Form.Group>
+
+                                    {props.cdw ?
+                                        <Form.Group as={Col}>
+                                            <Form.Label>Cena po kilometru (CDW)</Form.Label>
+                                            <Form.Control name="pricePerKmCDW" id="numPricePerKmCDW" type="number" placeholder="Cena po kilometru (CDW)" defaultValue="12" />
+                                        </Form.Group>
+                                        :
+                                        <Form.Group as={Col}>
+                                            <Form.Label>Cena po kilometru</Form.Label>
+                                            <Form.Control name="pricePerKm" id="numPricePerKm" type="number" placeholder="Cena po kilometru" defaultValue="12" />
+                                        </Form.Group>
+                                    }
+
                                     <Form.Group as={Col}>
                                         <Form.Label>Cena po danu</Form.Label>
                                         <Form.Control name="pricePerDay" id="numPricePerDay" type="number" placeholder="Cena po danu" defaultValue="12" />
                                     </Form.Group>
-                                    <Form.Group as={Col}>
-                                        <Button variant="primary" id="btnCreatedAd" type="submit">
-                                            Dodaj
-                                            </Button>
-                                    </Form.Group>
+
                                 </Col>
                             </Form.Row>
 
@@ -217,9 +219,10 @@ const CreatedAd = (props) => {
                                         <Form.Label>Dodaj sliku</Form.Label>
 
                                         <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike" label={props.coverPhotoName}
-                                            onChange={props.onPhotoChange} //custom
+                                            onChange={props.onPhotoChange} custom
                                         >
                                         </Form.File>
+
 
                                     </Form.Group>
 
@@ -236,7 +239,7 @@ const CreatedAd = (props) => {
                                     <Form.Group as={Col}>
                                         <Button variant="primary" id="btnCreatedAd" type="submit">
                                             Dodaj
-                                            </Button>
+                                        </Button>
                                     </Form.Group>
 
                                 </Col>
