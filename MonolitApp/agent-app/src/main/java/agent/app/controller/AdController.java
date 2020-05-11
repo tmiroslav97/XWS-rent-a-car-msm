@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/ad",  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -31,6 +32,7 @@ public class AdController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createAd(@RequestParam(value="coverPhoto", required = true) MultipartFile coverPhoto, @RequestParam(value="data", required = true)  String data) throws IOException{
         System.out.println("-----------------------UPLOAD FILE---------------------");
+        System.out.println("slika : " + coverPhoto.getOriginalFilename());
         File file = new File("photos");
         String direktorijum = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
         System.out.println(direktorijum);

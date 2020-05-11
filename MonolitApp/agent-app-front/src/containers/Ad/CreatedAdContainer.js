@@ -13,6 +13,7 @@ const CreatedAdContainer = () => {
     const [androidFlag, setAndroidFlag] = useState(false);
     const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
+    const [buttonLabel, setButtonLabel] = useState(1);
 
     const handleCreatedAd = (event) => {
         event.preventDefault();
@@ -76,9 +77,8 @@ const CreatedAdContainer = () => {
             let p = photos;
             let name = event.target.files[0].name;
             let flag = 0;
-            let slike = [];
+            
             p.map((photo) => {
-                slike.push(photo.photo);
                 if (photo.photoName === name) {
                     flag = 1;
                     console.log("Isti fajl");
@@ -92,20 +92,41 @@ const CreatedAdContainer = () => {
                         photo: event.target.files[0]
                     }
                 )
-                slike.push(event.target.files[0]);
                 setPhotos(p);
             }
             let nazivi = "";
-           
+            let slike = [];
             p.map((photo) => {
+                slike.push(photo.photo);
                 nazivi += " " + photo.photoName;
             })
             console.log(nazivi);
             console.log(slike);
+
+
             setCoverPhoto(event.target.files[0]);
-            setCoverPhotoName(nazivi);
+            setCoverPhotoName(event.target.files[0].name);
         }
 
+    };
+
+    const onButton1 = (event) =>{
+        setButtonLabel(1);
+    };
+    const onButton2 = (event) =>{
+        setButtonLabel(2);
+    };
+    const onButton3 = (event) =>{
+        setButtonLabel(3);
+    };
+    const onButton4 = (event) =>{
+        setButtonLabel(4);
+    };
+    const onButton5 = (event) =>{
+        setButtonLabel(5);
+    };
+    const onButton6 = (event) =>{
+        setButtonLabel(6);
     };
 
     return (
@@ -118,7 +139,15 @@ const CreatedAdContainer = () => {
             handleDistanceLimitFlag={handleDistanceLimitFlag}
             onPhotoChange={onPhotoChange}
             handleAndroidFlag={handleAndroidFlag}
-            handleCDW={handleCDW} />
+            handleCDW={handleCDW} 
+            buttonLabel={buttonLabel}
+            onButton1={onButton1}
+            onButton2={onButton2}
+            onButton3={onButton3}
+            onButton4={onButton4}
+            onButton5={onButton5}
+            onButton6={onButton6}
+            />
     )
 }
 
