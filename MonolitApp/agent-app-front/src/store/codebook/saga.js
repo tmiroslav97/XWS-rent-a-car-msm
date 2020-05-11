@@ -159,7 +159,7 @@ export function* addGearboxType() {
     yield put(putGearboxTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchGearboxTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
     yield put(putGearboxTypes({
-        'data': data.fuelTypes,
+        'data': data.gearboxTypes,
         'totalPageCnt': data.totalPageCnt,
         'nextPage': temp.nextPage,
         'size': temp.size,
@@ -176,7 +176,7 @@ export function* editGearboxType() {
     yield put(putGearboxTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchGearboxTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
     yield put(putGearboxTypes({
-        'data': data.fuelTypes,
+        'data': data.gearboxTypes,
         'totalPageCnt': data.totalPageCnt,
         'nextPage': temp.nextPage,
         'size': temp.size,
@@ -193,7 +193,7 @@ export function* deleteGearboxType() {
     yield put(putGearboxTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchGearboxTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
     yield put(putGearboxTypes({
-        'data': data.fuelTypes,
+        'data': data.gearboxTypes,
         'totalPageCnt': data.totalPageCnt,
         'nextPage': temp.nextPage,
         'size': temp.size,
