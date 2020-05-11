@@ -58,4 +58,13 @@ VALUES (19, 'Seat');
 INSERT INTO car_manufacturer(id, name)
 VALUES (20, 'Ferari');
 INSERT INTO car_manufacturer(id, name)
-VALUES (21, 'Proche');
+VALUES (21, 'Porsche');
+
+INSERT INTO car_type(id, name)
+VALUES (1, 'Limuzina');
+INSERT INTO car_type(id, name)
+VALUES (2, 'Karavan');
+INSERT INTO car_type(id, name)
+VALUES (3, 'Coupe');
+INSERT INTO car_type(id, name)
+VALUES (4, 'SUV');
