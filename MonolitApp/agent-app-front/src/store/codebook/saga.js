@@ -79,7 +79,6 @@ export function* addCarModel() {
     const { payload } = yield take(ADD_CAR_MODEL);
     const msg = yield call(CodebookService.addCarModel, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(carModelsSelector);
     yield put(putCarModels({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarModelsPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -96,7 +95,6 @@ export function* editCarModel() {
     const { payload } = yield take(EDIT_CAR_MODEL);
     const msg = yield call(CodebookService.editCarModel, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(carModelsSelector);
     yield put(putCarModels({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarModelsPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -113,7 +111,6 @@ export function* deleteCarModel() {
     const { payload } = yield take(DELETE_CAR_MODEL);
     const msg = yield call(CodebookService.deleteCarModel, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(carModelsSelector);
     yield put(putCarModels({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarModelsPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -154,7 +151,6 @@ export function* addGearboxType() {
     const { payload } = yield take(ADD_GEARBOX_TYPE);
     const msg = yield call(CodebookService.addGearboxType, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(gearboxTypesSelector);
     yield put(putGearboxTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchGearboxTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -188,7 +184,6 @@ export function* deleteGearboxType() {
     const { payload } = yield take(DELETE_GEARBOX_TYPE);
     const msg = yield call(CodebookService.deleteGearboxType, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(gearboxTypesSelector);
     yield put(putGearboxTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchGearboxTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -229,7 +224,6 @@ export function* addFuelType() {
     const { payload } = yield take(ADD_FUEL_TYPE);
     const msg = yield call(CodebookService.addFuelType, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(fuelTypesSelector);
     yield put(putFuelTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchFuelTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -246,7 +240,6 @@ export function* editFuelType() {
     const { payload } = yield take(EDIT_FUEL_TYPE);
     const msg = yield call(CodebookService.editFuelType, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(fuelTypesSelector);
     yield put(putFuelTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchFuelTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -263,7 +256,6 @@ export function* deleteFuelType() {
     const { payload } = yield take(DELETE_FUEL_TYPE);
     const msg = yield call(CodebookService.deleteFuelType, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(fuelTypesSelector);
     yield put(putFuelTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchFuelTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -304,7 +296,6 @@ export function* addCarType() {
     const { payload } = yield take(ADD_CAR_TYPE);
     const msg = yield call(CodebookService.addCarType, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(carTypesSelector);
     yield put(putCarTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -321,7 +312,6 @@ export function* editCarType() {
     const { payload } = yield take(EDIT_CAR_TYPE);
     const msg = yield call(CodebookService.editCarType, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(carTypesSelector);
     yield put(putCarTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -338,7 +328,6 @@ export function* deleteCarType() {
     const { payload } = yield take(DELETE_CAR_TYPE);
     const msg = yield call(CodebookService.deleteCarType, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(carTypesSelector);
     yield put(putCarTypes({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarTypesPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -379,7 +368,6 @@ export function* addCarManufacturer() {
     const { payload } = yield take(ADD_CAR_MANUFACTURER);
     const msg = yield call(CodebookService.addCarManufacturer, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(carManufacturersSelector);
     yield put(putCarManufacturers({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarManufacturersPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -396,7 +384,6 @@ export function* editCarManufacturer() {
     const { payload } = yield take(EDIT_CAR_MANUFACTURER);
     const msg = yield call(CodebookService.editCarManufacturer, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(carManufacturersSelector);
     yield put(putCarManufacturers({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarManufacturersPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -413,7 +400,6 @@ export function* deleteCarManufacturer() {
     const { payload } = yield take(DELETE_CAR_MANUFACTURER);
     const msg = yield call(CodebookService.deleteCarManufacturer, payload);
     yield put(putSuccessMsg(msg));
-    yield put(putSuccessMsg(null));
     const temp = yield select(carManufacturersSelector);
     yield put(putCarManufacturers({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchCarManufacturersPaginated, { "nextPage": temp.nextPage, "size": temp.size });
