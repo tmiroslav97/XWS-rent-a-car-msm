@@ -1,11 +1,16 @@
 package agent.app.service.impl;
 
+import agent.app.dto.codebook.FuelTypeDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.FuelType;
 import agent.app.repository.FuelTypeRepository;
 import agent.app.service.intf.FuelTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +29,18 @@ public class FuelTypeServiceImpl implements FuelTypeService {
     @Override
     public List<FuelType> findAll() {
         return fuelTypeRepository.findAll();
+    }
+
+    @Override
+    public FuelTypeDTO findAll(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<FuelType> fuelTypePage = fuelTypeRepository.findAll(pageable);
+        FuelTypeDTO fuelTypeDTO = FuelTypeDTO.builder()
+                .totalPageCnt(fuelTypePage.getTotalPages())
+                .fuelTypes(fuelTypePage.getContent())
+                .build();
+
+        return fuelTypeDTO;
     }
 
     @Override

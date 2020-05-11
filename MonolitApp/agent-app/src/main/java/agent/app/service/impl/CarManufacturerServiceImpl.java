@@ -1,6 +1,6 @@
 package agent.app.service.impl;
 
-import agent.app.dto.CarManufacturerDTO;
+import agent.app.dto.codebook.CarManufacturerDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.CarManufacturer;

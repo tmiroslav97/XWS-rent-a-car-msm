@@ -1,6 +1,6 @@
 package agent.app.service.intf;
 
-import agent.app.dto.CarManufacturerDTO;
+import agent.app.dto.codebook.CarManufacturerDTO;
 import agent.app.model.CarManufacturer;
 
 import java.util.List;

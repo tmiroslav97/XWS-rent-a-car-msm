@@ -1,6 +1,6 @@
-package agent.app.dto;
+package agent.app.dto.codebook;
 
-import agent.app.model.CarType;
+import agent.app.model.FuelType;
 import lombok.*;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarTypeDTO {
-    private List<CarType> carTypes;
+public class FuelTypeDTO {
+    private List<FuelType> fuelTypes;
     private Integer totalPageCnt;
 }

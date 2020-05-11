@@ -1,4 +1,4 @@
-package agent.app.dto;
+package agent.app.dto.codebook;
 
 import agent.app.model.CarManufacturer;
 import lombok.*;
