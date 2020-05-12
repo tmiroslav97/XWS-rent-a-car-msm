@@ -6,7 +6,7 @@ const CarManufacturerComponent = (props) => {
     return (
         <Container>
             <Row>
-                <Col md={{ span: 6, offset: 3 }} xs={12}>
+                <Col md={6} xs={12}>
                     <Table responsive>
                         <thead>
                             <tr>

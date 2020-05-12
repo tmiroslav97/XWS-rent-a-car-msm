@@ -6,7 +6,7 @@ import { createBrowserHistory } from 'history';
 import store from './store';
 import AppRouter from './AppRouter';
 import NavBar from './containers/NavBar';
-import InformationToasts from './common/InformationToasts';
+import InformationToastsContainer from './containers/Common/InformationToastsContainer';
 import { ToastProvider } from 'react-toast-notifications';
 
 export const history = createBrowserHistory();
@@ -17,7 +17,7 @@ ReactDOM.render(
       <NavBar />
       <AppRouter />
       <ToastProvider>
-        <InformationToasts />
+        <InformationToastsContainer />
       </ToastProvider>
     </Router>
   </Provider>,

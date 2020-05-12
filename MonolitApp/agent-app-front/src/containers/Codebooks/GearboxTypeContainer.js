@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Row, Col, Spinner, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import GearboxTypeComponent from '../../components/Codebooks/GearboxTypeComponent';
@@ -10,11 +10,11 @@ import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
 import CodebookEditFormComponent from '../../components/Codebooks/CodebookEditFormComponent';
+import SpinnerContainer from '../Common/SpinnerContainer';
 
 const GearboxTypeContainer = () => {
     const dispatch = useDispatch();
     const gearboxTypes = useSelector(gearboxTypesSelector);
-    const isFetch = gearboxTypes.isFetch;
     const [nextPage, setNextPage] = useState(gearboxTypes.nextPage);
     const [size, setSize] = useState(gearboxTypes.size);
     const [validated, setValidated] = useState(false);
@@ -31,15 +31,6 @@ const GearboxTypeContainer = () => {
             })
         );
     }, [nextPage, size]);
-
-
-    if (!isFetch) {
-        return <div className="d-flex justify-content-center">
-            <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-            </Spinner>
-        </div>;
-    }
 
     const handleAddGearboxType = (event) => {
         event.preventDefault();
@@ -100,17 +91,17 @@ const GearboxTypeContainer = () => {
 
     return (
         <Container>
-            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Tip mjenjaca'} footer={false} onSubmit={handleAddGearboxType} validated={validated} component={CodebookAdFormComponent} ></FormModalContainer>
-            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Tip mjenjaca'} footer={false} onSubmit={handleEditGearboxType} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} ></FormModalContainer>
-            <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteGearboxType}></DeleteModalContainer>
+            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Tip mjenjaca'} footer={false} onSubmit={handleAddGearboxType} validated={validated} component={CodebookAdFormComponent} />
+            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Tip mjenjaca'} footer={false} onSubmit={handleEditGearboxType} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} />
+            <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteGearboxType} />
             <Row>
-                <Col md={{ span: 8, offset: 2 }} xs={12}>
+                <Col md={{ span: 6, offset: 3 }} xs={12}>
                     <h2 className="border-bottom">Šifarnik tipova mjenjača</h2>
                 </Col>
             </Row>
             <Row>
                 <Col md={{ span: 2, offset: 3 }} xs={12}>
-                    <Button variant="outline-primary" onClick={() => setShowAdForm(true)}>Dodaj</Button>
+                    <Button className="mb-5" variant="outline-primary" onClick={() => setShowAdForm(true)}>Dodaj</Button>
                 </Col>
             </Row>
             <Row>
@@ -119,10 +110,15 @@ const GearboxTypeContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <GearboxTypeComponent gearboxTypes={gearboxTypes.data} handleEdit={handleEdit} handleDelete={handleDelete}></GearboxTypeComponent>
+                <Col md={{ span: 12, offset: 3 }} xs={12}>
+
+                    {
+                        gearboxTypes.isFetch ? <GearboxTypeComponent gearboxTypes={gearboxTypes.data} handleEdit={handleEdit} handleDelete={handleDelete} /> : <SpinnerContainer />
+                    }
+                </Col>
             </Row>
             <Row>
-                <PaginationContainer setNextPage={setNextPage} totalPageCnt={gearboxTypes.totalPageCnt} nextPage={nextPage}></PaginationContainer>
+                <PaginationContainer setNextPage={setNextPage} totalPageCnt={gearboxTypes.totalPageCnt} nextPage={nextPage} />
             </Row>
         </Container >
     );

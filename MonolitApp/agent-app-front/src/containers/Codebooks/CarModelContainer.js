@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Row, Col, Spinner, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import CarModelComponent from '../../components/Codebooks/CarModelComponent';
@@ -10,12 +10,12 @@ import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
 import CodebookEditFormComponent from '../../components/Codebooks/CodebookEditFormComponent';
+import SpinnerContainer from '../Common/SpinnerContainer';
 
 const CarModelContainer = () => {
     const dispatch = useDispatch();
     const carModels = useSelector(carModelsSelector);
     const carManufacturers = useSelector(carManufacturersSelector);
-    const isFetch = carModels.isFetch;
     const [nextPage, setNextPage] = useState(carModels.nextPage);
     const [size, setSize] = useState(carModels.size);
     const [validated, setValidated] = useState(false);
@@ -35,16 +35,6 @@ const CarModelContainer = () => {
             fetchAllCarManufacturers()
         );
     }, [nextPage, size]);
-
-
-
-    if (!isFetch) {
-        return <div className="d-flex justify-content-center">
-            <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-            </Spinner>
-        </div>;
-    }
 
     const handleAddCarModel = (event) => {
         event.preventDefault();
@@ -108,29 +98,34 @@ const CarModelContainer = () => {
 
     return (
         <Container>
-            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Model automobila'} footer={false} data={carManufacturers.data} onSubmit={handleAddCarModel} validated={validated} component={CodebookAdFormComponent} ></FormModalContainer>
-            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Model automobila'} footer={false} data={carManufacturers.data} onSubmit={handleEditCarModel} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} ></FormModalContainer>
-            <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteCarModel}></DeleteModalContainer>
+            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Model automobila'} footer={false} data={carManufacturers.data} onSubmit={handleAddCarModel} validated={validated} component={CodebookAdFormComponent} />
+            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Model automobila'} footer={false} data={carManufacturers.data} onSubmit={handleEditCarModel} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} />
+            <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteCarModel} />
             <Row>
-                <Col md={{ span: 8, offset: 2 }} xs={12}>
+                <Col md={{ span: 6, offset: 3 }} xs={12}>
                     <h2 className="border-bottom">Šifarnik modela automobila</h2>
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 2, offset: 2 }} xs={12}>
-                    <Button variant="outline-primary" onClick={() => setShowAdForm(true)}>Dodaj</Button>
+                <Col md={{ span: 2, offset: 3 }} xs={12}>
+                    <Button className="mb-5" variant="outline-primary" onClick={() => setShowAdForm(true)}>Dodaj</Button>
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 12, offset: 2 }} xs={12}>
+                <Col md={{ span: 12, offset: 3 }} xs={12}>
                     <PaginationSize size={size} setSize={setSize} />
                 </Col>
             </Row>
             <Row>
-                <CarModelComponent carModels={carModels.data} handleEdit={handleEdit} handleDelete={handleDelete}></CarModelComponent>
+                <Col md={{ span: 12, offset: 3 }} xs={12}>
+
+                    {
+                        carModels.isFetch ? <CarModelComponent carModels={carModels.data} handleEdit={handleEdit} handleDelete={handleDelete} /> : <SpinnerContainer />
+                    }
+                </Col>
             </Row>
             <Row>
-                <PaginationContainer setNextPage={setNextPage} totalPageCnt={carModels.totalPageCnt} nextPage={nextPage}></PaginationContainer>
+                <PaginationContainer setNextPage={setNextPage} totalPageCnt={carModels.totalPageCnt} nextPage={nextPage} />
             </Row>
         </Container >
     );

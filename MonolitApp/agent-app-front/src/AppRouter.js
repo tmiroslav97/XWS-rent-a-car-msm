@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import { tokenSelector } from './store/user/selectors';
 import PrivateRoute from './authorization/PrivateRoute';
 import HomePage from './containers/HomePage';
@@ -20,7 +19,6 @@ import AdminHomePage from './components/Administrator/AdminHomePage';
 const AppRouter = () => {
   const token = useSelector(tokenSelector);
   return (
-    <Container>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" render={props => token == null ? (<LoginContainter {...props} />) : (<Redirect to="/" />)} />
@@ -41,7 +39,6 @@ const AppRouter = () => {
         <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
         <Redirect from="*" to="/page-not-found" />
       </Switch>
-    </Container>
   );
 }
 
