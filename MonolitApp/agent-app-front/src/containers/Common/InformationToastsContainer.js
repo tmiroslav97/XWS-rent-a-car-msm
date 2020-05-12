@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useToasts } from 'react-toast-notifications'
-import { errorSelector, successSelector, warnSeletor, infoSelector } from '../store/common/selectors';
+import { useSelector, useDispatch } from "react-redux";
+import { useToasts } from 'react-toast-notifications';
+import { putErrorMsg, putSuccessMsg, putWarnMsg, putInfoMsg } from '../../store/common/actions';
+import { errorSelector, successSelector, warnSeletor, infoSelector } from '../../store/common/selectors';
 
-const InformationToasts = () => {
+const InformationToastsContainer = () => {
+    const dispatch = useDispatch();
     const error = useSelector(errorSelector);
     const success = useSelector(successSelector);
     const warn = useSelector(warnSeletor);
@@ -16,8 +18,9 @@ const InformationToasts = () => {
                 appearance: 'error',
                 autoDismiss: true,
             });
+            dispatch(putErrorMsg(null));
         }
-    });
+    }, [error]);
 
     useEffect(() => {
         if (success != null) {
@@ -26,7 +29,8 @@ const InformationToasts = () => {
                 autoDismiss: true,
             });
         }
-    });
+        dispatch(putSuccessMsg(null));
+    }, [success]);
 
     useEffect(() => {
         if (warn != null) {
@@ -34,8 +38,9 @@ const InformationToasts = () => {
                 appearance: 'warning',
                 autoDismiss: true,
             });
+            dispatch(putWarnMsg(null));
         }
-    });
+    }, [warn]);
 
     useEffect(() => {
         if (info != null) {
@@ -43,8 +48,9 @@ const InformationToasts = () => {
                 appearance: 'info',
                 autoDismiss: true,
             });
+            dispatch(putInfoMsg(null));
         }
-    });
+    }, [info]);
 
     return (
         <div id="toastMsg">
@@ -52,4 +58,4 @@ const InformationToasts = () => {
     );
 };
 
-export default InformationToasts;
+export default InformationToastsContainer;

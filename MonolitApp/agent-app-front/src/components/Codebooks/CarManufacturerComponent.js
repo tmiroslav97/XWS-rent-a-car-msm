@@ -6,12 +6,13 @@ const CarManufacturerComponent = (props) => {
     return (
         <Container>
             <Row>
-                <Col md={{ span: 6, offset: 3 }} xs={12}>
+                <Col md={6} xs={12}>
                     <Table responsive>
                         <thead>
                             <tr>
                                 <th>Naziv</th>
-                                <th>Akcija</th>
+                                <th className="text-right">Izmjena</th>
+                                <th className="text-right">Brisanje</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -20,7 +21,12 @@ const CarManufacturerComponent = (props) => {
                                     return (
                                         <tr key={carManufacturer.id}>
                                             <td>{carManufacturer.name}</td>
-                                            <td align="right"><Button>Izmjeni</Button></td>
+                                            <td align="right">
+                                                <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
+                                            </td>
+                                            <td align="right">
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
+                                            </td>
                                         </tr>
                                     );
                                 })

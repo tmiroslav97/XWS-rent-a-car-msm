@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/ad",  produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/ad", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdController {
 
     private final AdService adService;
@@ -55,8 +55,8 @@ public class AdController {
     }
 
     @RequestMapping(value = "{?page,size,sort}", method = RequestMethod.GET)
-    public ResponseEntity<?> findAllPageAd(@PathVariable("page") Integer page,@PathVariable("size") Integer size,
-                                         @PathVariable("sort") String sort) {
+    public ResponseEntity<?> findAllPageAd(@PathVariable("page") Integer page, @PathVariable("size") Integer size,
+                                           @PathVariable("sort") String sort) {
         return new ResponseEntity<>(adService.findAllPageAd(page, size, sort), HttpStatus.OK);
     }
 
