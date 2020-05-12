@@ -1,11 +1,16 @@
 package agent.app.service.impl;
 
+import agent.app.dto.codebook.GearboxTypeDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.GearboxType;
 import agent.app.repository.GearboxTypeRepository;
 import agent.app.service.intf.GearboxTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +29,18 @@ public class GearboxTypeServiceImpl implements GearboxTypeService {
     @Override
     public List<GearboxType> findAll() {
         return gearboxTypeRepository.findAll();
+    }
+
+    @Override
+    public GearboxTypeDTO findAll(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<GearboxType> gearboxTypePage = gearboxTypeRepository.findAll(pageable);
+        GearboxTypeDTO gearboxTypeDTO = GearboxTypeDTO.builder()
+                .totalPageCnt(gearboxTypePage.getTotalPages())
+                .gearboxTypes(gearboxTypePage.getContent())
+                .build();
+
+        return gearboxTypeDTO;
     }
 
     @Override

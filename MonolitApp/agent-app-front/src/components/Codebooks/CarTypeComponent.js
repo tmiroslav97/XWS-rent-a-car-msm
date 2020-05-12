@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button, Table } from 'react-bootstrap'
 
-const CarManufacturerComponent = (props) => {
+const CarTypeComponent = (props) => {
 
     return (
         <Container>
@@ -17,15 +17,15 @@ const CarManufacturerComponent = (props) => {
                         </thead>
                         <tbody>
                             {
-                                props.carManufacturers.map((carManufacturer) => {
+                                props.carTypes.map((carType) => {
                                     return (
-                                        <tr key={carManufacturer.id}>
-                                            <td>{carManufacturer.name}</td>
+                                        <tr key={carType.id}>
+                                            <td>{carType.name}</td>
                                             <td align="right">
-                                                <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
+                                                <Button variant="outline-success" onClick={() => { props.handleEdit(carType); }}>Izmjeni</Button>
                                             </td>
                                             <td align="right">
-                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carType.id) }}>Obriši</Button>
                                             </td>
                                         </tr>
                                     );
@@ -35,8 +35,8 @@ const CarManufacturerComponent = (props) => {
                     </Table>
                 </Col>
             </Row>
-        </Container>
+        </Container >
     );
 }
 
-export default CarManufacturerComponent;
+export default CarTypeComponent;

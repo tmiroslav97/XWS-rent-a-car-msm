@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -26,6 +27,6 @@ public class CarManufacturer {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "carManufacturer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "carManufacturer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CarModel> carModels = new HashSet<>();
 }

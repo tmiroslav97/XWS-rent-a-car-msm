@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button, Table } from 'react-bootstrap'
 
-const CarManufacturerComponent = (props) => {
+const GearboxTypeComponent = (props) => {
 
     return (
         <Container>
@@ -17,15 +17,15 @@ const CarManufacturerComponent = (props) => {
                         </thead>
                         <tbody>
                             {
-                                props.carManufacturers.map((carManufacturer) => {
+                                props.gearboxTypes.map((gearboxType) => {
                                     return (
-                                        <tr key={carManufacturer.id}>
-                                            <td>{carManufacturer.name}</td>
+                                        <tr key={gearboxType.id}>
+                                            <td>{gearboxType.name}</td>
                                             <td align="right">
-                                                <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
+                                                <Button variant="outline-success" onClick={() => { props.handleEdit(gearboxType); }}>Izmjeni</Button>
                                             </td>
                                             <td align="right">
-                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(gearboxType.id); }}>Obriši</Button>
                                             </td>
                                         </tr>
                                     );
@@ -39,4 +39,4 @@ const CarManufacturerComponent = (props) => {
     );
 }
 
-export default CarManufacturerComponent;
+export default GearboxTypeComponent;

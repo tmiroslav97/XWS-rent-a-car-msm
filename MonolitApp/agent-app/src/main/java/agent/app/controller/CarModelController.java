@@ -20,8 +20,12 @@ public class CarModelController {
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(carModelService.findAll(), HttpStatus.OK);
+    public ResponseEntity<?> getAll(@RequestParam(value = "nextPage", required = false) Integer nextPage, @RequestParam(value = "size", required = false) Integer size) {
+        if (nextPage != null) {
+            return new ResponseEntity<>(carModelService.findAll(nextPage, size), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(carModelService.findAll(), HttpStatus.OK);
+        }
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
@@ -53,8 +57,8 @@ public class CarModelController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteCarModel(@RequestBody Long id) {
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteCarModel(@RequestParam(value = "id") Long id) {
         Integer flag = carModelService.deleteById(id);
         if (flag == 1) {
             return new ResponseEntity<>("Model automobila uspjesno obrisan.", HttpStatus.CREATED);

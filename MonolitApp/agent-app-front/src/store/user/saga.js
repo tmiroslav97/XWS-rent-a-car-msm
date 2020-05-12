@@ -45,5 +45,4 @@ export function* registerUser() {
     const { payload } = yield take(REGISTER_USER);
     const data = yield call(AuthSecurity.register, payload);
     yield put(putSuccessMsg(data));
-    yield put(putSuccessMsg(null));
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button, Table } from 'react-bootstrap'
 
-const CarManufacturerComponent = (props) => {
+const CarModelComponent = (props) => {
 
     return (
         <Container>
@@ -11,21 +11,23 @@ const CarManufacturerComponent = (props) => {
                         <thead>
                             <tr>
                                 <th>Naziv</th>
+                                <th>Proizvodjač</th>
                                 <th className="text-right">Izmjena</th>
                                 <th className="text-right">Brisanje</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                props.carManufacturers.map((carManufacturer) => {
+                                props.carModels.map((carModel) => {
                                     return (
-                                        <tr key={carManufacturer.id}>
-                                            <td>{carManufacturer.name}</td>
+                                        <tr key={carModel.id}>
+                                            <td>{carModel.name}</td>
+                                            <td>{carModel.carManufacturer}</td>
                                             <td align="right">
-                                                <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
+                                                <Button variant="outline-success" onClick={() => { props.handleEdit(carModel); }}>Izmjeni</Button>
                                             </td>
                                             <td align="right">
-                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
+                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carModel.id); }}>Obriši</Button>
                                             </td>
                                         </tr>
                                     );
@@ -39,4 +41,4 @@ const CarManufacturerComponent = (props) => {
     );
 }
 
-export default CarManufacturerComponent;
+export default CarModelComponent;

@@ -24,7 +24,6 @@ export function* createdAd(){
     const data = yield call(AdServices.createdAd, payload); 
     console.log("nestoooooo");
     yield put(putSuccessMsg(data));
-    yield put(putSuccessMsg(null));
     history.push('/');
     
 }
