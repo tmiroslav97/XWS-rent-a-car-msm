@@ -17,6 +17,7 @@ VALUES (2, 'tomic.miroslav97@gmail.com', 'Miroslav', 'Tomic', '$2a$10$VSlWn0nzWD
 INSERT INTO user_authority(user_id, authority_id)
 VALUES (2,1);
 
+--car manufacturers
 INSERT INTO car_manufacturer(id, name)
 VALUES (1, 'BMW');
 INSERT INTO car_manufacturer(id, name)
@@ -58,4 +59,55 @@ VALUES (19, 'Seat');
 INSERT INTO car_manufacturer(id, name)
 VALUES (20, 'Ferari');
 INSERT INTO car_manufacturer(id, name)
-VALUES (21, 'Proche');
+VALUES (21, 'Porsche');
+
+--car models
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (1, 'A4', 3);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (2, 'A6', 3);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (3, 'A8', 3);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (4, 'A3', 3);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (5, '320d', 1);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (6, '320i', 1);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (7, '318d', 1);
+INSERT INTO car_model(id, name, car_manufacturer_id)
+VALUES (8, '318i', 1);
+
+--car types
+INSERT INTO car_type(id, name)
+VALUES (1, 'Limuzina');
+INSERT INTO car_type(id, name)
+VALUES (2, 'Karavan');
+INSERT INTO car_type(id, name)
+VALUES (3, 'Coupe');
+INSERT INTO car_type(id, name)
+VALUES (4, 'SUV');
+
+--fuel types
+INSERT INTO fuel_type(id, name)
+VALUES (1, 'Benzin');
+INSERT INTO fuel_type(id, name)
+VALUES (2, 'Dizel');
+INSERT INTO fuel_type(id, name)
+VALUES (3, 'Elektro');
+INSERT INTO fuel_type(id, name)
+VALUES (4, 'Hibrid');
+
+--gearbox types
+INSERT INTO gearbox_type(id, name)
+VALUES (1, 'Manuelni');
+INSERT INTO gearbox_type(id, name)
+VALUES (2, 'Automatik');
+INSERT INTO gearbox_type(id, name)
+VALUES (3, 'Poluautomatik');
+INSERT INTO gearbox_type(id, name)
+VALUES (4, 'DSG');
+INSERT INTO gearbox_type(id, name)
+VALUES (5, 'Tiptronik');
+

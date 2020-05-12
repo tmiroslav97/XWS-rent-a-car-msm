@@ -3,20 +3,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
-import CarManufacturerComponent from '../../components/Codebooks/CarManufacturerComponent';
-import { carManufacturersSelector } from '../../store/codebook/selectors';
-import { fetchCarManufacturers, addCarManufacturer, editCarManufacturer, deleteCarManufacturer } from '../../store/codebook/actions';
+import CarModelComponent from '../../components/Codebooks/CarModelComponent';
+import { carModelsSelector, carManufacturersSelector } from '../../store/codebook/selectors';
+import { fetchCarModels, addCarModel, editCarModel, deleteCarModel, fetchAllCarManufacturers } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
 import CodebookEditFormComponent from '../../components/Codebooks/CodebookEditFormComponent';
 import SpinnerContainer from '../Common/SpinnerContainer';
 
-const CarManufacturerContainer = () => {
+const CarModelContainer = () => {
     const dispatch = useDispatch();
+    const carModels = useSelector(carModelsSelector);
     const carManufacturers = useSelector(carManufacturersSelector);
-    const [nextPage, setNextPage] = useState(carManufacturers.nextPage);
-    const [size, setSize] = useState(carManufacturers.size);
+    const [nextPage, setNextPage] = useState(carModels.nextPage);
+    const [size, setSize] = useState(carModels.size);
     const [validated, setValidated] = useState(false);
     const [showAdForm, setShowAdForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false);
@@ -25,14 +26,17 @@ const CarManufacturerContainer = () => {
 
     useEffect(() => {
         dispatch(
-            fetchCarManufacturers({
+            fetchCarModels({
                 nextPage,
                 size
             })
         );
+        dispatch(
+            fetchAllCarManufacturers()
+        );
     }, [nextPage, size]);
 
-    const handleAddCarManufacturer = (event) => {
+    const handleAddCarModel = (event) => {
         event.preventDefault();
         const form = event.target;
         const data = new FormData(event.target);
@@ -42,16 +46,18 @@ const CarManufacturerContainer = () => {
             setValidated(true);
         } else {
             dispatch(
-                addCarManufacturer(
-                    data.get('name')
-                )
+                addCarModel({
+                    "name": data.get('name'),
+                    "carManufacturer": data.get('selCarMan')
+
+                })
             );
             setValidated(false);
             setShowAdForm(false);
         }
     };
 
-    const handleEditCarManufaturer = (event) => {
+    const handleEditCarModel = (event) => {
         event.preventDefault();
         const form = event.target;
         const data = new FormData(event.target);
@@ -61,9 +67,10 @@ const CarManufacturerContainer = () => {
             setValidated(true);
         } else {
             dispatch(
-                editCarManufacturer({
+                editCarModel({
                     "id": data.get('id'),
-                    "name": data.get('name')
+                    "name": data.get('name'),
+                    "carManufacturer": data.get('selCarMan')
                 })
             );
             setValidated(false);
@@ -71,15 +78,15 @@ const CarManufacturerContainer = () => {
         }
     };
 
-    const handleDeleteCarManufacturer = () => {
+    const handleDeleteCarModel = () => {
         setShowDeleteModal(false);
         dispatch(
-            deleteCarManufacturer(selectedItem)
+            deleteCarModel(selectedItem)
         );
     };
 
-    const handleEdit = (carManufacturer) => {
-        setSelectedItem(carManufacturer);
+    const handleEdit = (fuelType) => {
+        setSelectedItem(fuelType);
         setShowEditForm(true);
     };
 
@@ -91,12 +98,12 @@ const CarManufacturerContainer = () => {
 
     return (
         <Container>
-            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Proizvođač automobila'} footer={false} onSubmit={handleAddCarManufacturer} validated={validated} component={CodebookAdFormComponent} />
-            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Proizvođač automobila'} footer={false} onSubmit={handleEditCarManufaturer} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} />
-            <DeleteModalContainer show={showDeleteModal} msg={'(Postoje povezani modeli automobila sa ovim entitetom)'} setShow={setShowDeleteModal} onDelete={handleDeleteCarManufacturer} />
+            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Model automobila'} footer={false} data={carManufacturers.data} onSubmit={handleAddCarModel} validated={validated} component={CodebookAdFormComponent} />
+            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Model automobila'} footer={false} data={carManufacturers.data} onSubmit={handleEditCarModel} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} />
+            <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteCarModel} />
             <Row>
                 <Col md={{ span: 6, offset: 3 }} xs={12}>
-                    <h2 className="border-bottom">Šifarnik proizvođača automobila</h2>
+                    <h2 className="border-bottom">Šifarnik modela automobila</h2>
                 </Col>
             </Row>
             <Row>
@@ -111,16 +118,17 @@ const CarManufacturerContainer = () => {
             </Row>
             <Row>
                 <Col md={{ span: 12, offset: 3 }} xs={12}>
+
                     {
-                        carManufacturers.isFetch ? <CarManufacturerComponent carManufacturers={carManufacturers.data} handleEdit={handleEdit} handleDelete={handleDelete} /> : <SpinnerContainer />
+                        carModels.isFetch ? <CarModelComponent carModels={carModels.data} handleEdit={handleEdit} handleDelete={handleDelete} /> : <SpinnerContainer />
                     }
                 </Col>
             </Row>
             <Row>
-                <PaginationContainer setNextPage={setNextPage} totalPageCnt={carManufacturers.totalPageCnt} nextPage={nextPage} />
+                <PaginationContainer setNextPage={setNextPage} totalPageCnt={carModels.totalPageCnt} nextPage={nextPage} />
             </Row>
         </Container >
     );
 }
 
-export default CarManufacturerContainer;
+export default CarModelContainer;

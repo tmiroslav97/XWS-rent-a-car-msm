@@ -3,20 +3,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
-import CarManufacturerComponent from '../../components/Codebooks/CarManufacturerComponent';
-import { carManufacturersSelector } from '../../store/codebook/selectors';
-import { fetchCarManufacturers, addCarManufacturer, editCarManufacturer, deleteCarManufacturer } from '../../store/codebook/actions';
+import GearboxTypeComponent from '../../components/Codebooks/GearboxTypeComponent';
+import { gearboxTypesSelector } from '../../store/codebook/selectors';
+import { fetchGearboxTypes, addGearboxType, editGearboxType, deleteGearboxType } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
 import CodebookEditFormComponent from '../../components/Codebooks/CodebookEditFormComponent';
 import SpinnerContainer from '../Common/SpinnerContainer';
 
-const CarManufacturerContainer = () => {
+const GearboxTypeContainer = () => {
     const dispatch = useDispatch();
-    const carManufacturers = useSelector(carManufacturersSelector);
-    const [nextPage, setNextPage] = useState(carManufacturers.nextPage);
-    const [size, setSize] = useState(carManufacturers.size);
+    const gearboxTypes = useSelector(gearboxTypesSelector);
+    const [nextPage, setNextPage] = useState(gearboxTypes.nextPage);
+    const [size, setSize] = useState(gearboxTypes.size);
     const [validated, setValidated] = useState(false);
     const [showAdForm, setShowAdForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false);
@@ -25,14 +25,14 @@ const CarManufacturerContainer = () => {
 
     useEffect(() => {
         dispatch(
-            fetchCarManufacturers({
+            fetchGearboxTypes({
                 nextPage,
                 size
             })
         );
     }, [nextPage, size]);
 
-    const handleAddCarManufacturer = (event) => {
+    const handleAddGearboxType = (event) => {
         event.preventDefault();
         const form = event.target;
         const data = new FormData(event.target);
@@ -42,7 +42,7 @@ const CarManufacturerContainer = () => {
             setValidated(true);
         } else {
             dispatch(
-                addCarManufacturer(
+                addGearboxType(
                     data.get('name')
                 )
             );
@@ -51,7 +51,7 @@ const CarManufacturerContainer = () => {
         }
     };
 
-    const handleEditCarManufaturer = (event) => {
+    const handleEditGearboxType = (event) => {
         event.preventDefault();
         const form = event.target;
         const data = new FormData(event.target);
@@ -61,7 +61,7 @@ const CarManufacturerContainer = () => {
             setValidated(true);
         } else {
             dispatch(
-                editCarManufacturer({
+                editGearboxType({
                     "id": data.get('id'),
                     "name": data.get('name')
                 })
@@ -71,15 +71,15 @@ const CarManufacturerContainer = () => {
         }
     };
 
-    const handleDeleteCarManufacturer = () => {
+    const handleDeleteGearboxType = () => {
         setShowDeleteModal(false);
         dispatch(
-            deleteCarManufacturer(selectedItem)
+            deleteGearboxType(selectedItem)
         );
     };
 
-    const handleEdit = (carManufacturer) => {
-        setSelectedItem(carManufacturer);
+    const handleEdit = (gearboxType) => {
+        setSelectedItem(gearboxType);
         setShowEditForm(true);
     };
 
@@ -91,12 +91,12 @@ const CarManufacturerContainer = () => {
 
     return (
         <Container>
-            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Proizvođač automobila'} footer={false} onSubmit={handleAddCarManufacturer} validated={validated} component={CodebookAdFormComponent} />
-            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Proizvođač automobila'} footer={false} onSubmit={handleEditCarManufaturer} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} />
-            <DeleteModalContainer show={showDeleteModal} msg={'(Postoje povezani modeli automobila sa ovim entitetom)'} setShow={setShowDeleteModal} onDelete={handleDeleteCarManufacturer} />
+            <FormModalContainer show={showAdForm} setShow={setShowAdForm} name={'Tip mjenjaca'} footer={false} onSubmit={handleAddGearboxType} validated={validated} component={CodebookAdFormComponent} />
+            <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Tip mjenjaca'} footer={false} onSubmit={handleEditGearboxType} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} />
+            <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteGearboxType} />
             <Row>
                 <Col md={{ span: 6, offset: 3 }} xs={12}>
-                    <h2 className="border-bottom">Šifarnik proizvođača automobila</h2>
+                    <h2 className="border-bottom">Šifarnik tipova mjenjača</h2>
                 </Col>
             </Row>
             <Row>
@@ -111,16 +111,17 @@ const CarManufacturerContainer = () => {
             </Row>
             <Row>
                 <Col md={{ span: 12, offset: 3 }} xs={12}>
+
                     {
-                        carManufacturers.isFetch ? <CarManufacturerComponent carManufacturers={carManufacturers.data} handleEdit={handleEdit} handleDelete={handleDelete} /> : <SpinnerContainer />
+                        gearboxTypes.isFetch ? <GearboxTypeComponent gearboxTypes={gearboxTypes.data} handleEdit={handleEdit} handleDelete={handleDelete} /> : <SpinnerContainer />
                     }
                 </Col>
             </Row>
             <Row>
-                <PaginationContainer setNextPage={setNextPage} totalPageCnt={carManufacturers.totalPageCnt} nextPage={nextPage} />
+                <PaginationContainer setNextPage={setNextPage} totalPageCnt={gearboxTypes.totalPageCnt} nextPage={nextPage} />
             </Row>
         </Container >
     );
 }
 
-export default CarManufacturerContainer;
+export default GearboxTypeContainer;
