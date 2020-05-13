@@ -26,7 +26,7 @@ const AdCard = (props) => {
                                     <Card.Text>
                                        {idx}     
                                     </Card.Text>
-                                    <Card.Link href="/createAd">Vise detalja ></Card.Link>
+                                    <Card.Link href="/agent-firm/ad-detail-view">Vise detalja ></Card.Link>
                                 </Col>
                                 <Col>
                                     <Card.Text>
