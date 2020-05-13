@@ -26,6 +26,11 @@ const AdListContainer = () => {
         );
     }, [nextPage, size]);
 
+    // const handleDetailView = (id) => {
+    //     console.log(id);
+    //     console.log("Oglas")
+    // };
+
     return(
        
         <Container>
