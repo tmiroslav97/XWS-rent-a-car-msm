@@ -20,7 +20,8 @@ class AdServices extends HttpBaseClient {
         const response = await this.getApiClient().get(
             FINALPOINTS.FETCH_ADS, {
                 params: {
-                    nextPage: payload.nextPage
+                    nextPage: payload.nextPage,
+                    size: payload.size
                 }
             }
         );

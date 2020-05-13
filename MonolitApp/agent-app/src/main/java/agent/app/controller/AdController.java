@@ -51,11 +51,11 @@ public class AdController {
 //    }
 @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
 @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage) {
+    public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage, @RequestParam(value = "size", required = false) Integer size) {
 
         if (nextPage != null) {
             System.out.println("ima 1 str");
-            return new ResponseEntity<>(adService.findAllPageAd(nextPage), HttpStatus.OK);
+            return new ResponseEntity<>(adService.findAll(nextPage, size), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(adService.findAll(), HttpStatus.OK);
         }

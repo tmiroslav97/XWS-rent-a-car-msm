@@ -40,6 +40,7 @@ export function* fetchAds() {
         'data': data.ads,
         'totalPageCnt': data.totalPageCnt,
         'nextPage': payload.nextPage,
+        'size': payload.size,
         'isFetch': true
     }));
 }
