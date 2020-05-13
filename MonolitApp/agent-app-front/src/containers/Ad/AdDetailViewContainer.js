@@ -28,14 +28,14 @@ const AdDetailViewContainer = () => {
 
     return(
        
-        <Container>
+        <Container fluid>
              <Row>
                 <Col md={{ span: 12, offset: 3 }} xs={12}>
                     {/* <PaginationSize size={size} setSize={setSize} /> */}
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 12, offset: 3 }} xs={12}>
+                <Col  md={{ span: 12, offset: 2 }} xs={12}>
                 <AdDetailViewComponent />
                     {/* {
                         isFetchAds ?  <AdDetailViewComponent /> : <SpinnerContainer />
