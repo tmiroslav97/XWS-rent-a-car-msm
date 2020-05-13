@@ -6,6 +6,7 @@ const AdCard = (props) => {
 
 
     return(
+
         props.ads.map((variant, idx) => (
             <>
                     <br />
@@ -25,7 +26,7 @@ const AdCard = (props) => {
                                     <Card.Text>
                                        {idx}     
                                     </Card.Text>
-                                    <Card.Link href="#">Vise detalja ></Card.Link>
+                                    <Card.Link href="/createAd">Vise detalja ></Card.Link>
                                 </Col>
                                 <Col>
                                     <Card.Text>

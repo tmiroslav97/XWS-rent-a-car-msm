@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import AdCard from '../../components/Ad/AdCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Row, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import { adsSelector } from '../../store/ad/selectors';
 import PaginationContainer from '../Pagination/PaginationContainer';
 import { fetchAds } from '../../store/ad/actions';
+import SpinnerContainer from '../Common/SpinnerContainer';
 
 
 const AdListContainer = () => {
@@ -16,30 +17,21 @@ const AdListContainer = () => {
     useEffect(() => {
         dispatch(
             fetchAds({
-                nextPage
+                nextPage,
             })
         );
     }, [nextPage]);
 
-    if (!isFetchAds) {
-        return <div className="d-flex justify-content-center">
-            <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-            </Spinner>
-        </div>;
-    }
-
-
-
     return(
        
         <Container>
-          
-            
-          
-                
-                <AdCard ads={ads.data}/>    
-          
+            <Row>
+                <Col md={{ span: 12, offset: 3 }} xs={12}>
+                    {
+                        isFetchAds ?  <AdCard ads={ads.data}/> : <SpinnerContainer />
+                    }
+                </Col>
+            </Row>
             <Row>
                 <PaginationContainer setNextPage={setNextPage} totalPageCnt={ads.totalPageCnt} nextPage={nextPage}></PaginationContainer>
             </Row>

@@ -76,15 +76,10 @@ VALUES (1, '20.04.2020', 20, 10, 0, 1);
 INSERT INTO car (android_flag, car_manufacturer, car_model, car_type, cdw, children_seat_num, fuel_type, gearbox_type, mileage, token, year, ad_id) VALUES (false, 'Fiat', '500', 'Limuzina', false, 2, 'Dizel', 'Automatski', 120, null, '2020-05-20 17:00:00', null);
 INSERT INTO car (android_flag, car_manufacturer, car_model, car_type, cdw, children_seat_num, fuel_type, gearbox_type, mileage, token, year, ad_id) VALUES (false, 'Mercedes-Benz', 'C-klasa', 'Limuzina', false, 2, 'Dizel', 'Automatski', 200, null, '2020-05-20 17:00:00', null);
 
--- INSERT INTO ad (cover_photo, deleted, distance_limit, distance_limit_flag, enabled, location, name, publish_date, rating_count, rating_num, rent_cnt, car_id, price_list_id, publisher_user_id)
--- VALUES ('aa.jpg', false, 20, 'LIMITED', true, 'Novi Sad', 'Oglas1', '2020-04-20 20:00:00', 0, 0, 5, 1, 1, 1);
--- INSERT INTO ad (cover_photo, deleted, distance_limit, distance_limit_flag, enabled, location, name, publish_date, rating_count, rating_num, rent_cnt, car_id, price_list_id, publisher_user_id)
--- VALUES ('bb.jpg', false, 25, 'LIMITED', true, 'Beograd', 'Oglas2', '2020-04-20 20:00:00', 0, 0, 5, 2, 1, 1);
-
 INSERT INTO ad(id, cover_photo, deleted, distance_limit, distance_limit_flag, enabled, location, name, publish_date, rating_count, rating_num, rent_cnt, car_id, price_list_id, publisher_user_id)
 VALUES (1, 'aa.jpg', false, 20, 'LIMITED', true, 'Novi Sad', 'Oglas1', '20.04.2020.', 0, 0, 5, 1, 1, 1);
 INSERT INTO ad(id, cover_photo, deleted, distance_limit, distance_limit_flag, enabled, location, name, publish_date, rating_count, rating_num, rent_cnt, car_id, price_list_id, publisher_user_id)
-VALUES (2, 'bb.jpg', false, 25, 'LIMITED', true, 'Beograd', 'Oglas2', '20.04.2020.', 0, 0, 1100, 2, 1, 1);
+VALUES (2, 'bb.jpg', false, 25, 'LIMITED', true, 'Zrenjanin', 'Oglas2', '20.04.2020.', 0, 0, 1100, 2, 1, 1);
 
 -- UPDATE car
 -- SET ad_id = 1
