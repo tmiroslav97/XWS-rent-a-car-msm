@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import CreateAd from '../../components/Ad/CreateAd';
 import { createdAd } from '../../store/ad/actions';
+import Form1CreateAdContainer from './Form1CreateAdContainer';
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
 const CreateAdContainer = () => {
     const dispatch = useDispatch();
@@ -15,44 +17,46 @@ const CreateAdContainer = () => {
     const [photos, setPhotos] = useState([]);
     const [buttonLabel, setButtonLabel] = useState(1);
 
+
+    const[formData, setFormData] = useState(null);
+
     const handleCreatedAd = (event) => {
         event.preventDefault();
-        const form = event.target;
-
-        let data = {
-            'name': form.name.value,
-            'coverPhoto': coverPhotoName,
-            'location': form.location.value,
-            'distanceLimitFlag': distanceLimitFlag,
-            'distanceLimit': distanceLimit,
-            'carCreateDTO': {
-                'carManufacturer': form.carManufacturer.value,
-                'carModel': form.carModel.value,
-                'carType': form.carType.value,
-                'year': form.year.value,
-                'mileage': form.mileage.value,
-                'gearboxType': form.gearboxType.value,
-                'fuelType': form.fuelType.value,
-                'childrenSeatNum': form.childrenSeatNum.value,
-                'cdw': cdw,
-                'androidFlag': androidFlag,
-            },
-            'priceListCreateDTO': {
-                'pricePerKm': form.pricePerKm.value,
-                'pricePerKmCDW': form.pricePerKmCDW.value,
-                'pricePerDay': form.pricePerDay.value,
-                'id': 0,
-                // 'id': form.id.value,
-            },
-            'carCalendarTermCreateDTOList': null
-        }
-        let formData = new FormData(form);
-        formData.append('data', JSON.stringify(data));
+        const form = event.target;  
 
         if (form.checkValidity() === false) {
             event.stopPropagation();
             setValidated(true);
         } else {
+            let data = {
+                'name': form.name.value,
+                'coverPhoto': coverPhotoName,
+                'location': form.location.value,
+                'distanceLimitFlag': distanceLimitFlag,
+                'distanceLimit': distanceLimit,
+                'carCreateDTO': {
+                    'carManufacturer': form.carManufacturer.value,
+                    'carModel': form.carModel.value,
+                    'carType': form.carType.value,
+                    'year': form.year.value,
+                    'mileage': form.mileage.value,
+                    'gearboxType': form.gearboxType.value,
+                    'fuelType': form.fuelType.value,
+                    'childrenSeatNum': form.childrenSeatNum.value,
+                    'cdw': cdw,
+                    'androidFlag': androidFlag,
+                },
+                'priceListCreateDTO': {
+                    'pricePerKm': form.pricePerKm.value,
+                    'pricePerKmCDW': form.pricePerKmCDW.value,
+                    'pricePerDay': form.pricePerDay.value,
+                    'id': 0,
+                    // 'id': form.id.value,
+                },
+                'carCalendarTermCreateDTOList': null
+            }
+            let formData = new FormData(form);
+            formData.append('data', JSON.stringify(data));
             dispatch(createdAd(formData));
             setValidated(false);
         }
@@ -132,7 +136,8 @@ const CreateAdContainer = () => {
     };
 
     return (
-        <CreateAd onSubmit={handleCreatedAd}
+        <Container>
+            <CreateAd onSubmit={handleCreatedAd}
             validated={validated}
             distanceLimitFlag={distanceLimitFlag}
             cdw={cdw}
@@ -150,6 +155,13 @@ const CreateAdContainer = () => {
             onButton5={onButton5}
             onButton6={onButton6}
             />
+            {buttonLabel === 6 ?
+            <Form1CreateAdContainer formData={formData} setFormData={setFormData}></Form1CreateAdContainer>
+            :null
+            }
+        </Container>
+        
+
     )
 }
 

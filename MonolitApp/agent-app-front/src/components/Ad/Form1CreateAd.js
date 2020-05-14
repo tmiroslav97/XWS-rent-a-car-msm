@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row, Col, Container } from 'react-bootstrap';
+import { Form, Col, Container, Button } from 'react-bootstrap';
 
 const Form1CreateAd = (props) => {
     return (
@@ -63,6 +63,15 @@ const Form1CreateAd = (props) => {
                             </Form.Group>
                             : null
                         }
+                    </Col>
+                </Form.Row>
+                <Form.Row>
+                    <Col>
+                        <Form.Group as={Col} >
+                            <Button className="float-right" variant="primary" id="btnForm1CreateAd" type="submit">
+                                Dalje
+                            </Button>
+                        </Form.Group>
                     </Col>
                 </Form.Row>
             </Form>
