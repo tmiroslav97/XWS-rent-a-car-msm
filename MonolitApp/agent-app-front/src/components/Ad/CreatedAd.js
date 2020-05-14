@@ -13,6 +13,9 @@ const CreatedAd = (props) => {
             <Row>
                 <Col md={{ offset: 1 }} xs={12} style={{ paddingBottom: '10px' }}>
                     <ButtonToolbar>
+                        <ButtonGroup className="mr-2">
+                            <Button onClick={props.onButton6}>Nazad</Button>
+                        </ButtonGroup>
                         <ButtonGroup aria-label="Basic example" className="mr-2">
                             <Button variant="secondary" onClick={props.onButton1}>1. Osnovne informacije </Button>
                             <Button variant="secondary" onClick={props.onButton2}>2. Dodatne informacije </Button>
@@ -22,7 +25,7 @@ const CreatedAd = (props) => {
 
                         </ButtonGroup>
                         <ButtonGroup className="mr-2">
-                            <Button variant="secondary" onClick={props.onButton6}>Dodaj</Button>
+                            <Button onClick={props.onButton6}>Dalje</Button>
                         </ButtonGroup>
                     </ButtonToolbar>
 
@@ -162,7 +165,7 @@ const CreatedAd = (props) => {
                         {props.buttonLabel === 3 ?
                             <Form.Row>
                                 <Col>
-                                
+
                                     <Form.Group as={Col}>
                                         <Form.Label>Check box za biranje vec postojeceg cenovnika</Form.Label>
                                         <Form.Control name="id" id="selectId" placeholder="Cena po danu" as="select" type="text" >

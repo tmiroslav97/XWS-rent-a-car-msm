@@ -15,7 +15,7 @@ const AgentFirmHomePage = () => {
                 <Col>
                     <Card style={{ width: '300px', margin: '0 auto', alignItem: 'center' }}>
                         <Card.Body style={{ alignItem: 'center', fontSize: '20px' }}>
-                            <Link to="/createAd">Dodaj oglas</Link>
+                            <Link to="/agent-firm/create-ad">Dodaj oglas</Link>
                         </Card.Body>
                     </Card>
                 </Col>

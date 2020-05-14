@@ -76,6 +76,8 @@ const CreatedAdContainer = () => {
         if (event.target.files != null) {
             let p = photos;
             let name = event.target.files[0].name;
+            console.log(event.target);
+            console.log(event.target.files[0]);
             let flag = 0;
             
             p.map((photo) => {

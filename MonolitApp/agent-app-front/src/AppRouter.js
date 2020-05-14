@@ -34,7 +34,7 @@ const AppRouter = () => {
         <PrivateRoute exact path="/admin/car-model" component={CarModelContainer} accessRole={["ROLE_ADMIN"]} />
 
         <PrivateRoute exact path="/agent-firm" component={AgentFirmHomePage} accessRole={["ROLE_AGENT"]} />
-        <PrivateRoute exact path="/createAd" component={CreatedAdContainer} accessRole={["ROLE_AGENT", "ROLE_USER"]} />
+        <PrivateRoute exact path="/agent-firm/create-ad" component={CreatedAdContainer} accessRole={["ROLE_AGENT", "ROLE_USER"]} />
 
         <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
         <Redirect from="*" to="/page-not-found" />
