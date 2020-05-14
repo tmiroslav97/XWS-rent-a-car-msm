@@ -28,8 +28,14 @@ const Form1CreateAdContainer = (props) => {
                     carType: form.carType.value,
                     year: form.year.value,
                     mileage: form.mileage.value,
+                    gearboxType: null,
+                    fuelType: null,
+                    childrenSeatNum: null,
+                    cdw: null,
+                    androidFlag: null,
                 }
             });
+            props.setStepLabel(2);
             console.log(props.formData);
             setValidated(false);
         }

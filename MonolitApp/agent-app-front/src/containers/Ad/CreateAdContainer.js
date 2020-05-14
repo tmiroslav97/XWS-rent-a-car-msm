@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import CreateAd from '../../components/Ad/CreateAd';
 import { createdAd } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
+import Form2CreateAdContainer from './Form2CreateAdContainer';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 
 const CreateAdContainer = () => {
@@ -15,7 +16,7 @@ const CreateAdContainer = () => {
     const [androidFlag, setAndroidFlag] = useState(false);
     const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
-    const [buttonLabel, setButtonLabel] = useState(1);
+    const [stepLabel, setStepLabel] = useState(1);
 
 
     const[formData, setFormData] = useState(null);
@@ -117,22 +118,22 @@ const CreateAdContainer = () => {
     };
 
     const onButton1 = (event) =>{
-        setButtonLabel(1);
+        setStepLabel(1);
     };
     const onButton2 = (event) =>{
-        setButtonLabel(2);
+        setStepLabel(2);
     };
     const onButton3 = (event) =>{
-        setButtonLabel(3);
+        setStepLabel(3);
     };
     const onButton4 = (event) =>{
-        setButtonLabel(4);
+        setStepLabel(4);
     };
     const onButton5 = (event) =>{
-        setButtonLabel(5);
+        setStepLabel(5);
     };
     const onButton6 = (event) =>{
-        setButtonLabel(6);
+        setStepLabel(6);
     };
 
     return (
@@ -147,7 +148,7 @@ const CreateAdContainer = () => {
             onPhotoChange={onPhotoChange}
             handleAndroidFlag={handleAndroidFlag}
             handleCDW={handleCDW} 
-            buttonLabel={buttonLabel}
+            stepLabel={stepLabel}
             onButton1={onButton1}
             onButton2={onButton2}
             onButton3={onButton3}
@@ -155,8 +156,12 @@ const CreateAdContainer = () => {
             onButton5={onButton5}
             onButton6={onButton6}
             />
-            {buttonLabel === 6 ?
-            <Form1CreateAdContainer formData={formData} setFormData={setFormData}></Form1CreateAdContainer>
+            {stepLabel === 1 ?
+            <Form1CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form1CreateAdContainer>
+            :null
+            }
+            {stepLabel === 2 ?
+            <Form2CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form2CreateAdContainer>
             :null
             }
         </Container>
