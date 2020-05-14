@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import CreatedAd from '../../components/Ad/CreatedAd';
+import CreateAd from '../../components/Ad/CreateAd';
 import { createdAd } from '../../store/ad/actions';
 
-const CreatedAdContainer = () => {
+const CreateAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
     const [coverPhoto, setCoverPhoto] = useState();
@@ -132,7 +132,7 @@ const CreatedAdContainer = () => {
     };
 
     return (
-        <CreatedAd onSubmit={handleCreatedAd}
+        <CreateAd onSubmit={handleCreatedAd}
             validated={validated}
             distanceLimitFlag={distanceLimitFlag}
             cdw={cdw}
@@ -153,4 +153,4 @@ const CreatedAdContainer = () => {
     )
 }
 
-export default CreatedAdContainer;
+export default CreateAdContainer;

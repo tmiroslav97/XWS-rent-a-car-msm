@@ -1,15 +1,15 @@
 import React from 'react';
 import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image } from 'react-bootstrap';
 
-const CreatedAd = (props) => {
+const CreateAd = (props) => {
 
     return (
         <Container>
-            <Row>
+            {/* <Row>
                 <Col md={{ span: 5, offset: 4 }} xs={12}>
                     <h2 className="border-bottom">Dodavanje oglasa</h2>
                 </Col>
-            </Row>
+            </Row> */}
             <Row>
                 <Col md={{ offset: 1 }} xs={12} style={{ paddingBottom: '10px' }}>
                     <ButtonToolbar>
@@ -33,7 +33,7 @@ const CreatedAd = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <Form id="createdAdFrom" onSubmit={props.onSubmit} noValidate validated={props.validated}>
+                    <Form id="createAdFrom" onSubmit={props.onSubmit} noValidate validated={props.validated}>
 
                         {props.buttonLabel === 1 ?
                             <Form.Row>
@@ -257,4 +257,4 @@ const CreatedAd = (props) => {
     );
 
 }
-export default CreatedAd;
+export default CreateAd;
