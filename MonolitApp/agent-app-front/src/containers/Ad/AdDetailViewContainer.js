@@ -10,7 +10,7 @@ import { fetchAds } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
 
 
-const AdDetailViewContainer = () => {
+const AdDetailViewContainer = (props) => {
     const dispatch = useDispatch();
     // const ads = useSelector(adsSelector);
     // const isFetchAds = ads.isFetch;
@@ -25,6 +25,8 @@ const AdDetailViewContainer = () => {
     //         })
     //     );
     // }, [nextPage, size]);
+    
+    const adId = props.match.params.ad;
 
     return(
        
@@ -36,7 +38,7 @@ const AdDetailViewContainer = () => {
             </Row>
             <Row>
                 <Col  md={{ span: 12, offset: 2 }} xs={12}>
-                <AdDetailViewComponent />
+                <AdDetailViewComponent adId={adId}/>
                     {/* {
                         isFetchAds ?  <AdDetailViewComponent /> : <SpinnerContainer />
                     } */}

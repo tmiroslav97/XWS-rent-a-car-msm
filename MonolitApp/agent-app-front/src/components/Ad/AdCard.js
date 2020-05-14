@@ -13,8 +13,9 @@ const AdCard = (props) => {
                     <Card
                          key={idx}
                          border="primary" 
-                       
+                         style={{  width: '50rem'}}  
                     >
+                        
                         <Card.Header>{variant.name}</Card.Header>
                         <Card.Body>
                             <Row>
@@ -26,7 +27,7 @@ const AdCard = (props) => {
                                     <Card.Text>
                                        {idx}     
                                     </Card.Text> 
-                                    <Card.Link href="/agent-firm/ad-detail-view" >Vise detalja ></Card.Link>
+                                    <Card.Link  href={'/agent-firm/ad-detail-view/' + variant.id} >Vise detalja ></Card.Link>
                                     {/* <Card.Link href="/agent-firm/ad-detail-view" onClick={() => { props.handleDetailView({variant})}}>Vise detalja ></Card.Link> */}
                                 </Col>
                                 <Col>
