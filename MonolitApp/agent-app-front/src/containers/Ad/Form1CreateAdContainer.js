@@ -22,18 +22,11 @@ const Form1CreateAdContainer = (props) => {
                 location: form.location.value,
                 distanceLimitFlag: distanceLimitFlag,
                 distanceLimit: distanceLimit,
-                carCreateDTO: {
-                    carManufacturer: form.carManufacturer.value,
-                    carModel: form.carModel.value,
-                    carType: form.carType.value,
-                    year: form.year.value,
-                    mileage: form.mileage.value,
-                    gearboxType: null,
-                    fuelType: null,
-                    childrenSeatNum: null,
-                    cdw: null,
-                    androidFlag: null,
-                }
+                carManufacturer: form.carManufacturer.value,
+                carModel: form.carModel.value,
+                carType: form.carType.value,
+                year: form.year.value,
+                mileage: form.mileage.value
             });
             props.setStepLabel(2);
             console.log(props.formData);

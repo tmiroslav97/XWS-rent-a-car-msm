@@ -17,22 +17,14 @@ const Form2CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-            
+
             props.setFormData({
                 ...props.formData,
-                carCreateDTO: {
-                    carManufacturer: props.formData.carManufacturer,
-                    carModel: props.formData.carModel,
-                    carType: props.formData.carType,
-                    year: props.formData.year,
-                    mileage: props.formData.mileage,
-                    gearboxType: form.gearboxType.value,
-                    fuelType: form.fuelType.value,
-                    childrenSeatNum: form.childrenSeatNum.value,
-                    cdw: cdw,
-                    androidFlag: androidFlag,
-                }
-
+                gearboxType: form.gearboxType.value,
+                fuelType: form.fuelType.value,
+                childrenSeatNum: form.childrenSeatNum.value,
+                cdw: cdw,
+                androidFlag: androidFlag
             });
             props.setStepLabel(3);
             console.log(props.formData);
@@ -58,7 +50,7 @@ const Form2CreateAdContainer = (props) => {
             onSubmit={handleForm2}
             validated={validated}
             handleAndroidFlag={handleAndroidFlag}
-            handleCDW={handleCDW} 
+            handleCDW={handleCDW}
             cdw={cdw}
             androidFlag={androidFlag}
             handleButtonBack={handleButtonBack}

@@ -19,11 +19,33 @@ const CreateAdContainer = () => {
     const [stepLabel, setStepLabel] = useState(1);
 
 
-    const[formData, setFormData] = useState(null);
+    const [formData, setFormData] = useState({
+        name: null,
+        location: null,
+        distanceLimitFlag: null,
+        distanceLimit: null,
+        carManufacturer: null,
+        carModel: null,
+        carType: null,
+        year: null,
+        mileage: null,
+        gearboxType: null,
+        fuelType: null,
+        childrenSeatNum: null,
+        cdw: null,
+        androidFlag: null,
+        pricePerKm: null,
+        pricePerKmCDW: null,
+        pricePerDay: null,
+        id: null,
+        carCalendarTermCreateDTOList: null
+    });
+
+
 
     const handleCreatedAd = (event) => {
         event.preventDefault();
-        const form = event.target;  
+        const form = event.target;
 
         if (form.checkValidity() === false) {
             event.stopPropagation();
@@ -77,20 +99,20 @@ const CreateAdContainer = () => {
     };
 
     const onPhotoChange = (event) => {
-        
+
         if (event.target.files != null) {
             let p = photos;
             let name = event.target.files[0].name;
             console.log(event.target);
             console.log(event.target.files[0]);
             let flag = 0;
-            
+
             p.map((photo) => {
                 if (photo.photoName === name) {
                     flag = 1;
                     console.log("Isti fajl");
                 }
-                
+
             })
             if (flag != 1) {
                 p.push(
@@ -117,55 +139,55 @@ const CreateAdContainer = () => {
 
     };
 
-    const onButton1 = (event) =>{
+    const onButton1 = (event) => {
         setStepLabel(1);
     };
-    const onButton2 = (event) =>{
+    const onButton2 = (event) => {
         setStepLabel(2);
     };
-    const onButton3 = (event) =>{
+    const onButton3 = (event) => {
         setStepLabel(3);
     };
-    const onButton4 = (event) =>{
+    const onButton4 = (event) => {
         setStepLabel(4);
     };
-    const onButton5 = (event) =>{
+    const onButton5 = (event) => {
         setStepLabel(5);
     };
-    const onButton6 = (event) =>{
+    const onButton6 = (event) => {
         setStepLabel(6);
     };
 
     return (
         <Container>
             <CreateAd onSubmit={handleCreatedAd}
-            validated={validated}
-            distanceLimitFlag={distanceLimitFlag}
-            cdw={cdw}
-            androidFlag={androidFlag}
-            coverPhotoName={coverPhotoName}
-            handleDistanceLimitFlag={handleDistanceLimitFlag}
-            onPhotoChange={onPhotoChange}
-            handleAndroidFlag={handleAndroidFlag}
-            handleCDW={handleCDW} 
-            stepLabel={stepLabel}
-            onButton1={onButton1}
-            onButton2={onButton2}
-            onButton3={onButton3}
-            onButton4={onButton4}
-            onButton5={onButton5}
-            onButton6={onButton6}
+                validated={validated}
+                distanceLimitFlag={distanceLimitFlag}
+                cdw={cdw}
+                androidFlag={androidFlag}
+                coverPhotoName={coverPhotoName}
+                handleDistanceLimitFlag={handleDistanceLimitFlag}
+                onPhotoChange={onPhotoChange}
+                handleAndroidFlag={handleAndroidFlag}
+                handleCDW={handleCDW}
+                stepLabel={stepLabel}
+                onButton1={onButton1}
+                onButton2={onButton2}
+                onButton3={onButton3}
+                onButton4={onButton4}
+                onButton5={onButton5}
+                onButton6={onButton6}
             />
             {stepLabel === 1 ?
-            <Form1CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form1CreateAdContainer>
-            :null
+                <Form1CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form1CreateAdContainer>
+                : null
             }
             {stepLabel === 2 ?
-            <Form2CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form2CreateAdContainer>
-            :null
+                <Form2CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form2CreateAdContainer>
+                : null
             }
         </Container>
-        
+
 
     )
 }
