@@ -6,7 +6,7 @@ RUN ["mvn", "package", "-DskipTests"]
 
 FROM openjdk:8-jdk-alpine
 WORKDIR /eureka
-COPY --from=back /usr/src/eureka/target/eureka.jar ./
+COPY --from=eureka-back /usr/src/eureka/target/eureka.jar ./
 
 EXPOSE 8761
 
