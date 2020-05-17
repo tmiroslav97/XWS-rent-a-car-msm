@@ -1,6 +1,5 @@
 package agent.app.config;
 
-import agent.app.authentication.CustomAuthenticationFailureHandler;
 import agent.app.authentication.RestAuthenticationEntryPoint;
 import agent.app.authentication.TokenAuthenticationFilter;
 import agent.app.security.TokenUtils;
@@ -52,20 +51,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-
-                .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
-
-                .authorizeRequests().antMatchers("/auth/**").permitAll()
-
-                .anyRequest().authenticated().and()
-
-                .cors().and()
-
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
+                .and()
+                .authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .cors()
+                .and()
                 .addFilterBefore(new TokenAuthenticationFilter(tokenUtils, jwtUserDetailsService),
                         BasicAuthenticationFilter.class);
-
-        http.csrf().disable();
     }
 
     @Override
