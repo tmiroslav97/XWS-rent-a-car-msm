@@ -16,17 +16,16 @@ const AdDetailViewContainer = (props) => {
     // const isFetchAds = ads.isFetch;
     // const [nextPage, setNextPage] = useState(ads.nextPage);
     // const [size, setSize] = useState(ads.size);
-
+    const adId = props.match.params.ad;
     // useEffect(() => {
     //     dispatch(
-    //         fetchAds({
-    //             nextPage,
-    //             size
+    //         fetchAd({
+    //             adId
     //         })
     //     );
-    // }, [nextPage, size]);
+    // }, [adId]);
     
-    const adId = props.match.params.ad;
+
 
     return(
        
