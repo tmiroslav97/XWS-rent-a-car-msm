@@ -10,13 +10,14 @@
 	</parent>
 	<groupId>server</groupId>
 	<artifactId>eureka</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>eureka</name>
 	<description>Server for gateway</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+		<app.name>eureka</app.name>
 	</properties>
 
 	<dependencies>
@@ -63,6 +64,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>${app.name}</finalName>
 	</build>
 
 </project>

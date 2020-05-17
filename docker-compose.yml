@@ -1,6 +1,12 @@
 version: "3.7"
 services:
 
+  eureka-serviceregistry:
+    build: ./Eureka
+    ports:
+     - "8761:8761"
+    tty: true
+
   agent-app:
     image: agent-app
     container_name: agent-app
