@@ -2,10 +2,20 @@ version: "3.7"
 services:
 
   eureka-serviceregistry:
-    build: ./Eureka
+    build: ./eureka
     ports:
      - "8761:8761"
     tty: true
+
+  zuul:
+    build: ./zuul
+    ports:
+    - "8082:8082"
+    environment:
+      - REGISTRY_HOST=eureka-serviceregistry
+    tty: true
+    depends_on:
+      - eureka-serviceregistry
 
   agent-app:
     image: agent-app

@@ -10,13 +10,14 @@
 	</parent>
 	<groupId>gateway</groupId>
 	<artifactId>zuul</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>zuul</name>
 	<description>Gateway service</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+		<app.name>zuul</app.name>
 	</properties>
 
 	<dependencies>
@@ -75,6 +76,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>${app.name}</finalName>
 	</build>
 
 </project>
