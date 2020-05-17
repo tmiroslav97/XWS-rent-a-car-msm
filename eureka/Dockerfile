@@ -1,7 +1,7 @@
 FROM maven:3.6.3-ibmjava-8-alpine AS eureka-back
 
 WORKDIR /usr/src/eureka
-COPY eureka .
+COPY . .
 RUN ["mvn", "package", "-DskipTests"]
 
 FROM openjdk:8-jdk-alpine
