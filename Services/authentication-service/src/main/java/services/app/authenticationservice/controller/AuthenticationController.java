@@ -53,4 +53,14 @@ public class AuthenticationController {
         }
     }
 
+    @RequestMapping(value = "/verify", method = RequestMethod.GET)
+    public ResponseEntity<?> verify(HttpServletRequest request) {
+        Boolean flag = authenticationService.verify(request);
+        if (flag) {
+            return new ResponseEntity<>("Korisnik postoji u sistemu", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Korisnik ne postoji u sistemu", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

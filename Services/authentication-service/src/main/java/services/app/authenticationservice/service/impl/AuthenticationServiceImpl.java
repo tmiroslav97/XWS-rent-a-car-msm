@@ -97,4 +97,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             return null;
         }
     }
+
+    @Override
+    public Boolean verify(HttpServletRequest request) {
+        return null;
+    }
 }

@@ -10,4 +10,5 @@ public interface AuthenticationService {
     String login(JwtAuthenticationRequest jwtAuthenticationRequest);
     Integer signUp(SignUpDTO signUpDTO);
     UserTokenState refreshAuthenticationToken(HttpServletRequest request);
+    Boolean verify(HttpServletRequest request);
 }
