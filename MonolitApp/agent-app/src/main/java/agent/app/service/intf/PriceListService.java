@@ -3,10 +3,17 @@ package agent.app.service.intf;
 import agent.app.dto.PriceListCreateDTO;
 import agent.app.model.PriceList;
 
+import java.util.List;
+
 
 public interface PriceListService {
 
-    PriceList save(PriceList priceList);
-    PriceList createPriceList(PriceListCreateDTO priceListCreateDTO);
     PriceList findById(Long id);
+    List<PriceList> findAll();
+    PriceList save(PriceList priceList);
+    void delete(PriceList priceList);
+    PriceList createPriceList(PriceListCreateDTO priceListCreateDTO);
+    PriceList editPriceList(PriceList priceList);
+    Integer deleteById(Long id);
+
 }
