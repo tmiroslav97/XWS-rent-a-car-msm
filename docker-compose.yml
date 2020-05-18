@@ -35,6 +35,29 @@ services:
     depends_on: 
       - eureka-serviceregistry
       - mysql
+      
+  message-service:
+    image: message-service
+    container_name: message-service
+    build: 
+      context: ./Services/message-service
+      dockerfile: Dockerfile
+    environment:
+      - REGISTRY_HOST=eureka-serviceregistry
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
+    ports:
+      - "8091:8091"
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: msg_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - eureka-serviceregistry
+      - mysql
 
   zuul:
     image: zuul
@@ -52,6 +75,7 @@ services:
     depends_on:
       - eureka-serviceregistry
       - authentication-service
+      - message-service
 
   agent-app:
     image: agent-app
