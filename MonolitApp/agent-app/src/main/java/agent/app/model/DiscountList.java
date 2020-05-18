@@ -44,7 +44,7 @@ public class DiscountList {
     private Float discount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private AgentFirm agentFirm;
+    private Agent agent;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Ad> ads = new HashSet<>();

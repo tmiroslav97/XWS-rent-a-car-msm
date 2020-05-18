@@ -1,6 +1,34 @@
 version: "3.7"
 services:
 
+  eureka-serviceregistry:
+    image: eureka-serviceregistry
+    container_name: eureka-serviceregistry
+    build: 
+      context: ./eureka
+      dockerfile: Dockerfile
+    tty: true
+    networks:
+      - static-network
+    ports:
+      - "8761:8761"
+
+  zuul:
+    image: zuul
+    container_name: zuul
+    build: 
+      context: ./zuul
+      dockerfile: Dockerfile
+    environment:
+      - REGISTRY_HOST=eureka-serviceregistry
+    tty: true
+    networks:
+      - static-network
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-serviceregistry
+
   agent-app:
     image: agent-app
     container_name: agent-app
