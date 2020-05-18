@@ -10,7 +10,6 @@ public interface PriceListService {
     List<PriceList> findAll();
     PriceList save(PriceList priceList);
     void delete(PriceList priceList);
-    PriceList editPriceList(PriceList priceList);
     Integer deleteById(Long id);
 
 }

@@ -11,7 +11,6 @@ public interface DiscountListService {
     List<DiscountList> findAll();
     DiscountList save(DiscountList discountList);
     void delete(DiscountList discountList);
-    DiscountList editPriceList(DiscountList discountList);
     Integer deleteById(Long id);
 
 }
