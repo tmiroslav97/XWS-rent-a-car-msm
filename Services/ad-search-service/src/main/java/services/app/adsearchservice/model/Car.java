@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
+import org.joda.time.DateTime;
 import services.app.adsearchservice.common.db.DbColumnConstants;
 import services.app.adsearchservice.common.db.DbTableConstants;
 

@@ -4,6 +4,7 @@ package services.app.adsearchservice.model;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
+import org.joda.time.DateTime;
 import services.app.adsearchservice.common.db.DbColumnConstants;
 import services.app.adsearchservice.common.db.DbTableConstants;
 import services.app.adsearchservice.model.enumeration.DistanceLimitEnum;
