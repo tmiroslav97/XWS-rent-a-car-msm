@@ -12,10 +12,10 @@ import java.util.Date;
 public class PriceListConverter {
 
     public static PriceList toCreatePriceListFromRequest(PriceListCreateDTO priceListCreateDTO){
-        DateTime dt = DateAPI.DateTimeFromDateString(priceListCreateDTO.getCreationDate());
+//        DateTime dt = DateAPI.DateTimeFromDateString(priceListCreateDTO.getCreationDate());
 
         return PriceList.builder()
-                .creationDate(dt)
+                .creationDate(DateAPI.DateTimeNow())
                 .pricePerKm(priceListCreateDTO.getPricePerKm())
                 .pricePerKmCDW(priceListCreateDTO.getPricePerKmCDW())
                 .pricePerDay(priceListCreateDTO.getPricePerDay())

@@ -7,11 +7,11 @@ import org.joda.time.DateTime;
 public class CarCalendarTermConverter {
 
     public static CarCalendarTerm toCreateCarCalendarTermFromRequest(CarCalendarTermCreateDTO carCalendarTermCreateDTO){
-        DateTime sdt = DateAPI.DateTimeFromString(carCalendarTermCreateDTO.getStartDate());
-        DateTime edt = DateAPI.DateTimeFromString(carCalendarTermCreateDTO.getEndDate());
+//        DateTime sdt = DateAPI.DateTimeFromString(carCalendarTermCreateDTO.getStartDate());
+//        DateTime edt = DateAPI.DateTimeFromString(carCalendarTermCreateDTO.getEndDate());
         return CarCalendarTerm.builder()
-                .startDate(sdt)
-                .endDate(edt)
+                .startDate(DateAPI.DateTimeNow())
+                .endDate(DateAPI.DateTimeNow())
                 .build();
     }
 }

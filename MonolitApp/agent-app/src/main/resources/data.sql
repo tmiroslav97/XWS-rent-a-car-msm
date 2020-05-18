@@ -7,15 +7,16 @@ VALUES ('ROLE_USER');
 
 INSERT INTO user(id, email, first_name, last_name, password)
 VALUES (1, 'tomic@tomic.com', 'Tomke', 'Dazdarac', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
-
-INSERT INTO user_authority(user_id, authority_id)
-VALUES (1,2);
-
 INSERT INTO user(id, email, first_name, last_name, password)
 VALUES (2, 'tomic.miroslav97@gmail.com', 'Miroslav', 'Tomic', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
 
 INSERT INTO user_authority(user_id, authority_id)
+VALUES (1,2);
+INSERT INTO user_authority(user_id, authority_id)
 VALUES (2,1);
+
+INSERT INTO publisher_user(id, deleted)
+VALUES (1, false);
 
 --car manufacturers
 INSERT INTO car_manufacturer(id, name)
@@ -59,7 +60,21 @@ VALUES (19, 'Seat');
 INSERT INTO car_manufacturer(id, name)
 VALUES (20, 'Ferari');
 INSERT INTO car_manufacturer(id, name)
-VALUES (21, 'Porsche');
+VALUES (21, 'Proche');
+
+INSERT INTO price_list(id, creation_date, price_per_day, price_per_km, price_per_cwd, publisher_user_id)
+VALUES (1, '20.04.2020', 20, 10, 0, 1);
+
+INSERT INTO car (id, android_flag, car_manufacturer, car_model, car_type, cdw, children_seat_num, fuel_type, gearbox_type, mileage, token, year) VALUES (1, false, 'Fiat', '500', 'Limuzina', false, 2, 'Dizel', 'Automatski', 120, null, '2020-05-20 17:00:00');
+INSERT INTO car (id, android_flag, car_manufacturer, car_model, car_type, cdw, children_seat_num, fuel_type, gearbox_type, mileage, token, year) VALUES (2, false, 'Mercedes-Benz', 'C-klasa', 'Limuzina', false, 2, 'Dizel', 'Automatski', 200, null, '2020-05-20 17:00:00');
+
+INSERT INTO ad(id, cover_photo, deleted, distance_limit, distance_limit_flag, enabled, location, name, publish_date, rating_count, rating_num, rent_cnt, price_list_id, publisher_user_id)
+VALUES (1, 'aa.jpg', false, 20, 'LIMITED', true, 'Novi Sad', 'Oglas1', '20.04.2020.', 0, 0, 5, 1, 1);
+INSERT INTO ad(id, cover_photo, deleted, distance_limit, distance_limit_flag, enabled, location, name, publish_date, rating_count, rating_num, rent_cnt, price_list_id, publisher_user_id)
+VALUES (2, 'bb.jpg', false, 25, 'LIMITED', true, 'Zrenjanin', 'Oglas2', '20.04.2020.', 0, 0, 1100, 1, 1);
+
+INSERT INTO ad_car(ad_id, car_id) VALUES (1,1);
+INSERT INTO ad_car(ad_id, car_id) VALUES (2,2);
 
 --car models
 INSERT INTO car_model(id, name, car_manufacturer_id)
@@ -110,4 +125,5 @@ INSERT INTO gearbox_type(id, name)
 VALUES (4, 'DSG');
 INSERT INTO gearbox_type(id, name)
 VALUES (5, 'Tiptronik');
+
 

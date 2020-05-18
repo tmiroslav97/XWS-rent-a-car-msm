@@ -9,10 +9,8 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@ToString
 public class AdPageContentDTO {
-
-    private Integer totalPages;
+    private Integer totalPageCnt;
     List<AdPageDTO> ads;
-
-
 }

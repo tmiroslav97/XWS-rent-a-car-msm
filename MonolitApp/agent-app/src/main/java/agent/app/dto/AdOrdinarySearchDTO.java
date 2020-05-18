@@ -1,6 +1,7 @@
 package agent.app.dto;
 
 import lombok.*;
+import org.joda.time.DateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -8,7 +9,7 @@ import lombok.*;
 @Getter
 @Builder
 public class AdOrdinarySearchDTO {
-    private String startDate;
-    private String endDate;
+    private DateTime startDate;
+    private DateTime endDate;
     private String loation;
 }
