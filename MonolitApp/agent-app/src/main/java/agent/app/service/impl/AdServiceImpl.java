@@ -7,10 +7,9 @@ import agent.app.dto.AdCreateDTO;
 import agent.app.dto.AdPageContentDTO;
 import agent.app.dto.AdPageDTO;
 import agent.app.dto.CarCalendarTermCreateDTO;
-import agent.app.model.Ad;
-import agent.app.model.Car;
-import agent.app.model.CarCalendarTerm;
-import agent.app.model.PriceList;
+import agent.app.exception.ExistsException;
+import agent.app.exception.NotFoundException;
+import agent.app.model.*;
 import agent.app.repository.AdRepository;
 import agent.app.service.intf.AdService;
 import agent.app.service.intf.CarCalendarTermService;
@@ -44,7 +43,7 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ad findById(Long id) {
-        return adRepository.findById(id).orElseGet(null);
+        return adRepository.findById(id).orElseThrow(()-> new NotFoundException("Oglas ne postoi."));
     }
 
     @Override
@@ -54,12 +53,25 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ad save(Ad ad) {
+        if(ad.getId() != null){
+            if(adRepository.existsById(ad.getId())){
+                throw new ExistsException(String.format("Oglas vec postoji."));
+            }
+        }
+
         return adRepository.save(ad);
     }
 
     @Override
-    public void delete(Long id) {
-        adRepository.delete(findById(id));
+    public void delete(Ad ad) {
+        adRepository.delete(ad);
+    }
+
+    @Override
+    public Integer deleteById(Long id) {
+        Ad ad = this.findById(id);
+        this.delete(ad);
+        return 1;
     }
 
     @Override
@@ -67,35 +79,28 @@ public class AdServiceImpl implements AdService {
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
 
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
-        if(car == null){
-            return 2;
-        }
         ad.setCar(car);
 
-        if(adCreateDTO.getPriceListCreateDTO().getId() == null){
+        if(adCreateDTO.getPriceListCreateDTO().getId() == 0){
             //pravljenje novog cenovnika
             PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
-            if(priceList == null){
-                return 3;
-            }
             ad.setPriceList(priceList);
         }else{
             //dodavanje vec postojeceg cenovnika
             PriceList priceList = priceListService.findById(adCreateDTO.getPriceListCreateDTO().getId());
-            if(priceList == null){
-                return 4;
-            }
             ad.setPriceList(priceList);
         }
-        List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
 
-        for(CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList){
-            CarCalendarTerm carCalendarTerm = CarCalendarTermConverter.toCreateCarCalendarTermFromRequest(carCalendarTermCreateDTO);
-            carCalendarTerm = carCalendarTermService.save(carCalendarTerm);
-            ad.getCarCalendarTerms().add(carCalendarTerm);
+        if(adCreateDTO.getCarCalendarTermCreateDTOList() != null){
+            List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
+            for(CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList){
+                CarCalendarTerm carCalendarTerm = CarCalendarTermConverter.toCreateCarCalendarTermFromRequest(carCalendarTermCreateDTO);
+                carCalendarTerm = carCalendarTermService.save(carCalendarTerm);
+                ad.getCarCalendarTerms().add(carCalendarTerm);
+            }
         }
 
-        ad = save(ad);
+        ad = this.save(ad);
 
         return 1;
     }

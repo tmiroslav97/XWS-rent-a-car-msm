@@ -20,10 +20,7 @@ import {
 
 export function* createdAd(){
     const { payload } = yield take(CREATED_AD);
-    console.log(payload);
-    console.log("nestoooooo");
     const data = yield call(AdServices.createdAd, payload); 
-    console.log("nestoooooo");
     yield put(putSuccessMsg(data));
     history.push('/');
     

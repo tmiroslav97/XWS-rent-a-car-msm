@@ -8,7 +8,7 @@ import LoginContainter from './containers/Authorization/LoginContainer';
 import RegContainer from './containers/Authorization/RegContainer';
 import AgentFirmHomePage from './components/AgentFirm/AgentFirmHomePage';
 import EndUserHomePage from './components/EndUser/EndUserHomePage';
-import CreatedAdContainer from './containers/Ad/CreatedAdContainer';
+import CreateAdContainer from './containers/Ad/CreateAdContainer';
 import CarManufacturerContainer from './containers/Codebooks/CarManufacturerContainer';
 import AdListContainer from './containers/Ad/AdListContainer';
 import CarTypeContainer from './containers/Codebooks/CarTypeContainer';
@@ -38,7 +38,6 @@ const AppRouter = () => {
         <PrivateRoute exact path="/createAd" component={CreatedAdContainer} accessRole={["ROLE_AGENT", "ROLE_USER"]} />
         <PrivateRoute exact path="/agent-firm/ads" component={AdListContainer} />
         <PrivateRoute exact path="/agent-firm/ad-detail-view/:ad" component={AdDetailViewContainer} />
-
         <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
         <Redirect from="*" to="/page-not-found" />
       </Switch>
