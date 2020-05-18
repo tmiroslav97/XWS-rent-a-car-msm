@@ -54,7 +54,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         User user = (User) authentication.getPrincipal();
         List<String> roles = user.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList());
-        String jwt = tokenUtils.generateToken(user.getEmail(), roles.get(0));
+        String jwt = tokenUtils.generateToken(user.getEmail(), roles);
         return jwt;
     }
 

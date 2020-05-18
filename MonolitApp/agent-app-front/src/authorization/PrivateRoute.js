@@ -9,17 +9,20 @@ const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
 
 
     function hasRightRole() {
+
         if (!accessRole) {
             return true;
         }
 
-        var role = null;
 
         if (token != null) {
-            role = jwt_decode(token).role;
+            const roles = jwt_decode(token).roles;
+            const role = roles.filter(val => accessRole.includes(val));
+            return role.length > 0;
+        } else {
+            return true;
         }
 
-        return accessRole.includes(role);
     }
 
     return (
