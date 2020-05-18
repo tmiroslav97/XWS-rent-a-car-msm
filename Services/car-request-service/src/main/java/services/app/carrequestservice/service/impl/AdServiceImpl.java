@@ -1,0 +1,138 @@
+package services.app.carrequestservice.service.impl;
+
+
+import agent.app.converter.AdConverter;
+import agent.app.converter.CarCalendarTermConverter;
+import agent.app.dto.AdCreateDTO;
+import agent.app.dto.AdPageContentDTO;
+import agent.app.dto.AdPageDTO;
+import agent.app.dto.CarCalendarTermCreateDTO;
+import agent.app.exception.ExistsException;
+import agent.app.exception.NotFoundException;
+import agent.app.model.*;
+import agent.app.repository.AdRepository;
+import agent.app.service.intf.AdService;
+import agent.app.service.intf.CarCalendarTermService;
+import agent.app.service.intf.CarService;
+import agent.app.service.intf.PriceListService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+@Service
+public class AdServiceImpl implements AdService {
+
+    @Autowired
+    private AdRepository adRepository;
+
+    @Autowired
+    private CarService carService;
+
+    @Autowired
+    private PriceListService priceListService;
+
+    @Autowired
+    private CarCalendarTermService carCalendarTermService;
+
+    @Override
+    public Ad findById(Long id) {
+        return adRepository.findById(id).orElseThrow(()-> new NotFoundException("Oglas ne postoi."));
+    }
+
+    @Override
+    public List<Ad> findAll() {
+        return adRepository.findAll();
+    }
+
+    @Override
+    public Ad save(Ad ad) {
+        if(ad.getId() != null){
+            if(adRepository.existsById(ad.getId())){
+                throw new ExistsException(String.format("Oglas vec postoji."));
+            }
+        }
+
+        return adRepository.save(ad);
+    }
+
+    @Override
+    public void delete(Ad ad) {
+        adRepository.delete(ad);
+    }
+
+    @Override
+    public Integer deleteById(Long id) {
+        Ad ad = this.findById(id);
+        this.delete(ad);
+        return 1;
+    }
+
+    @Override
+    public Integer createAd(AdCreateDTO adCreateDTO) {
+        Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
+
+        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
+        ad.setCar(car);
+
+        if(adCreateDTO.getPriceListCreateDTO().getId() == 0){
+            //pravljenje novog cenovnika
+            PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
+            ad.setPriceList(priceList);
+        }else{
+            //dodavanje vec postojeceg cenovnika
+            PriceList priceList = priceListService.findById(adCreateDTO.getPriceListCreateDTO().getId());
+            ad.setPriceList(priceList);
+        }
+
+        if(adCreateDTO.getCarCalendarTermCreateDTOList() != null){
+            List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
+            for(CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList){
+                CarCalendarTerm carCalendarTerm = CarCalendarTermConverter.toCreateCarCalendarTermFromRequest(carCalendarTermCreateDTO);
+                carCalendarTerm = carCalendarTermService.save(carCalendarTerm);
+                ad.getCarCalendarTerms().add(carCalendarTerm);
+            }
+        }
+
+        ad = this.save(ad);
+
+        return 1;
+    }
+
+    @Override
+    public AdPageContentDTO findAll (Integer page, Integer size) {
+
+//        Pageable pageable;
+//        if(sort.equals("-")){
+//            pageable = PageRequest.of(page, size);
+//        }else{
+//            String par[] = sort.split(" ");
+//            if(par[1].equals("opadajuce")) {
+//                pageable = PageRequest.of(page, size, Sort.by(par[0]).descending());
+//            }else{
+//                pageable = PageRequest.of(page, size, Sort.by(par[0]).ascending());
+//            }
+//
+//        }
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<Ad> ads =  adRepository.findAllByDeleted(false, pageable);
+        System.out.println(ads.getSize());
+        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
+                .totalPageCnt(ads.getTotalPages())
+                .ads(ret)
+                .build();
+
+        System.out.println(adPageContentDTO);
+
+        return adPageContentDTO;
+    }
+
+
+}
