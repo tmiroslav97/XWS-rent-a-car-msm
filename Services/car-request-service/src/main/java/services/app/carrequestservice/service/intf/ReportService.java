@@ -10,7 +10,6 @@ public interface ReportService {
     List<Report> findAll();
     Report save(Report report);
     void delete(Report report);
-    Report editPriceList(Report report);
     Integer deleteById(Long id);
 
 }
