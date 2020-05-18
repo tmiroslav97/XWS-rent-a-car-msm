@@ -1,7 +1,8 @@
 package services.app.codebookservice.dto;
 
-import agent.app.model.CarModel;
+
 import lombok.*;
+import services.app.codebookservice.model.CarModel;
 
 import java.util.List;
 
