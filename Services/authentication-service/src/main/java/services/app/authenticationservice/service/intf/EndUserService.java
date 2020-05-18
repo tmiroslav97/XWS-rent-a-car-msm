@@ -10,6 +10,8 @@ public interface EndUserService {
 
     List<EndUser> findAll();
 
+    Integer editEndUser();
+
     Integer disableEndUser();
 
     Integer enableEndUser();

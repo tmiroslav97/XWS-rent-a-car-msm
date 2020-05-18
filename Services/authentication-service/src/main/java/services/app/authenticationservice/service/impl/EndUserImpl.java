@@ -26,6 +26,11 @@ public class EndUserImpl implements EndUserService {
     }
 
     @Override
+    public Integer editEndUser() {
+        return null;
+    }
+
+    @Override
     public Integer disableEndUser() {
         return null;
     }

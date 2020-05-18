@@ -12,6 +12,8 @@ public interface FirmService {
 
     Integer registerFirm(FirmRegDTO firmRegDTO);
 
+    Integer editFirm();
+
     Integer deleteById(Long id);
 
     void delete(Firm firm);
