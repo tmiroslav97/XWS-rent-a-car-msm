@@ -17,9 +17,10 @@ public class DbTableConstants {
     public static final String GEARBOXTYPE = "gearboxType";
     public static final String FUELTYPE = "fuelType";
     public static final String CARMANUFACTURER = "carManufacturer";
-    public static final String AGENTFIRM = "agentFirm";
+    public static final String AGENT = "agent";
     public static final String REPORT = "report";
     public static final String ENDUSER = "endUser";
     public static final String MESSAGE = "message";
     public static final String ADMINISTRATOR = "administrator";
+    public static final String FIRM = "firm";
 }
