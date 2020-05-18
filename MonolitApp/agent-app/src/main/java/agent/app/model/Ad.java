@@ -64,6 +64,9 @@ public class Ad {
     private Long rentCnt = 0L;
 
     @OneToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = DbTableConstants.ADCAR,
+            joinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "car_id", referencedColumnName = "id"))
     private Car car;
 
     @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY)

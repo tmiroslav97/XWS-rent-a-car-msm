@@ -23,4 +23,5 @@ public class DbTableConstants {
     public static final String MESSAGE = "message";
     public static final String ADMINISTRATOR = "administrator";
     public static final String FIRM = "firm";
+    public static final String ADCAR = "adCar";
 }
