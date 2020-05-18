@@ -31,16 +31,16 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String authToken = tokenUtils.getToken(request);
 
         if (authToken != null) {
-            // uzmi username iz tokena
+            //username iz tokena
             email = tokenUtils.getUsernameFromToken(authToken);
 
             if (email != null) {
-                // uzmi user-a na osnovu username-a
+                //user na osnovu username-a
                 UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
-                // proveri da li je prosledjeni token validan
+                //provjera da li je prosljedjeni token validan
                 if (tokenUtils.validateToken(authToken, userDetails)) {
-                    // kreiraj autentifikaciju
+                    //kreiraj autentifikaciju
                     TokenBasedAuthentication authentication = new TokenBasedAuthentication(userDetails);
                     authentication.setToken(authToken);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -48,7 +48,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
-        // prosledi request dalje u sledeci filter
+        //proslijedi request dalje u sledeci filter
         chain.doFilter(request, response);
     }
 }
