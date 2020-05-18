@@ -5,6 +5,7 @@ import agent.app.service.intf.AdService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,10 +55,22 @@ public class AdController {
 
     }
 
-    @RequestMapping(value = "{?page,size,sort}", method = RequestMethod.GET)
-    public ResponseEntity<?> findAllPageAd(@PathVariable("page") Integer page, @PathVariable("size") Integer size,
-                                           @PathVariable("sort") String sort) {
-        return new ResponseEntity<>(adService.findAllPageAd(page, size, sort), HttpStatus.OK);
+//    @RequestMapping(value = "{?page,size,sort}", method = RequestMethod.GET)
+//    public ResponseEntity<?> findAllPageAd(@PathVariable("page") Integer page,@PathVariable("size") Integer size,
+//                                         @PathVariable("sort") String sort) {
+//        return new ResponseEntity<>(adService.findAllPageAd(page, size, sort), HttpStatus.OK);
+//    }
+@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+@RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage, @RequestParam(value = "size", required = false) Integer size) {
+
+        if (nextPage != null) {
+            System.out.println("ima 1 str");
+            return new ResponseEntity<>(adService.findAll(nextPage, size), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(adService.findAll(), HttpStatus.OK);
+        }
+
     }
 
 }

@@ -106,26 +106,30 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public AdPageContentDTO findAllPageAd(Integer page, Integer size, String sort) {
-        Pageable pageable;
-        if(sort.equals("-")){
-            pageable = PageRequest.of(page, size);
-        }else{
-            String par[] = sort.split(" ");
-            if(par[1].equals("opadajuce")) {
-                pageable = PageRequest.of(page, size, Sort.by(par[0]).descending());
-            }else{
-                pageable = PageRequest.of(page, size, Sort.by(par[0]).ascending());
-            }
+    public AdPageContentDTO findAll (Integer page, Integer size) {
 
-        }
-
+//        Pageable pageable;
+//        if(sort.equals("-")){
+//            pageable = PageRequest.of(page, size);
+//        }else{
+//            String par[] = sort.split(" ");
+//            if(par[1].equals("opadajuce")) {
+//                pageable = PageRequest.of(page, size, Sort.by(par[0]).descending());
+//            }else{
+//                pageable = PageRequest.of(page, size, Sort.by(par[0]).ascending());
+//            }
+//
+//        }
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
         Page<Ad> ads =  adRepository.findAllByDeleted(false, pageable);
+        System.out.println(ads.getSize());
         List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
         AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
-                .totalPages(ads.getTotalPages())
+                .totalPageCnt(ads.getTotalPages())
                 .ads(ret)
                 .build();
+
+        System.out.println(adPageContentDTO);
 
         return adPageContentDTO;
     }
