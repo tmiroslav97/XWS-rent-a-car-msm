@@ -2,6 +2,8 @@ package agent.app.service.impl;
 
 import agent.app.converter.CarConverter;
 import agent.app.dto.CarCreateDTO;
+import agent.app.exception.ExistsException;
+import agent.app.exception.NotFoundException;
 import agent.app.model.Car;
 import agent.app.repository.CarRepository;
 import agent.app.service.intf.CarService;
@@ -17,19 +19,26 @@ public class CarServiceImpl implements CarService {
     private CarRepository carRepository;
 
     @Override
-    public Car finById(Long id) { return carRepository.findById(id).orElseGet(null); }
+    public Car finById(Long id) {
+        return carRepository.findById(id).orElseThrow(()-> new NotFoundException("Automobil ne postoji."));
+    }
 
     @Override
-    public List<Car> findAll() { return carRepository.findAll();  }
+    public List<Car> findAll() {
+        return carRepository.findAll();
+    }
 
     @Override
     public Car save(Car car) {
+        if(carRepository.existsById(car.getId())){
+            throw new ExistsException(String.format("Automobil vec postoji."));
+        }
         return carRepository.save(car);
     }
 
     @Override
-    public void delete(Long id) {
-        carRepository.delete(finById(id));
+    public void delete(Car car) {
+        carRepository.delete(car);
     }
 
     @Override
@@ -37,5 +46,19 @@ public class CarServiceImpl implements CarService {
        Car car = CarConverter.toCreateCarFromRequest(carCreateDTO);
        car = this.carRepository.save(car);
        return car;
+    }
+
+    @Override
+    public Car editCar(Car car) {
+        this.finById(car.getId());
+        Car car1 = carRepository.save(car);
+        return car1;
+    }
+
+    @Override
+    public Integer deleteById(Long id) {
+        Car car = this.finById(id);
+        this.delete(car);
+        return 1;
     }
 }
