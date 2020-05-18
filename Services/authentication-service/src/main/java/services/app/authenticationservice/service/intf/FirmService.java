@@ -10,7 +10,7 @@ public interface FirmService {
 
     List<Firm> findAll();
 
-    Integer RegisterFirm(FirmRegDTO firmRegDTO);
+    Integer registerFirm(FirmRegDTO firmRegDTO);
 
     Integer deleteById(Long id);
 

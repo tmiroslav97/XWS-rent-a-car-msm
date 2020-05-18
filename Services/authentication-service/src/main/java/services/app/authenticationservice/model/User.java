@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @Column(name = DbColumnConstants.LASTNAME)
     private String lastName;
 
-    @Column(name= DbColumnConstants.LASTPASSWORDRESETDATE)
+    @Column(name = DbColumnConstants.LASTPASSWORDRESETDATE)
     @Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
             @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
@@ -46,11 +46,15 @@ public class User implements UserDetails {
     })
     private DateTime lastPasswordResetDate;
 
+    @Column(name = DbColumnConstants.DELETED, nullable = false)
+    private Boolean deleted;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = DbTableConstants.USERAUTHORITY,
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
+
 
     @JsonIgnore
     @Override

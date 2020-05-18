@@ -8,7 +8,7 @@ import java.util.List;
 public interface AgentService {
     Agent findById(Long id);
     List<Agent> findAll();
-    Integer RegisterAgent(AgentRegDTO agentRegDTO);
+    Integer registerAgent(AgentRegDTO agentRegDTO);
     Integer deleteById(Long id);
     void delete(Agent agent);
     Agent save(Agent agent);

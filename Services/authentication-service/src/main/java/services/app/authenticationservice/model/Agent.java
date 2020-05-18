@@ -16,12 +16,12 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = DbTableConstants.AGENT)
-public class Agent extends PublisherUser {
+public class Agent extends User {
 
     @Builder(builderMethodName = "agentFirmBuilder")
     public Agent(Long id, String email, String password, String firstName,
                  String lastName, DateTime lastPasswordResetDate,
                  List<Authority> authorities, Boolean deleted) {
-        super(id, email, password, firstName, lastName, lastPasswordResetDate, authorities, deleted);
+        super(id, email, password, firstName, lastName, lastPasswordResetDate, deleted, authorities);
     }
 }

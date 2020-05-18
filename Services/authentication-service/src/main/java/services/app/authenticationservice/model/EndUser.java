@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = DbTableConstants.ENDUSER)
-public class EndUser extends PublisherUser {
+public class EndUser extends User {
 
     @Column(name = DbColumnConstants.ADLIMITNUM, nullable = false)
     private Integer adLimitNum = 3;
@@ -36,7 +36,7 @@ public class EndUser extends PublisherUser {
                    String lastName, DateTime lastPasswordResetDate,
                    List<Authority> authorities, Boolean deleted, Integer adLimitNum,
                    Boolean enabled, Boolean obliged, Integer canceledCnt) {
-        super(id, email, password, firstName, lastName, lastPasswordResetDate, authorities, deleted);
+        super(id, email, password, firstName, lastName, lastPasswordResetDate, deleted, authorities);
         this.adLimitNum = adLimitNum;
         this.enabled = enabled;
         this.obliged = obliged;

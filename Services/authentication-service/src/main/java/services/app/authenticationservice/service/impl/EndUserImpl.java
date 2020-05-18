@@ -7,6 +7,8 @@ import services.app.authenticationservice.model.EndUser;
 import services.app.authenticationservice.repository.EndUserRepository;
 import services.app.authenticationservice.service.intf.EndUserService;
 
+import java.util.List;
+
 @Service
 public class EndUserImpl implements EndUserService {
 
@@ -16,6 +18,46 @@ public class EndUserImpl implements EndUserService {
     @Override
     public EndUser findById(Long id) {
         return endUserRepository.findById(id).orElseThrow(() -> new NotFoundException("Krajnji korisnik sa zadatim id- em nije pronadjen"));
+    }
+
+    @Override
+    public List<EndUser> findAll() {
+        return endUserRepository.findAll();
+    }
+
+    @Override
+    public Integer disableEndUser() {
+        return null;
+    }
+
+    @Override
+    public Integer enableEndUser() {
+        return null;
+    }
+
+    @Override
+    public Integer enableObligation() {
+        return null;
+    }
+
+    @Override
+    public Integer disableObligation() {
+        return null;
+    }
+
+    @Override
+    public Integer resetCanceledCnt() {
+        return null;
+    }
+
+    @Override
+    public Integer deleteById(Long id) {
+        return null;
+    }
+
+    @Override
+    public void delete() {
+
     }
 
     @Override
