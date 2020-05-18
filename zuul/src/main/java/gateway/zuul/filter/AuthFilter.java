@@ -1,6 +1,6 @@
-package filter;
+package gateway.zuul.filter;
 
-import client.AuthClient;
+import gateway.zuul.client.AuthClient;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import feign.FeignException;
