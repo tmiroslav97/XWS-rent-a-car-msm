@@ -6,6 +6,6 @@ RUN ["mvn", "package", "-DskipTests"]
 
 FROM openjdk:8-jdk-alpine
 WORKDIR /authentication-service
-COPY --from=auth-back /usr/src/authentication-service/target/authentication-service ./
+COPY --from=auth-back /usr/src/authentication-service/target/authentication-service.jar ./
 
 CMD ["java", "-jar", "authentication-service.jar"]
