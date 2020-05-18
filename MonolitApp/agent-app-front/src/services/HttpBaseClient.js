@@ -3,9 +3,9 @@ import { AGENTAPP_BASE } from '../common/agentapp-api';
 
 class HttpBaseClient {
 
-    constructor(){
+    constructor() {
         this.client = axios.create({
-            baseURL:AGENTAPP_BASE.URL
+            baseURL: AGENTAPP_BASE.URL
         });
         this.setInterceptor();
     }
@@ -26,13 +26,24 @@ class HttpBaseClient {
         this.client.interceptors.response.use(function (response) {
             return response;
         }, function (error) {
-            //const { status, data, config } = error.response;
-            //if (status === 401) {
-                //return error.response;
-            //}else{
-                //throw error;
-            //}  
-            throw error;          
+            // const originalRequest = error.config;
+            // const { status, data, config } = error.response;
+            // const token = window.localStorage.getItem("token");
+            // if (status === 401 && !originalRequest._retry) {
+            //     originalRequest._retry = true;
+            //     console.log(`Bearer ${token}`);
+            //     return axios.get(AGENTAPP_BASE.URL + '/auth/refresh', {
+            //         headers: { 'Auth': `Bearer ${token}` }
+            //     }).then(res => {
+            //         console.log(res.data);
+            //         if (res.status === 200) {
+            //             localStorage.setItem('token', res.data);
+            //             return this.client(originalRequest);
+            //         }
+            //     })
+            // }
+
+            throw error;
         });
     };
 

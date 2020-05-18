@@ -5,22 +5,21 @@ import agent.app.dto.SignUpDTO;
 import agent.app.model.Authority;
 import agent.app.model.EndUser;
 import agent.app.model.User;
-import agent.app.repository.AuthorityRepository;
+import agent.app.model.UserTokenState;
 import agent.app.security.TokenUtils;
 import agent.app.service.intf.AuthenticationService;
-
 import agent.app.service.intf.AuthorityService;
 import agent.app.service.intf.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,6 +41,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     private UserService userService;
+
+    private UserDetailsService userDetailsService;
 
     @Override
     public String login(JwtAuthenticationRequest jwtAuthenticationRequest) {
@@ -85,6 +86,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     .build();
             userService.save(endUser);
             return 3;
+        }
+    }
+
+    @Override
+    public UserTokenState refreshAuthenticationToken(HttpServletRequest request) {
+        String token = tokenUtils.getToken(request);
+        String username = tokenUtils.getUsernameFromToken(token);
+        User user = (User) userDetailsService.loadUserByUsername(username);
+
+        if (this.tokenUtils.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
+            String refreshedToken = tokenUtils.refreshToken(token);
+            int expiresIn = tokenUtils.getExpiredIn();
+
+            return new UserTokenState(refreshedToken, Long.valueOf(expiresIn));
+        } else {
+            return null;
         }
     }
 }
