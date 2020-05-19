@@ -41,4 +41,4 @@ Za gateway service je koriscen zuul.
 
 #### Email service
 
-[Detaljno](Services/message-service/README.md)
+[Detaljno](Services/email-service/README.md)
