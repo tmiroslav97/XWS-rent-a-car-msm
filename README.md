@@ -1,4 +1,4 @@
-# Rent a Car - XWS projekat
+# Rent-A-Car - XWS projekat
 Fakultetski projekat iz XML i WS.
 
 Ovde je dat pregled svih mikroservisa koji su definisani i link ka njihovom detaljnom opisu.
@@ -45,3 +45,7 @@ Za gateway service je koriscen zuul.
 #### Ad search service
 [Detaljno](Services/ad-search-service/README.md)
 (Port: 8085)
+
+#### Codebook service
+[Detaljno](Services/codebook-service/README.md)
+(Port: 8087)
