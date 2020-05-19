@@ -14,4 +14,5 @@ public interface AdService {
     Ad save(Ad ad);
     void delete(Ad ad);
     Integer deleteById(Long id);
+    Integer editAd(Ad ad);
 }

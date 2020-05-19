@@ -11,6 +11,6 @@ public interface CarService {
     List<Car> findAll();
     Car save(Car car);
     void delete(Car car);
-    Car editCar(Car car);
     Integer deleteById(Long id);
+    Car editCar(Car car);
 }
