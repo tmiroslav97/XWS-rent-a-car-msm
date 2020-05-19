@@ -1,6 +1,8 @@
-package agent.app.dto;
+package agent.app.dto.ad;
 
-import agent.app.model.enumeration.DistanceLimitEnum;
+import agent.app.dto.car.CarCalendarTermCreateDTO;
+import agent.app.dto.car.CarCreateDTO;
+import agent.app.dto.PriceListCreateDTO;
 import lombok.*;
 
 import java.util.List;

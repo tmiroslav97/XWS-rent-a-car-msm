@@ -1,7 +1,5 @@
 package agent.app.converter;
 
-import agent.app.dto.CarCalendarTermCreateDTO;
-import agent.app.model.CarCalendarTerm;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;

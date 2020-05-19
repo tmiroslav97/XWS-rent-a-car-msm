@@ -1,6 +1,6 @@
 package agent.app.service.impl;
 
-import agent.app.dto.CarCalendarTermCreateDTO;
+import agent.app.dto.car.CarCalendarTermCreateDTO;
 import agent.app.converter.CarCalendarTermConverter;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;

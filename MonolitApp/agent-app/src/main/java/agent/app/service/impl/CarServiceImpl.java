@@ -1,7 +1,7 @@
 package agent.app.service.impl;
 
 import agent.app.converter.CarConverter;
-import agent.app.dto.CarCreateDTO;
+import agent.app.dto.car.CarCreateDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.Car;
