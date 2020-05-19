@@ -1,6 +1,5 @@
 package services.app.adservice.service.intf;
 
-
 import services.app.adservice.model.Ad;
 
 import java.util.List;

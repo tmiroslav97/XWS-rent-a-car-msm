@@ -5,14 +5,14 @@ Ovaj servis ukljucuje sljedece entitete:
 * Car
 * Car Calendar Term
 * Comment
-* Discount list
 
 U paketu service i njegovom potpaketu intf nalaze se definicije metoda, onoga sta bi trebao ovaj servis da realizuje.
 
 ## AdService
 Izvrsava operacije koje su vezane za oglase:
-* preuzimanje svig oglasa
-* pronalazak jednog oglasa
+* preuzimanje svih oglasa
+* preuzimanje paginiranih oglasa
+* preuzimanje jednog oglasa
 * brisanje 
 * izmjena 
 * dodavanje novog oglasa
