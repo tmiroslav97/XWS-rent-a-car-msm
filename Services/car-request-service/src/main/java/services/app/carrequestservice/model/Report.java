@@ -1,10 +1,9 @@
-package agent.app.model;
+package services.app.carrequestservice.model;
 
-import agent.app.common.db.DbColumnConstants;
-import agent.app.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.CollectionId;
+import services.app.carrequestservice.common.db.DbColumnConstants;
+import services.app.carrequestservice.common.db.DbTableConstants;
 
 import javax.persistence.*;
 
@@ -31,6 +30,7 @@ public class Report {
     @OneToOne(fetch = FetchType.LAZY)
     private Ad ad;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PublisherUser publisherUser;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long publisherUser;
 }
