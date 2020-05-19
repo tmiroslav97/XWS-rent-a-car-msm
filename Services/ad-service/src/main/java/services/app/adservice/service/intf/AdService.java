@@ -1,5 +1,6 @@
 package services.app.adservice.service.intf;
 
+import services.app.adservice.dto.AdPageContentDTO;
 import services.app.adservice.model.Ad;
 
 import java.util.List;
@@ -11,5 +12,7 @@ public interface AdService {
     Ad save(Ad ad);
     void delete(Ad ad);
     Integer deleteById(Long id);
+    AdPageContentDTO findAll(Integer page, Integer size);
+
 
 }

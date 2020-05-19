@@ -13,6 +13,6 @@ public class AdPageDTO {
     private String name;
     private String coverPhoto;
     private String location;
-    private Float price;
+    private Long price;
 
 }
