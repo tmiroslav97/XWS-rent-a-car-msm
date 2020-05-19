@@ -1,11 +1,12 @@
-package agent.app.model;
+package services.app.adservice.model;
 
-import agent.app.common.db.DbColumnConstants;
-import agent.app.common.db.DbTableConstants;
-import agent.app.model.enumeration.DistanceLimitEnum;
+
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import services.app.adservice.common.db.DbColumnConstants;
+import services.app.adservice.common.db.DbTableConstants;
+import services.app.adservice.model.enumeration.DistanceLimitEnum;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -63,9 +64,6 @@ public class Ad {
     @Column(name = DbColumnConstants.RENTCNT, nullable = false)
     private Long rentCnt = 0L;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Report report;
-
     @OneToOne(fetch = FetchType.EAGER)
     @JoinTable(name = DbTableConstants.ADCAR,
             joinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"),
@@ -78,19 +76,15 @@ public class Ad {
     @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY )
     private Set<Comment> comments = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PublisherUser publisherUser;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long publisherUser;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PriceList priceList;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long priceList;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<DiscountList> discountLists = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Request> requests = new HashSet<>();
-
-
-
 
 }
