@@ -12,7 +12,7 @@ Realizuje:
 * dobavljanje paginiranih rezultata
 * cuvanje oglasa u bazi
 * brisanje oglasa iz baze
-* izmjena podataka o oglasu
+* izmena podataka o oglasu
 
 ###CarService
 Realizuje: 
@@ -20,4 +20,4 @@ Realizuje:
 * dobavljanje liste automobila
 * cuvanje automobila u bazi
 * brisanje automobila iz baze
-* izmjena podataka o automobilu
+* izmena podataka o automobilu
