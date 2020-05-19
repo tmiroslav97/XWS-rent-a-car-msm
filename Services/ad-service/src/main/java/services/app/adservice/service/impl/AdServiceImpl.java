@@ -84,4 +84,6 @@ public class AdServiceImpl implements AdService {
 
         return adPageContentDTO;
     }
+
+    //dodati i za dodavanje oglasa
 }
