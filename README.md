@@ -38,3 +38,7 @@ Za gateway service je koriscen zuul.
 [Detaljno](Services/message-service/README.md)
 
 (Port: 8091)
+
+#### Email service
+
+[Detaljno](Services/message-service/README.md)
