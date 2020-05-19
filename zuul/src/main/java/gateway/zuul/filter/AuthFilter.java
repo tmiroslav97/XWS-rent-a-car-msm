@@ -1,6 +1,6 @@
-package filter;
+package gateway.zuul.filter;
 
-import client.AuthClient;
+import gateway.zuul.client.AuthClient;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import feign.FeignException;
@@ -45,15 +45,15 @@ public class AuthFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
 
-        if (request.getHeader("Authorization") == null) {
+        if (request.getHeader("Auth") == null) {
             return null;
         }
 
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("Auth");
         try {
-            authClient.verify();
+            authClient.verify(request);
 
-            ctx.addZuulRequestHeader("Authorization", token);
+            ctx.addZuulRequestHeader("Auth", token);
         } catch (FeignException.NotFound e) {
             setFailedRequest("User doesn't exist!", 403);
         }

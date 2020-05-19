@@ -13,6 +13,52 @@ services:
     ports:
       - "8761:8761"
 
+  authentication-service:
+    image: authentication-service
+    container_name: authentication-service
+    build: 
+      context: ./Services/authentication-service
+      dockerfile: Dockerfile
+    environment:
+      - REGISTRY_HOST=eureka-serviceregistry
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
+    ports:
+      - "8084:8084"
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: auth_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - eureka-serviceregistry
+      - mysql
+      
+  message-service:
+    image: message-service
+    container_name: message-service
+    build: 
+      context: ./Services/message-service
+      dockerfile: Dockerfile
+    environment:
+      - REGISTRY_HOST=eureka-serviceregistry
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
+    ports:
+      - "8091:8091"
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: msg_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - eureka-serviceregistry
+      - mysql
+
   zuul:
     image: zuul
     container_name: zuul
@@ -28,6 +74,8 @@ services:
       - "8082:8082"
     depends_on:
       - eureka-serviceregistry
+      - authentication-service
+      - message-service
 
   agent-app:
     image: agent-app
@@ -40,7 +88,7 @@ services:
     networks:
       - static-network
     ports:
-      - 8083:8083
+      - "8083:8083"
     environment:
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
