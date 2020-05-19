@@ -29,7 +29,7 @@ public class Report {
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    private Car car;
+    private Ad ad;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private PublisherUser publisherUser;

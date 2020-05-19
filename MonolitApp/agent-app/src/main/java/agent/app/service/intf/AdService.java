@@ -10,11 +10,8 @@ import java.util.List;
 
 public interface AdService {
     Ad findById(Long id);
-
     List<Ad> findAll();
-
     AdPageContentDTO findAll(Integer page, Integer size);
-
     Ad save(Ad ad);
     void delete(Ad ad);
     Integer deleteById(Long id);

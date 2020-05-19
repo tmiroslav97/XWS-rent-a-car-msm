@@ -1,7 +1,6 @@
 package agent.app.repository;
 
 import agent.app.model.Ad;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

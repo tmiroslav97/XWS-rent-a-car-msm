@@ -63,6 +63,9 @@ public class Ad {
     @Column(name = DbColumnConstants.RENTCNT, nullable = false)
     private Long rentCnt = 0L;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Report report;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinTable(name = DbTableConstants.ADCAR,
             joinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"),

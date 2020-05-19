@@ -29,12 +29,12 @@ export function* loginUser() {
     const { payload } = yield take(LOGIN);
     const data = yield call(AuthSecurity.login, payload);
     yield put(putToken(data));
-    const role = jwt_decode(data).role;
-    if (role === 'ROLE_AGENT') {
+    const roles = jwt_decode(data).roles;
+    if (roles.includes('ROLE_AGENT')) {
         history.push('/agent-firm');
-    } else if (role === 'ROLE_USER') {
+    } else if (roles.includes('ROLE_USER')) {
         history.push('/end-user');
-    } else if (role === 'ROLE_ADMIN') {
+    } else if (roles.includes('ROLE_ADMIN')) {
         history.push('/admin');
     } else {
         history.push('/');
