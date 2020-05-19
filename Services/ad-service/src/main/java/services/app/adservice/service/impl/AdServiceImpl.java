@@ -1,6 +1,8 @@
 package services.app.adservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import services.app.adservice.exception.ExistsException;
+import services.app.adservice.exception.NotFoundException;
 import services.app.adservice.model.Ad;
 import services.app.adservice.repository.AdRepository;
 import services.app.adservice.service.intf.AdService;
@@ -14,26 +16,34 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ad findById(Long id) {
-        return null;
+        return adRepository.findById(id).orElseThrow(()-> new NotFoundException("Oglas ne postoi."));
     }
 
     @Override
     public List<Ad> findAll() {
-        return null;
+        return adRepository.findAll();
     }
 
     @Override
     public Ad save(Ad ad) {
-        return null;
-    }
+        if(ad.getId() != null){
+            if(adRepository.existsById(ad.getId())){
+                throw new ExistsException(String.format("Oglas vec postoji."));
+            }
+        }
+
+        return adRepository.save(ad);    }
 
     @Override
     public void delete(Ad ad) {
+        adRepository.delete(ad);
 
     }
 
     @Override
     public Integer deleteById(Long id) {
-        return null;
+        Ad ad = this.findById(id);
+        this.delete(ad);
+        return 1;
     }
 }
