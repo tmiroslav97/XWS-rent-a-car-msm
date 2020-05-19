@@ -1,6 +1,6 @@
 package services.app.adservice.service.intf;
 
-import services.app.adservice.dto.AdPageContentDTO;
+import services.app.adservice.dto.ad.AdPageContentDTO;
 import services.app.adservice.model.Ad;
 
 import java.util.List;

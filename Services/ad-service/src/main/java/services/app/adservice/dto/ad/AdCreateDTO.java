@@ -1,4 +1,4 @@
-package services.app.adservice.dto;
+package services.app.adservice.dto.ad;
 
 import lombok.*;
 

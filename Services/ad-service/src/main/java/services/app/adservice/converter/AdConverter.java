@@ -1,6 +1,6 @@
 package services.app.adservice.converter;
 
-import services.app.adservice.dto.AdPageDTO;
+import services.app.adservice.dto.ad.AdPageDTO;
 import services.app.adservice.model.Ad;
 
 public class AdConverter {
