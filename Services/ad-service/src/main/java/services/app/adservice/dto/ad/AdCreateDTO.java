@@ -1,6 +1,8 @@
 package services.app.adservice.dto.ad;
 
 import lombok.*;
+import services.app.adservice.dto.car.CarCalendarTermCreateDTO;
+import services.app.adservice.dto.car.CarCreateDTO;
 
 import java.util.List;
 
@@ -17,8 +19,8 @@ public class AdCreateDTO {
     private String location;
     private String distanceLimitFlag;
     private Float distanceLimit;
-//    private CarCreateDTO carCreateDTO;
-//    private PriceListCreateDTO priceListCreateDTO;
-//    private List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList;
+    private CarCreateDTO carCreateDTO;
+   // private PriceListCreateDTO priceListCreateDTO;
+    private List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList;
 
 }

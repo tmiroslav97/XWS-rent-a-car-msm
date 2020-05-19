@@ -1,6 +1,8 @@
 package services.app.adservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import services.app.adservice.converter.CarConverter;
+import services.app.adservice.dto.car.CarCreateDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
 import services.app.adservice.model.Car;
@@ -35,6 +37,13 @@ public class CarServiceImpl implements CarService {
     @Override
     public void delete(Car car) {
         carRepository.delete(car);
+    }
+
+    @Override
+    public Car createCar(CarCreateDTO carCreateDTO) {
+        Car car = CarConverter.toCreateCarFromRequest(carCreateDTO);
+        car = this.carRepository.save(car);
+        return car;
     }
 
     @Override

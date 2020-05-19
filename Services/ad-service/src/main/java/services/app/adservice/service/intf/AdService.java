@@ -1,5 +1,6 @@
 package services.app.adservice.service.intf;
 
+import services.app.adservice.dto.ad.AdCreateDTO;
 import services.app.adservice.dto.ad.AdPageContentDTO;
 import services.app.adservice.model.Ad;
 
@@ -13,6 +14,8 @@ public interface AdService {
     void delete(Ad ad);
     Integer deleteById(Long id);
     AdPageContentDTO findAll(Integer page, Integer size);
+    Integer createAd(AdCreateDTO adCreateDTO);
+
 
 
 }
