@@ -5,7 +5,7 @@ COPY . .
 RUN ["mvn", "package", "-DskipTests"]
 
 FROM openjdk:8-jdk-alpine
-WORKDIR /message-service
+WORKDIR /ad-service
 COPY --from=ad-back /usr/src/message-service/target/ad-service.jar ./
 
 CMD ["java", "-jar", "ad-service.jar"]
