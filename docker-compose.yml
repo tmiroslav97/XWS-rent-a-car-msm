@@ -65,15 +65,14 @@ services:
     build:
       context: ./Services/ad-service
       dockerfile: Dockerfile
-    environment:
-      - REGISTRY_HOST=eureka-serviceregistry
     tty: true
     restart: on-failure
     networks:
       - static-network
     ports:
-      - "8083:8083"
+      - "8086:8086"
     environment:
+      REGISTRY_HOST: eureka-serviceregistry
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_DOMAIN: mysql
@@ -88,8 +87,6 @@ services:
     build:
       context: ./Services/car-request-service
       dockerfile: Dockerfile
-    environment:
-      - REGISTRY_HOST=eureka-serviceregistry
     tty: true
     restart: on-failure
     networks:
@@ -97,6 +94,7 @@ services:
     ports:
       - "8090:8090"
     environment:
+      REGISTRY_HOST: eureka-serviceregistry
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_DOMAIN: mysql
@@ -112,8 +110,6 @@ services:
     build:
       context: ./Services/price-list-and-discount-service
       dockerfile: Dockerfile
-    environment:
-      - REGISTRY_HOST=eureka-serviceregistry
     tty: true
     restart: on-failure
     networks:
@@ -121,6 +117,7 @@ services:
     ports:
       - "8088:8088"
     environment:
+      REGISTRY_HOST: eureka-serviceregistry
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_DOMAIN: mysql
