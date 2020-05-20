@@ -38,10 +38,11 @@ Izvrsava operacije vezane za krajnjeg korisnika:
 * dobavljanje liste krajnjih korisnika
 * izmjena podataka o krajnjem korisniku (zabrane, ogranicenja...)
 
-### EndService
+### FirmService
 Izvrsava operacije vezane za firmu:
 * registracija firme
 * dobavljanje podataka o firmi
 * dobavljanje podataka o firmama
 * brisanje firme
 * izmjena podataka o firmi
+* sinhronizovanje podataka firme

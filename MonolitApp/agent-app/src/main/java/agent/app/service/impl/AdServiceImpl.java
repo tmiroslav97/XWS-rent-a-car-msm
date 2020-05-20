@@ -106,6 +106,11 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public void syncData() {
+
+    }
+
+    @Override
     public AdPageContentDTO findAll (Integer page, Integer size) {
 
 //        Pageable pageable;

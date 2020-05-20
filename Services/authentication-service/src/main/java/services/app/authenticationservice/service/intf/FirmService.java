@@ -19,4 +19,6 @@ public interface FirmService {
     void delete(Firm firm);
 
     Firm save(Firm firm);
+
+    void syncData();
 }

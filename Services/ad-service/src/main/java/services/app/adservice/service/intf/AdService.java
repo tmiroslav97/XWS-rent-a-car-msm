@@ -18,5 +18,6 @@ public interface AdService {
     AdPageContentDTO findAll(Integer page, Integer size);
     Integer createAd(AdCreateDTO adCreateDTO);
     List<StatisticCarDTO> getCarsWithBestRating(Long publisherId);
+    void syncData();
 
 }

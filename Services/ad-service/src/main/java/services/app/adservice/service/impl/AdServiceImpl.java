@@ -134,4 +134,9 @@ public class AdServiceImpl implements AdService {
     public List<StatisticCarDTO> getCarsWithBestRating(Long publisherId) {
         return null;
     }
+
+    @Override
+    public void syncData() {
+
+    }
 }

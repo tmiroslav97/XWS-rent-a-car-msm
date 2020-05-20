@@ -19,6 +19,7 @@ Izvrsava operacije koje su vezane za oglase:
 * cuvanje u bazu podataka
 * vracanje oglasa sa najvecim rejtingom
 * pregled ocjena
+* sinhronizacija podataka
 
 ## CarService 
 Izvrsava operacije vezane za auta:
