@@ -33,19 +33,42 @@ Za gateway service je koriscen zuul.
 [Detaljno](Services/authentication-service/README.md)
 (Port: 8084)
 
+#### Ad search service
+
+[Detaljno](Services/ad-search-service/README.md)
+(Port: 8085)
+
+### Ad service
+
+[Detaljno](Services/ad-service/README.md)
+(Port: 8086)
+
+#### Codebook service
+
+[Detaljno](Services/codebook-service/README.md)
+(Port: 8087)
+
+### Price list and discount service
+
+[Detaljno](Services/price-list-and-discount-service/README.md)
+(Port: 8088)
+
 #### Message service
 
 [Detaljno](Services/message-service/README.md)
-(Port: 8091)
+(Port: 8090)
 
 #### Email service
 
 [Detaljno](Services/email-service/README.md)
 
-#### Ad search service
-[Detaljno](Services/ad-search-service/README.md)
-(Port: 8085)
 
-#### Codebook service
-[Detaljno](Services/codebook-service/README.md)
-(Port: 8087)
+
+
+
+
+
+
+### Car request service
+[Detaljno](Services/car-request-service/README.md)
+(Port: 8090)
