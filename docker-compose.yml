@@ -101,6 +101,20 @@ services:
       - eureka-serviceregistry
       - mysql
 
+  front:
+    image: front
+    container_name: front
+    build: 
+      context: ./Services/front
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
+    ports:
+      - "80:80"
+   
+
   zuul:
     image: zuul
     container_name: zuul
