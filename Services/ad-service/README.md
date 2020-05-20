@@ -36,7 +36,7 @@ Izvrsava operacije za:
 * brisanje komentara 
 * cuvanje komentara
 * vracanje automobila sa najvecim brojem komentara
-* odobravanje komentara
+* odobravanje komentara (tj. odbijanje)
 
 ## CarCalendarTermService
 Izvrsava operacije za:
