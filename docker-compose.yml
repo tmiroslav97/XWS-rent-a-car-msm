@@ -184,6 +184,9 @@ services:
       - message-service
       - codebook-service
       - ad-search-service
+      - price-list-and-discount-service
+      - car-requst-service
+      - ad-service
 
   agent-app:
     image: agent-app

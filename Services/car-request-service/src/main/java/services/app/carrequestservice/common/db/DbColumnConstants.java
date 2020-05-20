@@ -9,4 +9,6 @@ public class DbColumnConstants {
     public static final String BUNDLE = "bundle";
     public static final String DESCRIPTION = "description";
     public static final String DISTANCETRAVELED = "distanceTraveled";
+    public static final String PUBLISHERUSER = "publisherUser";
+    public static final String ENDUSER = "endUser";
 }

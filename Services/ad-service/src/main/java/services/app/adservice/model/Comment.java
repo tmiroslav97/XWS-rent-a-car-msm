@@ -35,8 +35,7 @@ public class Comment {
     @Column(name = DbColumnConstants.APPROVED, nullable = false)
     private Boolean approved;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
     private Long publisherUser;
 
     @ManyToOne(fetch = FetchType.LAZY)

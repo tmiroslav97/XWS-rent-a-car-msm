@@ -20,6 +20,7 @@ import java.util.Set;
 @Entity
 @Table(name = DbTableConstants.DISCOUNTLIST)
 public class DiscountList {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,8 +44,7 @@ public class DiscountList {
     @Column(name = DbColumnConstants.DISCOUNT, nullable = false)
     private Float discount;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = DbColumnConstants.AGENT, nullable = false)
     private Long agent;
 
 

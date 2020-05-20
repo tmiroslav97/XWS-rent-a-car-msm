@@ -64,6 +64,12 @@ public class Ad {
     @Column(name = DbColumnConstants.RENTCNT, nullable = false)
     private Long rentCnt = 0L;
 
+    @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
+    private Long publisherUser;
+
+    @Column(name = DbColumnConstants.PRICELIST, nullable = false)
+    private Long priceList;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinTable(name = DbTableConstants.ADCAR,
             joinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"),
@@ -75,14 +81,6 @@ public class Ad {
 
     @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY )
     private Set<Comment> comments = new HashSet<>();
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long publisherUser;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long priceList;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<DiscountList> discountLists = new HashSet<>();
