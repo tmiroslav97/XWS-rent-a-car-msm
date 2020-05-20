@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import services.app.adservice.converter.AdConverter;
 import services.app.adservice.converter.CarCalendarTermConverter;
+import services.app.adservice.dto.StatisticCarDTO;
 import services.app.adservice.dto.ad.AdCreateDTO;
 import services.app.adservice.dto.ad.AdPageContentDTO;
 import services.app.adservice.dto.ad.AdPageDTO;
@@ -127,5 +128,10 @@ public class AdServiceImpl implements AdService {
         ad = this.save(ad);
 
         return 1;
+    }
+
+    @Override
+    public List<StatisticCarDTO> getCarWithBestRating(Long publisherId) {
+        return null;
     }
 }

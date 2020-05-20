@@ -2,6 +2,7 @@ package services.app.adservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import services.app.adservice.converter.CarConverter;
+import services.app.adservice.dto.StatisticCarDTO;
 import services.app.adservice.dto.car.CarCreateDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
@@ -58,5 +59,10 @@ public class CarServiceImpl implements CarService {
         Car car = this.finById(id);
         this.delete(car);
         return 1;
+    }
+
+    @Override
+    public List<StatisticCarDTO> getCarWithHighestMileage(Long publisherId) {
+        return null;
     }
 }

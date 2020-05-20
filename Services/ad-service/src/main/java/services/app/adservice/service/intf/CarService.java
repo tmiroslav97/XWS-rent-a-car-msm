@@ -1,7 +1,7 @@
 package services.app.adservice.service.intf;
 
-
 import services.app.adservice.dto.car.CarCreateDTO;
+import services.app.adservice.dto.StatisticCarDTO;
 import services.app.adservice.model.Car;
 
 import java.util.List;
@@ -15,5 +15,6 @@ public interface CarService {
     Car createCar(CarCreateDTO carCreateDTO);
     Car editCar(Car car);
     Integer deleteById(Long id);
+    List<StatisticCarDTO> getCarWithHighestMileage(Long publisherId);
 
 }
