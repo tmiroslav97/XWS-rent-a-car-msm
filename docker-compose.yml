@@ -131,6 +131,8 @@ services:
       - eureka-serviceregistry
       - authentication-service
       - message-service
+      - codebook-service
+      - ad-search-service
 
   agent-app:
     image: agent-app
