@@ -1,7 +1,6 @@
-package agent.app.dto;
+package services.app.adservice.dto.car;
 
 import lombok.*;
-import org.joda.time.DateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor

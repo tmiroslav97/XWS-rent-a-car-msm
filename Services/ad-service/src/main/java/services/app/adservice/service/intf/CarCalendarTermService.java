@@ -1,7 +1,7 @@
-package agent.app.service.intf;
+package services.app.adservice.service.intf;
 
-import agent.app.dto.car.CarCalendarTermCreateDTO;
-import agent.app.model.CarCalendarTerm;
+import services.app.adservice.dto.car.CarCalendarTermCreateDTO;
+import services.app.adservice.model.CarCalendarTerm;
 
 import java.util.List;
 

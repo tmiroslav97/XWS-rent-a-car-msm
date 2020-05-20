@@ -1,14 +1,14 @@
-package agent.app.service.impl;
+package services.app.adservice.service.impl;
 
-import agent.app.dto.car.CarCalendarTermCreateDTO;
-import agent.app.converter.CarCalendarTermConverter;
-import agent.app.exception.ExistsException;
-import agent.app.exception.NotFoundException;
-import agent.app.model.CarCalendarTerm;
-import agent.app.repository.CarCalendarTermRepository;
-import agent.app.service.intf.CarCalendarTermService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import services.app.adservice.converter.CarCalendarTermConverter;
+import services.app.adservice.dto.car.CarCalendarTermCreateDTO;
+import services.app.adservice.exception.ExistsException;
+import services.app.adservice.exception.NotFoundException;
+import services.app.adservice.model.CarCalendarTerm;
+import services.app.adservice.repository.CarCalendarTermRepository;
+import services.app.adservice.service.intf.CarCalendarTermService;
 
 import java.util.List;
 

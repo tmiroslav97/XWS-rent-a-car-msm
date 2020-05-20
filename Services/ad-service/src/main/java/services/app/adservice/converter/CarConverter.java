@@ -1,7 +1,7 @@
-package agent.app.converter;
+package services.app.adservice.converter;
 
-import agent.app.dto.car.CarCreateDTO;
-import agent.app.model.Car;
+import services.app.adservice.dto.car.CarCreateDTO;
+import services.app.adservice.model.Car;
 
 public class CarConverter {
     public static Car toCreateCarFromRequest(CarCreateDTO carCreateDTO){

@@ -1,12 +1,9 @@
 package agent.app.converter;
 
-import agent.app.dto.AdCreateDTO;
-import agent.app.dto.AdPageDTO;
+import agent.app.dto.ad.AdCreateDTO;
+import agent.app.dto.ad.AdPageDTO;
 import agent.app.model.Ad;
-import agent.app.model.Car;
 import agent.app.model.enumeration.DistanceLimitEnum;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 
 import java.util.HashSet;
 

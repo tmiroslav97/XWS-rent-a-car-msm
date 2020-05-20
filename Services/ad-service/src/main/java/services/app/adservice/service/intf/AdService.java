@@ -1,5 +1,7 @@
 package services.app.adservice.service.intf;
 
+import services.app.adservice.dto.ad.AdCreateDTO;
+import services.app.adservice.dto.ad.AdPageContentDTO;
 
 import services.app.adservice.dto.StatisticCarDTO;
 import services.app.adservice.model.Ad;
@@ -13,6 +15,9 @@ public interface AdService {
     Ad save(Ad ad);
     void delete(Ad ad);
     Integer deleteById(Long id);
-    List<StatisticCarDTO> getCarWithBestRating(Long publisherId);
+    AdPageContentDTO findAll(Integer page, Integer size);
+    Integer createAd(AdCreateDTO adCreateDTO);
+    List<StatisticCarDTO> getCarsWithBestRating(Long publisherId);
+
 
 }

@@ -14,6 +14,6 @@ public interface CommentService {
     void delete(Comment comment);
     Comment editCar(Comment comment);
     Integer deleteById(Long id);
-    List<StatisticCarDTO> getCarWithMostComments(Long publisherId);
+    List<StatisticCarDTO> getCarsWithMostComments(Long publisherId);
 
 }

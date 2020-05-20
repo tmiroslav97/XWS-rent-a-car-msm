@@ -3,10 +3,10 @@ package agent.app.service.impl;
 
 import agent.app.converter.AdConverter;
 import agent.app.converter.CarCalendarTermConverter;
-import agent.app.dto.AdCreateDTO;
-import agent.app.dto.AdPageContentDTO;
-import agent.app.dto.AdPageDTO;
-import agent.app.dto.CarCalendarTermCreateDTO;
+import agent.app.dto.ad.AdCreateDTO;
+import agent.app.dto.ad.AdPageContentDTO;
+import agent.app.dto.ad.AdPageDTO;
+import agent.app.dto.car.CarCalendarTermCreateDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.*;

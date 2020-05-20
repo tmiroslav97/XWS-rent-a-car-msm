@@ -1,4 +1,4 @@
-package agent.app.dto;
+package agent.app.dto.ad;
 
 import lombok.*;
 

@@ -1,10 +1,8 @@
 package agent.app.service.intf;
 
 
-import agent.app.dto.AdCreateDTO;
-import agent.app.dto.AdPageContentDTO;
-import agent.app.dto.AdPageDTO;
-import agent.app.dto.AdSearchDTO;
+import agent.app.dto.ad.AdCreateDTO;
+import agent.app.dto.ad.AdPageContentDTO;
 import agent.app.model.Ad;
 import java.util.List;
 

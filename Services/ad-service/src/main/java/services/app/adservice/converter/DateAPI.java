@@ -1,4 +1,4 @@
-package agent.app.converter;
+package services.app.adservice.converter;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;

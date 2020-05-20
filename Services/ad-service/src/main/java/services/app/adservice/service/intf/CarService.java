@@ -1,6 +1,6 @@
 package services.app.adservice.service.intf;
 
-
+import services.app.adservice.dto.car.CarCreateDTO;
 import services.app.adservice.dto.StatisticCarDTO;
 import services.app.adservice.model.Car;
 
@@ -12,8 +12,9 @@ public interface CarService {
     List<Car> findAll();
     Car save(Car car);
     void delete(Car car);
+    Car createCar(CarCreateDTO carCreateDTO);
     Car editCar(Car car);
     Integer deleteById(Long id);
-    List<StatisticCarDTO> getCarWithHighestMileage(Long publisherId);
+    List<StatisticCarDTO> getCarsWithHighestMileage(Long publisherId);
 
 }

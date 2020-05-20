@@ -1,22 +1,22 @@
-package agent.app.service.impl;
+package services.app.adservice.service.impl;
 
-import agent.app.converter.CarConverter;
-import agent.app.dto.car.CarCreateDTO;
-import agent.app.exception.ExistsException;
-import agent.app.exception.NotFoundException;
-import agent.app.model.Car;
-import agent.app.repository.CarRepository;
-import agent.app.service.intf.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import services.app.adservice.converter.CarConverter;
+import services.app.adservice.dto.StatisticCarDTO;
+import services.app.adservice.dto.car.CarCreateDTO;
+import services.app.adservice.exception.ExistsException;
+import services.app.adservice.exception.NotFoundException;
+import services.app.adservice.model.Car;
+import services.app.adservice.repository.CarRepository;
+import services.app.adservice.service.intf.CarService;
 
 import java.util.List;
 
-@Service
 public class CarServiceImpl implements CarService {
 
     @Autowired
     private CarRepository carRepository;
+
 
     @Override
     public Car finById(Long id) {
@@ -33,8 +33,7 @@ public class CarServiceImpl implements CarService {
         if(carRepository.existsById(car.getId())){
             throw new ExistsException(String.format("Automobil vec postoji."));
         }
-        return carRepository.save(car);
-    }
+        return carRepository.save(car);    }
 
     @Override
     public void delete(Car car) {
@@ -43,9 +42,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car createCar(CarCreateDTO carCreateDTO) {
-       Car car = CarConverter.toCreateCarFromRequest(carCreateDTO);
-       car = this.carRepository.save(car);
-       return car;
+        Car car = CarConverter.toCreateCarFromRequest(carCreateDTO);
+        car = this.carRepository.save(car);
+        return car;
     }
 
     @Override
@@ -60,5 +59,10 @@ public class CarServiceImpl implements CarService {
         Car car = this.finById(id);
         this.delete(car);
         return 1;
+    }
+
+    @Override
+    public List<StatisticCarDTO> getCarsWithHighestMileage(Long publisherId) {
+        return null;
     }
 }
