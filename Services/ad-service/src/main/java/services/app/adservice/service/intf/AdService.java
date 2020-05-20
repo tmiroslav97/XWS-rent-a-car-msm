@@ -19,5 +19,4 @@ public interface AdService {
     Integer createAd(AdCreateDTO adCreateDTO);
     List<StatisticCarDTO> getCarsWithBestRating(Long publisherId);
 
-
 }

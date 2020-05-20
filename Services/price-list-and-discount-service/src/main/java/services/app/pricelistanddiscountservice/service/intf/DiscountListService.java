@@ -12,5 +12,6 @@ public interface DiscountListService {
     DiscountList save(DiscountList discountList);
     void delete(DiscountList discountList);
     Integer deleteById(Long id);
+    Integer edit(Long id); //proslijediti dto
 
 }

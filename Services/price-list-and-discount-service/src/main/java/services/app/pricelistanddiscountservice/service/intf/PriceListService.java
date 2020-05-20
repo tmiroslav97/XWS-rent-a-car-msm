@@ -11,5 +11,6 @@ public interface PriceListService {
     PriceList save(PriceList priceList);
     void delete(PriceList priceList);
     Integer deleteById(Long id);
+    Integer edit(Long id);
 
 }
