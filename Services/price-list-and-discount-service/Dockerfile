@@ -6,6 +6,6 @@ RUN ["mvn", "package", "-DskipTests"]
 
 FROM openjdk:8-jdk-alpine
 WORKDIR /price-list-and-discount-service
-COPY --from=pad-back /usr/src/message-service/target/price-list-and-discount-service.jar ./
+COPY --from=pad-back /usr/src/price-list-and-discount-service/target/price-list-and-discount-service.jar ./
 
 CMD ["java", "-jar", "price-list-and-discounts-service.jar"]
