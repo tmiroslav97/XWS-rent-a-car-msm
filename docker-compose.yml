@@ -57,6 +57,57 @@ services:
       - eureka-serviceregistry
       - mysql
 
+  ad-service:
+    image: ad-service
+    container_name: ad-service
+    build:
+      context: ./Services/ad-service
+    ports:
+      - "8086:8086"
+    environment:
+      REGISTRY_HOST: eureka-serviceregistry
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: ad_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - eureka-serviceregistry
+      - mysql
+
+  car-requst-service:
+    image: car-requst-service
+    container_name: car-requst-service
+    build:
+      context: ./Services/car-requst-service
+    ports:
+      - "8090:8090"
+    environment:
+      REGISTRY_HOST: eureka-serviceregistry
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: carreq_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - eureka-serviceregistry
+      - mysql
+
+  price-list-and-discount-service:
+    image: price-list-and-discount-service
+    container_name: price-list-and-discount-service
+    build:
+      context: ./Services/price-list-and-discount-service
+    ports:
+      - "8088:8088"
+    environment:
+      REGISTRY_HOST: eureka-serviceregistry
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: pad_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - eureka-serviceregistry
+      - mysql
+      
   ad-search-service:
     image: ad-search-service
     container_name: ad-search-service
