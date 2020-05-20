@@ -19,8 +19,6 @@ services:
     build: 
       context: ./Services/authentication-service
       dockerfile: Dockerfile
-    environment:
-      - REGISTRY_HOST=eureka-serviceregistry
     tty: true
     restart: on-failure
     networks:
@@ -28,6 +26,7 @@ services:
     ports:
       - "8084:8084"
     environment:
+      REGISTRY_HOST: eureka-serviceregistry
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_DOMAIN: mysql
@@ -42,8 +41,6 @@ services:
     build: 
       context: ./Services/message-service
       dockerfile: Dockerfile
-    environment:
-      - REGISTRY_HOST=eureka-serviceregistry
     tty: true
     restart: on-failure
     networks:
@@ -51,10 +48,55 @@ services:
     ports:
       - "8090:8090"
     environment:
+      REGISTRY_HOST: eureka-serviceregistry
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_DOMAIN: mysql
       DATABASE_SCHEMA: msg_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - eureka-serviceregistry
+      - mysql
+
+  ad-search-service:
+    image: ad-search-service
+    container_name: ad-search-service
+    build: 
+      context: ./Services/ad-search-service
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
+    ports:
+      - "8085:8085"
+    environment:
+      REGISTRY_HOST: eureka-serviceregistry
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: ad_search_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - eureka-serviceregistry
+      - mysql
+
+  codebook-service:
+    image: codebook-service
+    container_name: codebook-service
+    build: 
+      context: ./Services/codebook-service
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
+    ports:
+      - "8087:8087"
+    environment:
+      REGISTRY_HOST: eureka-serviceregistry
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: codebook_db?createDatabaseIfNotExist=true&serverTimezone=UTC
     depends_on: 
       - eureka-serviceregistry
       - mysql
