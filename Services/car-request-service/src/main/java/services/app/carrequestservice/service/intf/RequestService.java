@@ -14,7 +14,8 @@ public interface RequestService {
     Integer deleteById(Long id);
     Integer createRequest(RequestDTO request);
     Integer confirmRequest(Long id, Boolean status);
-    Integer refuseRequest(Long id);
-    Integer scheduleRefuseRequest(Long id);
+    Integer cancelRequest(Long id);
+    Integer scheduleCancelRequest(Long id);
+    Integer cancelRequestUser(Long id);
 
 }

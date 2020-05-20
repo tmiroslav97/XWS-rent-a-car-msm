@@ -17,6 +17,9 @@ Izvrsava operacije koje su vezane za izvjestaje:
 ## RequestService
 Izvrsava operacije koje su vezane za zahtjeve:
 * kreiranje zahtjeva za iznajmljivanje automobila
+* dobavljanje zahtjeva
 * odobravanje zahtjeva
+* otkazivanje zahtjeva od strane korisnika
 * automatsko odbijanje zahtjeva koji nisu prihvaceni (automobil je rentiran)
 * automatska funkcija za odbijanje zahtjeva koji nisu obradjeni
+

@@ -2,7 +2,7 @@ package services.app.adservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import services.app.adservice.converter.CarConverter;
-import services.app.adservice.dto.StatisticCarDTO;
+import services.app.adservice.dto.car.StatisticCarDTO;
 import services.app.adservice.dto.car.CarCreateDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;

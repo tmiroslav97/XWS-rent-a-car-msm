@@ -1,6 +1,7 @@
 package services.app.adservice.service.intf;
 
-import services.app.adservice.dto.StatisticCarDTO;
+import services.app.adservice.dto.comment.CommentCreateDTO;
+import services.app.adservice.dto.car.StatisticCarDTO;
 import services.app.adservice.model.Car;
 import services.app.adservice.model.Comment;
 
@@ -15,5 +16,6 @@ public interface CommentService {
     Integer deleteById(Long id);
     List<StatisticCarDTO> getCarsWithMostComments(Long publisherId);
     Integer setApprove(Boolean status);
+    Integer createComment(CommentCreateDTO comment);
 
 }
