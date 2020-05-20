@@ -113,8 +113,7 @@ services:
       - static-network
     ports:
       - "80:80"
-   
-
+      
   zuul:
     image: zuul
     container_name: zuul
