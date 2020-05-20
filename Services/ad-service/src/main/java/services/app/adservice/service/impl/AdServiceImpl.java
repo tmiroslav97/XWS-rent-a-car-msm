@@ -7,10 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import services.app.adservice.converter.AdConverter;
 import services.app.adservice.converter.CarCalendarTermConverter;
-import services.app.adservice.dto.StatisticCarDTO;
+import services.app.adservice.dto.car.StatisticCarDTO;
 import services.app.adservice.dto.ad.AdCreateDTO;
 import services.app.adservice.dto.ad.AdPageContentDTO;
 import services.app.adservice.dto.ad.AdPageDTO;
+import services.app.adservice.dto.ad.AdRatingDTO;
 import services.app.adservice.dto.car.CarCalendarTermCreateDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
@@ -133,5 +134,15 @@ public class AdServiceImpl implements AdService {
     @Override
     public List<StatisticCarDTO> getCarsWithBestRating(Long publisherId) {
         return null;
+    }
+
+    @Override
+    public void syncData() {
+
+    }
+
+    @Override
+    public void setRating(AdRatingDTO ad) {
+
     }
 }

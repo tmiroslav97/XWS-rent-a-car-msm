@@ -9,7 +9,7 @@ U paketu service i njegovom potpaketu intf nalaze se definicije metoda, onoga st
 ## PriceListService
 Izvrsava operacije koje su vezane za cjenovnike:
 * kreiranje novog cjenovnika
-* brisanje postojeeg cjenovnika
+* brisanje jednog cjenovnika
 * izmjenu cjenovnika
 * brisanje svih cjenovnika
 * cuvanje cjenovnika u bazi podataka

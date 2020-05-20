@@ -18,6 +18,9 @@ Izvrsava operacije koje su vezane za oglase:
 * dodavanje novog oglasa
 * cuvanje u bazu podataka
 * vracanje oglasa sa najvecim rejtingom
+* pregled ocjena
+* postavljanje ocjene
+* sinhronizacija podataka
 
 ## CarService 
 Izvrsava operacije vezane za auta:
@@ -31,13 +34,13 @@ Izvrsava operacije vezane za auta:
 Izvrsava operacije za:
 * postavljanje komentara
 * brisanje komentara 
-* izmjenu komentara
 * cuvanje komentara
 * vracanje automobila sa najvecim brojem komentara
+* odobravanje komentara (tj. odbijanje)
 
 ## CarCalendarTermService
 Izvrsava operacije za:
 * vracanje slobodnih termina za automobil
-* definisanje novog slobodnog termina
+* definisanje novog slobodnog termina (zauzece automobila)
 * izmjena termina
 * brisanje termina

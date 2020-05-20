@@ -13,6 +13,8 @@ Realizuje:
 * cuvanje oglasa u bazi
 * brisanje oglasa iz baze
 * izmena podataka o oglasu
+* pretraga oglasa (moguce slati sort parametre)
+* napredna pretraga
 
 ###CarService
 Realizuje: 

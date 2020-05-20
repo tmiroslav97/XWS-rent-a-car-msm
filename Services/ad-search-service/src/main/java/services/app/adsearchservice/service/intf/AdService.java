@@ -3,6 +3,7 @@ package services.app.adsearchservice.service.intf;
 
 
 import services.app.adsearchservice.dto.AdPageContentDTO;
+import services.app.adsearchservice.dto.AdPageDTO;
 import services.app.adsearchservice.model.Ad;
 
 import java.util.List;
@@ -15,4 +16,8 @@ public interface AdService {
     void delete(Ad ad);
     Integer deleteById(Long id);
     Integer editAd(Ad ad);
+
+    //moguce slati sort parametre
+    AdPageDTO ordinarySearch();
+    AdPageDTO advancedSearch();
 }

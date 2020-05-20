@@ -10,10 +10,16 @@ U paketu service i njegovom potpaketu intf nalaze se definicije metoda, onoga st
 ## ReportService
 Izvrsava operacije koje su vezane za izvjestaje:
 * preuzimanje svih izvjestaja
-* brisanje izvjestaja
-* izmjena  
 * dodavanje novog izvjestaja
-* cuvanje izvjetsaja u bazi podataka
+* cuvanje izvjestaja u bazi podataka
+* placanje ukoliko dodje do prekoracenja kilometraze (na osnovu id-ja request-a)
 
 ## RequestService
 Izvrsava operacije koje su vezane za zahtjeve:
+* kreiranje zahtjeva za iznajmljivanje automobila
+* dobavljanje zahtjeva
+* odobravanje zahtjeva
+* otkazivanje zahtjeva od strane korisnika
+* automatsko odbijanje zahtjeva koji nisu prihvaceni (automobil je rentiran)
+* automatska funkcija za odbijanje zahtjeva koji nisu obradjeni
+

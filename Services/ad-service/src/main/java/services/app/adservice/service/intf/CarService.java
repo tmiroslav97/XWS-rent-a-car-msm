@@ -1,7 +1,7 @@
 package services.app.adservice.service.intf;
 
 import services.app.adservice.dto.car.CarCreateDTO;
-import services.app.adservice.dto.StatisticCarDTO;
+import services.app.adservice.dto.car.StatisticCarDTO;
 import services.app.adservice.model.Car;
 
 import java.util.List;

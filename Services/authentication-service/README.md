@@ -30,18 +30,20 @@ Izvrsava operacije vezane za agenta:
 * dobavljanje liste agenata
 * izmjena podataka o agentu
 
-### EndService
+### EndUserService
 Izvrsava operacije vezane za krajnjeg korisnika:
 * cuvanje krajnjeg korisnika u bazi
 * brisanje
 * dobavljanje krajnjeg korisnika
 * dobavljanje liste krajnjih korisnika
-* izmjena podataka o krajnjem korisniku (zabrane, ogranicenja...)
+* izmjena podataka o krajnjem korisniku (blokiranje, aktiviranje, uklanjanje iz sistema)
+* definisanje permisija za korisnike
 
-### EndService
+### FirmService
 Izvrsava operacije vezane za firmu:
 * registracija firme
 * dobavljanje podataka o firmi
 * dobavljanje podataka o firmama
 * brisanje firme
 * izmjena podataka o firmi
+* sinhronizovanje podataka firme

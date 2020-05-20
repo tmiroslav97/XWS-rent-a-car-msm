@@ -3,7 +3,8 @@ package services.app.adservice.service.intf;
 import services.app.adservice.dto.ad.AdCreateDTO;
 import services.app.adservice.dto.ad.AdPageContentDTO;
 
-import services.app.adservice.dto.StatisticCarDTO;
+import services.app.adservice.dto.car.StatisticCarDTO;
+import services.app.adservice.dto.ad.AdRatingDTO;
 import services.app.adservice.model.Ad;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public interface AdService {
     AdPageContentDTO findAll(Integer page, Integer size);
     Integer createAd(AdCreateDTO adCreateDTO);
     List<StatisticCarDTO> getCarsWithBestRating(Long publisherId);
-
+    void syncData();
+    void setRating(AdRatingDTO ad);
 
 }
