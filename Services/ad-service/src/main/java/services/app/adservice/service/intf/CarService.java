@@ -15,6 +15,6 @@ public interface CarService {
     Car createCar(CarCreateDTO carCreateDTO);
     Car editCar(Car car);
     Integer deleteById(Long id);
-    List<StatisticCarDTO> getCarWithHighestMileage(Long publisherId);
+    List<StatisticCarDTO> getCarsWithHighestMileage(Long publisherId);
 
 }

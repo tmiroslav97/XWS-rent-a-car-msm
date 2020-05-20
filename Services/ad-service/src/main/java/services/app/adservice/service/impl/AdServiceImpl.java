@@ -131,7 +131,7 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public List<StatisticCarDTO> getCarWithBestRating(Long publisherId) {
+    public List<StatisticCarDTO> getCarsWithBestRating(Long publisherId) {
         return null;
     }
 }

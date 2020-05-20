@@ -62,7 +62,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<StatisticCarDTO> getCarWithHighestMileage(Long publisherId) {
+    public List<StatisticCarDTO> getCarsWithHighestMileage(Long publisherId) {
         return null;
     }
 }

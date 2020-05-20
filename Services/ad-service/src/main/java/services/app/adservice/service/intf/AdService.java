@@ -17,7 +17,7 @@ public interface AdService {
     Integer deleteById(Long id);
     AdPageContentDTO findAll(Integer page, Integer size);
     Integer createAd(AdCreateDTO adCreateDTO);
-    List<StatisticCarDTO> getCarWithBestRating(Long publisherId);
+    List<StatisticCarDTO> getCarsWithBestRating(Long publisherId);
 
 
 }
