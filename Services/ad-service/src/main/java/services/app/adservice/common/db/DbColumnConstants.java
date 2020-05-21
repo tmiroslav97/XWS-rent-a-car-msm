@@ -28,4 +28,7 @@ public class DbColumnConstants {
     public static final String ANDROIDFLAG = "androidFlag";
     public static final String TOKEN = "token";
     public static final String COVERPHOTO = "coverPhoto";
+    public static final String PRICELIST = "priceList";
+    public static final String PUBLISHERUSER = "publisherUser";
+
 }

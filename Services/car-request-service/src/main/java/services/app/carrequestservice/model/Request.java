@@ -36,8 +36,7 @@ public class Request {
     @Column(name = DbColumnConstants.SUBMITDATE, nullable = false)
     private DateTime submitDate;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = DbColumnConstants.ENDUSER, nullable = false)
     private Long endUser;
 
     @Temporal(TemporalType.DATE)

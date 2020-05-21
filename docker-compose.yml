@@ -74,11 +74,11 @@ services:
       - eureka-serviceregistry
       - mysql
 
-  car-requst-service:
-    image: car-requst-service
-    container_name: car-requst-service
+  car-request-service:
+    image: car-request-service
+    container_name: car-request-service
     build:
-      context: ./Services/car-requst-service
+      context: ./Services/car-request-service
     ports:
       - "8090:8090"
     environment:
@@ -184,6 +184,9 @@ services:
       - message-service
       - codebook-service
       - ad-search-service
+      - price-list-and-discount-service
+      - car-request-service
+      - ad-service
 
   agent-app:
     image: agent-app

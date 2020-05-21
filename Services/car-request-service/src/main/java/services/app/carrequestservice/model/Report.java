@@ -26,11 +26,12 @@ public class Report {
     @Column(name = DbColumnConstants.DISTANCETRAVELED, nullable = false)
     private Float distanceTraveled;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    private Ad ad;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
     private Long publisherUser;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = DbTableConstants.ADREPORT,
+            joinColumns = @JoinColumn(name = "report_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"))
+    private Ad ad;
 }
