@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router-dom';
+import { Router, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory, createHashHistory } from 'history';
 import store from './store';
 import AppRouter from './AppRouter';
 import NavBar from './containers/NavBar';
@@ -10,6 +10,7 @@ import InformationToastsContainer from './containers/Common/InformationToastsCon
 import { ToastProvider } from 'react-toast-notifications';
 
 export const history = createBrowserHistory();
+// export const history = createBrowserHistory();
 
 ReactDOM.render(
   <Provider store={store}>
