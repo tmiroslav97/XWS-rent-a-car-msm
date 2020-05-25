@@ -2,6 +2,7 @@ package agent.app.config;
 
 import agent.app.authentication.RestAuthenticationEntryPoint;
 import agent.app.authentication.TokenAuthenticationFilter;
+import agent.app.common.Constants;
 import agent.app.security.TokenUtils;
 import agent.app.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers(Constants.REST_PATH + "/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors()
@@ -68,9 +69,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
-        web.ignoring().antMatchers(HttpMethod.POST, "/auth/sign-up");
-        web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
+        web.ignoring().antMatchers(HttpMethod.POST, Constants.REST_PATH + "/auth/login");
+        web.ignoring().antMatchers(HttpMethod.POST, Constants.REST_PATH + "/auth/sign-up");
+        web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/images/**", "/imgs/**", "/img/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js", "/**/assets/**");
     }
 }
