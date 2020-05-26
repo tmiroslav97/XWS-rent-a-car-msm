@@ -9,18 +9,18 @@ import NavBar from './containers/NavBar';
 import InformationToastsContainer from './containers/Common/InformationToastsContainer';
 import { ToastProvider } from 'react-toast-notifications';
 
-export const history = createBrowserHistory();
 // export const history = createBrowserHistory();
+export const history = createHashHistory();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <HashRouter history={history}>
       <NavBar />
       <AppRouter />
       <ToastProvider>
         <InformationToastsContainer />
       </ToastProvider>
-    </Router>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 );
