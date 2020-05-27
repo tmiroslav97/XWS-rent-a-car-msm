@@ -16,7 +16,8 @@ const CreateAdContainer = () => {
     const [androidFlag, setAndroidFlag] = useState(false);
     const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
-    const [stepLabel, setStepLabel] = useState(1);
+
+    const [stepLabel, setStepLabel] = useState();
 
 
     const [formData, setFormData] = useState({
@@ -139,23 +140,10 @@ const CreateAdContainer = () => {
 
     };
 
-    const onButton1 = (event) => {
-        setStepLabel(1);
-    };
-    const onButton2 = (event) => {
-        setStepLabel(2);
-    };
-    const onButton3 = (event) => {
-        setStepLabel(3);
-    };
-    const onButton4 = (event) => {
-        setStepLabel(4);
-    };
-    const onButton5 = (event) => {
-        setStepLabel(5);
-    };
-    const onButton6 = (event) => {
-        setStepLabel(6);
+    const getStepContent = (event) => {
+        console.log("Step  --------------------")
+        console.log(event);
+        setStepLabel(event);
     };
 
     return (
@@ -170,19 +158,13 @@ const CreateAdContainer = () => {
                 onPhotoChange={onPhotoChange}
                 handleAndroidFlag={handleAndroidFlag}
                 handleCDW={handleCDW}
-                stepLabel={stepLabel}
-                onButton1={onButton1}
-                onButton2={onButton2}
-                onButton3={onButton3}
-                onButton4={onButton4}
-                onButton5={onButton5}
-                onButton6={onButton6}
+                getStepContent={getStepContent}
             />
-            {stepLabel === 1 ?
+            {stepLabel === 0 ?
                 <Form1CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form1CreateAdContainer>
                 : null
             }
-            {stepLabel === 2 ?
+            {stepLabel === 1 ?
                 <Form2CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form2CreateAdContainer>
                 : null
             }
