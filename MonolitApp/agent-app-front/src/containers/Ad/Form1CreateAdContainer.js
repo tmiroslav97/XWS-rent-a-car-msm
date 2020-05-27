@@ -31,6 +31,7 @@ const Form1CreateAdContainer = (props) => {
             props.setStepLabel(2);
             console.log(props.formData);
             setValidated(false);
+            props.handleNext();
         }
     };
 
@@ -45,7 +46,13 @@ const Form1CreateAdContainer = (props) => {
             validated={validated}
             distanceLimitFlag={distanceLimitFlag}
             handleDistanceLimitFlag={handleDistanceLimitFlag}
-
+            activeStep={props.activeStep}
+            steps={props.steps}
+            isStepOptional={props.isStepOptional}
+            handleNext={props.handleNext}
+            handleBack={props.handleBack}
+            handleSkip={props.handleSkip}
+            handleReset={props.handleReset}
         />
     );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Col, Container, Button } from 'react-bootstrap';
+import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
 
 const Form1CreateAd = (props) => {
     return (
@@ -68,12 +69,57 @@ const Form1CreateAd = (props) => {
                 <Form.Row>
                     <Col>
                         <Form.Group as={Col} >
-                            <Button className="float-right" variant="primary" id="btnForm1CreateAd" type="submit">
-                                Dalje
-                            </Button>
+                            {props.activeStep === props.steps.length ? (
+                                <div>
+                                    <Typography 
+                                    // className={classes.instructions}
+                                    >
+                                        Svi koraci su zavrseni. Uspesno ste dodadali oglas!
+                                    </Typography>
+
+                                    <Button onClick={props.handleReset}
+                                    //  className={classes.button} 
+                                     >
+                                        Reset
+                                    </Button>
+                                </div>
+                            ) : (
+                                <div>
+                                        <div>
+                                            <Button disabled={props.activeStep === 0} onClick={props.handleBack} className="float-left" >
+                                                Nazad
+                                            </Button>
+
+                                            {props.isStepOptional(props.activeStep) && (
+                                                <Button
+                                                    variant="contained"
+                                                    // color="primary"
+                                                    onClick={props.handleSkip}
+                                                    // className={classes.button}
+                                                    className="float-right"
+                                                >
+                                                    Preskoci
+                                                </Button>
+                                            )}
+
+                                            <Button
+                                                // variant="contained"
+                                                // color="primary"
+                                                // onClick={props.handleNext}
+                                                // className={classes.button}
+                                                type="submit"
+                                                className="float-right"
+                                            >
+                                                {props.activeStep === props.steps.length - 1 ? 'Dodaj' : 'Dalje'}
+                                            </Button>
+                                        </div>
+                                    </div>
+                            )}
                         </Form.Group>
                     </Col>
                 </Form.Row>
+
+               
             </Form>
         </Container>
     );

@@ -5,6 +5,8 @@ import { createdAd } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
 import Form2CreateAdContainer from './Form2CreateAdContainer';
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
+
 
 const CreateAdContainer = () => {
     const dispatch = useDispatch();
@@ -17,7 +19,10 @@ const CreateAdContainer = () => {
     const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
 
-    const [stepLabel, setStepLabel] = useState();
+    const [activeStep, setActiveStep] = useState(0);
+    const [skipped, setSkipped] = useState(new Set());
+    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];  
+    // const classes = useStyles();
 
 
     const [formData, setFormData] = useState({
@@ -42,7 +47,18 @@ const CreateAdContainer = () => {
         carCalendarTermCreateDTOList: null
     });
 
-
+    // const useStyles = makeStyles((theme) => ({
+    //     root: {
+    //         width: '100%',
+    //     },
+    //     button: {
+    //         marginRight: theme.spacing(1),
+    //     },
+    //     instructions: {
+    //         marginTop: theme.spacing(1),
+    //         marginBottom: theme.spacing(1),
+    //     },
+    // }));
 
     const handleCreatedAd = (event) => {
         event.preventDefault();
@@ -140,11 +156,49 @@ const CreateAdContainer = () => {
 
     };
 
-    const getStepContent = (event) => {
-        console.log("Step  --------------------")
-        console.log(event);
-        setStepLabel(event);
+    const isStepOptional = (step) => {
+        return step === 1;
     };
+
+    const isStepSkipped = (step) => {
+        return skipped.has(step);
+    };
+
+    const handleNext = () => {
+        let newSkipped = skipped;
+        if (isStepSkipped(activeStep)) {
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+        }
+
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setSkipped(newSkipped);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    const handleSkip = () => {
+        if (!isStepOptional(activeStep)) {
+            // You probably want to guard against something like this,
+            // it should never occur unless someone's actively trying to break something.
+            throw new Error("You can't skip a step that isn't optional.");
+        }
+
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setSkipped((prevSkipped) => {
+            const newSkipped = new Set(prevSkipped.values());
+            newSkipped.add(activeStep);
+            return newSkipped;
+        });
+    };
+
+    const handleReset = () => {
+        setActiveStep(0);
+    };
+
+    
 
     return (
         <Container>
@@ -158,16 +212,35 @@ const CreateAdContainer = () => {
                 onPhotoChange={onPhotoChange}
                 handleAndroidFlag={handleAndroidFlag}
                 handleCDW={handleCDW}
-                getStepContent={getStepContent}
+                activeStep={activeStep}
+                skipped={skipped}
+                setSkipped={setSkipped}
+                isStepOptional={isStepOptional}
+                isStepSkipped={isStepSkipped}
+                // classes={classes}
+                steps={steps}
             />
-            {stepLabel === 0 ?
-                <Form1CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form1CreateAdContainer>
+            {activeStep === 0 ?
+                <Form1CreateAdContainer 
+                formData={formData} setFormData={setFormData} 
+                activeStep={activeStep} setStepLabel={setActiveStep} 
+                steps={steps}
+                isStepOptional={isStepOptional}
+                handleNext={handleNext}
+                handleBack={handleBack}
+                handleSkip={handleSkip}
+                handleReset={handleReset}
+                ></Form1CreateAdContainer>
                 : null
             }
-            {stepLabel === 1 ?
-                <Form2CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form2CreateAdContainer>
+            {activeStep === 1 ?
+                <Form2CreateAdContainer 
+                formData={formData} setFormData={setFormData} 
+                activeStep={activeStep} setStepLabel={setActiveStep}
+                ></Form2CreateAdContainer>
                 : null
             }
+           
         </Container>
 
 
