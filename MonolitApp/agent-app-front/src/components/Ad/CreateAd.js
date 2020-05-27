@@ -1,15 +1,11 @@
 import React from 'react';
 import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image } from 'react-bootstrap';
+import { Stepper } from '@material-ui/core';
 
 const CreateAd = (props) => {
 
     return (
         <Container>
-            {/* <Row>
-                <Col md={{ span: 5, offset: 4 }} xs={12}>
-                    <h2 className="border-bottom">Dodavanje oglasa</h2>
-                </Col>
-            </Row> */}
             <Row>
                 <Col md={{ offset: 1 }} xs={12} style={{ paddingBottom: '10px' }}>
                     <ButtonToolbar>
