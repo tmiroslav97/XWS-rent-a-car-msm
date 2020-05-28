@@ -4,6 +4,7 @@ import CreateAd from '../../components/Ad/CreateAd';
 import { createdAd } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
 import Form2CreateAdContainer from './Form2CreateAdContainer';
+import Form3CreateAdContainer from './Form3CreateAdContainer';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
 
@@ -175,11 +176,9 @@ const CreateAdContainer = () => {
         switch(activeStep){
             case 0: setActiveStep(1);
             case 1: setActiveStep(2);
-            case 2: setActiveStep(3);
-            case 3: setActiveStep(4);
-            case 4: setActiveStep(5);
-            
-
+            case 2: setActiveStep(2);
+            case 3: setActiveStep(2);
+            case 4: setActiveStep(2);
         }
         // setActiveStep((prevActiveStep) => prevActiveStep + 1);
         
@@ -261,6 +260,19 @@ const CreateAdContainer = () => {
                 handleSkip={handleSkip}
                 handleReset={handleReset}
                 ></Form2CreateAdContainer>
+                : null
+            }
+             {activeStep === 2 ?
+                <Form3CreateAdContainer 
+                formData={formData} setFormData={setFormData} 
+                activeStep={activeStep} setActiveStep={setActiveStep}
+                steps={steps}
+                isStepOptional={isStepOptional}
+                handleNext={handleNext}
+                handleBack={handleBack}
+                handleSkip={handleSkip}
+                handleReset={handleReset}
+                ></Form3CreateAdContainer>
                 : null
             }
            

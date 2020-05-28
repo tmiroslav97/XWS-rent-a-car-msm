@@ -76,8 +76,8 @@ const CreateAd = (props) => {
 
 
                             : null
-                        }
-                        {props.activeStep === 3 ?
+                        } */}
+                        {/* {props.activeStep === 3 ?
                             <Form.Row>
                                 <Col>
 
@@ -92,7 +92,9 @@ const CreateAd = (props) => {
                             </Form.Row>
 
                             : null
-                        }
+                        } */}
+
+
                         {props.activeStep === 4 ?
                             <Form.Row>
                                 <Col>
@@ -113,6 +115,7 @@ const CreateAd = (props) => {
 
                             : null
                         }
+                        
                         {props.activeStep === 5 ?
                             <Form.Row>
                                 <Col>
@@ -128,7 +131,7 @@ const CreateAd = (props) => {
                             </Form.Row>
 
                             : null
-                        } */}
+                        }
                     </Form>
                 </Col>
             </Row>
