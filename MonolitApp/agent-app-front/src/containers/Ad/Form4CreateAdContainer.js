@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import Form3CreateAd from '../../components/Ad/Form3CreateAd'
+import Form4CreateAd from '../../components/Ad/Form4CreateAd'
 
-const Form3CreateAdContainer = (props) => {
+const Form4CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
@@ -28,19 +28,15 @@ const Form3CreateAdContainer = (props) => {
             //     mileage: form.mileage.value
             // });
             // props.setActiveStep(2);
-            // props.setActiveStep(3);
+            // props.setActiveStep(4);
             console.log(props.formData);
             setValidated(false);
             props.handleNext();
         }
     };
 
-
-
-    
-
     return (
-        <Form3CreateAd
+        <Form4CreateAd
             onSubmit={handleForm3}
             validated={validated}
 
@@ -54,4 +50,4 @@ const Form3CreateAdContainer = (props) => {
         />
     );
 }
-export default Form3CreateAdContainer;
+export default Form4CreateAdContainer;

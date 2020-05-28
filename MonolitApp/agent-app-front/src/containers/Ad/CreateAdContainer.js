@@ -5,6 +5,7 @@ import { createdAd } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
 import Form2CreateAdContainer from './Form2CreateAdContainer';
 import Form3CreateAdContainer from './Form3CreateAdContainer';
+import Form4CreateAdContainer from './Form4CreateAdContainer';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
 
@@ -158,7 +159,7 @@ const CreateAdContainer = () => {
     };
 
     const isStepOptional = (step) => {
-        return step === 3;
+        // return step === 3;
     };
 
     const isStepSkipped = (step) => {
@@ -173,13 +174,19 @@ const CreateAdContainer = () => {
         }
         console.log("ispis")
         console.log(activeStep);
-        switch(activeStep){
-            case 0: setActiveStep(1);
-            case 1: setActiveStep(2);
-            case 2: setActiveStep(2);
-            case 3: setActiveStep(2);
-            case 4: setActiveStep(2);
+    
+        if(activeStep === 0){
+            setActiveStep(1); 
+        }else if(activeStep === 1){
+            setActiveStep(2);
+        }else if(activeStep === 2){
+            setActiveStep(3);
+        }else if(activeStep === 3){
+            setActiveStep(4);
+        }else if(activeStep === 4){
+            setActiveStep(5);
         }
+        
         // setActiveStep((prevActiveStep) => prevActiveStep + 1);
         
         console.log(activeStep);
@@ -262,7 +269,7 @@ const CreateAdContainer = () => {
                 ></Form2CreateAdContainer>
                 : null
             }
-             {activeStep === 2 ?
+            {activeStep === 2 ?
                 <Form3CreateAdContainer 
                 formData={formData} setFormData={setFormData} 
                 activeStep={activeStep} setActiveStep={setActiveStep}
@@ -273,6 +280,19 @@ const CreateAdContainer = () => {
                 handleSkip={handleSkip}
                 handleReset={handleReset}
                 ></Form3CreateAdContainer>
+                : null
+            }
+            {activeStep === 3 ?
+                <Form4CreateAdContainer 
+                formData={formData} setFormData={setFormData} 
+                activeStep={activeStep} setActiveStep={setActiveStep}
+                steps={steps}
+                isStepOptional={isStepOptional}
+                handleNext={handleNext}
+                handleBack={handleBack}
+                handleSkip={handleSkip}
+                handleReset={handleReset}
+                ></Form4CreateAdContainer>
                 : null
             }
            
