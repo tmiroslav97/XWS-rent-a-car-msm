@@ -58,7 +58,7 @@ public class AdController {
 //                                         @PathVariable("sort") String sort) {
 //        return new ResponseEntity<>(adService.findAllPageAd(page, size, sort), HttpStatus.OK);
 //    }
-@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+//@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
 @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage, @RequestParam(value = "size", required = false) Integer size) {
 

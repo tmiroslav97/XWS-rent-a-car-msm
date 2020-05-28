@@ -36,11 +36,11 @@ public class AdConverter {
                 .location(ad.getLocation())
                 .coverPhoto(ad.getCoverPhoto())
                 .price(ad.getPriceList().getPricePerDay())
-//                .carManufacturer(car.getCarManufacturer())
-//                .carModel(car.getCarModel())
-//                .childrenSeatNum(car.getChildrenSeatNum())
-//                .fuelType(car.getFuelType())
-//                .mileage(car.getMileage())
+                .carManufacturer(ad.getCar().getCarManufacturer())
+                .carModel(ad.getCar().getCarModel())
+                .childrenSeatNum(ad.getCar().getChildrenSeatNum())
+                .fuelType(ad.getCar().getFuelType())
+                .mileage(ad.getCar().getMileage())
                 .build();
     }
 }
