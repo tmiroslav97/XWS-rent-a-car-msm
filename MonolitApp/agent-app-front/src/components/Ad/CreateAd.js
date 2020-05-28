@@ -18,7 +18,7 @@ const CreateAd = (props) => {
                             const stepProps = {};
                             const labelProps = {};
                             if (props.isStepOptional(index)) {
-                                labelProps.optional = <Typography variant="caption">Optional</Typography>
+                                labelProps.optional = <Typography variant="caption">Opciono</Typography>
                             }
                             if (props.isStepSkipped(index)) {
                                 stepProps.completed = false;
@@ -39,7 +39,7 @@ const CreateAd = (props) => {
                     
                     <Form id="createAdFrom" onSubmit={props.onSubmit} noValidate validated={props.validated}>
 
-                        {props.activeStep === 2 ?
+                        {/* {props.activeStep === 2 ?
                             <Form.Row>
                                 <Col>
 
@@ -126,7 +126,7 @@ const CreateAd = (props) => {
                             </Form.Row>
 
                             : null
-                        }
+                        } */}
                     </Form>
                 </Col>
             </Row>

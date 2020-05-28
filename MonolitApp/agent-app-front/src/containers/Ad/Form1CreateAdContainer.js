@@ -40,6 +40,8 @@ const Form1CreateAdContainer = (props) => {
         setDistanceLimit(null);
     };
 
+    
+
     return (
         <Form1CreateAd
             onSubmit={handleForm1}
@@ -49,8 +51,8 @@ const Form1CreateAdContainer = (props) => {
             activeStep={props.activeStep}
             steps={props.steps}
             isStepOptional={props.isStepOptional}
-            handleNext={props.handleNext}
-            handleBack={props.handleBack}
+            // handleNext={props.handleNext}
+            // handleBack={props.handleBack}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
         />

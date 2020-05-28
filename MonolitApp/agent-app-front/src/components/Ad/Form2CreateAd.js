@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Col, Container, Button } from 'react-bootstrap';
+import { Typography } from '@material-ui/core';
 
 const Form2CreateAd = (props) => {
     return (
@@ -45,12 +46,52 @@ const Form2CreateAd = (props) => {
                 <Form.Row>
                     <Col>
                         <Form.Group as={Col} >
-                            {/* <Button className="float-left" variant="primary" onClick={props.handleButtonBack} >
-                                Nazad
-                            </Button> */}
-                            <Button className="float-right" variant="primary" id="btnForm2CreateAd" type="submit">
-                                Dalje
-                            </Button>
+                            {props.activeStep === props.steps.length ? (
+                                <div>
+                                    <Typography 
+                                    // className={classes.instructions}
+                                    >
+                                        Svi koraci su zavrseni. Uspesno ste dodadali oglas!
+                                    </Typography>
+
+                                    <Button onClick={props.handleReset}
+                                    //  className={classes.button} 
+                                     >
+                                        Reset
+                                    </Button>
+                                </div>
+                            ) : (
+                                <div>
+                                        <div>
+                                            <Button disabled={props.activeStep === 0} onClick={props.handleBack(props.activeStep)} className="float-left" >
+                                                Nazad
+                                            </Button>
+
+                                            {props.isStepOptional(props.activeStep) && (
+                                                <Button
+                                                    variant="contained"
+                                                    // color="primary"
+                                                    onClick={props.handleSkip(props.activeStep)}
+                                                    // className={classes.button}
+                                                    className="float-right"
+                                                >
+                                                    Preskoci
+                                                </Button>
+                                            )}
+
+                                            <Button
+                                                // variant="contained"
+                                                // onClick={props.handleNext}
+                                                // className={classes.button}
+                                                type="submit"
+                                                className="float-right"
+                                            >
+                                                Dalje
+                                                {/* {props.activeStep === props.steps.length - 1 ? 'Dodaj' : 'Dalje'} */}
+                                            </Button>
+                                        </div>
+                                    </div>
+                            )}
                         </Form.Group>
                     </Col>
                 </Form.Row>

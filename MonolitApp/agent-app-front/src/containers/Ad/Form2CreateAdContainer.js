@@ -29,6 +29,7 @@ const Form2CreateAdContainer = (props) => {
             props.setStepLabel(3);
             console.log(props.formData);
             setValidated(false);
+            props.handleNext();
         }
     };
 
@@ -54,7 +55,13 @@ const Form2CreateAdContainer = (props) => {
             cdw={cdw}
             androidFlag={androidFlag}
             handleButtonBack={handleButtonBack}
-
+            activeStep={props.activeStep}
+            steps={props.steps}
+            isStepOptional={props.isStepOptional}
+            // handleNext={props.handleNext}
+            handleBack={props.handleBack}
+            handleSkip={props.handleSkip}
+            handleReset={props.handleReset}
         />
     );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import CreateAd from '../../components/Ad/CreateAd';
 import { createdAd } from '../../store/ad/actions';
@@ -157,7 +157,7 @@ const CreateAdContainer = () => {
     };
 
     const isStepOptional = (step) => {
-        return step === 1;
+        return step === 3;
     };
 
     const isStepSkipped = (step) => {
@@ -170,8 +170,21 @@ const CreateAdContainer = () => {
             newSkipped = new Set(newSkipped.values());
             newSkipped.delete(activeStep);
         }
+        console.log("ispis")
+        console.log(activeStep);
+        switch(activeStep){
+            case 0: setActiveStep(1);
+            case 1: setActiveStep(2);
+            case 2: setActiveStep(3);
+            case 3: setActiveStep(4);
+            case 4: setActiveStep(5);
+            
 
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }
+        // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        
+        console.log(activeStep);
+
         setSkipped(newSkipped);
     };
 
@@ -181,8 +194,6 @@ const CreateAdContainer = () => {
 
     const handleSkip = () => {
         if (!isStepOptional(activeStep)) {
-            // You probably want to guard against something like this,
-            // it should never occur unless someone's actively trying to break something.
             throw new Error("You can't skip a step that isn't optional.");
         }
 
@@ -237,6 +248,12 @@ const CreateAdContainer = () => {
                 <Form2CreateAdContainer 
                 formData={formData} setFormData={setFormData} 
                 activeStep={activeStep} setStepLabel={setActiveStep}
+                steps={steps}
+                isStepOptional={isStepOptional}
+                handleNext={handleNext}
+                handleBack={handleBack}
+                handleSkip={handleSkip}
+                handleReset={handleReset}
                 ></Form2CreateAdContainer>
                 : null
             }

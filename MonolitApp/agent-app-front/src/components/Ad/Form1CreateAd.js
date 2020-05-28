@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Col, Container, Button } from 'react-bootstrap';
-import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 const Form1CreateAd = (props) => {
     return (
@@ -86,15 +86,15 @@ const Form1CreateAd = (props) => {
                             ) : (
                                 <div>
                                         <div>
-                                            <Button disabled={props.activeStep === 0} onClick={props.handleBack} className="float-left" >
+                                            {/* <Button disabled={props.activeStep === 0} onClick={props.handleBack} className="float-left" >
                                                 Nazad
-                                            </Button>
+                                            </Button> */}
 
                                             {props.isStepOptional(props.activeStep) && (
                                                 <Button
                                                     variant="contained"
                                                     // color="primary"
-                                                    onClick={props.handleSkip}
+                                                    onClick={props.handleSkip(props.activeStep)}
                                                     // className={classes.button}
                                                     className="float-right"
                                                 >
@@ -110,7 +110,8 @@ const Form1CreateAd = (props) => {
                                                 type="submit"
                                                 className="float-right"
                                             >
-                                                {props.activeStep === props.steps.length - 1 ? 'Dodaj' : 'Dalje'}
+                                                Dalje
+                                                {/* {props.activeStep === props.steps.length - 1 ? 'Dodaj' : 'Dalje'} */}
                                             </Button>
                                         </div>
                                     </div>
