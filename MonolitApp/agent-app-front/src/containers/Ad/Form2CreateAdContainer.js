@@ -26,8 +26,7 @@ const Form2CreateAdContainer = (props) => {
                 cdw: cdw,
                 androidFlag: androidFlag
             });
-            // props.setActiveStep(3);
-            // props.setActiveStep(2);
+            props.setActiveStep(2);
             console.log(props.formData);
             setValidated(false);
             props.handleNext();

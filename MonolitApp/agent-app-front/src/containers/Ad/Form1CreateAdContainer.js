@@ -30,6 +30,7 @@ const Form1CreateAdContainer = (props) => {
             });
             // props.setActiveStep(2);
             // props.setActiveStep(props.activeStep +1);
+            props.setActiveStep(1);
             console.log(props.formData);
             setValidated(false);
             props.handleNext();

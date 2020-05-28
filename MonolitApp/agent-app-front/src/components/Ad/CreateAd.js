@@ -95,7 +95,7 @@ const CreateAd = (props) => {
                         } */}
 
 
-                        {props.activeStep === 4 ?
+                        {/* {props.activeStep === 4 ?
                             <Form.Row>
                                 <Col>
 
@@ -114,9 +114,9 @@ const CreateAd = (props) => {
                             </Form.Row>
 
                             : null
-                        }
+                        } */}
                         
-                        {props.activeStep === 5 ?
+                        {/* {props.activeStep === 5 ?
                             <Form.Row>
                                 <Col>
 
@@ -131,36 +131,11 @@ const CreateAd = (props) => {
                             </Form.Row>
 
                             : null
-                        }
+                        } */}
                     </Form>
                 </Col>
             </Row>
-            {/* {props.activeStep === 0 ?
-                <Form1CreateAdContainer 
-                formData={props.formData} setFormData={props.setFormData} 
-                activeStep={props.activeStep} setActiveStep={props.setActiveStep} 
-                steps={props.steps}
-                isStepOptional={props.isStepOptional}
-                handleNext={props.handleNext}
-                handleBack={props.handleBack}
-                handleSkip={props.handleSkip}
-                handleReset={props.handleReset}
-                ></Form1CreateAdContainer>
-                : null
-            }
-            {props.activeStep === 1 ?
-                <Form2CreateAdContainer 
-                formData={props.formData} setFormData={props.setFormData} 
-                activeStep={props.activeStep} setActiveStep={props.setActiveStep}
-                steps={props.steps}
-                isStepOptional={props.isStepOptional}
-                handleNext={props.handleNext}
-                handleBack={props.handleBack}
-                handleSkip={props.handleSkip}
-                handleReset={props.handleReset}
-                ></Form2CreateAdContainer>
-                : null
-            } */}
+
             
         </Container>
     );

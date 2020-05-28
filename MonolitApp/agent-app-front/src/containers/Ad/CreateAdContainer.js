@@ -6,6 +6,7 @@ import Form1CreateAdContainer from './Form1CreateAdContainer';
 import Form2CreateAdContainer from './Form2CreateAdContainer';
 import Form3CreateAdContainer from './Form3CreateAdContainer';
 import Form4CreateAdContainer from './Form4CreateAdContainer';
+import Form5CreateAdContainer from './Form5CreateAdContainer';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
 
@@ -23,7 +24,7 @@ const CreateAdContainer = () => {
 
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
-    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];  
+    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];
     // const classes = useStyles();
 
 
@@ -172,26 +173,29 @@ const CreateAdContainer = () => {
             newSkipped = new Set(newSkipped.values());
             newSkipped.delete(activeStep);
         }
-        console.log("ispis")
-        console.log(activeStep);
-    
-        if(activeStep === 0){
-            setActiveStep(1); 
-        }else if(activeStep === 1){
-            setActiveStep(2);
-        }else if(activeStep === 2){
-            setActiveStep(3);
-        }else if(activeStep === 3){
-            setActiveStep(4);
-        }else if(activeStep === 4){
-            setActiveStep(5);
-        }
-        
-        // setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        
-        console.log(activeStep);
-
         setSkipped(newSkipped);
+        // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+
+        // if(activeStep === 0){
+        //     setActiveStep(1); 
+        // }else if(activeStep === 1){
+        //     setActiveStep(2);
+        // }else if(activeStep === 2){
+        //     setActiveStep(3);
+        // }else if(activeStep === 3){
+        //     setActiveStep(4);
+        // }else if(activeStep === 4){
+        //     setActiveStep(5);
+        // }else {
+        //     setActiveStep(5);
+        // }
+        // setActiveStep(2);
+
+
+
+
+
     };
 
     const handleBack = () => {
@@ -215,7 +219,6 @@ const CreateAdContainer = () => {
         setActiveStep(0);
     };
 
-    
 
     return (
         <Container>
@@ -240,62 +243,76 @@ const CreateAdContainer = () => {
                 handleBack={handleBack}
                 handleSkip={handleSkip}
                 handleReset={handleReset}
-                formData={formData} setFormData={setFormData} 
-                setActiveStep ={setActiveStep}
+                formData={formData} setFormData={setFormData}
+                setActiveStep={setActiveStep}
             />
             {activeStep === 0 ?
-                <Form1CreateAdContainer 
-                formData={formData} setFormData={setFormData} 
-                activeStep={activeStep} setActiveStep={setActiveStep} 
-                steps={steps}
-                isStepOptional={isStepOptional}
-                handleNext={handleNext}
-                handleBack={handleBack}
-                handleSkip={handleSkip}
-                handleReset={handleReset}
+                <Form1CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
                 ></Form1CreateAdContainer>
                 : null
             }
             {activeStep === 1 ?
-                <Form2CreateAdContainer 
-                formData={formData} setFormData={setFormData} 
-                activeStep={activeStep} setActiveStep={setActiveStep}
-                steps={steps}
-                isStepOptional={isStepOptional}
-                handleNext={handleNext}
-                handleBack={handleBack}
-                handleSkip={handleSkip}
-                handleReset={handleReset}
+                <Form2CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
                 ></Form2CreateAdContainer>
                 : null
             }
             {activeStep === 2 ?
-                <Form3CreateAdContainer 
-                formData={formData} setFormData={setFormData} 
-                activeStep={activeStep} setActiveStep={setActiveStep}
-                steps={steps}
-                isStepOptional={isStepOptional}
-                handleNext={handleNext}
-                handleBack={handleBack}
-                handleSkip={handleSkip}
-                handleReset={handleReset}
+                <Form3CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
                 ></Form3CreateAdContainer>
                 : null
             }
             {activeStep === 3 ?
-                <Form4CreateAdContainer 
-                formData={formData} setFormData={setFormData} 
-                activeStep={activeStep} setActiveStep={setActiveStep}
-                steps={steps}
-                isStepOptional={isStepOptional}
-                handleNext={handleNext}
-                handleBack={handleBack}
-                handleSkip={handleSkip}
-                handleReset={handleReset}
+                <Form4CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
                 ></Form4CreateAdContainer>
                 : null
             }
-           
+            {activeStep === 4 ?
+                <Form5CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    handleCreatedAd={handleCreatedAd}
+                ></Form5CreateAdContainer>
+                : null
+            }
+
         </Container>
 
 

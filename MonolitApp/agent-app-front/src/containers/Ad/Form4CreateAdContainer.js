@@ -8,7 +8,7 @@ const Form4CreateAdContainer = (props) => {
 
     
 
-    const handleForm3 = (event) => {
+    const handleForm4 = (event) => {
         event.preventDefault();
         const form = event.target;
         if (form.checkValidity() === false) {
@@ -27,8 +27,8 @@ const Form4CreateAdContainer = (props) => {
             //     year: form.year.value,
             //     mileage: form.mileage.value
             // });
-            // props.setActiveStep(2);
-            // props.setActiveStep(4);
+
+            props.setActiveStep(4);
             console.log(props.formData);
             setValidated(false);
             props.handleNext();
@@ -37,7 +37,7 @@ const Form4CreateAdContainer = (props) => {
 
     return (
         <Form4CreateAd
-            onSubmit={handleForm3}
+            onSubmit={handleForm4}
             validated={validated}
 
             activeStep={props.activeStep}

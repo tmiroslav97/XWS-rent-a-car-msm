@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import Form3CreateAd from '../../components/Ad/Form3CreateAd'
+import Form5CreateAd from '../../components/Ad/Form5CreateAd'
 
-const Form3CreateAdContainer = (props) => {
+const Form5CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
     
 
-    const handleForm3 = (event) => {
+    const handleForm5 = (event) => {
         event.preventDefault();
         const form = event.target;
         if (form.checkValidity() === false) {
@@ -27,20 +27,19 @@ const Form3CreateAdContainer = (props) => {
             //     year: form.year.value,
             //     mileage: form.mileage.value
             // });
-            props.setActiveStep(3);
+            // props.setActiveStep(2);
+            // props.setActiveStep(4);
             console.log(props.formData);
             setValidated(false);
-            props.handleNext();
+            // props.handleNext();
+            //treba dodati oglas.... 
+            props.handleCreatedAd();
         }
     };
 
-
-
-    
-
     return (
-        <Form3CreateAd
-            onSubmit={handleForm3}
+        <Form5CreateAd
+            onSubmit={handleForm5}
             validated={validated}
 
             activeStep={props.activeStep}
@@ -53,4 +52,4 @@ const Form3CreateAdContainer = (props) => {
         />
     );
 }
-export default Form3CreateAdContainer;
+export default Form5CreateAdContainer;
