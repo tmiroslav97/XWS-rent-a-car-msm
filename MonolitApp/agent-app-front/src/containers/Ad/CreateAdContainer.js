@@ -230,11 +230,17 @@ const CreateAdContainer = () => {
                 isStepSkipped={isStepSkipped}
                 // classes={classes}
                 steps={steps}
+                handleNext={handleNext}
+                handleBack={handleBack}
+                handleSkip={handleSkip}
+                handleReset={handleReset}
+                formData={formData} setFormData={setFormData} 
+                setActiveStep ={setActiveStep}
             />
             {activeStep === 0 ?
                 <Form1CreateAdContainer 
                 formData={formData} setFormData={setFormData} 
-                activeStep={activeStep} setStepLabel={setActiveStep} 
+                activeStep={activeStep} setActiveStep={setActiveStep} 
                 steps={steps}
                 isStepOptional={isStepOptional}
                 handleNext={handleNext}
@@ -247,7 +253,7 @@ const CreateAdContainer = () => {
             {activeStep === 1 ?
                 <Form2CreateAdContainer 
                 formData={formData} setFormData={setFormData} 
-                activeStep={activeStep} setStepLabel={setActiveStep}
+                activeStep={activeStep} setActiveStep={setActiveStep}
                 steps={steps}
                 isStepOptional={isStepOptional}
                 handleNext={handleNext}

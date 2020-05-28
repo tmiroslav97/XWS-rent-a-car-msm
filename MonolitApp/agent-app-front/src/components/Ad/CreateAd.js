@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image } from 'react-bootstrap';
 import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
+import Form1CreateAdContainer from '../../containers/Ad/Form1CreateAdContainer';
+import Form2CreateAdContainer from '../../containers/Ad/Form2CreateAdContainer';
 
 const CreateAd = (props) => {
     
@@ -130,7 +132,32 @@ const CreateAd = (props) => {
                     </Form>
                 </Col>
             </Row>
-
+            {/* {props.activeStep === 0 ?
+                <Form1CreateAdContainer 
+                formData={props.formData} setFormData={props.setFormData} 
+                activeStep={props.activeStep} setActiveStep={props.setActiveStep} 
+                steps={props.steps}
+                isStepOptional={props.isStepOptional}
+                handleNext={props.handleNext}
+                handleBack={props.handleBack}
+                handleSkip={props.handleSkip}
+                handleReset={props.handleReset}
+                ></Form1CreateAdContainer>
+                : null
+            }
+            {props.activeStep === 1 ?
+                <Form2CreateAdContainer 
+                formData={props.formData} setFormData={props.setFormData} 
+                activeStep={props.activeStep} setActiveStep={props.setActiveStep}
+                steps={props.steps}
+                isStepOptional={props.isStepOptional}
+                handleNext={props.handleNext}
+                handleBack={props.handleBack}
+                handleSkip={props.handleSkip}
+                handleReset={props.handleReset}
+                ></Form2CreateAdContainer>
+                : null
+            } */}
             
         </Container>
     );
