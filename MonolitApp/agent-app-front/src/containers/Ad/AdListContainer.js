@@ -5,9 +5,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { adsSelector } from '../../store/ad/selectors';
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
-
+import OrdinarySearchContainer from '../../containers/Search/OrdinarySearchContainer'
 import { fetchAds } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
+
 
 
 const AdListContainer = () => {
@@ -34,15 +35,20 @@ const AdListContainer = () => {
     return(
        
         <Container>
-             <Row>
-                {/* <Col md={{ span: 12, offset: 3 }} xs={12}> */}
+            <Row>
                 <Col>
+                    <OrdinarySearchContainer></OrdinarySearchContainer>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={{ span: 12, offset: 3 }} xs={12}>
+                {/* <Col> */}
                     <PaginationSize size={size} setSize={setSize} />
                 </Col>
             </Row>
             <Row>
-                {/* <Col md={{ span: 12, offset: 3 }} xs={12}> */}
-                <Col>
+                <Col md={{offset: 1 }} xs={22}>
+                {/* <Col> */}
                     {
                         isFetchAds ?  <AdCard ads={ads.data}/> : <SpinnerContainer />
                     }
