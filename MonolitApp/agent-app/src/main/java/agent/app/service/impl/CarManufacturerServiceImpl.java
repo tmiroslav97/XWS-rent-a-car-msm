@@ -29,6 +29,7 @@ public class CarManufacturerServiceImpl implements CarManufacturerService {
 
     @Override
     public List<CarManufacturer> findAll() {
+        System.out.println("********************************");
         return carManufacturerRepository.findAll();
     }
 

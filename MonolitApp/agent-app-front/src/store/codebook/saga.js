@@ -56,6 +56,7 @@ export function* fetchAllCarModels() {
     const { payload } = yield take(FETCH_ALL_CAR_MODELS);
     yield put(putCarModels({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchAllCarModels, payload);
+    console.log(data);
     yield put(putCarModels({
         'data': data,
         'isFetch': true

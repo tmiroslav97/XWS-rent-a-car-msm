@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import Form1CreateAd from '../../components/Ad/Form1CreateAd'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Form1CreateAd from '../../components/Ad/Form1CreateAd';
+import { carManufacturersSelector } from '../../store/codebook/selectors';
+import { fetchAllCarManufacturers } from '../../store/codebook/actions';
 
 const Form1CreateAdContainer = (props) => {
     const dispatch = useDispatch();
@@ -8,6 +10,8 @@ const Form1CreateAdContainer = (props) => {
 
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
     const [distanceLimit, setDistanceLimit] = useState();
+
+    const carManufacturers = useSelector(carManufacturersSelector);
 
     const handleForm1 = (event) => {
         event.preventDefault();
@@ -28,7 +32,6 @@ const Form1CreateAdContainer = (props) => {
                 year: form.year.value,
                 mileage: form.mileage.value
             });
-            // props.setActiveStep(1);
             props.handleNext();
             console.log(props.formData);
             setValidated(false);
@@ -40,20 +43,34 @@ const Form1CreateAdContainer = (props) => {
         setDistanceLimitFlag(event.target.checked);
         setDistanceLimit(null);
     };
-    
+
+    useEffect(() => {
+        dispatch(
+            fetchAllCarManufacturers()
+        );
+    });
 
     return (
-        <Form1CreateAd
-            onSubmit={handleForm1}
-            validated={validated}
-            distanceLimitFlag={distanceLimitFlag}
-            handleDistanceLimitFlag={handleDistanceLimitFlag}
-            activeStep={props.activeStep}
-            steps={props.steps}
-            isStepOptional={props.isStepOptional}
-            handleSkip={props.handleSkip}
-            handleReset={props.handleReset}
-        />
+        <div>
+        {
+         carManufacturers.isFatch ?  
+            <Form1CreateAd
+                onSubmit={handleForm1}
+                validated={validated}
+                distanceLimitFlag={distanceLimitFlag}
+                handleDistanceLimitFlag={handleDistanceLimitFlag}
+                activeStep={props.activeStep}
+                steps={props.steps}
+                isStepOptional={props.isStepOptional}
+                handleSkip={props.handleSkip}
+                handleReset={props.handleReset}
+                carManufacturers={carManufacturers.data}
+            /> 
+             : null 
+        } 
+        </div>
+        
+        
     );
 }
 export default Form1CreateAdContainer;

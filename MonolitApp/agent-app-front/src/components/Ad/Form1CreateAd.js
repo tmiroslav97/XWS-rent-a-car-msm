@@ -10,16 +10,25 @@ const Form1CreateAd = (props) => {
                     <Col>
                         <Form.Group as={Col}>
                             <Form.Label>Naziv oglasa</Form.Label>
-                            <Form.Control required name="name" type="text" id="txtName" placeholder="Naziv oglasa" defaultValue="oglas" />
+                            <Form.Control required name="name" type="text" id="txtName" placeholder="Naziv oglasa"/>
                         </Form.Group>
 
                         <Form.Group as={Col}>
                             <Form.Label>Proizvodjac</Form.Label>
-                            <Form.Control as="select" defaultValue="Choose..." required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac" >
-                                <option>Choose...</option>
-                                <option>sd...</option>
+                            <Form.Control as="select" required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac" >   
+                               {
+                                props.carManufacturers.map((carManufacturer) => {
+                                    console.log(carManufacturer.name);
+                                    // return (
+                                        
+                                    //     <option key={carManufacturer.name} >
+                                    //         {carManufacturer.name}
+                                    //     </option>
+                                    // );
+                                })
+                                }
                             </Form.Control>
-                            {/* <Form.Control required name="carManufacturer" id="txtCarManufacturer" type="combobox" placeholder="Proizvodjac" /> */}
+                            
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Model</Form.Label>
