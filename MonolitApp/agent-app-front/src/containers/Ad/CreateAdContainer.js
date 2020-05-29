@@ -50,6 +50,8 @@ const CreateAdContainer = () => {
         carCalendarTermCreateDTOList: null
     });
 
+    
+
     // const useStyles = makeStyles((theme) => ({
     //     root: {
     //         width: '100%',
@@ -160,7 +162,7 @@ const CreateAdContainer = () => {
     };
 
     const isStepOptional = (step) => {
-        // return step === 3;
+        return step === 3;
     };
 
     const isStepSkipped = (step) => {
@@ -174,28 +176,7 @@ const CreateAdContainer = () => {
             newSkipped.delete(activeStep);
         }
         setSkipped(newSkipped);
-        // setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
-
-        // if(activeStep === 0){
-        //     setActiveStep(1); 
-        // }else if(activeStep === 1){
-        //     setActiveStep(2);
-        // }else if(activeStep === 2){
-        //     setActiveStep(3);
-        // }else if(activeStep === 3){
-        //     setActiveStep(4);
-        // }else if(activeStep === 4){
-        //     setActiveStep(5);
-        // }else {
-        //     setActiveStep(5);
-        // }
-        // setActiveStep(2);
-
-
-
-
-
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
     const handleBack = () => {
@@ -232,7 +213,6 @@ const CreateAdContainer = () => {
                 onPhotoChange={onPhotoChange}
                 handleAndroidFlag={handleAndroidFlag}
                 handleCDW={handleCDW}
-                activeStep={activeStep}
                 skipped={skipped}
                 setSkipped={setSkipped}
                 isStepOptional={isStepOptional}
@@ -244,7 +224,7 @@ const CreateAdContainer = () => {
                 handleSkip={handleSkip}
                 handleReset={handleReset}
                 formData={formData} setFormData={setFormData}
-                setActiveStep={setActiveStep}
+                activeStep={activeStep} setActiveStep={setActiveStep}
             />
             {activeStep === 0 ?
                 <Form1CreateAdContainer

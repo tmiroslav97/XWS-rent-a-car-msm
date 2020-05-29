@@ -28,12 +28,11 @@ const Form1CreateAdContainer = (props) => {
                 year: form.year.value,
                 mileage: form.mileage.value
             });
-            // props.setActiveStep(2);
-            // props.setActiveStep(props.activeStep +1);
-            props.setActiveStep(1);
+            // props.setActiveStep(1);
+            props.handleNext();
             console.log(props.formData);
             setValidated(false);
-            props.handleNext();
+            
         }
     };
 
@@ -41,7 +40,6 @@ const Form1CreateAdContainer = (props) => {
         setDistanceLimitFlag(event.target.checked);
         setDistanceLimit(null);
     };
-
     
 
     return (
@@ -53,8 +51,6 @@ const Form1CreateAdContainer = (props) => {
             activeStep={props.activeStep}
             steps={props.steps}
             isStepOptional={props.isStepOptional}
-            // handleNext={props.handleNext}
-            // handleBack={props.handleBack}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
         />

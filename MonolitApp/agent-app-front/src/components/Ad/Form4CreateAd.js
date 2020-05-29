@@ -42,7 +42,7 @@ const Form4CreateAd = (props) => {
                                                 <Button
                                                     variant="contained"
                                                     // color="primary"
-                                                    onClick={props.handleSkip(props.activeStep)}
+                                                    onClick={props.handleSkip}
                                                     // className={classes.button}
                                                     className="float-right"
                                                 >

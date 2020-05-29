@@ -31,9 +31,9 @@ const Form5CreateAdContainer = (props) => {
             // props.setActiveStep(4);
             console.log(props.formData);
             setValidated(false);
-            // props.handleNext();
+            props.handleNext();
             //treba dodati oglas.... 
-            props.handleCreatedAd();
+            // props.handleCreatedAd();
         }
     };
 

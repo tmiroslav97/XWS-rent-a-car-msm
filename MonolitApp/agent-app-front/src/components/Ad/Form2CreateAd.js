@@ -29,7 +29,7 @@ const Form2CreateAd = (props) => {
                         <Form.Group as={Col}>
                             <Form.Label>Broj sedista za decu</Form.Label>
                             <Form.Control required name="childrenSeatNum" id="numChildrenSeatNum" type="number" pattern=".{0,8}" placeholder="Broj sedista za decu" defaultValue="3" />
-                            {/* <Form.Control type="range" min="0" max="8" custom /> */}
+                            
                             <Form.Control.Feedback type="invalid">
                                 min 0 max 8 sedista
                                         </Form.Control.Feedback>
@@ -43,19 +43,20 @@ const Form2CreateAd = (props) => {
 
                     </Col>
                 </Form.Row>
+                
                 <Form.Row>
                     <Col>
                         <Form.Group as={Col} >
                             {props.activeStep === props.steps.length ? (
                                 <div>
                                     <Typography 
-                                    // className={classes.instructions}
+                                    
                                     >
                                         Svi koraci su zavrseni. Uspesno ste dodadali oglas!
                                     </Typography>
 
                                     <Button onClick={props.handleReset}
-                                    //  className={classes.button} 
+                                    
                                      >
                                         Reset
                                     </Button>
@@ -63,16 +64,14 @@ const Form2CreateAd = (props) => {
                             ) : (
                                 <div>
                                         <div>
-                                            <Button disabled={props.activeStep === 0} onClick={props.handleBack(props.activeStep)} className="float-left" >
+                                            <Button  onClick={props.handleBack} className="float-left" >
                                                 Nazad
                                             </Button>
 
                                             {props.isStepOptional(props.activeStep) && (
                                                 <Button
-                                                    variant="contained"
-                                                    // color="primary"
-                                                    onClick={props.handleSkip(props.activeStep)}
-                                                    // className={classes.button}
+                                                    variant="contained"   
+                                                    onClick={props.handleSkip}
                                                     className="float-right"
                                                 >
                                                     Preskoci
@@ -80,14 +79,11 @@ const Form2CreateAd = (props) => {
                                             )}
 
                                             <Button
-                                                // variant="contained"
-                                                // onClick={props.handleNext}
-                                                // className={classes.button}
+                                            
                                                 type="submit"
                                                 className="float-right"
                                             >
-                                                Dalje
-                                                {/* {props.activeStep === props.steps.length - 1 ? 'Dodaj' : 'Dalje'} */}
+                                             Dalje
                                             </Button>
                                         </div>
                                     </div>

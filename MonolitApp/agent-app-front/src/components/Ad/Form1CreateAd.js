@@ -71,7 +71,7 @@ const Form1CreateAd = (props) => {
                         <Form.Group as={Col} >
                             {props.activeStep === props.steps.length ? (
                                 <div>
-                                    <Typography 
+                                    <Typography
                                     // className={classes.instructions}
                                     >
                                         Svi koraci su zavrseni. Uspesno ste dodadali oglas!
@@ -79,12 +79,12 @@ const Form1CreateAd = (props) => {
 
                                     <Button onClick={props.handleReset}
                                     //  className={classes.button} 
-                                     >
+                                    >
                                         Reset
                                     </Button>
                                 </div>
                             ) : (
-                                <div>
+                                    <div>
                                         <div>
                                             {/* <Button disabled={props.activeStep === 0} onClick={props.handleBack} className="float-left" >
                                                 Nazad
@@ -94,7 +94,7 @@ const Form1CreateAd = (props) => {
                                                 <Button
                                                     variant="contained"
                                                     // color="primary"
-                                                    onClick={props.handleSkip(props.activeStep)}
+                                                    onClick={props.handleSkip}
                                                     // className={classes.button}
                                                     className="float-right"
                                                 >
@@ -115,12 +115,12 @@ const Form1CreateAd = (props) => {
                                             </Button>
                                         </div>
                                     </div>
-                            )}
+                                )}
                         </Form.Group>
                     </Col>
                 </Form.Row>
 
-               
+
             </Form>
         </Container>
     );

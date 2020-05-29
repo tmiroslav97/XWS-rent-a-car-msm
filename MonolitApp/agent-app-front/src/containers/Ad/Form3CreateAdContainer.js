@@ -27,7 +27,7 @@ const Form3CreateAdContainer = (props) => {
             //     year: form.year.value,
             //     mileage: form.mileage.value
             // });
-            props.setActiveStep(3);
+            // props.setActiveStep(3);
             console.log(props.formData);
             setValidated(false);
             props.handleNext();
