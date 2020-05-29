@@ -16,7 +16,7 @@ const OrdinarySearchComponent = (props) => {
             <Row>
               
                 <Col>
-                <Accordion defaultActiveKey="2">
+                <Accordion defaultActiveKey="0">
                     <Card   >
                         <Card.Header>
                         <Accordion.Toggle as={Button} variant="link" eventKey="0"  >
@@ -79,7 +79,73 @@ const OrdinarySearchComponent = (props) => {
                         </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey="1">
-                        <Card.Body>Hello! I'm another body</Card.Body>
+                        <Card.Body>
+                        <Form.Group as={Col}>
+                            <Form.Label>Proizvodjac</Form.Label>
+                            <Form.Control as="select" defaultValue="Choose..." required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac" >
+                                <option>Choose...</option>
+                                <option>sd...</option>
+                            </Form.Control>
+                            {/* <Form.Control required name="carManufacturer" id="txtCarManufacturer" type="combobox" placeholder="Proizvodjac" /> */}
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>Model</Form.Label>
+                            <Form.Control as="select" defaultValue="Choose..." required name="carModel" id="txtCarModel" placeholder="Model">
+                                <option>Choose...</option>
+                                <option>...</option>
+                            </Form.Control>
+                            {/* <Form.Control required name="carModel" id="txtCarModel" type="text" placeholder="Model" /> */}
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>Tip</Form.Label>
+                            <Form.Control as="select" defaultValue="Choose..." required name="carType" id="txtCarType" placeholder="Tip" >
+                                <option>Choose...</option>
+                                <option>...</option>
+                            </Form.Control>
+                            {/* <Form.Control required name="carType" id="txtCarType" type="text" placeholder="Tip" /> */}
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>Menjac</Form.Label>
+                            <Form.Control as="select" defaultValue="Choose..." required name="gearboxType" id="txtGearboxType" type="text" placeholder="Menjac" >
+                                <option>Choose...</option>
+                                <option>...</option>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>Tip goriva</Form.Label>
+                            <Form.Control as="select" defaultValue="Choose..." required name="fuelType" id="txtFuelType" type="text" placeholder="Tip goriva" >
+                                <option>Choose...</option>
+                                <option>...</option>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>Predjeni kilometri</Form.Label>
+                            <Form.Control required name="mileage" id="numMileage" type="number" placeholder="Predjeni kilometri" defaultValue="34" />
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>Planirana kilometraza</Form.Label>
+                            <Form.Control required name="mileage" id="numMileage" type="number" placeholder="Predjeni kilometri" defaultValue="34" />
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>Broj sedista za decu</Form.Label>
+                            <Form.Control required name="childrenSeatNum" id="numChildrenSeatNum" type="number" pattern=".{0,8}" placeholder="Broj sedista za decu" defaultValue="3" />
+                            {/* <Form.Control type="range" min="0" max="8" custom /> */}
+                            <Form.Control.Feedback type="invalid">
+                                min 0 max 8 sedista
+                             </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Unesi opseg cijene</Form.Label>
+                            <Form.Control name="pricerange" id="rangePrice" type="range"/>
+                            <form class="multi-range-field my-5 pb-5">
+                              <input id="multi5" class="multi-range" type="range" />
+                            </form>
+                        </Form.Group>
+
+                        <Form.Group as={Col}>
+                            <Form.Check name="cdw" id="chbCDW" type="checkbox" label="Da li postoji opcija kupovine Collision Damage Waiver protekcije?" onChange={props.handleCDW} />
+                        </Form.Group>
+                        </Card.Body>
                         </Accordion.Collapse>
                     </Card>
                     </Accordion>
