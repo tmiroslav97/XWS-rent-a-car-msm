@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Form1CreateAd from '../../components/Ad/Form1CreateAd';
 import { carManufacturersSelector } from '../../store/codebook/selectors';
 import { fetchAllCarManufacturers } from '../../store/codebook/actions';
+import SpinnerContainer from '../Common/SpinnerContainer';
 
 const Form1CreateAdContainer = (props) => {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Form1CreateAdContainer = (props) => {
     const [distanceLimit, setDistanceLimit] = useState();
 
     const carManufacturers = useSelector(carManufacturersSelector);
+
 
     const handleForm1 = (event) => {
         event.preventDefault();
@@ -53,7 +55,7 @@ const Form1CreateAdContainer = (props) => {
     return (
         <div>
         {
-         carManufacturers.isFatch ?  
+         carManufacturers.isFetch ?  
             <Form1CreateAd
                 onSubmit={handleForm1}
                 validated={validated}
@@ -66,8 +68,9 @@ const Form1CreateAdContainer = (props) => {
                 handleReset={props.handleReset}
                 carManufacturers={carManufacturers.data}
             /> 
-             : null 
+             :<SpinnerContainer />
         } 
+        
         </div>
         
         
