@@ -27,10 +27,6 @@ const AdListContainer = () => {
         );
     }, [nextPage, size]);
 
-    // const handleDetailView = (id) => {
-    //     console.log(id);
-    //     console.log("Oglas")
-    // };
 
     return(
        
@@ -42,13 +38,13 @@ const AdListContainer = () => {
             </Row>
             <Row>
                 <Col md={{ span: 12, offset: 3 }} xs={12}>
-                {/* <Col> */}
+    
                     <PaginationSize size={size} setSize={setSize} />
                 </Col>
             </Row>
             <Row>
                 <Col md={{offset: 1 }} xs={22}>
-                {/* <Col> */}
+
                     {
                         isFetchAds ?  <AdCard ads={ads.data}/> : <SpinnerContainer />
                     }
