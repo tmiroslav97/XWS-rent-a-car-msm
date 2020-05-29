@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter} from 'react-router-dom';
 import { Provider } from 'react-redux';
-import {ncreateHashHistory } from 'history';
+import { createHashHistory } from 'history';
 import store from './store';
 import AppRouter from './AppRouter';
 import NavBar from './containers/NavBar';
