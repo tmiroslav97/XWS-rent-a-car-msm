@@ -5,22 +5,22 @@ const LoginPage = (props) => {
 
     return (
         <Container>
-            <Row>
-                <Col md={{ span: 3, offset: 3 }} xs={12}>
+            <Row className="justify-content-center">
+                <Col md={3} xs={12} className="text-center">
                     <h2 className="border-bottom">Prijava</h2>
                 </Col>
             </Row>
-            <Row>
-                <Col md={{ span: 3, offset: 3 }} xs={12}>
+            <Row className="justify-content-center">
+                <Col md={3} xs={12}>
                     <Form noValidate validated={props.validated} id="logForm" onSubmit={props.onSubmit}>
                         <Form.Row>
                             <Form.Group as={Col}>
-                                <Form.Label>E-mail</Form.Label>
+                                <Form.Label >E-mail</Form.Label>
                                 <Form.Control required type="email" name="username" id="txtEmail" placeholder="E-mail" />
                             </Form.Group>
                         </Form.Row>
-                        <Form.Row>
-                            <Form.Group as={Col}>
+                        <Form.Row >
+                            <Form.Group as={Col} >
                                 <Form.Label>Lozinka</Form.Label>
                                 <Form.Control required type="password" name="password" id="txtPass" pattern=".{5,25}" placeholder="Lozinka" />
                                 <Form.Control.Feedback type="invalid">
@@ -29,8 +29,8 @@ const LoginPage = (props) => {
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
-                            <Form.Group as={Col}>
-                                <Button variant="primary" id="btnLogin" type="submit">
+                            <Form.Group as={Col} >
+                                <Button variant="primary" id="btnLogin" type="submit" block>
                                     Prijavi se
                                 </Button>
                             </Form.Group>

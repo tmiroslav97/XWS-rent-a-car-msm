@@ -11,7 +11,7 @@ const SpinnerContainer = () => {
                         <Spinner animation="border" role="status">
                             <span className="sr-only">Loading...</span>
                         </Spinner>
-                    </div>;
+                    </div>
                 </Col>
             </Row>
         </Container>
