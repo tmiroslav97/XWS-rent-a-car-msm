@@ -18,22 +18,18 @@ const Form1CreateAd = (props) => {
                             <Form.Control as="select" required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac" >   
                                {props.getCarManufacturers()}
                             </Form.Control>
-                            
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Model</Form.Label>
-                            <Form.Control as="select" defaultValue="Choose..." required name="carModel" id="txtCarModel" placeholder="Model">
-                                <option>Choose...</option>
-                                <option>...</option>
+                            <Form.Control as="select"  required name="carModel" id="txtCarModel" placeholder="Model">
+                                {props.getCarModels()}
                             </Form.Control>
-                            {/* <Form.Control required name="carModel" id="txtCarModel" type="text" placeholder="Model" /> */}
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Tip</Form.Label>
                             <Form.Control as="select" required name="carType" id="txtCarType" placeholder="Tip" >
                                 {props.getCarTypes()}
                             </Form.Control>
-                           
                         </Form.Group>
                     </Col>
                     <Col>

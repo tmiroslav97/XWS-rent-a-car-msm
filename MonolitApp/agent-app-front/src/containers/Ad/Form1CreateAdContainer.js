@@ -66,6 +66,17 @@ const Form1CreateAdContainer = (props) => {
         return listCarMan;
     }
 
+    const getCarModels = () => {
+        const listCarModel = [];
+        if(carManufacturers.isFetch){
+            console.log(carManufacturers.data);
+            // carManufacturers.data.carModels.map((carModel)=> {
+            //     listCarModel.push(<option key={carModel.id}>{carModel.name}</option>);
+            // })
+        }
+        return listCarModel;
+    }
+
     const getCarTypes = () => {
         const listCarType = [];
         if(carTypes.isFetch){
@@ -88,6 +99,7 @@ const Form1CreateAdContainer = (props) => {
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
             getCarManufacturers = {getCarManufacturers}
+            getCarModels = {getCarModels}
             getCarTypes ={getCarTypes}
         />   
                 
