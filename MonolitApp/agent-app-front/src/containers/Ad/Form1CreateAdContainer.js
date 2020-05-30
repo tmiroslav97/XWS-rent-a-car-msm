@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Form1CreateAd from '../../components/Ad/Form1CreateAd';
-import { carManufacturersSelector } from '../../store/codebook/selectors';
-import { fetchAllCarManufacturers } from '../../store/codebook/actions';
+import { carManufacturersSelector, carTypesSelector } from '../../store/codebook/selectors';
+import { fetchAllCarManufacturers, fetchAllCarTypes } from '../../store/codebook/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
 
 const Form1CreateAdContainer = (props) => {
@@ -13,6 +13,7 @@ const Form1CreateAdContainer = (props) => {
     const [distanceLimit, setDistanceLimit] = useState();
 
     const carManufacturers = useSelector(carManufacturersSelector);
+    const carTypes = useSelector(carTypesSelector);
 
 
     const handleForm1 = (event) => {
@@ -50,30 +51,46 @@ const Form1CreateAdContainer = (props) => {
         dispatch(
             fetchAllCarManufacturers()
         );
-    });
+        dispatch(
+            fetchAllCarTypes()
+        );
+    }, []);
+
+    const getCarManufacturers = () => {
+        const listCarMan = [];
+        if(carManufacturers.isFetch){
+            carManufacturers.data.map((carManufacturer)=> {
+                listCarMan.push(<option key={carManufacturer.id}>{carManufacturer.name}</option>);
+            })
+        }
+        return listCarMan;
+    }
+
+    const getCarTypes = () => {
+        const listCarType = [];
+        if(carTypes.isFetch){
+            carTypes.data.map((carType)=> {
+                listCarType.push(<option key={carType.id}>{carType.name}</option>);
+            })
+        }
+        return listCarType;
+    }
 
     return (
-        <div>
-        {
-         carManufacturers.isFetch ?  
-            <Form1CreateAd
-                onSubmit={handleForm1}
-                validated={validated}
-                distanceLimitFlag={distanceLimitFlag}
-                handleDistanceLimitFlag={handleDistanceLimitFlag}
-                activeStep={props.activeStep}
-                steps={props.steps}
-                isStepOptional={props.isStepOptional}
-                handleSkip={props.handleSkip}
-                handleReset={props.handleReset}
-                carManufacturers={carManufacturers.data}
-            /> 
-             :<SpinnerContainer />
-        } 
-        
-        </div>
-        
-        
+        <Form1CreateAd
+            onSubmit={handleForm1}
+            validated={validated}
+            distanceLimitFlag={distanceLimitFlag}
+            handleDistanceLimitFlag={handleDistanceLimitFlag}
+            activeStep={props.activeStep}
+            steps={props.steps}
+            isStepOptional={props.isStepOptional}
+            handleSkip={props.handleSkip}
+            handleReset={props.handleReset}
+            getCarManufacturers = {getCarManufacturers}
+            getCarTypes ={getCarTypes}
+        />   
+                
     );
 }
 export default Form1CreateAdContainer;

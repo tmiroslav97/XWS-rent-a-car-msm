@@ -345,7 +345,6 @@ export function* fetchAllCarManufacturers() {
     const { payload } = yield take(FETCH_ALL_CAR_MANUFACTURERS);
     yield put(putCarManufacturers({ 'isFetch': false }));
     const data = yield call(CodebookService.fetchAllCarManufacturers, payload);
-    console.log(data);
     yield put(putCarManufacturers({
         'data': data,
         'isFetch': true

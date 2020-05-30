@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CreateAd from '../../components/Ad/CreateAd';
 import { createdAd } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
@@ -8,7 +8,6 @@ import Form3CreateAdContainer from './Form3CreateAdContainer';
 import Form4CreateAdContainer from './Form4CreateAdContainer';
 import Form5CreateAdContainer from './Form5CreateAdContainer';
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
 
 
 const CreateAdContainer = () => {
@@ -25,7 +24,6 @@ const CreateAdContainer = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
     const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];
-    // const classes = useStyles();
 
 
     const [formData, setFormData] = useState({
@@ -49,22 +47,7 @@ const CreateAdContainer = () => {
         id: null,
         carCalendarTermCreateDTOList: null
     });
-
     
-
-    // const useStyles = makeStyles((theme) => ({
-    //     root: {
-    //         width: '100%',
-    //     },
-    //     button: {
-    //         marginRight: theme.spacing(1),
-    //     },
-    //     instructions: {
-    //         marginTop: theme.spacing(1),
-    //         marginBottom: theme.spacing(1),
-    //     },
-    // }));
-
     const handleCreatedAd = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -199,7 +182,7 @@ const CreateAdContainer = () => {
     const handleReset = () => {
         setActiveStep(0);
     };
-
+      
 
     return (
         <Container>

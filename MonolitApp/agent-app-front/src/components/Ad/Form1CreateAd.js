@@ -16,17 +16,7 @@ const Form1CreateAd = (props) => {
                         <Form.Group as={Col}>
                             <Form.Label>Proizvodjac</Form.Label>
                             <Form.Control as="select" required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac" >   
-                               {
-                                props.carManufacturers.map((carManufacturer) => {
-                                    console.log(carManufacturer.name);
-                                    // return (
-                                        
-                                    //     <option key={carManufacturer.name} >
-                                    //         {carManufacturer.name}
-                                    //     </option>
-                                    // );
-                                })
-                                }
+                               {props.getCarManufacturers()}
                             </Form.Control>
                             
                         </Form.Group>
@@ -40,11 +30,10 @@ const Form1CreateAd = (props) => {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Tip</Form.Label>
-                            <Form.Control as="select" defaultValue="Choose..." required name="carType" id="txtCarType" placeholder="Tip" >
-                                <option>Choose...</option>
-                                <option>...</option>
+                            <Form.Control as="select" required name="carType" id="txtCarType" placeholder="Tip" >
+                                {props.getCarTypes()}
                             </Form.Control>
-                            {/* <Form.Control required name="carType" id="txtCarType" type="text" placeholder="Tip" /> */}
+                           
                         </Form.Group>
                     </Col>
                     <Col>
