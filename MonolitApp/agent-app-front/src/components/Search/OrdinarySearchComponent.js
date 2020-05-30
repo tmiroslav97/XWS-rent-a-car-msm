@@ -16,81 +16,70 @@ import 'nouislider/src/nouislider.pips.less';
 const OrdinarySearchComponent = (props) => {
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
+    const [toggleAdvancedSearch, setToggled] = useState(false);
+
     return (
         
         <Container>
             <br />
             <Row>
                 <Col>
-                <Accordion defaultActiveKey="0">
-                    <Card >
-                        <Card.Header>
-                        <Accordion.Toggle as={Button} variant="link" eventKey="0"  >
-                           Obicna pretraga
-                        </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="0">
-               
+                    <Card >    
                         <Card.Body>
                         <Form>
-                                <Form.Group controlId="formBasicLokacija">
-                                    <Form.Label>Lokacija</Form.Label>
-                                    <Form.Control type="text" placeholder="Unesite naziv lokacije..." />
-                                    <Form.Text className="text-muted">
-                                    </Form.Text>
-                                </Form.Group>
-                                <Form.Group controlId="formBasicLokacija">
-                                    <Form.Label>Datum od</Form.Label>
-                                    <Form.Control type="date"  />
-                                </Form.Group>
-                               
-                            {/* <Form.Group controlId="formBasicPassword">
-                                <Form.Label>Izaberite datum</Form.Label>
-                                <DateRangePicker
-                                    startDate={startDate}
-                                    endDate={endDate}
-                                    onStartDateChange={setStartDate}
-                                    onEndDateChange={setEndDate}
-                                    minimumDate={new Date()}
-                                    minimumLength={1}
-                                    format='dd MMM yyyy'
-                                    locale={enGB}
-                                 
-                                    >
-                                    {({ startDateInputProps, endDateInputProps, focus }) => (
-                                        <div className='date-range'>
-                                        <input
-                                            className={'input' + (focus === START_DATE ? ' -focused' : '')}
-                                            {...startDateInputProps}
-                                            placeholder='Pocetak datuma'
-                                        />
-                                        <span className='date-range_arrow' />
-                                        <input
-                                            className={'input' + (focus === END_DATE ? ' -focused' : '')}
-                                            {...endDateInputProps}
-                                            placeholder='Kraj datuma'
-                                        />
-                                        </div>
-                                    )}
-                            </DateRangePicker>
-                            </Form.Group> */}
-
-                     
-                            <Button variant="primary" type="submit">
-                                Pretrazi
-                            </Button>
-                        </Form>
-                        </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                    <Card>
-                        <Card.Header>
-                        <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                            Napredna pretraga
-                        </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="1">
-                        <Card.Body>
+                            <Row>
+                                <Col>
+                                    <Form.Group controlId="formBasicLokacija">
+                                        <Form.Label>Lokacija</Form.Label>
+                                        <Form.Control type="text" placeholder="Unesite naziv lokacije..." />
+                                        <Form.Text className="text-muted">
+                                        </Form.Text>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group controlId="formBasicLokacija">
+                                        <Form.Label>Datum od</Form.Label>
+                                        <Form.Control type="date"  />
+                                    </Form.Group>
+                                    {/* <Form.Group controlId="formBasicPassword">
+                                        <Form.Label>Izaberite datum</Form.Label>
+                                        <DateRangePicker
+                                            startDate={startDate}
+                                            endDate={endDate}
+                                            onStartDateChange={setStartDate}
+                                            onEndDateChange={setEndDate}
+                                            minimumDate={new Date()}
+                                            minimumLength={1}
+                                            format='dd MMM yyyy'
+                                            locale={enGB}
+                                        
+                                            >
+                                            {({ startDateInputProps, endDateInputProps, focus }) => (
+                                                <div className='date-range'>
+                                                <input
+                                                    className={'input' + (focus === START_DATE ? ' -focused' : '')}
+                                                    {...startDateInputProps}
+                                                    placeholder='Pocetak datuma'
+                                                />
+                                                <span className='date-range_arrow' />
+                                                <input
+                                                    className={'input' + (focus === END_DATE ? ' -focused' : '')}
+                                                    {...endDateInputProps}
+                                                    placeholder='Kraj datuma'
+                                                />
+                                                </div>
+                                            )}
+                                        </DateRangePicker>
+                                    </Form.Group> */}
+                                </Col>
+                            </Row>
+                            <br />
+                            <Button variant="outline-primary" onClick={() => setToggled(!toggleAdvancedSearch)}>
+                                Napredna pretraga 
+                            </Button>{' '}
+                            <br />
+                            <br />
+                        { toggleAdvancedSearch &&
                             <Form>
                                 <Row>
                                     <Col>
@@ -140,7 +129,7 @@ const OrdinarySearchComponent = (props) => {
                                         </Form.Group>
                                         <Form.Group>
                                             <Form.Label>Planirana kilometraza</Form.Label>
-                                            <Form.Control required name="mileage" id="numMileage" type="number" placeholder="Predjeni kilometri" defaultValue="34" />
+                                            <Form.Control required name="mileageKM" id="numMileageKM" type="number" placeholder="Predjeni kilometri" defaultValue="34" />
                                         </Form.Group>
                                         <Form.Group >
                                             <Form.Label>Broj sedista za decu</Form.Label>
@@ -157,7 +146,7 @@ const OrdinarySearchComponent = (props) => {
                                             <br />
                                             <Nouislider
                                             range={{min: 0, max: 1000}}
-                                            start={[100, 500]}
+                                            start={[0, 100]}
                                             tooltips />
 
                                         </Form.Group>
@@ -166,13 +155,17 @@ const OrdinarySearchComponent = (props) => {
                                             <Form.Check name="cdw" id="chbCDW" type="checkbox" label="Da li postoji opcija kupovine Collision Damage Waiver protekcije?" onChange={props.handleCDW} />
                                         </Form.Group>
                                     </Col>
-                                </Row>
-                                <Button type="submit">Pretrazi</Button>
+                                </Row>                        
                             </Form>
+                        } 
+                            <br />
+
+                            <Button variant="primary" type="submit">
+                                Pretrazi
+                            </Button>
+                        </Form>
                         </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                    </Accordion>
+                    </Card>        
                 </Col>
             </Row>
             <br />
