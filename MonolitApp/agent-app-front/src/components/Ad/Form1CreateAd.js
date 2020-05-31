@@ -39,7 +39,10 @@ const Form1CreateAd = (props) => {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Godina proizvodnje</Form.Label>
-                            <Form.Control required name="year" id="dateYear" type="date" max="2020-05-25" placeholder="Godina proizvodnje" />
+                            <Form.Control required name="year" id="dateYear" type="date" 
+                            max={props.getCurrentDate()} 
+                            // defaultValue={props.getCurrentDate()}
+                            placeholder="Godina proizvodnje" />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Predjeni kilometri</Form.Label>

@@ -11,9 +11,12 @@ const Form1CreateAdContainer = (props) => {
 
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
     const [distanceLimit, setDistanceLimit] = useState();
+    const maxDate = new Date();
+
 
     const carManufacturers = useSelector(carManufacturersSelector);
     const carTypes = useSelector(carTypesSelector);
+
 
 
     const handleForm1 = (event) => {
@@ -38,7 +41,7 @@ const Form1CreateAdContainer = (props) => {
             props.handleNext();
             console.log(props.formData);
             setValidated(false);
-            
+
         }
     };
 
@@ -58,8 +61,8 @@ const Form1CreateAdContainer = (props) => {
 
     const getCarManufacturers = () => {
         const listCarMan = [];
-        if(carManufacturers.isFetch){
-            carManufacturers.data.map((carManufacturer)=> {
+        if (carManufacturers.isFetch) {
+            carManufacturers.data.map((carManufacturer) => {
                 listCarMan.push(<option key={carManufacturer.id}>{carManufacturer.name}</option>);
             })
         }
@@ -68,23 +71,41 @@ const Form1CreateAdContainer = (props) => {
 
     const getCarModels = () => {
         const listCarModel = [];
-        if(carManufacturers.isFetch){
+        if (carManufacturers.isFetch) {
             console.log(carManufacturers.data);
             // carManufacturers.data.carModels.map((carModel)=> {
             //     listCarModel.push(<option key={carModel.id}>{carModel.name}</option>);
             // })
         }
+
         return listCarModel;
     }
 
     const getCarTypes = () => {
         const listCarType = [];
-        if(carTypes.isFetch){
-            carTypes.data.map((carType)=> {
+        if (carTypes.isFetch) {
+            carTypes.data.map((carType) => {
                 listCarType.push(<option key={carType.id}>{carType.name}</option>);
             })
         }
         return listCarType;
+    }
+
+    const getCurrentDate = () => {
+
+        let newDate = new Date()
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        let rez = "";
+        if(month < 10){
+            rez = year + "-0" + month + "-" + date;
+        }else{
+            rez = year + "-" + month + "-" + date;
+        }
+        
+        console.log(rez)
+        return rez;
     }
 
     return (
@@ -98,11 +119,12 @@ const Form1CreateAdContainer = (props) => {
             isStepOptional={props.isStepOptional}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
-            getCarManufacturers = {getCarManufacturers}
-            getCarModels = {getCarModels}
-            getCarTypes ={getCarTypes}
-        />   
-                
+            getCarManufacturers={getCarManufacturers}
+            getCarModels={getCarModels}
+            getCarTypes={getCarTypes}
+            getCurrentDate={getCurrentDate}
+        />
+
     );
 }
 export default Form1CreateAdContainer;
