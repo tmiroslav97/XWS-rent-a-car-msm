@@ -34,6 +34,12 @@ public class CarManufacturerController {
         return new ResponseEntity<>(carManufacturerService.findById(id), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/{id}/car-model", method = RequestMethod.GET)
+    public ResponseEntity<?> getCarModelsByCarManufacturer(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(carManufacturerService.findCarModelsById(id), HttpStatus.OK);
+    }
+
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<?> createCarManufacturer(@RequestBody String name) {
