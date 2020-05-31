@@ -99,15 +99,13 @@ const OrdinarySearchComponent = (props) => {
                                     <Form.Group >
                                         <Form.Label>Menjac</Form.Label>
                                         <Form.Control as="select" defaultValue="Choose..." required name="gearboxType" id="txtGearboxType" type="text" placeholder="Menjac" >
-                                            <option>Choose...</option>
-                                            <option>...</option>
+                                            {props.getGearboxTypes()}   
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Tip goriva</Form.Label>
                                         <Form.Control as="select" defaultValue="Choose..." required name="fuelType" id="txtFuelType" type="text" placeholder="Tip goriva" >
-                                            <option>Choose...</option>
-                                            <option>...</option>
+                                            {props.getFuelTypes()}
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
