@@ -10,14 +10,14 @@ const Form1CreateAd = (props) => {
                     <Col>
                         <Form.Group as={Col}>
                             <Form.Label>Naziv oglasa</Form.Label>
-                            <Form.Control required name="name" type="text" id="txtName" placeholder="Naziv oglasa"/>
+                            <Form.Control required name="name" type="text" id="txtName" placeholder="Naziv oglasa" />
                         </Form.Group>
 
                         <Form.Group as={Col}>
                             <Form.Label>Proizvodjac</Form.Label>
                             <Form.Control as="select" required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac"
-                                onChange={props.handleCarManufacturers} >   
-                               {props.getCarManufacturers()}
+                                onChange={props.handleCarManufacturers} >
+                                {props.getCarManufacturers()}
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col}>
@@ -40,29 +40,33 @@ const Form1CreateAd = (props) => {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Godina proizvodnje</Form.Label>
-                            <Form.Control required name="year" id="dateYear" type="date" 
-                            max={props.getCurrentDate()} 
-                            // defaultValue={props.getCurrentDate()}
-                            placeholder="Godina proizvodnje" />
+                            <Form.Control required name="year" id="dateYear" type="date"
+                                max={props.getCurrentDate()}
+                                // defaultValue={props.getCurrentDate()}
+                                placeholder="Godina proizvodnje" />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Predjeni kilometri</Form.Label>
-                            <Form.Control required name="mileage" id="numMileage" 
-                            type="number" min="0" max="10000000" placeholder="Predjeni kilometri"  />
+                            <Form.Control required name="mileage" id="numMileage"
+                                type="number" min="0" max="10000000" pattern="[0-9]{7}"  placeholder="Predjeni kilometri" />
+                            <Form.Control.Feedback type="invalid">
+                                min 0 max 10000000 km
+                            </Form.Control.Feedback>
                         </Form.Group>
-
-
                         <Form.Group as={Col} >
                             <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"
-                                onChange={props.handleDistanceLimitFlag}/>
+                                onChange={props.handleDistanceLimitFlag} />
                         </Form.Group>
                         {props.distanceLimitFlag ?
                             <Form.Group as={Col}>
                                 <Form.Label>Unesi kilometrazu</Form.Label>
                                 <Form.Control name="distanceLimit" required onChange={props.handleDistanceLimit}
-                                 id="txtDistanceLimit" type="number" placeholder="Kilometraza" min="0" max="10000000" />
+                                    id="txtDistanceLimit" type="number" pattern="[0-9]{7}" placeholder="Kilometraza" min="0" max="10000000" />
+                                <Form.Control.Feedback type="invalid">
+                                    min 0 max 10000000 km
+                                </Form.Control.Feedback>
                             </Form.Group>
-                            : 
+                            :
                             null
                         }
                     </Col>

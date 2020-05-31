@@ -16,6 +16,15 @@ const Form1CreateAdContainer = (props) => {
     const carTypes = useSelector(carTypesSelector);
     const carModels = useSelector(carModelsSelector);
 
+    useEffect(() => {
+        dispatch(
+            fetchAllCarManufacturers()
+        );
+        dispatch(
+            fetchAllCarTypes()
+        );
+    }, []);
+
     const handleForm1 = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -49,15 +58,6 @@ const Form1CreateAdContainer = (props) => {
     const handleDistanceLimit = (event) => {
         setDistanceLimit(event.target.value);
     };
-
-    useEffect(() => {
-        dispatch(
-            fetchAllCarManufacturers()
-        );
-        dispatch(
-            fetchAllCarTypes()
-        );
-    }, []);
 
     const getCarManufacturers = () => {
         const listCarMan = [];
