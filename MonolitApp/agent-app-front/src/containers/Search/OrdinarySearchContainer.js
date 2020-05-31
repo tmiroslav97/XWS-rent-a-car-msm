@@ -8,6 +8,8 @@ import { fetchAllCarManufacturers, fetchAllCarTypes, fetchAllCarModels, fetchAll
 
 const OrdinarySearchContainer = () => {
     const dispatch = useDispatch();
+    const [validated, setValidated] = useState(false);
+
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [toggleAdvancedSearch, setToggled] = useState(false);
@@ -100,7 +102,7 @@ const OrdinarySearchContainer = () => {
 
     const handleChange1 = (date) => {
         setStartDate(date.target.value);
-        console.log(date.target.value);
+        console.log(startDate);
 
     };
 
@@ -138,6 +140,29 @@ const OrdinarySearchContainer = () => {
         console.log(e.target.checked)
         
     }
+
+    const handleForm = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            setValidated(true);
+        } else {
+
+            let data = {
+                'location': form.name.location,
+                'startDateTime': startDate,
+                'endDate': endDate,
+                
+            }
+            console.log(data)
+            let formData = new FormData(form);
+            formData.append('data', JSON.stringify(data));
+            // dispatch(createdAd(formData));
+            setValidated(false);
+        }
+    };
+
     return (
 
         <Container>
@@ -145,6 +170,8 @@ const OrdinarySearchContainer = () => {
             <Row>
                 <Col>
                     <OrdinarySearchComponent
+                        onSubmit={handleForm}
+                        validated={validated}
                         startDate={startDate}
                         endDate={endDate}
                         toggleAdvancedSearch={toggleAdvancedSearch}

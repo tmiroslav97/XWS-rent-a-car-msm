@@ -27,12 +27,12 @@ const OrdinarySearchComponent = (props) => {
 
         <Card >
             <Card.Body>
-                <Form>
+                <Form id="search" onSubmit={props.onSubmit} noValidate validated={props.validated}>
                     <Row>
                         <Col>
                             <Form.Group controlId="formBasicLokacija">
                                 <Form.Label>Lokacija</Form.Label>
-                                <Form.Control type="text" name="location" onChange={props.hanleLocation} placeholder="Unesite naziv lokacije..." />
+                                <Form.Control type="text" required name="location" onChange={props.hanleLocation} placeholder="Unesite naziv lokacije..." />
                                 <Form.Text className="text-muted">
                                 </Form.Text>
                             </Form.Group>
@@ -46,7 +46,7 @@ const OrdinarySearchComponent = (props) => {
                         <Col>
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Label>Izaberite datum i vrijeme preuzimanja</Form.Label>
-                                <Form.Control type="datetime-local"
+                                <Form.Control type="datetime-local" required name="startDateTime"
                                     selected={props.startDate}
                                     onChange={props.handleChange1}
                                 />
@@ -57,7 +57,7 @@ const OrdinarySearchComponent = (props) => {
                         <Col>
                             <Form.Group>
                                 <Form.Label>Izaberite datum i vrijeme povratka</Form.Label>
-                                <Form.Control type="datetime-local"
+                                <Form.Control type="datetime-local" required name="startDateTime"
                                     selected={props.endDate}
                                     onChange={props.handleChange2}
                                 />
@@ -76,25 +76,22 @@ const OrdinarySearchComponent = (props) => {
                                 <Col>
                                     <Form.Group>
                                         <Form.Label>Proizvodjac</Form.Label>
-                                        <Form.Control as="select" required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac"
+                                        <Form.Control as="select" defaultValue="Choose..." required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac"
                                             onChange={props.handleCarManufacturers} >
                                             {props.getCarManufacturers()}
                                         </Form.Control>
-                                        {/* <Form.Control required name="carManufacturer" id="txtCarManufacturer" type="combobox" placeholder="Proizvodjac" /> */}
                                     </Form.Group>
                                     <Form.Group >
                                         <Form.Label>Model</Form.Label>
                                         <Form.Control as="select" defaultValue="Choose..." required name="carModel" id="txtCarModel" placeholder="Model">
                                             {props.getCarModels()}  
                                         </Form.Control>
-                                        {/* <Form.Control required name="carModel" id="txtCarModel" type="text" placeholder="Model" /> */}
                                     </Form.Group>
                                     <Form.Group >
                                         <Form.Label>Tip</Form.Label>
                                         <Form.Control as="select" defaultValue="Choose..." required name="carType" id="txtCarType" placeholder="Tip" >
                                             {props.getCarTypes()}
                                         </Form.Control>
-                                        {/* <Form.Control required name="carType" id="txtCarType" type="text" placeholder="Tip" /> */}
                                     </Form.Group>
                                     <Form.Group >
                                         <Form.Label>Menjac</Form.Label>

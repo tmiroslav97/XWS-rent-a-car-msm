@@ -8,6 +8,7 @@ import CarModelContainer from '../containers/Codebooks/CarModelContainer';
 import CarTypeContainer from '../containers/Codebooks/CarTypeContainer';
 import FuelTypeContainer from '../containers/Codebooks/FuelTypeContainer';
 import GearboxTypeContainer from '../containers/Codebooks/GearboxTypeContainer';
+import AdListContainer from '../containers/Ad/AdListContainer';
 
 
 const PanelContainer = () => {
@@ -54,6 +55,11 @@ const PanelContainer = () => {
                                     <Nav.Link eventKey="gearbox-type">Tipovi mjenjača</Nav.Link>
                                 </Nav.Item>
                             }
+                            
+                            <Nav.Item>
+                                <Nav.Link eventKey="ads">Oglasi</Nav.Link>
+                            </Nav.Item>
+                            
                         </Nav>
                     </Col>
                     <Col md={10} sm={10} xs={12}>
@@ -72,6 +78,9 @@ const PanelContainer = () => {
                             </Tab.Pane>
                             <Tab.Pane eventKey="gearbox-type">
                                 <GearboxTypeContainer />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="ads">
+                                <AdListContainer />
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>
