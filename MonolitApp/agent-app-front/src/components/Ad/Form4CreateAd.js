@@ -1,17 +1,50 @@
 import React from 'react';
-import { Form, Col, Container, Button } from 'react-bootstrap';
+import { Form, Col, Container, Button, Table } from 'react-bootstrap';
 import { Typography } from '@material-ui/core';
 
 const Form4CreateAd = (props) => {
     return (
         <Container>
-            <Form id="step4" onSubmit={props.onSubmit} noValidate validated={props.validated}>
+            <Form id="step4" onSubmit={props.addTerm} noValidate validated={props.validated}>
                 <Form.Row>
                     <Col>
-                        Dostupnost
+                        <Form.Label>Unesi zauzece:</Form.Label>
                     </Col>
                     <Col>
-
+                        <Form.Control required name="startDate" id="startDate" type="datetime-local"
+                            min={props.getCurrentDate()}
+                            onChange={props.handleStartDate}
+                            // defaultValue={props.getCurrentDate()}
+                            placeholder="Datum pocetka"
+                        />
+                    </Col>
+                    <Col>
+                        <Form.Control required name="endDate" id="endDate" type="datetime-local"
+                            min={props.startDate}
+                            onChange={props.handleEndDate}
+                            // defaultValue={props.getCurrentDate()}
+                            placeholder="Datum kraja"
+                        />
+                    </Col>
+                    <Col>
+                        <Button type="submit">Dodaj</Button>
+                    </Col>
+                </Form.Row>
+                <br />
+                <Form.Row>
+                    <Col>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Rbr.</th>
+                                    <th className="text-right">Datum pocetka</th>
+                                    <th className="text-right">Datum kraja</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {props.getCarCalentarTermList()}
+                            </tbody>
+                        </Table>
                     </Col>
                 </Form.Row>
                 <Form.Row>
@@ -55,7 +88,8 @@ const Form4CreateAd = (props) => {
                                                 // color="primary"
                                                 // onClick={props.handleNext}
                                                 // className={classes.button}
-                                                type="submit"
+                                                // type="submit"
+                                                onClick={props.handleForm4}
                                                 className="float-right"
                                             >
                                                 Dalje

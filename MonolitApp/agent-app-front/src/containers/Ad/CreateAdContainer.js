@@ -21,6 +21,8 @@ const CreateAdContainer = () => {
     const [pricePerKm, setPricePerKm] = useState(null);
     const [pricePerKmCDW, setPricePerKmCDW] = useState(null);
     const [id, setId] = useState(null);
+    const [carCalendarTermList, setCarCalendarTermList] = useState([]);
+
 
     const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
@@ -272,6 +274,8 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
+                    carCalendarTermList={carCalendarTermList} 
+                    setCarCalendarTermList={setCarCalendarTermList}
                 ></Form4CreateAdContainer>
                 : null
             }

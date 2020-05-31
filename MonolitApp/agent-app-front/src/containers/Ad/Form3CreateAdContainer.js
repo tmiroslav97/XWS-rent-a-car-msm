@@ -47,7 +47,6 @@ const Form3CreateAdContainer = (props) => {
         setActiveToggle(1);
     };
 
-
     return (
         <Form3CreateAd
             onSubmit={handleForm3}
