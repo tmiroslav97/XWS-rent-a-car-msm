@@ -9,6 +9,7 @@ const OrdinarySearchContainer = () => {
     const [toggleAdvancedSearch, setToggled] = useState(false);
     const [lowValue, setLowValue] = useState(0);
     const [highValue, setHighValue] = useState(3000);
+    const [cdw, setCDW] = useState(false);
 
     const handleChangePrice = (e) => {
         console.log('setting level', e)
@@ -20,17 +21,36 @@ const OrdinarySearchContainer = () => {
     }
 
     const handleChange1 = (date) => {
-        setStartDate(date);
-        console.log(date);
+        setStartDate(date.target.value);
+        console.log(date.target.value);
+
     };
 
     const handleChange2 = (date) => {
-        setEndDate(date);
-        console.log(date);
+        setEndDate(date.target.value);
+        console.log(date.target.value);
     };
 
+    const hanleLocation = (location) => {
+        console.log(location.target.value)
+    }
 
+    const handleKm1 = (e) => {
+        console.log(e.target.value)
+    }
 
+    const handleKm2 = (e) => {
+        console.log(e.target.value)
+    }
+
+    const handleSeat = (e) => {
+        console.log(e.target.value)
+    }
+
+    const handleCDW = (e) =>{
+        console.log(e.target.checked)
+        
+    }
     return (
 
         <Container>
@@ -49,7 +69,12 @@ const OrdinarySearchContainer = () => {
                         handleChangePrice={handleChangePrice}
                         highValue={highValue}
                         lowValue={lowValue}
-
+                        hanleLocation={hanleLocation}
+                        handleKm1={handleKm1}
+                        handleKm2={handleKm2}
+                        handleSeat={handleSeat}
+                        handleCDW={handleCDW}
+                        setCDW={setCDW}
 
                     />
                 </Col>

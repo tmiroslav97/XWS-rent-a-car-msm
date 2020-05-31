@@ -32,7 +32,7 @@ const OrdinarySearchComponent = (props) => {
                         <Col>
                             <Form.Group controlId="formBasicLokacija">
                                 <Form.Label>Lokacija</Form.Label>
-                                <Form.Control type="text" placeholder="Unesite naziv lokacije..." />
+                                <Form.Control type="text" name="location" onChange={props.hanleLocation} placeholder="Unesite naziv lokacije..." />
                                 <Form.Text className="text-muted">
                                 </Form.Text>
                             </Form.Group>
@@ -49,13 +49,7 @@ const OrdinarySearchComponent = (props) => {
                                 <Form.Control type="datetime-local"
                                     selected={props.startDate}
                                     onChange={props.handleChange1}
-                                    showTimeSelect
-                                    timeFormat="hh:mm"
-                                    timeIntervals={30}
-                                    timeCaption="time"
-                                    dateFormat="hh:mm dd-MM-yyyy"
-                                    minDate={new Date()}
-                                    placeholderText="Unesite datum" />
+                                />
 
 
                             </Form.Group>
@@ -66,12 +60,7 @@ const OrdinarySearchComponent = (props) => {
                                 <Form.Control type="datetime-local"
                                     selected={props.endDate}
                                     onChange={props.handleChange2}
-                                    showTimeSelect
-                                    timeFormat="hh:mm"
-                                    timeCaption="time"
-                                    dateFormat="hh:mm dd-MM-yyyy"
-                                    min={new Date()}
-                                    placeholderText="Unesite datum" />
+                                />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -127,19 +116,18 @@ const OrdinarySearchComponent = (props) => {
                                 <Col>
                                     <Form.Group>
                                         <Form.Label>Predjeni kilometri</Form.Label>
-                                        <Form.Control required name="mileage" id="numMileage" type="number" placeholder="Predjeni kilometri" defaultValue="34" />
+                                        <Form.Control required name="mileage" id="numMileage" type="number" onChange={props.handleKm1} placeholder="Predjeni kilometri" defaultValue="0" />
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Planirana kilometraza</Form.Label>
-                                        <Form.Control required name="mileageKM" id="numMileageKM" type="number" placeholder="Predjeni kilometri" defaultValue="34" />
+                                        <Form.Control required name="mileageKM" id="numMileageKM" type="number" onChange={props.handleKm2} placeholder="Predjeni kilometri" defaultValue="0" />
                                     </Form.Group>
                                     <Form.Group >
                                         <Form.Label>Broj sedista za decu</Form.Label>
-                                        <Form.Control required name="childrenSeatNum" id="numChildrenSeatNum" type="number" pattern=".{0,8}" placeholder="Broj sedista za decu" defaultValue="3" />
-                                        {/* <Form.Control type="range" min="0" max="8" custom /> */}
+                                        <Form.Control required name="childrenSeatNum" id="numChildrenSeatNum" type="number" onChange={props.handleSeat} pattern=".{0,8}" placeholder="Broj sedista za decu" defaultValue="3" />
                                         <Form.Control.Feedback type="invalid">
                                             min 0 max 8 sedista
-                                            </Form.Control.Feedback>
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                     <Form.Group >
                                         <Form.Label>Unesi opseg cijene</Form.Label>
