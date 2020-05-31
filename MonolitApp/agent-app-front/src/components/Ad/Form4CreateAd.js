@@ -27,24 +27,41 @@ const Form4CreateAd = (props) => {
                         />
                     </Col>
                     <Col>
-                        <Button type="submit">Dodaj</Button>
+                        <Button type="submit" >Dodaj</Button>
                     </Col>
                 </Form.Row>
                 <br />
                 <Form.Row>
                     <Col>
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Rbr.</th>
-                                    <th className="text-right">Datum pocetka</th>
-                                    <th className="text-right">Datum kraja</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {props.getCarCalentarTermList()}
-                            </tbody>
-                        </Table>
+                        {props.flag ?
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Rbr.</th>
+                                        <th className="text-right">Datum pocetka</th>
+                                        <th className="text-right">Datum kraja</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {props.getCarCalentarTermList()}
+                                    {/* {
+                                props.carCalendarTermList.map((term) => {
+                                    return (
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{term.startDate}</td>
+                                            <td>{term.endDate}</td>
+                                        </tr>
+                                    )
+
+                                })} */}
+                                </tbody>
+                            </Table>
+                            : null}
+
+
+
                     </Col>
                 </Form.Row>
                 <Form.Row>
@@ -89,11 +106,10 @@ const Form4CreateAd = (props) => {
                                                 // onClick={props.handleNext}
                                                 // className={classes.button}
                                                 // type="submit"
-                                                onClick={props.handleForm4}
+                                                onClick={props.handleNext}
                                                 className="float-right"
                                             >
                                                 Dalje
-                                                {/* {props.activeStep === props.steps.length - 1 ? 'Dodaj' : 'Dalje'} */}
                                             </Button>
                                         </div>
                                     </div>

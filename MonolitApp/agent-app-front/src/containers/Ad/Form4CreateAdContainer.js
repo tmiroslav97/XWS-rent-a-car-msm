@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Form4CreateAd from '../../components/Ad/Form4CreateAd'
 
@@ -8,33 +8,12 @@ const Form4CreateAdContainer = (props) => {
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [flag, setFlag] = useState(true);
+    
+    // useEffect(() => {
+    //     setTimeout(props.carCalendarTermList, 2000);
+    // }, []);
 
-    const handleForm4 = () => {
-        // event.preventDefault();
-        // const form = event.target;
-        // if (form.checkValidity() === false) {
-        //     event.stopPropagation();
-        //     setValidated(true);
-        // } else {
-        //     // props.setFormData({
-        //     //     ...props.formData,
-        //     //     name: form.name.value,
-        //     //     location: form.location.value,
-        //     //     distanceLimitFlag: distanceLimitFlag,
-        //     //     distanceLimit: distanceLimit,
-        //     //     carManufacturer: form.carManufacturer.value,
-        //     //     carModel: form.carModel.value,
-        //     //     carType: form.carType.value,
-        //     //     year: form.year.value,
-        //     //     mileage: form.mileage.value
-        //     // });
-
-        //     console.log(props.formData);
-        //     setValidated(false);
-        //     props.handleNext();
-        // }
-        props.handleNext();
-    };
     const addTerm = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -42,16 +21,15 @@ const Form4CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-            console.log("moze da se doda");
-            console.log(form.startDate.value);
-            console.log(form.endDate.value);
             console.log(props.carCalendarTermList);
             props.carCalendarTermList.push({
                 'startDate': form.startDate.value,
-                'endDate': form.endDate.valu
+                'endDate': form.endDate.value
             })
             console.log(props.carCalendarTermList);
+            props.setCarCalendarTermList(props.carCalendarTermList);
             setValidated(false);
+            
         }
     }
     const getCurrentDate = () => {
@@ -85,7 +63,7 @@ const Form4CreateAdContainer = (props) => {
         let i = 1;
         props.carCalendarTermList.map((term) => {
             list.push(
-                <tr key={term.id}>
+                <tr key={i}>
                     <td>{i}</td>
                     <td>{term.startDate}</td>
                     <td>{term.endDate}</td>
@@ -99,17 +77,19 @@ const Form4CreateAdContainer = (props) => {
             );
             i++;
         })
+        // setFlag(false);
         return list;
     }
 
+
     return (
         <Form4CreateAd
-            onSubmit={handleForm4}
             addTerm={addTerm}
             validated={validated}
             activeStep={props.activeStep}
             steps={props.steps}
             isStepOptional={props.isStepOptional}
+            handleNext={props.handleNext}
             handleBack={props.handleBack}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
@@ -121,7 +101,7 @@ const Form4CreateAdContainer = (props) => {
             handleStartDate={handleStartDate}
             handleEndDate={handleEndDate}
             getCarCalentarTermList={getCarCalentarTermList}
-
+            flag={flag}
         />
     );
 }
