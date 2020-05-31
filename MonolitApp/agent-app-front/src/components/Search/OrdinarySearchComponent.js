@@ -13,11 +13,32 @@ import 'nouislider/nouislider.css';
 import 'nouislider/src/nouislider.tooltips.less';
 import 'nouislider/src/nouislider.pips.less';
 
-const OrdinarySearchComponent = (props) => {
-    const [startDate, setStartDate] = useState()
-    const [endDate, setEndDate] = useState()
-    const [toggleAdvancedSearch, setToggled] = useState(false);
 
+import DatePicker from 'react-datepicker';
+ 
+import "react-datepicker/dist/react-datepicker.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const OrdinarySearchComponent = (props) => {
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [toggleAdvancedSearch, setToggled] = useState(false);
+    const [price, setPrice] = useState();
+
+
+    const handleChange1 = (date) => {
+        setStartDate(date);
+        console.log(date);
+    };  
+   
+    const handleChange2 = (date) => {
+        setEndDate(date);
+        console.log(date);
+    };
+    const handlePrice = (price) => {
+        setPrice(price);
+        console.log(price);
+    }
     return (
         
         <Container>
@@ -37,40 +58,41 @@ const OrdinarySearchComponent = (props) => {
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <Form.Group controlId="formBasicLokacija">
-                                        <Form.Label>Datum od</Form.Label>
-                                        <Form.Control type="date"  />
+                                    <Form.Group>
                                     </Form.Group>
-                                    {/* <Form.Group controlId="formBasicPassword">
-                                        <Form.Label>Izaberite datum</Form.Label>
-                                        <DateRangePicker
-                                            startDate={startDate}
-                                            endDate={endDate}
-                                            onStartDateChange={setStartDate}
-                                            onEndDateChange={setEndDate}
-                                            minimumDate={new Date()}
-                                            minimumLength={1}
-                                            format='dd MMM yyyy'
-                                            locale={enGB}
-                                        
-                                            >
-                                            {({ startDateInputProps, endDateInputProps, focus }) => (
-                                                <div className='date-range'>
-                                                <input
-                                                    className={'input' + (focus === START_DATE ? ' -focused' : '')}
-                                                    {...startDateInputProps}
-                                                    placeholder='Pocetak datuma'
-                                                />
-                                                <span className='date-range_arrow' />
-                                                <input
-                                                    className={'input' + (focus === END_DATE ? ' -focused' : '')}
-                                                    {...endDateInputProps}
-                                                    placeholder='Kraj datuma'
-                                                />
-                                                </div>
-                                            )}
-                                        </DateRangePicker>
-                                    </Form.Group> */}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                <Form.Group controlId="formBasicPassword">
+                                    <Form.Label>Izaberite datum i vrijeme preuzimanja</Form.Label>
+                                        <Form.Control type="datetime-local"
+                                                       selected={startDate}
+                                                       onChange={ handleChange1 }
+                                                       showTimeSelect
+                                                       timeFormat="hh:mm"
+                                                       timeIntervals={30}
+                                                       timeCaption="time"
+                                                       dateFormat="hh:mm dd-MM-yyyy"
+                                                       minDate={new Date()}
+                                                       placeholderText="Unesite datum"/>
+                                       
+                                      
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Izaberite datum i vrijeme povratka</Form.Label>
+                                        <Form.Control type="datetime-local"
+                                                       selected={endDate}
+                                                       onChange={handleChange2}
+                                                       showTimeSelect
+                                                       timeFormat="hh:mm"
+                                                       timeCaption="time"
+                                                       dateFormat="hh:mm dd-MM-yyyy"
+                                                       min={new Date()}
+                                                       placeholderText="Unesite datum"/>
+                                    </Form.Group>
                                 </Col>
                             </Row>
                             <br />
@@ -145,8 +167,10 @@ const OrdinarySearchComponent = (props) => {
                                             <br />
                                             <br />
                                             <Nouislider
-                                            range={{min: 0, max: 1000}}
-                                            start={[0, 100]}
+                                            range={{min: 0, max: 10000}}
+                                            selected={price}
+                                            start={[0, 3000]}
+                                            onClick={handlePrice}
                                             tooltips />
 
                                         </Form.Group>
