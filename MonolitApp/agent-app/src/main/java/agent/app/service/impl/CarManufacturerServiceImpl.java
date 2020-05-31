@@ -1,5 +1,6 @@
 package agent.app.service.impl;
 
+import agent.app.converter.CarModelConverter;
 import agent.app.dto.codebook.CarManufacturerDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -42,6 +44,12 @@ public class CarManufacturerServiceImpl implements CarManufacturerService {
                 .build();
 
         return carManufacturerDTO;
+    }
+
+    @Override
+    public List<String> findCarModelsById(Long id) {
+        CarManufacturer carManufacturer = findById(id);
+        return CarModelConverter.fromEntityList(new ArrayList<>(carManufacturer.getCarModels()), CarModelConverter::fromEntityToString);
     }
 
     @Override
