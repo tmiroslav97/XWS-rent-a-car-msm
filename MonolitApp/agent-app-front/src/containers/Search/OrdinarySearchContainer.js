@@ -16,21 +16,17 @@ const OrdinarySearchContainer = () => {
     const [cdw, setCDW] = useState(false);
 
     const carManufacturers = useSelector(carManufacturersSelector);
+    const carModels = useSelector(carModelsSelector);
+    const carTypes = useSelector(carTypesSelector);
 
     useEffect(() => {
         dispatch(
             fetchAllCarManufacturers()
         );
+        dispatch(
+            fetchAllCarTypes()
+        );
     }, []);
-
-    const handleChangePrice = (e) => {
-        console.log('setting level', e)
-        setLowValue(e[0]);
-        setHighValue(e[1]);
-        //kasni za jedan  
-        console.log(lowValue);
-        console.log(highValue);
-    }
 
     const getCarManufacturers = () => {
         const listCarMan = [];
@@ -50,6 +46,29 @@ const OrdinarySearchContainer = () => {
             })
         );
     };
+
+    const getCarModels = () => {
+        const listCarModel = [];
+        if (carModels.isFetch) {
+            let i = 0;
+            carModels.data.map((carModel)=> {
+                listCarModel.push(<option key={i}>{carModel}</option>);
+                i++
+            })
+        }
+
+        return listCarModel;
+    }
+
+    const getCarTypes = () => {
+        const listCarType = [];
+        if (carTypes.isFetch) {
+            carTypes.data.map((carType) => {
+                listCarType.push(<option key={carType.id}>{carType.name}</option>);
+            })
+        }
+        return listCarType;
+    }
 
     const handleChange1 = (date) => {
         setStartDate(date.target.value);
@@ -72,6 +91,15 @@ const OrdinarySearchContainer = () => {
 
     const handleKm2 = (e) => {
         console.log(e.target.value)
+    }
+
+    const handleChangePrice = (e) => {
+        console.log('setting level', e)
+        setLowValue(e[0]);
+        setHighValue(e[1]);
+        //kasni za jedan  
+        console.log(lowValue);
+        console.log(highValue);
     }
 
     const handleSeat = (e) => {
@@ -108,6 +136,8 @@ const OrdinarySearchContainer = () => {
                         setCDW={setCDW}
                         getCarManufacturers={getCarManufacturers}
                         handleCarManufacturers={handleCarManufacturers}
+                        getCarModels={getCarModels}
+                        getCarTypes={getCarTypes}
 
                     />
                 </Col>
