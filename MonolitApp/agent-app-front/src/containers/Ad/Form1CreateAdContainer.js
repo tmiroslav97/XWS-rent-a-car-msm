@@ -9,9 +9,6 @@ const Form1CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
-    const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
-    const [distanceLimit, setDistanceLimit] = useState(null);
-
     const carManufacturers = useSelector(carManufacturersSelector);
     const carTypes = useSelector(carTypesSelector);
     const carModels = useSelector(carModelsSelector);
@@ -36,8 +33,8 @@ const Form1CreateAdContainer = (props) => {
                 ...props.formData,
                 name: form.name.value,
                 location: form.location.value,
-                distanceLimitFlag: distanceLimitFlag,
-                distanceLimit: distanceLimit,
+                distanceLimitFlag: props.distanceLimitFlag,
+                distanceLimit: props.distanceLimit,
                 carManufacturer: form.carManufacturer.value,
                 carModel: form.carModel.value,
                 carType: form.carType.value,
@@ -52,11 +49,11 @@ const Form1CreateAdContainer = (props) => {
     };
 
     const handleDistanceLimitFlag = (event) => {
-        setDistanceLimitFlag(event.target.checked);
+        props.setDistanceLimitFlag(event.target.checked);
     };
 
     const handleDistanceLimit = (event) => {
-        setDistanceLimit(event.target.value);
+        props.setDistanceLimit(event.target.value);
     };
 
     const getCarManufacturers = () => {
@@ -120,8 +117,9 @@ const Form1CreateAdContainer = (props) => {
         <Form1CreateAd
             onSubmit={handleForm1}
             validated={validated}
-            distanceLimitFlag={distanceLimitFlag}
+            distanceLimitFlag={props.distanceLimitFlag}
             handleDistanceLimitFlag={handleDistanceLimitFlag}
+            handleDistanceLimit={handleDistanceLimit}
             activeStep={props.activeStep}
             steps={props.steps}
             isStepOptional={props.isStepOptional}
@@ -132,7 +130,7 @@ const Form1CreateAdContainer = (props) => {
             getCarModels={getCarModels}
             getCarTypes={getCarTypes}
             getCurrentDate={getCurrentDate}
-            handleDistanceLimit={handleDistanceLimit}
+            
         />
 
     );

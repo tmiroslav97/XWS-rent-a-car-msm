@@ -6,7 +6,7 @@ const Form3CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
-    
+
 
     const handleForm3 = (event) => {
         event.preventDefault();
@@ -15,41 +15,31 @@ const Form3CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-            // props.setFormData({
-            //     ...props.formData,
-            //     name: form.name.value,
-            //     location: form.location.value,
-            //     distanceLimitFlag: distanceLimitFlag,
-            //     distanceLimit: distanceLimit,
-            //     carManufacturer: form.carManufacturer.value,
-            //     carModel: form.carModel.value,
-            //     carType: form.carType.value,
-            //     year: form.year.value,
-            //     mileage: form.mileage.value
-            // });
-            // props.setActiveStep(3);
+            props.setFormData({
+                ...props.formData,
+                id: form.id.value,
+                pricePerDay: form.pricePerDay.value,
+                pricePerKm: form.pricePerKm.value,
+                pricePerKmCDW: form.pricePerKmCDW.value,
+            });
             console.log(props.formData);
             setValidated(false);
             props.handleNext();
         }
     };
 
-
-
-    
-
     return (
         <Form3CreateAd
             onSubmit={handleForm3}
             validated={validated}
-
             activeStep={props.activeStep}
             steps={props.steps}
             isStepOptional={props.isStepOptional}
-            // handleNext={props.handleNext}
             handleBack={props.handleBack}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
+            cdw={props.cdw} 
+            distanceLimitFlag={props.distanceLimitFlag} 
         />
     );
 }

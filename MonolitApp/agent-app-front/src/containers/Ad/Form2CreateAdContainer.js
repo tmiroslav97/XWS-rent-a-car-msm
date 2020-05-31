@@ -8,9 +8,6 @@ const Form2CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
-    const [cdw, setCdw] = useState(false);
-    const [androidFlag, setAndroidFlag] = useState(false);
-
     const gearboxTypes = useSelector(gearboxTypesSelector);
     const fuelTypes = useSelector(fuelTypesSelector);
 
@@ -56,8 +53,8 @@ const Form2CreateAdContainer = (props) => {
                 gearboxType: form.gearboxType.value,
                 fuelType: form.fuelType.value,
                 childrenSeatNum: form.childrenSeatNum.value,
-                cdw: cdw,
-                androidFlag: androidFlag
+                cdw: props.cdw,
+                androidFlag: props.androidFlag
             });
             console.log(props.formData);
             setValidated(false);
@@ -66,21 +63,21 @@ const Form2CreateAdContainer = (props) => {
     };
 
     const handleCDW = (event) => {
-        setCdw(event.target.checked);
+        props.setCdw(event.target.checked);
     };
 
     const handleAndroidFlag = (event) => {
-        setAndroidFlag(event.target.checked);
+        props.setAndroidFlag(event.target.checked);
     };
 
     return (
         <Form2CreateAd
             onSubmit={handleForm2}
             validated={validated}
+            androidFlag={props.androidFlag}
             handleAndroidFlag={handleAndroidFlag}
+            cdw={props.cdw}
             handleCDW={handleCDW}
-            cdw={cdw}
-            androidFlag={androidFlag}
             activeStep={props.activeStep}
             steps={props.steps}
             isStepOptional={props.isStepOptional}

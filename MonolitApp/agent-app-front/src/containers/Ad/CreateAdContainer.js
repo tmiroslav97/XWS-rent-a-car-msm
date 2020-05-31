@@ -13,13 +13,15 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 const CreateAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
-    const [coverPhoto, setCoverPhoto] = useState();
+
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
-    const [distanceLimit, setDistanceLimit] = useState();
+    const [distanceLimit, setDistanceLimit] = useState(null);
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
+
     const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
+    const [coverPhoto, setCoverPhoto] = useState();
 
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
@@ -78,8 +80,7 @@ const CreateAdContainer = () => {
                     'pricePerKm': form.pricePerKm.value,
                     'pricePerKmCDW': form.pricePerKmCDW.value,
                     'pricePerDay': form.pricePerDay.value,
-                    'id': 0,
-                    // 'id': form.id.value,
+                    'id': form.id.value,
                 },
                 'carCalendarTermCreateDTOList': null
             }
@@ -219,6 +220,8 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
+                    distanceLimitFlag={distanceLimitFlag} setDistanceLimitFlag={setDistanceLimitFlag}
+                    distanceLimit={distanceLimit} setDistanceLimit={setDistanceLimit}
                 ></Form1CreateAdContainer>
                 : null
             }
@@ -232,6 +235,8 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
+                    cdw={cdw} setCdw={setCdw}
+                    androidFlag={androidFlag} setAndroidFlag={setAndroidFlag}
                 ></Form2CreateAdContainer>
                 : null
             }
@@ -245,6 +250,9 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
+                    cdw={cdw} setCdw={setCdw}
+                    distanceLimitFlag={distanceLimitFlag} setDistanceLimitFlag={setDistanceLimitFlag}
+
                 ></Form3CreateAdContainer>
                 : null
             }
