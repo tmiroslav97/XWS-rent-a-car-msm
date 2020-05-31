@@ -59,7 +59,7 @@ const Form1CreateAd = (props) => {
                         {props.distanceLimitFlag ?
                             <Form.Group as={Col}>
                                 <Form.Label>Unesi kilometrazu</Form.Label>
-                                <Form.Control name="distanceLimit" required
+                                <Form.Control name="distanceLimit" required onChange={props.handleDistanceLimit}
                                  id="txtDistanceLimit" type="number" placeholder="Kilometraza" min="0" max="10000000" />
                             </Form.Group>
                             : 

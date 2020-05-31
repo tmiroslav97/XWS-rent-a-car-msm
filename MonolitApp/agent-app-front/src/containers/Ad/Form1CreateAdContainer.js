@@ -10,6 +10,7 @@ const Form1CreateAdContainer = (props) => {
     const [validated, setValidated] = useState(false);
 
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
+    const [distanceLimit, setDistanceLimit] = useState(null);
 
     const carManufacturers = useSelector(carManufacturersSelector);
     const carTypes = useSelector(carTypesSelector);
@@ -27,7 +28,7 @@ const Form1CreateAdContainer = (props) => {
                 name: form.name.value,
                 location: form.location.value,
                 distanceLimitFlag: distanceLimitFlag,
-                distanceLimit: form.distanceLimit.value,
+                distanceLimit: distanceLimit,
                 carManufacturer: form.carManufacturer.value,
                 carModel: form.carModel.value,
                 carType: form.carType.value,
@@ -43,6 +44,10 @@ const Form1CreateAdContainer = (props) => {
 
     const handleDistanceLimitFlag = (event) => {
         setDistanceLimitFlag(event.target.checked);
+    };
+
+    const handleDistanceLimit = (event) => {
+        setDistanceLimit(event.target.value);
     };
 
     useEffect(() => {
@@ -127,6 +132,7 @@ const Form1CreateAdContainer = (props) => {
             getCarModels={getCarModels}
             getCarTypes={getCarTypes}
             getCurrentDate={getCurrentDate}
+            handleDistanceLimit={handleDistanceLimit}
         />
 
     );
