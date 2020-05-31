@@ -4,30 +4,60 @@ import OrdinarySearchComponent from '../../components/Search/OrdinarySearchCompo
 
 
 const OrdinarySearchContainer = () => {
-    // const dispatch = useDispatch();
-    // const ads = useSelector(adsSelector);
-    // const isFetchAds = ads.isFetch;
-    // const [nextPage, setNextPage] = useState(ads.nextPage);
-    // const [size, setSize] = useState(ads.size);
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [toggleAdvancedSearch, setToggled] = useState(false);
+    const [lowValue, setLowValue] = useState(0);
+    const [highValue, setHighValue] = useState(3000);
 
-    // useEffect(() => {
-    //     dispatch(
-    //         fetchAds({
-    //             nextPage,
-    //             size
-    //         })
-    //     );
-    // }, [nextPage, size]);
+    const handleChangePrice = (e) => {
+        console.log('setting level', e)
+        setLowValue(e[0]);
+        setHighValue(e[1]);
+        //kasni za jedan  
+        console.log(lowValue);
+        console.log(highValue);
+    }
+
+    const handleChange1 = (date) => {
+        setStartDate(date);
+        console.log(date);
+    };
+
+    const handleChange2 = (date) => {
+        setEndDate(date);
+        console.log(date);
+    };
 
 
 
-    return(
-       
+    return (
+
         <Container>
-            <OrdinarySearchComponent></OrdinarySearchComponent>
+            <br />
+            <Row>
+                <Col>
+                    <OrdinarySearchComponent
+                        startDate={startDate}
+                        endDate={endDate}
+                        toggleAdvancedSearch={toggleAdvancedSearch}
+                        setStartDate={setStartDate}
+                        setEndDate={setEndDate}
+                        setToggled={setToggled}
+                        handleChange1={handleChange1}
+                        handleChange2={handleChange2}
+                        handleChangePrice={handleChangePrice}
+                        highValue={highValue}
+                        lowValue={lowValue}
+
+
+                    />
+                </Col>
+            </Row>
+            <br />
         </Container>
 
-       
+
     );
 }
 
