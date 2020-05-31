@@ -15,13 +15,14 @@ const Form1CreateAd = (props) => {
 
                         <Form.Group as={Col}>
                             <Form.Label>Proizvodjac</Form.Label>
-                            <Form.Control as="select" required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac" >   
+                            <Form.Control as="select" required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac"
+                                onChange={props.handleCarManufacturers} >   
                                {props.getCarManufacturers()}
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Model</Form.Label>
-                            <Form.Control as="select"  required name="carModel" id="txtCarModel" placeholder="Model">
+                            <Form.Control as="select" name="carModel" id="txtCarModel" placeholder="Model">
                                 {props.getCarModels()}
                             </Form.Control>
                         </Form.Group>
@@ -46,20 +47,23 @@ const Form1CreateAd = (props) => {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Predjeni kilometri</Form.Label>
-                            <Form.Control required name="mileage" id="numMileage" type="number" placeholder="Predjeni kilometri" defaultValue="34" />
+                            <Form.Control required name="mileage" id="numMileage" 
+                            type="number" min="0" max="10000000" placeholder="Predjeni kilometri"  />
                         </Form.Group>
 
 
                         <Form.Group as={Col} >
                             <Form.Check name="distanceLimitFlag" id="chbDistanceLimitFlag" type="checkbox" label="Da li je ogranicena kilometraza?"
-                                onChange={props.handleDistanceLimitFlag} />
+                                onChange={props.handleDistanceLimitFlag}/>
                         </Form.Group>
                         {props.distanceLimitFlag ?
                             <Form.Group as={Col}>
                                 <Form.Label>Unesi kilometrazu</Form.Label>
-                                <Form.Control name="distanceLimit" id="txtDistanceLimit" type="text" placeholder="kilometraza" defaultValue="123" />
+                                <Form.Control name="distanceLimit" required
+                                 id="txtDistanceLimit" type="number" placeholder="Kilometraza" min="0" max="10000000" />
                             </Form.Group>
-                            : null
+                            : 
+                            null
                         }
                     </Col>
                 </Form.Row>
