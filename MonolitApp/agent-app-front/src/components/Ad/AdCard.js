@@ -14,7 +14,7 @@ console.log(props);
                 <Card
                     key={idx}
                     border="secondary"
-                    style={{ width: '50rem' }}
+                    // style={{ width: '50rem' }}
 
                 >
                     {/* <Card.Header>{variant.name}</Card.Header> */}

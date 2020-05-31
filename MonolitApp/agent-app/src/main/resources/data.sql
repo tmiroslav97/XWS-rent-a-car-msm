@@ -6,14 +6,22 @@ INSERT INTO authority (name)
 VALUES ('ROLE_USER');
 
 INSERT INTO user(id, email, first_name, last_name, password)
-VALUES (1, 'tomic@tomic.com', 'Tomke', 'Dazdarac', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
+VALUES (1, 'msm@msm.com', 'msm', 'msm', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
 INSERT INTO user(id, email, first_name, last_name, password)
-VALUES (2, 'tomic.miroslav97@gmail.com', 'Miroslav', 'Tomic', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
+VALUES (2, 'miroslav@gmail.com', 'Miroslav', 'Tomic', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
+INSERT INTO user(id, email, first_name, last_name, password)
+VALUES (3, 'svetlana@gmail.com', 'Svetlana', 'Antesevic', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
+INSERT INTO user(id, email, first_name, last_name, password)
+VALUES (4, 'magdalena@gmail.com', 'Magdalena', 'Lakic', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
 
 INSERT INTO user_authority(user_id, authority_id)
-VALUES (1,2);
+VALUES (1,1);
 INSERT INTO user_authority(user_id, authority_id)
-VALUES (2,1);
+VALUES (2,2);
+INSERT INTO user_authority(user_id, authority_id)
+VALUES (3,2);
+INSERT INTO user_authority(user_id, authority_id)
+VALUES (4,2);
 
 INSERT INTO publisher_user(id, deleted)
 VALUES (1, false);
