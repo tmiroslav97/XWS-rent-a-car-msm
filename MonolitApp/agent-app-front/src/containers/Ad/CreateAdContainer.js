@@ -18,6 +18,9 @@ const CreateAdContainer = () => {
     const [distanceLimit, setDistanceLimit] = useState(null);
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
+    const [pricePerKm, setPricePerKm] = useState(null);
+    const [pricePerKmCDW, setPricePerKmCDW] = useState(null);
+    const [id, setId] = useState(null);
 
     const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
@@ -252,6 +255,9 @@ const CreateAdContainer = () => {
                     handleReset={handleReset}
                     cdw={cdw} setCdw={setCdw}
                     distanceLimitFlag={distanceLimitFlag} setDistanceLimitFlag={setDistanceLimitFlag}
+                    pricePerKm={pricePerKm} setPricePerKm={setPricePerKm}
+                    pricePerKmCDW={pricePerKmCDW} setPricePerKmCDW={setPricePerKmCDW}
+                    id={id} setId={setId}
 
                 ></Form3CreateAdContainer>
                 : null
