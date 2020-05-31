@@ -13,7 +13,7 @@ class CodebookService extends HttpBaseClient {
     //for car models
     fetchAllCarModels = async payload => {
         const response = await this.getApiClient().get(
-            FINALPOINTS.CAR_MODEL_BASE
+            FINALPOINTS.CAR_MANUFACTURER_BASE + '/' + payload.id + FINALPOINTS.CAR_MODEL_BASE
         );
         return response.data;
     };

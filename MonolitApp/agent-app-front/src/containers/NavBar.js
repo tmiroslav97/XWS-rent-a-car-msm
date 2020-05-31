@@ -22,16 +22,14 @@ const NavBar = () => {
 
     return (
         <Navbar collapseOnSelect bg="light" expand="lg">
-            <Navbar.Brand onClick={() => { history.push('/') }}>Reant A Car</Navbar.Brand>
+            <Navbar.Brand onClick={() => { history.push('/') }}>Rent A Car</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link onClick={() => { history.push('/') }}>Pocetna stranica</Nav.Link>
-                    {token != null && role != null && role === 'ROLE_AGENT' && <Nav.Link href="#" onClick={() => { history.push('/agent-firm') }}>Admin panel</Nav.Link>}
-                    {token != null && role != null && role === 'ROLE_USER' && <Nav.Link href="#" onClick={() => { history.push('/end-user') }}>Admin panel</Nav.Link>}
-                    {token != null && role != null && role === 'ROLE_ADMIN' && <Nav.Link href="#" onClick={() => { history.push('/admin') }}>Admin panel</Nav.Link>}
+                    <Nav.Link onClick={() => { history.push('/') }}>Početna stranica</Nav.Link>
                 </Nav>
                 <Nav className="ml-auto">
+                    {token != null && <Nav.Link href="#" onClick={() => { history.push('/panel') }}>Radni panel</Nav.Link>}
                     {token == null && <Nav.Link href="#" onClick={() => { history.push('/login') }}>Prijava</Nav.Link>}
                     {token == null && <Nav.Link href="#" onClick={() => { history.push('/sign-up') }}>Registracija</Nav.Link>}
                     {token != null && <Nav.Link href="#" onClick={() => handleSignOut()}>Odjavi se</Nav.Link>}

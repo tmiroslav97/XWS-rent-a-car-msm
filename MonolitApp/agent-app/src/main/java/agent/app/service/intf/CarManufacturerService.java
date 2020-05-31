@@ -12,6 +12,8 @@ public interface CarManufacturerService {
 
     CarManufacturerDTO findAll(Integer page, Integer size);
 
+    List<String> findCarModelsById(Long id);
+
     Integer createCarManufacturer(String name);
 
     Integer editCarManufacturer(CarManufacturer carManufacturer);

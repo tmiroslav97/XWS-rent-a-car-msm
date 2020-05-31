@@ -5,13 +5,13 @@ const RegPage = (props) => {
 
     return (
         <Container>
-            <Row>
-                <Col md={{ span: 5, offset: 3 }} xs={12}>
+            <Row className="justify-content-center">
+                <Col md={5} xs={12} className="text-center">
                     <h2 className="border-bottom">Registracija</h2>
                 </Col>
             </Row>
-            <Row>
-                <Col md={{ span: 5, offset: 3 }} xs={12}>
+            <Row className="justify-content-center">
+                <Col md={5} xs={12}>
                     <Form noValidate validated={props.validated} id="regForm" onSubmit={props.onSubmit}>
                         <Form.Row>
                             <Form.Group as={Col} md={8}>
