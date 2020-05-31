@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import OrdinarySearchComponent from '../../components/Search/OrdinarySearchComponent';
+import { carManufacturersSelector, carTypesSelector, carModelsSelector } from '../../store/codebook/selectors';
+import { fetchAllCarManufacturers, fetchAllCarTypes, fetchAllCarModels } from '../../store/codebook/actions';
 
 
 const OrdinarySearchContainer = () => {
+    const dispatch = useDispatch();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [toggleAdvancedSearch, setToggled] = useState(false);
     const [lowValue, setLowValue] = useState(0);
     const [highValue, setHighValue] = useState(3000);
     const [cdw, setCDW] = useState(false);
+
+    const carManufacturers = useSelector(carManufacturersSelector);
+
+    useEffect(() => {
+        dispatch(
+            fetchAllCarManufacturers()
+        );
+    }, []);
 
     const handleChangePrice = (e) => {
         console.log('setting level', e)
@@ -19,6 +31,25 @@ const OrdinarySearchContainer = () => {
         console.log(lowValue);
         console.log(highValue);
     }
+
+    const getCarManufacturers = () => {
+        const listCarMan = [];
+        if (carManufacturers.isFetch) {
+            carManufacturers.data.map((carManufacturer) => {
+                listCarMan.push(<option key={carManufacturer.id}>{carManufacturer.name}</option>);
+            })
+        }
+        return listCarMan;
+    }
+
+    const handleCarManufacturers = (event) => {
+        let index = event.target.options.selectedIndex;
+        dispatch(
+            fetchAllCarModels({
+                "id" : carManufacturers.data[index].id
+            })
+        );
+    };
 
     const handleChange1 = (date) => {
         setStartDate(date.target.value);
@@ -75,6 +106,8 @@ const OrdinarySearchContainer = () => {
                         handleSeat={handleSeat}
                         handleCDW={handleCDW}
                         setCDW={setCDW}
+                        getCarManufacturers={getCarManufacturers}
+                        handleCarManufacturers={handleCarManufacturers}
 
                     />
                 </Col>

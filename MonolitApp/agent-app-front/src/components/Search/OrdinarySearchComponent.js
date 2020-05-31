@@ -76,9 +76,9 @@ const OrdinarySearchComponent = (props) => {
                                 <Col>
                                     <Form.Group>
                                         <Form.Label>Proizvodjac</Form.Label>
-                                        <Form.Control as="select" defaultValue="Choose..." required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac" >
-                                            <option>Choose...</option>
-                                            <option>sd...</option>
+                                        <Form.Control as="select" required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac"
+                                            onChange={props.handleCarManufacturers} >
+                                            {props.getCarManufacturers()}
                                         </Form.Control>
                                         {/* <Form.Control required name="carManufacturer" id="txtCarManufacturer" type="combobox" placeholder="Proizvodjac" /> */}
                                     </Form.Group>
