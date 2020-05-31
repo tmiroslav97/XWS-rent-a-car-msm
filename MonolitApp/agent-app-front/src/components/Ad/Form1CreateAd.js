@@ -35,11 +35,11 @@ const Form1CreateAd = (props) => {
                     <Col>
                         <Form.Group as={Col}>
                             <Form.Label>Mesto</Form.Label>
-                            <Form.Control required name="location" id="txtLocation" type="text" placeholder="Lokacija" defaultValue="lokacija" />
+                            <Form.Control required name="location" id="txtLocation" type="text" placeholder="Lokacija" />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Godina proizvodnje</Form.Label>
-                            <Form.Control required name="year" id="dateYear" type="date" placeholder="Godina proizvodnje" />
+                            <Form.Control required name="year" id="dateYear" type="date" max="2020-05-25" placeholder="Godina proizvodnje" />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Predjeni kilometri</Form.Label>
