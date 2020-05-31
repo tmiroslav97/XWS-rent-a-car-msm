@@ -143,14 +143,14 @@ const OrdinarySearchContainer = () => {
 
     const handleForm = (event) => {
         event.preventDefault();
+        console.log("aaaaaaaaaaaaaaaaaaa")
         const form = event.target;
         if (form.checkValidity() === false) {
             event.stopPropagation();
             setValidated(true);
         } else {
-
             let data = {
-                'location': form.name.location,
+                'location': form.location.value,
                 'startDateTime': startDate,
                 'endDate': endDate,
                 

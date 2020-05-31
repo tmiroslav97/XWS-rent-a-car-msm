@@ -43,7 +43,7 @@ const AdListContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <Col md={{offset: 1 }} xs={22}>
+                <Col >
 
                     {
                         isFetchAds ?  <AdCard ads={ads.data}/> : <SpinnerContainer />

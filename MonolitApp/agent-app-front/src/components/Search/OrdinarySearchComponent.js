@@ -147,7 +147,7 @@ const OrdinarySearchComponent = (props) => {
 
                     <Button variant="primary" type="submit">
                         Pretrazi
-                            </Button>
+                    </Button>
                 </Form>
             </Card.Body>
         </Card>
