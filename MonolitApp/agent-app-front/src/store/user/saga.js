@@ -19,6 +19,7 @@ import {
 } from '../common/actions';
 
 export function* signOut() {
+    
     yield take(SIGN_OUT);
     yield put(putToken(null));
     localStorage.removeItem('token');
