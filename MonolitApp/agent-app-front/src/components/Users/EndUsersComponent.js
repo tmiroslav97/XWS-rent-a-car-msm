@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Row, Col, Button, Table } from 'react-bootstrap'
+import { Row, Col, Button, Table } from 'react-bootstrap'
 
 const EndUsersComponent = (props) => {
 
     return (
         <Row>
-            <Col md={6} xs={12}>
+            <Col md={12} xs={12}>
                 <Table responsive>
                     <thead>
                         <tr>
@@ -26,10 +26,13 @@ const EndUsersComponent = (props) => {
                                         <td>{endUser.firstName + ' ' + endUser.lastName}</td>
                                         <td>{endUser.canceledCnt}</td>
                                         <td align="right">
-                                            <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
+                                            {!endUser.deleted && endUser.enabled ? <Button>Blokiraj</Button> : <Button>Odblokiraj</Button>}
                                         </td>
                                         <td align="right">
-                                            <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
+                                            {!endUser.deleted && endUser.obligated ? <Button>Uvedi zabranu</Button> : <Button>Skini zabranu</Button>}
+                                        </td>
+                                        <td align="right">
+                                            {endUser.deleted ? <Button>Vrati</Button> : <Button>Obriši</Button>}
                                         </td>
                                     </tr>
                                 );
