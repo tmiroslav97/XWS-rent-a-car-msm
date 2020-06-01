@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import AdDetailViewComponent from '../../components/Ad/AdDetailViewComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
-import { adsSelector } from '../../store/ad/selectors';
+
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
-
-import { fetchAds } from '../../store/ad/actions';
+import { adsSelector } from '../../store/ad/selectors'; 
+import { fetchAds, fetchAd } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
 
 
 const AdDetailViewContainer = (props) => {
     const dispatch = useDispatch();
-    // const ads = useSelector(adsSelector);
+    const ads = useSelector(adsSelector);
     // const isFetchAds = ads.isFetch;
     // const [nextPage, setNextPage] = useState(ads.nextPage);
     // const [size, setSize] = useState(ads.size);
