@@ -84,10 +84,12 @@ public class AdServiceImpl implements AdService {
         if(adCreateDTO.getPriceListCreateDTO().getId() == 0){
             //pravljenje novog cenovnika
             PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
+            //TODO 1: DODATI PUBLISHERA I DODATI OGLAS TAJ PRICE LISTI
             ad.setPriceList(priceList);
         }else{
             //dodavanje vec postojeceg cenovnika
             PriceList priceList = priceListService.findById(adCreateDTO.getPriceListCreateDTO().getId());
+            //TODO 2: DODATI OGLAS TAJ PRICE LISTI
             ad.setPriceList(priceList);
         }
 
@@ -101,6 +103,8 @@ public class AdServiceImpl implements AdService {
         }
 
         ad = this.save(ad);
+//        PriceList priceList = ad.getPriceList();
+//        priceList.getAds().add(ad);
 
         return 1;
     }

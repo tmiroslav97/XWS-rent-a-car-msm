@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.joda.time.DateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,4 +15,5 @@ public class PriceListCreateDTO {
     private Float pricePerKmCDW;
     private Float pricePerDay;
     private Long id;
+    private String publisherUsername;
 }
