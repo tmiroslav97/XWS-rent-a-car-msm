@@ -1,5 +1,6 @@
 package agent.app.controller;
 
+import agent.app.converter.AdConverter;
 import agent.app.dto.ad.AdCreateDTO;
 import agent.app.service.intf.AdService;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class AdController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
         System.out.println("Service ad !!!!!");
-        return new ResponseEntity<>(adService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(AdConverter.toAdDetailViewDTOFromAd(adService.findById(id)), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
