@@ -12,20 +12,17 @@ const AdComponent = (props) => {
             <>
                 <br />
                 <Card
-                    key={idx}
+                    // key={idx}
                     border="secondary"
-                // style={{ width: '50rem' }}
-
                 >
-                    {/* <Card.Header>{variant.name}</Card.Header> */}
                     <Card.Body>
                         <Card.Title>{variant.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{variant.carManufacturer} {variant.carModel}  </Card.Subtitle>
                         <Row>
-                            <Col>
+                            <Col md={4}>
                                 <Card.Img src="/img-ad/fiat.jpg" />
                             </Col>
-                            <Col>
+                            <Col >
                                 <br />
                                 <Row>
                                     <Col sm={2}>
@@ -74,10 +71,10 @@ const AdComponent = (props) => {
                                 <Card.Link href={'/agent-firm/ad-detail-view/' + variant.id} >Vise detalja ></Card.Link>
 
                             </Col>
-                            <Col md={2}>
+                            <Col>
                                 <br />
                                 <br />
-                                <Button variant="outline-success">Rezervisi</Button>{' '}
+                                <Button variant="outline-success">Dodja u korpu</Button>{' '}
                             </Col>
                         </Row>
                     </Card.Body>

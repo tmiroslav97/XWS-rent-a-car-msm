@@ -17,15 +17,13 @@ const AdDetailViewComponent = (props) => {
                  <br />
                  <Card 
                     border="secondary"
-                    // style={{  width: '50rem'}}  
-
                 >
-                    {/* <Card.Header as="h5">{props.ad.name}</Card.Header> */}
                     <Card.Body>
                         <Card.Title as="h4">{props.ad.name}</Card.Title>
                         <Row>
                             <Col md={5}>
-                                <Card.Img variant="top" src="holder.js/100px160" />                            </Col>
+                                <Card.Img src="/img-ad/fiat.jpg" />               
+                            </Col>
                             <Col >
                                 <ListGroup variant="flush">
                                     <ListGroup.Item>Proizvodjac: {props.ad.carManufacturer}</ListGroup.Item>
@@ -41,18 +39,16 @@ const AdDetailViewComponent = (props) => {
                         <Row>
                             <Col md={5}>
                                 <ListGroup variant="flush">
-                                    <ListGroup.Item> datum objavljivanja oglasa</ListGroup.Item>
-                                    <ListGroup.Item> broj rentiranja</ListGroup.Item>
-                                    <ListGroup.Item>   ocjena</ListGroup.Item>
-                                    <ListGroup.Item>   like</ListGroup.Item>
+                                    <ListGroup.Item>Datum objavljivanja: {props.ad.publishedDate}</ListGroup.Item>
+                                    <ListGroup.Item>Broj rentiranja: {props.ad.rentCnt}</ListGroup.Item>
+                                    <ListGroup.Item>Ocjena: neki broj </ListGroup.Item>
                                 </ListGroup>
                             </Col>
                             <Col>
                                 <ListGroup variant="flush">
                                     <ListGroup.Item>Broj sjedista za djecu:  {props.ad.childrenSeatNum}</ListGroup.Item>
-                                    <ListGroup.Item> godiste auta</ListGroup.Item>
+                                    <ListGroup.Item>Godiste: {props.ad.year}</ListGroup.Item>
                                     <ListGroup.Item>Posjedovanje android uredjaja: {androidFlag}</ListGroup.Item>
-                                    <ListGroup.Item>{props.ad.year}</ListGroup.Item>
                                 </ListGroup>
                             </Col>
                         </Row>
@@ -68,6 +64,9 @@ const AdDetailViewComponent = (props) => {
                                     <Card.Body>
                                         dsdsdsadsadasdsan
                                         asfafddsfsddddddddddddddddddddddddddd
+                                        Opisss nekii fdffdsfdsfdsfdsfdsfdsfdsfdsfcddsc
+                                        cdscdscsdc
+                                        cdscdscs
                                     </Card.Body>
                                 </Card>
                                 
