@@ -1,16 +1,15 @@
 import HttpBaseClient from './HttpBaseClient';
 
 const FINALPOINTS = {
-    CREATED_AD: '/ad',
-    FETCH_ADS: '/ad',
-    FETCH_AD: '/ad/'
+    AD_BASE: '/ad',
+    
 };
 
 class AdServices extends HttpBaseClient {
 
     createdAd = async payload => {
         const response = await this.getApiClient().post(
-            FINALPOINTS.CREATED_AD,
+            FINALPOINTS.AD_BASE,
             payload,
             {
                 headers : {
@@ -23,7 +22,7 @@ class AdServices extends HttpBaseClient {
 
     fetchAdsPaginated = async payload => {
         const response = await this.getApiClient().get(
-            FINALPOINTS.FETCH_ADS, {
+            FINALPOINTS.AD_BASE, {
                 params: {
                     nextPage: payload.nextPage,
                     size: payload.size
@@ -38,7 +37,7 @@ class AdServices extends HttpBaseClient {
         console.log("SERVICE AD")
         console.log(payload)
         const response = await this.getApiClient().get(
-            FINALPOINTS.FETCH_AD  + payload
+            FINALPOINTS.AD_BASE + "/"  + payload
         
         );
 
