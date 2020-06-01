@@ -1,6 +1,7 @@
 package agent.app.converter;
 
 import agent.app.dto.ad.AdCreateDTO;
+import agent.app.dto.ad.AdDetailViewDTO;
 import agent.app.dto.ad.AdPageDTO;
 import agent.app.model.Ad;
 import agent.app.model.enumeration.DistanceLimitEnum;
@@ -41,6 +42,29 @@ public class AdConverter {
                 .childrenSeatNum(ad.getCar().getChildrenSeatNum())
                 .fuelType(ad.getCar().getFuelType())
                 .mileage(ad.getCar().getMileage())
+                .build();
+    }
+
+    public static AdDetailViewDTO toAdDetailViewDTOFromAd(Ad ad){
+        return AdDetailViewDTO.builder()
+                .name(ad.getName())
+                .location(ad.getLocation())
+                .coverPhoto(ad.getCoverPhoto())
+                .distanceLimitFlag(ad.getDistanceLimitFlag().toString())
+                .year(ad.getCar().getYear().toString())
+                .distanceLimit(ad.getDistanceLimit())
+                .carManufacturer(ad.getCar().getCarManufacturer())
+                .carModel(ad.getCar().getCarModel())
+                .gearboxType(ad.getCar().getGearboxType())
+                .fuelType(ad.getCar().getFuelType())
+                .carType(ad.getCar().getCarType())
+                .mileage(ad.getCar().getMileage())
+                .childrenSeatNum(ad.getCar().getChildrenSeatNum())
+                .cdw(ad.getCar().getCdw())
+                .androidFlag(ad.getCar().getAndroidFlag())
+                .pricePerKm(ad.getPriceList().getPricePerKm())
+                .pricePerKmCDW(ad.getPriceList().getPricePerKmCDW())
+                .pricePerDay(ad.getPriceList().getPricePerDay())
                 .build();
     }
 }
