@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Container, Carousel } from 'react-bootstrap';
-import AdCard from "../components/Ad/AdCard";
+import AdComponent from "../components/Ad/AdComponent";
 import AdListContainer from './Ad/AdListContainer';
 
 const HomePage = () => {
@@ -46,7 +46,7 @@ const HomePage = () => {
                         </Carousel.Item>
                     </Carousel>
                     
-                    {/* <AdListContainer></AdListContainer> */}
+                    <AdListContainer/>
                    
                    
                 </Col>

@@ -3,8 +3,8 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 
 
 
-const AdCard = (props) => {
-console.log(props);
+const AdComponent = (props) => {
+    console.log(props);
 
     return (
 
@@ -14,7 +14,7 @@ console.log(props);
                 <Card
                     key={idx}
                     border="secondary"
-                    // style={{ width: '50rem' }}
+                // style={{ width: '50rem' }}
 
                 >
                     {/* <Card.Header>{variant.name}</Card.Header> */}
@@ -28,7 +28,7 @@ console.log(props);
                             <Col>
                                 <br />
                                 <Row>
-                                    <Col xs={3}>
+                                    <Col sm={2}>
                                         <Card.Img src="/img-icon/seat-num.png" />
                                     </Col>
                                     <Card.Text>
@@ -36,7 +36,7 @@ console.log(props);
                                     </Card.Text>
                                 </Row>
                                 <Row>
-                                    <Col xs={3}>
+                                    <Col sm={2}>
                                         <Card.Img src="/img-icon/location.png" />
                                     </Col>
                                     <Card.Text>
@@ -44,7 +44,7 @@ console.log(props);
                                     </Card.Text>
                                 </Row>
                                 <Row>
-                                    <Col xs={3}>
+                                    <Col sm={2}>
                                         <Card.Img src="/img-icon/price-tag.png" />
                                     </Col>
                                     <Card.Text>
@@ -56,7 +56,7 @@ console.log(props);
                             <Col>
                                 <br />
                                 <Row>
-                                    <Col xs={3}>
+                                    <Col sm={2}>
                                         <Card.Img src="/img-icon/fuel24.png" />
                                     </Col>
                                     <Card.Text>
@@ -64,7 +64,7 @@ console.log(props);
                                     </Card.Text>
                                 </Row>
                                 <Row>
-                                    <Col xs={3}>
+                                    <Col sm={2}>
                                         <Card.Img src="/img-icon/km.png" />
                                     </Col>
                                     <Card.Text>
@@ -89,4 +89,4 @@ console.log(props);
     );
 }
 
-export default AdCard;
+export default AdComponent;
