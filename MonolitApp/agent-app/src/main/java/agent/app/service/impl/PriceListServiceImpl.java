@@ -1,22 +1,17 @@
 package agent.app.service.impl;
 
-import agent.app.converter.CarModelConverter;
 import agent.app.converter.PriceListConverter;
-import agent.app.dto.PriceListCreateDTO;
+import agent.app.dto.pricelist.PriceListCreateDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.PriceList;
 import agent.app.model.PublisherUser;
-import agent.app.model.User;
 import agent.app.repository.PriceListRepository;
-import agent.app.service.intf.CarService;
 import agent.app.service.intf.PriceListService;
 import agent.app.service.intf.PublisherUserService;
-import agent.app.service.intf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,8 +41,11 @@ public class PriceListServiceImpl implements PriceListService {
 
     @Override
     public List<PriceListCreateDTO> findAllListDTOFromPublisher(String publisherUsername) {
-
-        return null;
+        List<PriceList> priceLists = publisherUserService.findPriceListsFromPublishUser(publisherUsername);
+        if(priceLists.isEmpty()){
+            return null;
+        }
+        return PriceListConverter.fromEntityList(priceLists, PriceListConverter::toCreatePriceListCreateDTOFromPriceList);
     }
 
     @Override
@@ -73,10 +71,10 @@ public class PriceListServiceImpl implements PriceListService {
     }
 
     @Override
-    public PriceList editPriceList(PriceList priceList) {
+    public Integer editPriceList(PriceList priceList) {
         this.findById(priceList.getId());
         PriceList priceList1 = priceListRepository.save(priceList);
-        return priceList1;
+        return 1;
     }
 
     @Override

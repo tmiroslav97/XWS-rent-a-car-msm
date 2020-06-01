@@ -1,4 +1,4 @@
-package agent.app.dto;
+package agent.app.dto.pricelist;
 
 import lombok.*;
 
@@ -7,11 +7,9 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 @Getter
-public class PriceListCreateDTO {
+public class PriceListDTO {
     private String creationDate;
     private Float pricePerKm;
     private Float pricePerKmCDW;
     private Float pricePerDay;
-    private Long id;
-    private String publisherUsername;
 }
