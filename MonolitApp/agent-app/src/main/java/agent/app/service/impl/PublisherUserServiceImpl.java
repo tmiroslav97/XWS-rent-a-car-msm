@@ -80,4 +80,14 @@ public class PublisherUserServiceImpl implements PublisherUserService {
 
         return publisherUser1;
     }
+
+    @Override
+    public Boolean existsByEmail(String email) {
+        return publisherUserRepository.existsByEmail(email);
+    }
+
+    @Override
+    public PublisherUser findByEmail(String email) {
+        return publisherUserRepository.findByEmail(email);
+    }
 }

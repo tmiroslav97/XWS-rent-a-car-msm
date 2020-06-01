@@ -5,10 +5,12 @@ import agent.app.dto.PriceListCreateDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.PriceList;
+import agent.app.model.PublisherUser;
 import agent.app.model.User;
 import agent.app.repository.PriceListRepository;
 import agent.app.service.intf.CarService;
 import agent.app.service.intf.PriceListService;
+import agent.app.service.intf.PublisherUserService;
 import agent.app.service.intf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class PriceListServiceImpl implements PriceListService {
     PriceListRepository priceListRepository;
 
     @Autowired
-    private UserService userService;
+    private PublisherUserService publisherUserService;
 
     @Override
     public PriceList findById(Long id) {
@@ -51,8 +53,13 @@ public class PriceListServiceImpl implements PriceListService {
     @Override
     public PriceList createPriceList(PriceListCreateDTO priceListCreateDTO) {
         PriceList priceList = PriceListConverter.toCreatePriceListFromRequest(priceListCreateDTO);
-        User user = userService.findByEmail(priceListCreateDTO.getPublisherUsername());
-
+        PublisherUser publisherUser;
+        if(!publisherUserService.existsByEmail(priceListCreateDTO.getPublisherUsername())){
+            publisherUser = publisherUserService.createPublisherUser(priceListCreateDTO.getPublisherUsername());
+        }else{
+            publisherUser = publisherUserService.findByEmail(priceListCreateDTO.getPublisherUsername());
+        }
+        priceList.setPublisherUser(publisherUser);
         priceList = this.priceListRepository.save(priceList);
         return priceList;
     }
