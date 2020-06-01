@@ -1,6 +1,7 @@
 package services.app.authenticationservice.service.intf;
 
 
+import services.app.authenticationservice.dto.EndUserPageDTO;
 import services.app.authenticationservice.model.EndUser;
 
 import java.util.List;
@@ -10,21 +11,17 @@ public interface EndUserService {
 
     List<EndUser> findAll();
 
-    Integer editEndUser();
+    EndUserPageDTO findAll(Integer page, Integer size);
 
-    Integer disableEndUser();
+    String blockOrUnblockById(Long id, Boolean status);
 
-    Integer enableEndUser();
+    String obligateOrUnobligateById(Long id, Boolean status);
 
-    Integer enableObligation();
-
-    Integer disableObligation();
-
-    Integer resetCanceledCnt();
+    String logicDeleteOrRevertById(Long id, Boolean status);
 
     Integer deleteById(Long id);
 
-    void delete();
+    void delete(EndUser endUser);
 
     EndUser save(EndUser endUser);
 }
