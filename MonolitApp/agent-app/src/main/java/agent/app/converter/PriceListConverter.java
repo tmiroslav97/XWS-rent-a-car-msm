@@ -9,7 +9,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Date;
 
-public class PriceListConverter {
+public class PriceListConverter extends AbstractConverter{
 
     public static PriceList toCreatePriceListFromRequest(PriceListCreateDTO priceListCreateDTO){
 //        DateTime dt = DateAPI.DateTimeFromDateString(priceListCreateDTO.getCreationDate());

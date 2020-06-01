@@ -2,6 +2,7 @@ package agent.app.service.impl;
 
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
+import agent.app.model.PriceList;
 import agent.app.model.PublisherUser;
 import agent.app.model.User;
 import agent.app.repository.PublisherUserRepository;
@@ -48,7 +49,7 @@ public class PublisherUserServiceImpl implements PublisherUserService {
     @Override
     public Integer deleteById(Long id) {
         PublisherUser publisherUser = findById(id);
-        delete(publisherUser);
+        this.delete(publisherUser);
         return 1;
     }
 
@@ -89,5 +90,12 @@ public class PublisherUserServiceImpl implements PublisherUserService {
     @Override
     public PublisherUser findByEmail(String email) {
         return publisherUserRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<PriceList> findPriceListsFromPublishUser(String publishUserUsername) {
+        PublisherUser publisherUser = this.findByEmail(publishUserUsername);
+        List<PriceList> priceLists = (List<PriceList>) publisherUser.getPriceLists();
+        return priceLists;
     }
 }

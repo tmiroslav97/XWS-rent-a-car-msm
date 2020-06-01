@@ -10,6 +10,8 @@ public interface PriceListService {
 
     PriceList findById(Long id);
     List<PriceList> findAll();
+    List<PriceListCreateDTO> findAllListDTO();
+    List<PriceListCreateDTO> findAllListDTOFromPublisher(String publisherUsername);
     PriceList save(PriceList priceList);
     void delete(PriceList priceList);
     PriceList createPriceList(PriceListCreateDTO priceListCreateDTO);

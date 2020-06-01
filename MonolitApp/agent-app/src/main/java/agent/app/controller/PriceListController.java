@@ -29,9 +29,20 @@ public class PriceListController {
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAllPriceList() {
-        return new ResponseEntity<>(priceListService.findAll().stream()
-                .map(PriceListConverter::toCreatePriceListCreateDTOFromPriceList)
-                .collect(Collectors.toList()), HttpStatus.OK);
+        return new ResponseEntity<>(priceListService.findAllListDTO(), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getPriceList(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(PriceListConverter.toCreatePriceListCreateDTOFromPriceList(priceListService.findById(id)),
+                HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getPriceListsFromPublishUser(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(priceListService.findAll(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")

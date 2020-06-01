@@ -1,5 +1,6 @@
 package agent.app.service.impl;
 
+import agent.app.converter.CarModelConverter;
 import agent.app.converter.PriceListConverter;
 import agent.app.dto.PriceListCreateDTO;
 import agent.app.exception.ExistsException;
@@ -15,6 +16,7 @@ import agent.app.service.intf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,6 +40,17 @@ public class PriceListServiceImpl implements PriceListService {
     }
 
     @Override
+    public List<PriceListCreateDTO> findAllListDTO() {
+        return PriceListConverter.fromEntityList(this.findAll(), PriceListConverter::toCreatePriceListCreateDTOFromPriceList);
+    }
+
+    @Override
+    public List<PriceListCreateDTO> findAllListDTOFromPublisher(String publisherUsername) {
+
+        return null;
+    }
+
+    @Override
     public PriceList save(PriceList priceList) {
         if(priceListRepository.existsById(priceList.getId())){
             throw new ExistsException(String.format("Cenovnik vec postoji."));
@@ -53,12 +66,7 @@ public class PriceListServiceImpl implements PriceListService {
     @Override
     public PriceList createPriceList(PriceListCreateDTO priceListCreateDTO) {
         PriceList priceList = PriceListConverter.toCreatePriceListFromRequest(priceListCreateDTO);
-        PublisherUser publisherUser;
-        if(!publisherUserService.existsByEmail(priceListCreateDTO.getPublisherUsername())){
-            publisherUser = publisherUserService.createPublisherUser(priceListCreateDTO.getPublisherUsername());
-        }else{
-            publisherUser = publisherUserService.findByEmail(priceListCreateDTO.getPublisherUsername());
-        }
+        PublisherUser publisherUser = publisherUserService.findByEmail(priceListCreateDTO.getPublisherUsername());
         priceList.setPublisherUser(publisherUser);
         priceList = this.priceListRepository.save(priceList);
         return priceList;
