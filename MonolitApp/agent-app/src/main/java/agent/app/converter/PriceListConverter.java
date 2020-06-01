@@ -21,4 +21,16 @@ public class PriceListConverter {
                 .pricePerDay(priceListCreateDTO.getPricePerDay())
                 .build();
     }
+
+    public static PriceListCreateDTO toCreatePriceListCreateDTOFromPriceList(PriceList priceList){
+        return PriceListCreateDTO.builder()
+                .id(priceList.getId())
+                .pricePerDay(priceList.getPricePerDay())
+                .pricePerKm(priceList.getPricePerKm())
+                .pricePerKmCDW(priceList.getPricePerKmCDW())
+                .publisherUsername(priceList.getPublisherUser().getEmail())
+                .creationDate(priceList.getCreationDate().toString())
+                .build();
+    }
+
 }
