@@ -4,12 +4,18 @@ import {
     REGISTER_USER,
     SIGN_OUT,
     FETCH_END_USERS_PAGINATED,
+    PUT_END_USERS,
     BLOCK_OR_UNBLOCK,
     OBLIGATE_OR_UNOBLIGATE,
     LOG_DEL_OR_REVERT
 } from './constants';
 
 //end users
+export const putEndUsers = payload => ({
+    type: PUT_END_USERS,
+    payload
+});
+
 export const fetchEndUsersPaginated = payload => ({
     type: FETCH_END_USERS_PAGINATED,
     payload
