@@ -46,11 +46,11 @@ public class EndUserServiceImpl implements EndUserService {
     }
 
     @Override
-    public String blockOrUnblockById(Long id, Boolean state) {
+    public String blockOrUnblockById(Long id, Boolean status) {
         EndUser endUser = this.findById(id);
-        endUser.setEnabled(state);
+        endUser.setEnabled(status);
         this.save(endUser);
-        if (state) {
+        if (status) {
             return "Korisnik uspjesno blokiran";
         } else {
             return "Korisniku uspjesno ukinuto blokiranje";
@@ -58,11 +58,11 @@ public class EndUserServiceImpl implements EndUserService {
     }
 
     @Override
-    public String obligateOrUnobligateById(Long id, Boolean state) {
+    public String obligateOrUnobligateById(Long id, Boolean status) {
         EndUser endUser = this.findById(id);
-        endUser.setObliged(state);
+        endUser.setObliged(status);
         this.save(endUser);
-        if (state) {
+        if (status) {
             return "Korisniku uspjesno uvedena zabrana";
         } else {
             return "Korisniku uspjesno skinuta zabrana";
@@ -70,11 +70,11 @@ public class EndUserServiceImpl implements EndUserService {
     }
 
     @Override
-    public String logicDeleteOrRevertById(Long id, Boolean state) {
+    public String logicDeleteOrRevertById(Long id, Boolean status) {
         EndUser endUser = this.findById(id);
-        endUser.setDeleted(state);
+        endUser.setDeleted(status);
         this.save(endUser);
-        if (state) {
+        if (status) {
             return "Korisnik uspjesno logicki obrisan";
         } else {
             return "Korisnik uspjesno vracen";

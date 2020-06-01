@@ -18,6 +18,44 @@ class UserService extends HttpBaseClient {
         return response.data;
     };
 
+    blockOrUnblock = async payload => {
+        const response = await this.getApiClient().put(
+            FINALPOINTS.END_USER_SERVICE_BASE + '/' + payload.id,
+            payload.status, {
+            headers: {
+                'action': 'block',
+                'Content-Type': 'application/json;charset=UTF-8'
+            }
+        }
+        );
+        return response.data;
+    };
+
+    obligateOrUnobligate = async payload => {
+        const response = await this.getApiClient().put(
+            FINALPOINTS.END_USER_SERVICE_BASE + '/' + payload.id,
+            payload.status, {
+            headers: {
+                'action': 'obligate',
+                'Content-Type': 'application/json;charset=UTF-8'
+            }
+        }
+        );
+        return response.data;
+    };
+
+    logDelOrRevert = async payload => {
+        const response = await this.getApiClient().put(
+            FINALPOINTS.END_USER_SERVICE_BASE + '/' + payload.id,
+            payload.status, {
+            headers: {
+                'action': 'log-del',
+                'Content-Type': 'application/json;charset=UTF-8'
+            }
+        }
+        );
+        return response.data;
+    };
 
 };
 

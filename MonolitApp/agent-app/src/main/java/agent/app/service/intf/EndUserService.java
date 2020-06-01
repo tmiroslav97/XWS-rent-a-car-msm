@@ -12,11 +12,11 @@ public interface EndUserService {
 
     EndUserPageDTO findAll(Integer page, Integer size);
 
-    String blockOrUnblockById(Long id, Boolean state);
+    String blockOrUnblockById(Long id, Boolean status);
 
-    String obligateOrUnobligateById(Long id, Boolean state);
+    String obligateOrUnobligateById(Long id, Boolean status);
 
-    String logicDeleteOrRevertById(Long id, Boolean state);
+    String logicDeleteOrRevertById(Long id, Boolean status);
 
     Integer deleteById(Long id);
 

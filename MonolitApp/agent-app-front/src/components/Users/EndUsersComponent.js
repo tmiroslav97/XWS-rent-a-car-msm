@@ -25,14 +25,16 @@ const EndUsersComponent = (props) => {
                                         <td>{endUser.email}</td>
                                         <td>{endUser.firstName + ' ' + endUser.lastName}</td>
                                         <td>{endUser.canceledCnt}</td>
+                                        {!endUser.deleted ? <td align="right">
+                                            {endUser.enabled ? <Button variant="outline-danger" onClick={() => { props.handleBlock(endUser.id); }}>Blokiraj</Button> : <Button variant="outline-success" onClick={() => { props.handleUnblock(endUser.id); }}>Odblokiraj</Button>}
+                                        </td> : <td></td>
+                                        }
+                                        {!endUser.deleted && endUser.enabled ? <td align="right">
+                                            {!endUser.obligated ? <Button variant="outline-danger" onClick={() => { props.handleObligate(endUser.id); }}>Uvedi zabranu</Button > : <Button variant="outline-success" onClick={() => { props.handleUnObligate(endUser.id); }}>Skini zabranu</Button>}
+                                        </td> : <td></td>
+                                        }
                                         <td align="right">
-                                            {!endUser.deleted && endUser.enabled ? <Button>Blokiraj</Button> : <Button>Odblokiraj</Button>}
-                                        </td>
-                                        <td align="right">
-                                            {!endUser.deleted && !endUser.obligated ? <Button>Uvedi zabranu</Button> : <Button>Skini zabranu</Button>}
-                                        </td>
-                                        <td align="right">
-                                            {endUser.deleted ? <Button>Vrati</Button> : <Button>Obriši</Button>}
+                                            {endUser.deleted ? <Button variant="outline-success" onClick={() => { props.handleRevert(endUser.id); }}>Vrati</Button> : <Button variant="outline-danger" onClick={() => { props.handleLogDelete(endUser.id); }}>Obriši</Button>}
                                         </td>
                                     </tr>
                                 );

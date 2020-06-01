@@ -5,7 +5,7 @@ import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import EndUsersComponent from '../../components/Users/EndUsersComponent';
 import { endUsersSelector } from '../../store/user/selectors';
-import { fetchEndUsersPaginated, putEndUsers } from '../../store/user/actions';
+import { fetchEndUsersPaginated, putEndUsers, blockOrUnblock, obligateOrUnobligate, logDelOrRevert } from '../../store/user/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
 
 const EndUsersContainer = () => {
@@ -33,7 +33,59 @@ const EndUsersContainer = () => {
         };
     }, [nextPage, size]);
 
+    const handleBlock = (id) => {
+        dispatch(
+            blockOrUnblock({
+                "id": id,
+                "status": false
+            })
+        );
+    };
 
+    const handleUnblock = (id) => {
+        dispatch(
+            blockOrUnblock({
+                "id": id,
+                "status": true
+            })
+        );
+    };
+
+    const handleObligate = (id) => {
+        dispatch(
+            obligateOrUnobligate({
+                "id": id,
+                "status": true
+            })
+        );
+    };
+
+    const handleUnObligate = (id) => {
+        dispatch(
+            obligateOrUnobligate({
+                "id": id,
+                "status": false
+            })
+        );
+    };
+
+    const handleLogDelete = (id) => {
+        dispatch(
+            logDelOrRevert({
+                "id": id,
+                "status": true
+            })
+        );
+    };
+
+    const handleRevert = (id) => {
+        dispatch(
+            logDelOrRevert({
+                "id": id,
+                "status": false
+            })
+        );
+    };
 
     return (
         <Container>
@@ -50,7 +102,7 @@ const EndUsersContainer = () => {
             <Row>
                 <Col md={12} xs={12}>
                     {
-                        endUsers.isFetch ? <EndUsersComponent endUsers={endUsers.data} /> : <SpinnerContainer />
+                        endUsers.isFetch ? <EndUsersComponent endUsers={endUsers.data} handleBlock={handleBlock} handleUnblock={handleUnblock} handleObligate={handleObligate} handleUnObligate={handleUnObligate} handleLogDelete={handleLogDelete} handleRevert={handleRevert} /> : <SpinnerContainer />
                     }
                 </Col>
             </Row>

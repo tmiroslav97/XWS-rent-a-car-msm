@@ -1,4 +1,4 @@
-import { take, put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import { history } from '../../index';
 import jwt_decode from 'jwt-decode';
 
@@ -21,6 +21,10 @@ import {
 } from './actions';
 
 import {
+    endUsersSelector
+} from './selectors';
+
+import {
     putSuccessMsg
 } from '../common/actions';
 
@@ -34,6 +38,51 @@ export function* fetchEndUsersPaginated() {
         'totalPageCnt': data.totalPageCnt,
         'nextPage': payload.nextPage,
         'size': payload.size,
+        'isFetch': true
+    }));
+}
+
+export function* blockOrUnblock() {
+    const { payload } = yield take(BLOCK_OR_UNBLOCK);
+    const msg = yield call(UserService.blockOrUnblock, payload);
+    const temp = yield select(endUsersSelector);
+    yield put(putEndUsers({ 'isFetch': false }));
+    const data = yield call(UserService.fetchEndUsersPaginated, { "nextPage": temp.nextPage, "size": temp.size });
+    yield put(putEndUsers({
+        'data': data.endUsers,
+        'totalPageCnt': data.totalPageCnt,
+        'nextPage': temp.nextPage,
+        'size': temp.size,
+        'isFetch': true
+    }));
+}
+
+export function* obligateOrUnobligate() {
+    const { payload } = yield take(OBLIGATE_OR_UNOBLIGATE);
+    const msg = yield call(UserService.obligateOrUnobligate, payload);
+    const temp = yield select(endUsersSelector);
+    yield put(putEndUsers({ 'isFetch': false }));
+    const data = yield call(UserService.fetchEndUsersPaginated, { "nextPage": temp.nextPage, "size": temp.size });
+    yield put(putEndUsers({
+        'data': data.endUsers,
+        'totalPageCnt': data.totalPageCnt,
+        'nextPage': temp.nextPage,
+        'size': temp.size,
+        'isFetch': true
+    }));
+}
+
+export function* logDelOrRevert() {
+    const { payload } = yield take(LOG_DEL_OR_REVERT);
+    const msg = yield call(UserService.logDelOrRevert, payload);
+    const temp = yield select(endUsersSelector);
+    yield put(putEndUsers({ 'isFetch': false }));
+    const data = yield call(UserService.fetchEndUsersPaginated, { "nextPage": temp.nextPage, "size": temp.size });
+    yield put(putEndUsers({
+        'data': data.endUsers,
+        'totalPageCnt': data.totalPageCnt,
+        'nextPage': temp.nextPage,
+        'size': temp.size,
         'isFetch': true
     }));
 }

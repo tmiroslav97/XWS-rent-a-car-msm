@@ -29,13 +29,13 @@ public class EndUserController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> blockOrUnblockById(@RequestHeader("action") String action, @PathVariable("id") Long id, @RequestBody Boolean state) {
+    public ResponseEntity<?> blockOrUnblockById(@RequestHeader("action") String action, @PathVariable("id") Long id, @RequestBody Boolean status) {
         if (action.equals("block")) {
-            return new ResponseEntity<>(endUserService.blockOrUnblockById(id, state), HttpStatus.OK);
+            return new ResponseEntity<>(endUserService.blockOrUnblockById(id, status), HttpStatus.OK);
         } else if (action.equals("obligate")) {
-            return new ResponseEntity<>(endUserService.obligateOrUnobligateById(id, state), HttpStatus.OK);
+            return new ResponseEntity<>(endUserService.obligateOrUnobligateById(id, status), HttpStatus.OK);
         } else if (action.equals("log-del")) {
-            return new ResponseEntity<>(endUserService.logicDeleteOrRevertById(id, state), HttpStatus.OK);
+            return new ResponseEntity<>(endUserService.logicDeleteOrRevertById(id, status), HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Los zahtjev", HttpStatus.BAD_REQUEST);
         }
