@@ -7,6 +7,7 @@ public class EndUserConverter extends AbstractConverter {
 
     public static EndUserDTO fromEndUserToEndUserDTO(EndUser endUser) {
         return EndUserDTO.builder()
+                .id(endUser.getId())
                 .email(endUser.getEmail())
                 .firstName(endUser.getFirstName())
                 .lastName(endUser.getLastName())
