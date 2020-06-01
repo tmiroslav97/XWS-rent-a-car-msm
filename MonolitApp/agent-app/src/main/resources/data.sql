@@ -126,4 +126,15 @@ VALUES (4, 'DSG');
 INSERT INTO gearbox_type(id, name)
 VALUES (5, 'Tiptronik');
 
+--end users
+INSERT INTO user(id, email, first_name, last_name, password)
+VALUES (3, 'end@end.com', 'Krajnji', 'Korisnik', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
 
+INSERT INTO user_authority(user_id, authority_id)
+VALUES (3,3);
+
+INSERT INTO publisher_user(id, deleted)
+VALUES (3, false);
+
+INSERT INTO end_user(id, ad_limit_num, canceled_cnt, enabled, obliged)
+VALUES (3, 3, 0, true, false);

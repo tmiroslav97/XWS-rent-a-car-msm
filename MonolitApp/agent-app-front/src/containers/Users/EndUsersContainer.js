@@ -55,7 +55,7 @@ const EndUsersContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <Col md={3} xs={12}>
+                <Col md={12} xs={12}>
                     <PaginationContainer setNextPage={setNextPage} totalPageCnt={endUsers.totalPageCnt} nextPage={nextPage} />
                 </Col>
             </Row>

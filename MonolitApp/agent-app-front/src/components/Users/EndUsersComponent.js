@@ -29,7 +29,7 @@ const EndUsersComponent = (props) => {
                                             {!endUser.deleted && endUser.enabled ? <Button>Blokiraj</Button> : <Button>Odblokiraj</Button>}
                                         </td>
                                         <td align="right">
-                                            {!endUser.deleted && endUser.obligated ? <Button>Uvedi zabranu</Button> : <Button>Skini zabranu</Button>}
+                                            {!endUser.deleted && !endUser.obligated ? <Button>Uvedi zabranu</Button> : <Button>Skini zabranu</Button>}
                                         </td>
                                         <td align="right">
                                             {endUser.deleted ? <Button>Vrati</Button> : <Button>Obriši</Button>}

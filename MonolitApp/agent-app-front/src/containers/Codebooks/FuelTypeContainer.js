@@ -126,7 +126,7 @@ const FuelTypeContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 2, offset: 2 }} xs={12}>
+                <Col md={6} xs={12}>
                     <PaginationContainer setNextPage={setNextPage} totalPageCnt={fuelTypes.totalPageCnt} nextPage={nextPage} />
                 </Col>
             </Row>
