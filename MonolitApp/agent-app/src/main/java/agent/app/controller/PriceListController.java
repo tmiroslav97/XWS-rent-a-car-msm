@@ -50,6 +50,7 @@ public class PriceListController {
         PriceList priceList = priceListService.createPriceList(priceListCreateDTO);
         return new ResponseEntity<>("Cenovnik uspesno kreiran.", HttpStatus.OK);
     }
+
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> editPriceList(@RequestBody PriceListCreateDTO priceListCreateDTO) {
