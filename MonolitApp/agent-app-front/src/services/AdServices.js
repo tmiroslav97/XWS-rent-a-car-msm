@@ -2,7 +2,8 @@ import HttpBaseClient from './HttpBaseClient';
 
 const FINALPOINTS = {
     CREATED_AD: '/ad',
-    FETCH_ADS: '/ad'
+    FETCH_ADS: '/ad',
+    FETCH_AD: '/ad/id'
 };
 
 class AdServices extends HttpBaseClient {
@@ -31,6 +32,19 @@ class AdServices extends HttpBaseClient {
         );
 
         return response.data;
+    };
+
+    fetchAd = async payload => {
+        // const response = await this.getApiClient().get(
+        //     FINALPOINTS.FETCH_AD, {
+        //         params: {
+        //             nextPage: payload.nextPage,
+        //             size: payload.size
+        //         }
+        //     }
+        // );
+
+        // return response.data;
     };
 }
 
