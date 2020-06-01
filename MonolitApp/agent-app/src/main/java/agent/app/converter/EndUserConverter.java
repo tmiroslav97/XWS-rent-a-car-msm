@@ -14,6 +14,7 @@ public class EndUserConverter extends AbstractConverter {
                 .canceledCnt(endUser.getCanceledCnt())
                 .enabled(endUser.getEnabled())
                 .obligated(endUser.getObliged())
+                .deleted(endUser.getDeleted())
                 .build();
     }
 }

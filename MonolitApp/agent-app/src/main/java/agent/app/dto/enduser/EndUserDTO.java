@@ -16,4 +16,5 @@ public class EndUserDTO {
     Integer canceledCnt;
     Boolean enabled;
     Boolean obligated;
+    Boolean deleted;
 }
