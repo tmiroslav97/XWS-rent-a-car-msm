@@ -31,15 +31,7 @@ export function* loginUser() {
     const data = yield call(AuthSecurity.login, payload);
     yield put(putToken(data));
     const roles = jwt_decode(data).roles;
-    if (roles.includes('ROLE_AGENT')) {
-        history.push('/agent-firm');
-    } else if (roles.includes('ROLE_USER')) {
-        history.push('/end-user');
-    } else if (roles.includes('ROLE_ADMIN')) {
-        history.push('/admin');
-    } else {
-        history.push('/');
-    }
+    history.push('/panel');
 }
 
 export function* registerUser() {
