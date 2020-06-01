@@ -12,7 +12,11 @@ public interface EndUserService {
 
     EndUserPageDTO findAll(Integer page, Integer size);
 
-    Integer logicDeleteById(Long id);
+    Integer blockOrUnblockById(Long id, Boolean state);
+
+    Integer obligateOrUnobligateById(Long id, Boolean state);
+
+    Integer logicDeleteOrRevertById(Long id, Boolean state);
 
     Integer deleteById(Long id);
 

@@ -46,9 +46,25 @@ public class EndUserServiceImpl implements EndUserService {
     }
 
     @Override
-    public Integer logicDeleteById(Long id) {
+    public Integer blockOrUnblockById(Long id, Boolean state) {
         EndUser endUser = this.findById(id);
-        endUser.setDeleted(false);
+        endUser.setEnabled(state);
+        this.save(endUser);
+        return 1;
+    }
+
+    @Override
+    public Integer obligateOrUnobligateById(Long id, Boolean state) {
+        EndUser endUser = this.findById(id);
+        endUser.setObliged(state);
+        this.save(endUser);
+        return 1;
+    }
+
+    @Override
+    public Integer logicDeleteOrRevertById(Long id, Boolean state) {
+        EndUser endUser = this.findById(id);
+        endUser.setDeleted(state);
         this.save(endUser);
         return 1;
     }
