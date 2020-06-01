@@ -17,13 +17,13 @@ const AdDetailViewContainer = (props) => {
     // const [nextPage, setNextPage] = useState(ads.nextPage);
     // const [size, setSize] = useState(ads.size);
     const adId = props.match.params.ad;
-    // useEffect(() => {
-    //     dispatch(
-    //         fetchAd({
-    //             adId
-    //         })
-    //     );
-    // }, [adId]);
+    useEffect(() => {
+        dispatch(
+            fetchAd({
+                adId
+            })
+        );
+    }, [adId]);
     
 
 
@@ -37,7 +37,7 @@ const AdDetailViewContainer = (props) => {
             </Row>
             <Row>
                 <Col  md={{ span: 12, offset: 2 }} xs={12}>
-                <AdDetailViewComponent adId={adId}/>
+                <AdDetailViewComponent id={adId}/>
                     {/* {
                         isFetchAds ?  <AdDetailViewComponent /> : <SpinnerContainer />
                     } */}

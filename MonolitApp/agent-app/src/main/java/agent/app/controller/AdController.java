@@ -26,6 +26,12 @@ public class AdController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
+//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
+        System.out.println("Service ad !!!!!");
+        return new ResponseEntity<>(adService.findById(id), HttpStatus.OK);
+    }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)

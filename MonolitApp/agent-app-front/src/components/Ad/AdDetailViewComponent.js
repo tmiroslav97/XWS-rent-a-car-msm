@@ -13,7 +13,7 @@ const AdDetailViewComponent = (props) => {
                     style={{  width: '50rem'}}  
 
                 >
-                    <Card.Header as="h5">{props.adId}</Card.Header>
+                    <Card.Header as="h5">{props.id}</Card.Header>
                     <Card.Body>
                         <Row>
                             <Col md={5}>

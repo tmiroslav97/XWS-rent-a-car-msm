@@ -1,23 +1,10 @@
 import React from 'react';
 import { Row, Col, Button, Card } from 'react-bootstrap'
-import Accordion from 'react-bootstrap/Accordion'
 import Form from 'react-bootstrap/Form'
-import { useState } from 'react'
-import { enGB } from 'date-fns/locale'
-import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
-import 'react-nice-dates/build/style.css'
-
-import RangeSlider from 'react-slider'
 import Nouislider from 'react-nouislider';
 import 'nouislider/nouislider.css';
 import 'nouislider/src/nouislider.tooltips.less';
 import 'nouislider/src/nouislider.pips.less';
-
-
-import DatePicker from 'react-datepicker';
-
-import "react-datepicker/dist/react-datepicker.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const OrdinarySearchComponent = (props) => {
     console.log(props);

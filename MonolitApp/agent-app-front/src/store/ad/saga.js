@@ -43,8 +43,12 @@ export function* fetchAds() {
 
 export function* fetchAd() {
     const { payload } = yield take(FETCH_AD);
+
+    console.log("SAGA  ADDDD")
+    console.log(payload.adId)
+    var id = payload.adId
     yield put(putAds({ 'isFetch': false }));
-    const data = yield call(AdServices.fetchAd, payload);
+    const data = yield call(AdServices.fetchAd, id);
     console.log(data);
     yield put(putAds({
         'data': data.ad,

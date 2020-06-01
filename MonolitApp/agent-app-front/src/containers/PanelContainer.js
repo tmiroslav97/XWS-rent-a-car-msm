@@ -82,6 +82,9 @@ const PanelContainer = () => {
                             <Tab.Pane eventKey="ads">
                                 <AdListContainer />
                             </Tab.Pane>
+                            {/* <Tab.Pane eventKey="ad-detail-view/:ad">
+                                <AdDetailViewContainer />
+                            </Tab.Pane> */}
                         </Tab.Content>
                     </Col>
                 </Row>
