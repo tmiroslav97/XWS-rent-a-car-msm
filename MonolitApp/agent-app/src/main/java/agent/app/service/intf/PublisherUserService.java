@@ -13,6 +13,6 @@ public interface PublisherUserService {
     PublisherUser save(PublisherUser publisherUser);
     void delete(PublisherUser publisherUser);
     Integer deleteById(Long id);
-    PublisherUser createPublisherUser(PublisherUser publisherUser);
+    PublisherUser createPublisherUser(String publishUserUsernamer);
     PublisherUser editPublisherUser(PublisherUser publisherUser);
 }

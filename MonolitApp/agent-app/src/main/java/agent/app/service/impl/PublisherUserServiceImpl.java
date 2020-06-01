@@ -3,11 +3,14 @@ package agent.app.service.impl;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.PublisherUser;
+import agent.app.model.User;
 import agent.app.repository.PublisherUserRepository;
 import agent.app.service.intf.PublisherUserService;
+import agent.app.service.intf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -15,6 +18,9 @@ public class PublisherUserServiceImpl implements PublisherUserService {
 
     @Autowired
     private PublisherUserRepository publisherUserRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public PublisherUser findById(Long id) {
@@ -47,14 +53,31 @@ public class PublisherUserServiceImpl implements PublisherUserService {
     }
 
     @Override
-    public PublisherUser createPublisherUser(PublisherUser publisherUser) {
-        return null;
+    public PublisherUser createPublisherUser(String publishUserUsername) {
+        User user = userService.findByEmail(publishUserUsername);
+        PublisherUser publisherUser = PublisherUser.publisherUserBuilder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .lastPasswordResetDate(user.getLastPasswordResetDate())
+                .authorities(user.getAuthorities())
+                .deleted(false)
+                .ads(new HashSet<>())
+                .priceLists(new HashSet<>())
+                .comments(new HashSet<>())
+                .inbox(new HashSet<>())
+                .reports(new HashSet<>())
+                .build();
+        return publisherUser;
     }
 
     @Override
     public PublisherUser editPublisherUser(PublisherUser publisherUser) {
         findById(publisherUser.getId());
         PublisherUser publisherUser1 = publisherUserRepository.save(publisherUser);
+
         return publisherUser1;
     }
 }
