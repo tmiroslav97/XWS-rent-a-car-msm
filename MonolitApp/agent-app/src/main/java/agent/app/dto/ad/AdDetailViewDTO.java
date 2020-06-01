@@ -19,6 +19,10 @@ public class AdDetailViewDTO {
     private String location;
     private String distanceLimitFlag;
     private Float distanceLimit;
+    private String publishedDate;
+    private Long ratingNum;
+    private Long ratingCnt;
+    private Long rentCnt;
     private String year;
     private String carManufacturer;
     private String carModel;
