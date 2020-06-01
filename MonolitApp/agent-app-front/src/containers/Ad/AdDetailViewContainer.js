@@ -23,7 +23,7 @@ const AdDetailViewContainer = (props) => {
                 adId
             })
         );
-    }, [adId]);
+    }, []);
     
 
 
