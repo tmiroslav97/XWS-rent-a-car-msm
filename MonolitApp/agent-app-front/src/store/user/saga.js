@@ -3,21 +3,42 @@ import { history } from '../../index';
 import jwt_decode from 'jwt-decode';
 
 import AuthSecurity from '../../services/AuthSecurity';
+import UserService from '../../services/UserService';
 
 import {
     LOGIN,
     REGISTER_USER,
-    SIGN_OUT
+    SIGN_OUT,
+    BLOCK_OR_UNBLOCK,
+    OBLIGATE_OR_UNOBLIGATE,
+    LOG_DEL_OR_REVERT,
+    FETCH_END_USERS_PAGINATED
 } from './constants';
 
 import {
-    putToken
+    putToken,
+    putEndUsers
 } from './actions';
 
 import {
     putSuccessMsg
 } from '../common/actions';
 
+//end users
+export function* fetchEndUsersPaginated() {
+    const { payload } = yield take(FETCH_END_USERS_PAGINATED);
+    yield put(putEndUsers({ 'isFetch': false }));
+    const data = yield call(UserService.fetchEndUsersPaginated, payload);
+    yield put(putEndUsers({
+        'data': data.endUsers,
+        'totalPageCnt': data.totalPageCnt,
+        'nextPage': payload.nextPage,
+        'size': payload.size,
+        'isFetch': true
+    }));
+}
+
+//users
 export function* signOut() {
     yield take(SIGN_OUT);
     yield put(putToken(null));
