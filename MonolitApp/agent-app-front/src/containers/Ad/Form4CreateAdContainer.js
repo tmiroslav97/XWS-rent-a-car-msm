@@ -5,15 +5,10 @@ import Form4CreateAd from '../../components/Ad/Form4CreateAd'
 const Form4CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
-
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [flag, setFlag] = useState(true);
     
-    // useEffect(() => {
-    //     setTimeout(props.carCalendarTermList, 2000);
-    // }, []);
-
     const addTerm = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -21,15 +16,18 @@ const Form4CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-            console.log(props.carCalendarTermList);
-            props.carCalendarTermList.push({
-                'startDate': form.startDate.value,
-                'endDate': form.endDate.value
-            })
-            console.log(props.carCalendarTermList);
-            props.setCarCalendarTermList(props.carCalendarTermList);
+            let ss = startDate.substring(0, 10);
+            let ss2 = startDate.substring(11, 16);
+            let ee = startDate.substring(0, 10);
+            let ee2 = startDate.substring(11, 16);
+            ss = ss + " " + ss2;
+            ee = ee + " " + ee2;
+            let temp = {
+                'startDate': ss,
+                'endDate': ee
+            };
+            props.setCarCalendarTermList([...props.carCalendarTermList, temp]);
             setValidated(false);
-            
         }
     }
     const getCurrentDate = () => {
@@ -77,14 +75,21 @@ const Form4CreateAdContainer = (props) => {
             );
             i++;
         })
-        // setFlag(false);
         return list;
     }
-
+    const handlerForm4 = ()=>{
+        if(props.carCalendarTermList.length == 0){
+            setFlag(0);
+        }else{
+            setFlag(1);
+            props.handleNext();
+        }
+    }
 
     return (
         <Form4CreateAd
             addTerm={addTerm}
+            handlerForm4={handlerForm4}
             validated={validated}
             activeStep={props.activeStep}
             steps={props.steps}

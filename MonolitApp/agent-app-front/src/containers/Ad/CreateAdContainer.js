@@ -151,7 +151,7 @@ const CreateAdContainer = () => {
     };
 
     const isStepOptional = (step) => {
-        return step === 3;
+        // return step === 3;
     };
 
     const isStepSkipped = (step) => {

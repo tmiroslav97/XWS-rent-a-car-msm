@@ -30,37 +30,28 @@ const Form4CreateAd = (props) => {
                         <Button type="submit" >Dodaj</Button>
                     </Col>
                 </Form.Row>
+                {props.flag === 0 ?
+                    <label style={{color:"red"}}>Unesite bar jedan termin</label>
+                    :null
+                }
+                    
                 <br />
                 <Form.Row>
                     <Col>
-                        {props.flag ?
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>Rbr.</th>
-                                        <th className="text-right">Datum pocetka</th>
-                                        <th className="text-right">Datum kraja</th>
-                                    </tr>
-                                </thead>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Rbr.</th>
+                                    <th className="text-right">Datum pocetka</th>
+                                    <th className="text-right">Datum kraja</th>
+                                </tr>
+                            </thead>
 
-                                <tbody>
-                                    {props.getCarCalentarTermList()}
-                                    {/* {
-                                props.carCalendarTermList.map((term) => {
-                                    return (
-                                        <tr>
-                                            <td>1</td>
-                                            <td>{term.startDate}</td>
-                                            <td>{term.endDate}</td>
-                                        </tr>
-                                    )
+                            <tbody>
+                                {props.getCarCalentarTermList()}
 
-                                })} */}
-                                </tbody>
-                            </Table>
-                            : null}
-
-
+                            </tbody>
+                        </Table>
 
                     </Col>
                 </Form.Row>
@@ -84,29 +75,22 @@ const Form4CreateAd = (props) => {
                             ) : (
                                     <div>
                                         <div>
-                                            <Button disabled={props.activeStep === 0} onClick={props.handleBack} className="float-left" >
+                                            <Button disabled={props.activeStep === 0}
+                                                onClick={props.handleBack} className="float-left">
                                                 Nazad
                                             </Button>
 
                                             {props.isStepOptional(props.activeStep) && (
                                                 <Button
                                                     variant="contained"
-                                                    // color="primary"
                                                     onClick={props.handleSkip}
-                                                    // className={classes.button}
                                                     className="float-right"
                                                 >
                                                     Preskoci
                                                 </Button>
                                             )}
-
                                             <Button
-                                                // variant="contained"
-                                                // color="primary"
-                                                // onClick={props.handleNext}
-                                                // className={classes.button}
-                                                // type="submit"
-                                                onClick={props.handleNext}
+                                                onClick={props.handlerForm4}
                                                 className="float-right"
                                             >
                                                 Dalje
