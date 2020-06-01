@@ -6,6 +6,7 @@ import agent.app.dto.enduser.EndUserPageDTO;
 import agent.app.exception.NotFoundException;
 import agent.app.model.EndUser;
 import agent.app.repository.EndUserRepository;
+import agent.app.service.intf.AdService;
 import agent.app.service.intf.EndUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,9 @@ public class EndUserServiceImpl implements EndUserService {
 
     @Autowired
     private EndUserRepository endUserRepository;
+
+    @Autowired
+    private AdService adService;
 
     @Override
     public EndUser findById(Long id) {
@@ -72,6 +76,7 @@ public class EndUserServiceImpl implements EndUserService {
     @Override
     public String logicDeleteOrRevertById(Long id, Boolean status) {
         EndUser endUser = this.findById(id);
+        adService.logicalDeleteOrRevertAds(new ArrayList<>(endUser.getAds()), status);
         endUser.setDeleted(status);
         this.save(endUser);
         if (status) {
