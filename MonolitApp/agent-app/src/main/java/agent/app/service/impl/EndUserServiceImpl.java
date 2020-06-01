@@ -55,9 +55,9 @@ public class EndUserServiceImpl implements EndUserService {
         endUser.setEnabled(status);
         this.save(endUser);
         if (status) {
-            return "Korisnik uspjesno blokiran";
+            return "Korisniku uspješno ukinuto blokiranje";
         } else {
-            return "Korisniku uspjesno ukinuto blokiranje";
+            return "Korisnik uspješno blokiran";
         }
     }
 
@@ -67,9 +67,9 @@ public class EndUserServiceImpl implements EndUserService {
         endUser.setObliged(status);
         this.save(endUser);
         if (status) {
-            return "Korisniku uspjesno uvedena zabrana";
+            return "Korisniku uspješno uvedena zabrana";
         } else {
-            return "Korisniku uspjesno skinuta zabrana";
+            return "Korisniku uspješno skinuta zabrana";
         }
     }
 
@@ -80,9 +80,9 @@ public class EndUserServiceImpl implements EndUserService {
         endUser.setDeleted(status);
         this.save(endUser);
         if (status) {
-            return "Korisnik uspjesno logicki obrisan";
+            return "Korisnik uspješno logički obrisan";
         } else {
-            return "Korisnik uspjesno vracen";
+            return "Korisnik uspješno vraćen";
         }
     }
 

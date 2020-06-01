@@ -14,7 +14,7 @@ const EndUsersComponent = (props) => {
                             <th>Broj otkazivanja</th>
                             <th className="text-right">Blokiranje</th>
                             <th className="text-right">Zabrana</th>
-                            <th className="text-right">Logicko brisanje</th>
+                            <th className="text-right">Logičko brisanje</th>
                         </tr>
                     </thead>
                     <tbody>

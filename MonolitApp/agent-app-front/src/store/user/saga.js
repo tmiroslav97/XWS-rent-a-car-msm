@@ -45,6 +45,7 @@ export function* fetchEndUsersPaginated() {
 export function* blockOrUnblock() {
     const { payload } = yield take(BLOCK_OR_UNBLOCK);
     const msg = yield call(UserService.blockOrUnblock, payload);
+    yield put(putSuccessMsg(msg));
     const temp = yield select(endUsersSelector);
     yield put(putEndUsers({ 'isFetch': false }));
     const data = yield call(UserService.fetchEndUsersPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -60,6 +61,7 @@ export function* blockOrUnblock() {
 export function* obligateOrUnobligate() {
     const { payload } = yield take(OBLIGATE_OR_UNOBLIGATE);
     const msg = yield call(UserService.obligateOrUnobligate, payload);
+    yield put(putSuccessMsg(msg));
     const temp = yield select(endUsersSelector);
     yield put(putEndUsers({ 'isFetch': false }));
     const data = yield call(UserService.fetchEndUsersPaginated, { "nextPage": temp.nextPage, "size": temp.size });
@@ -75,6 +77,7 @@ export function* obligateOrUnobligate() {
 export function* logDelOrRevert() {
     const { payload } = yield take(LOG_DEL_OR_REVERT);
     const msg = yield call(UserService.logDelOrRevert, payload);
+    yield put(putSuccessMsg(msg));
     const temp = yield select(endUsersSelector);
     yield put(putEndUsers({ 'isFetch': false }));
     const data = yield call(UserService.fetchEndUsersPaginated, { "nextPage": temp.nextPage, "size": temp.size });
