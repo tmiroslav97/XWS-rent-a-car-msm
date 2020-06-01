@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/end-user", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,6 +24,20 @@ public class EndUserController {
             return new ResponseEntity<>(endUserService.findAll(nextPage, size), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(endUserService.findAll(), HttpStatus.OK);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> blockOrUnblockById(@RequestHeader("action") String action, @PathVariable("id") Long id, @RequestBody Boolean state) {
+        if (action.equals("block")) {
+            return new ResponseEntity<>(endUserService.blockOrUnblockById(id, state), HttpStatus.OK);
+        } else if (action.equals("obligate")) {
+            return new ResponseEntity<>(endUserService.obligateOrUnobligateById(id, state), HttpStatus.OK);
+        } else if (action.equals("log-del")) {
+            return new ResponseEntity<>(endUserService.logicDeleteOrRevertById(id, state), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Los zahtjev", HttpStatus.BAD_REQUEST);
         }
     }
 }

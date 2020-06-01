@@ -46,27 +46,39 @@ public class EndUserServiceImpl implements EndUserService {
     }
 
     @Override
-    public Integer blockOrUnblockById(Long id, Boolean state) {
+    public String blockOrUnblockById(Long id, Boolean state) {
         EndUser endUser = this.findById(id);
         endUser.setEnabled(state);
         this.save(endUser);
-        return 1;
+        if (state) {
+            return "Korisnik uspjesno blokiran";
+        } else {
+            return "Korisniku uspjesno ukinuto blokiranje";
+        }
     }
 
     @Override
-    public Integer obligateOrUnobligateById(Long id, Boolean state) {
+    public String obligateOrUnobligateById(Long id, Boolean state) {
         EndUser endUser = this.findById(id);
         endUser.setObliged(state);
         this.save(endUser);
-        return 1;
+        if (state) {
+            return "Korisniku uspjesno uvedena zabrana";
+        } else {
+            return "Korisniku uspjesno skinuta zabrana";
+        }
     }
 
     @Override
-    public Integer logicDeleteOrRevertById(Long id, Boolean state) {
+    public String logicDeleteOrRevertById(Long id, Boolean state) {
         EndUser endUser = this.findById(id);
         endUser.setDeleted(state);
         this.save(endUser);
-        return 1;
+        if (state) {
+            return "Korisnik uspjesno logicki obrisan";
+        } else {
+            return "Korisnik uspjesno vracen";
+        }
     }
 
     @Override
