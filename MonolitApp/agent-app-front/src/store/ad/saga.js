@@ -51,7 +51,7 @@ export function* fetchAd() {
     const data = yield call(AdServices.fetchAd, id);
     console.log(data);
     yield put(putAds({
-        'data': data.ad,
+        'data': data,
         'isFetch': true
     }));
 }

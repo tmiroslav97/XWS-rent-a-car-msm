@@ -12,40 +12,36 @@ import SpinnerContainer from '../Common/SpinnerContainer';
 
 const AdDetailViewContainer = (props) => {
     const dispatch = useDispatch();
-    const ads = useSelector(adsSelector);
-    // const isFetchAds = ads.isFetch;
-    // const [nextPage, setNextPage] = useState(ads.nextPage);
-    // const [size, setSize] = useState(ads.size);
+    const ad = useSelector(adsSelector);
+    const isFetchAd = ad.isFetch;
+
     const adId = props.match.params.ad;
+    
+   console.log(ad)
     useEffect(() => {
         dispatch(
             fetchAd({
-                adId
+                adId,
+                
             })
         );
-    }, []);
+    }, [adId]);
     
 
 
     return(
        
-        <Container fluid>
-             <Row>
-                <Col md={{ span: 12, offset: 3 }} xs={12}>
-                    {/* <PaginationSize size={size} setSize={setSize} /> */}
+        <Container >
+       
+            <Row>
+                <Col >
+                {/* <AdDetailViewComponent id={adId}/> */}
+                    {
+                        isFetchAd ?  <AdDetailViewComponent id={adId} ad={ad.data}/> : <SpinnerContainer />
+                    }
                 </Col>
             </Row>
-            <Row>
-                <Col  md={{ span: 12, offset: 2 }} xs={12}>
-                <AdDetailViewComponent id={adId}/>
-                    {/* {
-                        isFetchAds ?  <AdDetailViewComponent /> : <SpinnerContainer />
-                    } */}
-                </Col>
-            </Row>
-            <Row>
-                {/* <PaginationContainer setNextPage={setNextPage} totalPageCnt={ads.totalPageCnt} nextPage={nextPage}></PaginationContainer> */}
-            </Row>
+
         </Container>
 
        
