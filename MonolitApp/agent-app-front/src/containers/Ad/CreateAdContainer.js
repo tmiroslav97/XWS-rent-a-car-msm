@@ -7,8 +7,10 @@ import Form2CreateAdContainer from './Form2CreateAdContainer';
 import Form3CreateAdContainer from './Form3CreateAdContainer';
 import Form4CreateAdContainer from './Form4CreateAdContainer';
 import Form5CreateAdContainer from './Form5CreateAdContainer';
-import { Container, Row, Col, Button } from 'react-bootstrap'
-
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import SpinnerImageContainer from './SpinnerImageContainer';
+import ImagesContainer from './ImagesContainer';
+import ButtonsImageContainer from './ButtonsImageContainer';
 
 const CreateAdContainer = () => {
     const dispatch = useDispatch();
@@ -23,14 +25,84 @@ const CreateAdContainer = () => {
     const [id, setId] = useState(null);
     const [carCalendarTermList, setCarCalendarTermList] = useState([]);
 
+    const [activeStep, setActiveStep] = useState(0);
+    const [skipped, setSkipped] = useState(new Set());
+    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];
 
+
+    const [uploading, setUploading] = useState(false);
+    // const [images, setImages] = useState([]);
+    const [imagesDTO, setImagesDTO] = useState([]);
     const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
     const [coverPhoto, setCoverPhoto] = useState();
 
-    const [activeStep, setActiveStep] = useState(0);
-    const [skipped, setSkipped] = useState(new Set());
-    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];
+    const content = () => {
+        switch (true) {
+            case uploading:
+                return <SpinnerImageContainer />
+            case imagesDTO.length > 0:
+                return <ImagesContainer images={imagesDTO} removeImage={removeImage} />
+            default:
+                return <ButtonsImageContainer onChange={buttonImageChange} />
+        }
+    }
+
+    const removeImage = (id) => {
+        console.log("brisanje")
+        // this.setState({
+        //   images: this.state.images.filter(image => image.public_id !== id)
+        // })
+    }
+    const buttonImageChange = (event) => {
+        console.log("stisnuto dugme");
+        if (event.target.files != null) {
+            const files = Array.from(event.target.files)
+            console.log(files[0]);
+            
+            let name = event.target.files[0].name;
+            let flag = 0;
+
+            photos.map((photo) => {
+                if (photo.photoName === name) {
+                    flag = 1;
+                    console.log("Vec ste dodali ovu sliku");
+                }
+            })
+            if (flag != 1) {
+                let temp = {
+                            photoName: event.target.files[0].name,
+                            photo: event.target.files[0]
+                        }
+                setPhotos(...photos, temp);
+                setUploading(true);
+
+
+
+            }
+
+        }
+       
+        // const podaci = new FormData();
+
+        // files.forEach((file, i) => {
+        //     podaci.append(i, file)
+        // })
+
+        // fetch(`${API_URL}/image-upload`, {
+        //     method: 'POST',
+        //     body: podaci
+        // })
+        // .then(res => res.json())
+        // .then(images => {
+        //     this.setState({
+        //         uploading: false,
+        //         images
+        //     })
+        // })
+
+        
+    }
 
 
     const [formData, setFormData] = useState({
@@ -54,7 +126,7 @@ const CreateAdContainer = () => {
         id: null,
         carCalendarTermCreateDTOList: null
     });
-    
+
     const handleCreatedAd = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -188,7 +260,7 @@ const CreateAdContainer = () => {
     const handleReset = () => {
         setActiveStep(0);
     };
-      
+
 
     return (
         <Container>
@@ -214,7 +286,9 @@ const CreateAdContainer = () => {
                 handleReset={handleReset}
                 formData={formData} setFormData={setFormData}
                 activeStep={activeStep} setActiveStep={setActiveStep}
+                content={content}
             />
+
             {activeStep === 0 ?
                 <Form1CreateAdContainer
                     formData={formData} setFormData={setFormData}
@@ -274,7 +348,7 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
-                    carCalendarTermList={carCalendarTermList} 
+                    carCalendarTermList={carCalendarTermList}
                     setCarCalendarTermList={setCarCalendarTermList}
                 ></Form4CreateAdContainer>
                 : null

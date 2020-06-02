@@ -37,6 +37,50 @@ const Form5CreateAdContainer = (props) => {
         }
     };
 
+    const [coverPhotoName, setCoverPhotoName] = useState("");
+    const [photos, setPhotos] = useState([]);
+    const [coverPhoto, setCoverPhoto] = useState();
+    const onPhotoChange = (event) => {
+
+        if (event.target.files != null) {
+            let p = photos;
+            let name = event.target.files[0].name;
+            console.log(event.target);
+            console.log(event.target.files[0]);
+            let flag = 0;
+
+            p.map((photo) => {
+                if (photo.photoName === name) {
+                    flag = 1;
+                    console.log("Isti fajl");
+                }
+
+            })
+            if (flag != 1) {
+                p.push(
+                    {
+                        photoName: event.target.files[0].name,
+                        photo: event.target.files[0]
+                    }
+                )
+                setPhotos(p);
+            }
+            let nazivi = "";
+            let slike = [];
+            p.map((photo) => {
+                slike.push(photo.photo);
+                nazivi += " " + photo.photoName;
+            })
+            console.log(nazivi);
+            console.log(slike);
+
+
+            setCoverPhoto(event.target.files[0]);
+            setCoverPhotoName(event.target.files[0].name);
+        }
+
+    };
+
     return (
         <Form5CreateAd
             onSubmit={handleForm5}

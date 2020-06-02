@@ -18,7 +18,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.PHOTO, nullable = false)
+    @Column(name = DbColumnConstants.PHOTO, unique = true, nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)

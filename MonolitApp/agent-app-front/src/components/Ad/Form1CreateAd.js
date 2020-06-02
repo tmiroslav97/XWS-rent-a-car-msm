@@ -48,7 +48,7 @@ const Form1CreateAd = (props) => {
                         <Form.Group as={Col}>
                             <Form.Label>Predjeni kilometri</Form.Label>
                             <Form.Control required name="mileage" id="numMileage"
-                                type="number" min="0" max="10000000" pattern="[0-9]{7}"  placeholder="Predjeni kilometri" />
+                                type="number" min="0" max="10000000" pattern="[0-9]{7}" placeholder="Predjeni kilometri" />
                             <Form.Control.Feedback type="invalid">
                                 min 0 max 10000000 km
                             </Form.Control.Feedback>

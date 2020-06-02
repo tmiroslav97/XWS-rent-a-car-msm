@@ -11,8 +11,10 @@ const Form5CreateAd = (props) => {
                         <Form.Group as={Col}>
                             <Form.Label>Dodaj sliku</Form.Label>
 
-                            <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike" label={props.coverPhotoName}
-                                onChange={props.onPhotoChange} custom multiple
+                            <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike" 
+                                // label={props.coverPhotoName}
+                                // onChange={props.onPhotoChange} 
+                                custom multiple
                             >
                             </Form.File>
 
@@ -66,8 +68,6 @@ const Form5CreateAd = (props) => {
                                                 className="float-right"
                                             >
                                                 Dodaj
-                                                {/* Dalje */}
-                                                {/* {props.activeStep === props.steps.length - 1 ? 'Dodaj' : 'Dalje'} */}
                                             </Button>
                                         </div>
                                     </div>

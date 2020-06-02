@@ -112,7 +112,6 @@ const Form1CreateAdContainer = (props) => {
         return rez;
     }
 
-
     return (
         <Form1CreateAd
             onSubmit={handleForm1}

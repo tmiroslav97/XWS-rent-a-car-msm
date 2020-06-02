@@ -36,25 +36,26 @@ public class AdController {
         return new ResponseEntity<>(AdConverter.toAdDetailViewDTOFromAd(adService.findById(id)), HttpStatus.OK);
     }
 
-//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-//    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<?> uploadImage(@RequestParam(value = "coverPhoto", required = true) MultipartFile coverPhoto) throws IOException {
-//        System.out.println("-----------------------UPLOAD FILE---------------------");
-//
-//        File file = new File("photos");
-//        String uploadDirectory = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
-//
-//        System.out.println(uploadDirectory);
-//        System.out.println("slika : " + coverPhoto.getOriginalFilename());
-//
-//        File convertFile = new File(uploadDirectory.toString());
-//        convertFile.createNewFile();
-//        FileOutputStream fout = new FileOutputStream(convertFile);
-//        fout.write(coverPhoto.getBytes());
-//        fout.close();
-//        //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
-//        return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
-//    }
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadImage(@RequestParam(value = "coverPhoto", required = true) MultipartFile coverPhoto) throws IOException {
+        System.out.println("-----------------------UPLOAD FILE---------------------");
+
+        File file = new File("photos");
+        String uploadDirectory = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
+
+        System.out.println(uploadDirectory);
+        System.out.println("slika : " + coverPhoto.getOriginalFilename());
+
+        File convertFile = new File(uploadDirectory.toString());
+        convertFile.createNewFile();
+        FileOutputStream fout = new FileOutputStream(convertFile);
+        fout.write(coverPhoto.getBytes());
+        fout.close();
+
+        //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
+        return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
+    }
 
 
 
