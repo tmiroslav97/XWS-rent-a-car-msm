@@ -92,6 +92,7 @@ export function* logDelOrRevert() {
 
 //users
 export function* signOut() {
+    
     yield take(SIGN_OUT);
     yield put(putToken(null));
     localStorage.removeItem('token');

@@ -22,5 +22,11 @@ public interface EndUserService {
 
     void delete(EndUser endUser);
 
+    Boolean existsByEmail(String email);
+
+    EndUser findByEmail(String email);
+
     EndUser save(EndUser endUser);
+
+    Integer getAdLimitNum(String email);
 }

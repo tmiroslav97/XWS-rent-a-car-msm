@@ -9,6 +9,7 @@ import CarTypeContainer from '../containers/Codebooks/CarTypeContainer';
 import FuelTypeContainer from '../containers/Codebooks/FuelTypeContainer';
 import GearboxTypeContainer from '../containers/Codebooks/GearboxTypeContainer';
 import EndUsersContainer from '../containers/Users/EndUsersContainer';
+import CreateAdContainer from '../containers/Ad/CreateAdContainer';
 
 const PanelContainer = () => {
     const token = useSelector(tokenSelector);
@@ -59,6 +60,11 @@ const PanelContainer = () => {
                                     <Nav.Link eventKey="end-users">Krajnji korisnici</Nav.Link>
                                 </Nav.Item>
                             }
+                            {hasRole(['ROLE_AGENT']) &&
+                                <Nav.Item>
+                                    <Nav.Link eventKey="create-ad">Dodaj oglas</Nav.Link>
+                                </Nav.Item>
+                            }
                         </Nav>
                     </Col>
                     <Col md={10} sm={10} xs={12}>
@@ -80,6 +86,9 @@ const PanelContainer = () => {
                             </Tab.Pane>
                             <Tab.Pane eventKey="end-users">
                                 <EndUsersContainer />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="create-ad">
+                                <CreateAdContainer />
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>

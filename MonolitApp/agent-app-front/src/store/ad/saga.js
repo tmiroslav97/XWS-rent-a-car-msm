@@ -6,7 +6,8 @@ import AdServices from '../../services/AdServices';
 
 import {
     CREATED_AD,
-    FETCH_ADS
+    FETCH_ADS,
+    FETCH_AD
 } from './constants';
 
 import {
@@ -27,8 +28,6 @@ export function* createdAd(){
 }
 
 export function* fetchAds() {
-    console.log("sagaaaa");
-
     const { payload } = yield take(FETCH_ADS);
     yield put(putAds({ 'isFetch': false }));
     const data = yield call(AdServices.fetchAdsPaginated, payload);
@@ -38,6 +37,21 @@ export function* fetchAds() {
         'totalPageCnt': data.totalPageCnt,
         'nextPage': payload.nextPage,
         'size': payload.size,
+        'isFetch': true
+    }));
+}
+
+export function* fetchAd() {
+    const { payload } = yield take(FETCH_AD);
+
+    console.log("SAGA  ADDDD")
+    console.log(payload.adId)
+    var id = payload.adId
+    yield put(putAds({ 'isFetch': false }));
+    const data = yield call(AdServices.fetchAd, id);
+    console.log(data);
+    yield put(putAds({
+        'data': data,
         'isFetch': true
     }));
 }

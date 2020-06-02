@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import AdCard from '../../components/Ad/AdCard';
+import AdComponent from '../../components/Ad/AdComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import { adsSelector } from '../../store/ad/selectors';
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
-
+import OrdinarySearchContainer from '../../containers/Search/OrdinarySearchContainer'
 import { fetchAds } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
+
 
 
 const AdListContainer = () => {
@@ -26,23 +27,26 @@ const AdListContainer = () => {
         );
     }, [nextPage, size]);
 
-    // const handleDetailView = (id) => {
-    //     console.log(id);
-    //     console.log("Oglas")
-    // };
 
     return(
        
         <Container>
-             <Row>
-                <Col md={{ span: 12, offset: 3 }} xs={12}>
-                    <PaginationSize size={size} setSize={setSize} />
+            <Row>
+                <Col>
+                    <OrdinarySearchContainer></OrdinarySearchContainer>
                 </Col>
             </Row>
             <Row>
                 <Col md={{ span: 12, offset: 3 }} xs={12}>
+    
+                    <PaginationSize size={size} setSize={setSize} />
+                </Col>
+            </Row>
+            <Row>
+                <Col >
+
                     {
-                        isFetchAds ?  <AdCard ads={ads.data}/> : <SpinnerContainer />
+                        isFetchAds ?  <AdComponent ads={ads.data}/> : <SpinnerContainer />
                     }
                 </Col>
             </Row>

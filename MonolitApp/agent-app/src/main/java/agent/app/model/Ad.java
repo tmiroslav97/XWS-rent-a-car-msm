@@ -78,6 +78,9 @@ public class Ad {
     @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY )
     private Set<Comment> comments = new HashSet<>();
 
+    @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY )
+    private Set<Image> images = new HashSet<>();
+
     @ManyToOne(fetch = FetchType.LAZY)
     private PublisherUser publisherUser;
 
@@ -89,6 +92,8 @@ public class Ad {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Request> requests = new HashSet<>();
+
+
 
 
 

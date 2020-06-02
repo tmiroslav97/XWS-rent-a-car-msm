@@ -5,7 +5,7 @@ U okviru search ad servisa se nalaze sledeci entiteti trazeni u specifikaciji:
 
 U paketu service i njegovom potpaketu intf nalaze se definicije metoda, onoga sta bi trebao ovaj servis da realizuje.
 
-###AdService
+### AdService
 Realizuje:
 * dobavljanje oglasa
 * dobavljanje liste oglasa
@@ -16,7 +16,7 @@ Realizuje:
 * pretraga oglasa (moguce slati sort parametre)
 * napredna pretraga
 
-###CarService
+### CarService
 Realizuje: 
 * dobavljanje automobila
 * dobavljanje liste automobila
