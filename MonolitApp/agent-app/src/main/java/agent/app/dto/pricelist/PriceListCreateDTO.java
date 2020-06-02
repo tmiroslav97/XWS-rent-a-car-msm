@@ -1,11 +1,8 @@
-package agent.app.dto;
+package agent.app.dto.pricelist;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.joda.time.DateTime;
+import lombok.*;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -16,4 +13,5 @@ public class PriceListCreateDTO {
     private Float pricePerKmCDW;
     private Float pricePerDay;
     private Long id;
+    private String publisherUsername;
 }

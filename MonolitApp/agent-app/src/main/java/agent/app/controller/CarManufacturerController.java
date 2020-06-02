@@ -18,7 +18,7 @@ public class CarManufacturerController {
         this.carManufacturerService = carManufacturerService;
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getAll(@RequestParam(value = "nextPage", required = false) Integer nextPage, @RequestParam(value = "size", required = false) Integer size) {
         if (nextPage != null) {
@@ -32,6 +32,12 @@ public class CarManufacturerController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getCarManufacturer(@PathVariable("id") Long id) {
         return new ResponseEntity<>(carManufacturerService.findById(id), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/{id}/car-model", method = RequestMethod.GET)
+    public ResponseEntity<?> getCarModelsByCarManufacturer(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(carManufacturerService.findCarModelsById(id), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")

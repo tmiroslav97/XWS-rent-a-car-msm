@@ -5,7 +5,7 @@ import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import GearboxTypeComponent from '../../components/Codebooks/GearboxTypeComponent';
 import { gearboxTypesSelector } from '../../store/codebook/selectors';
-import { fetchGearboxTypes, addGearboxType, editGearboxType, deleteGearboxType } from '../../store/codebook/actions';
+import { fetchGearboxTypes, addGearboxType, editGearboxType, deleteGearboxType, putGearboxTypes } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
@@ -30,6 +30,15 @@ const GearboxTypeContainer = () => {
                 size
             })
         );
+        return () => {
+            dispatch(putGearboxTypes({
+                'data': [],
+                'totalPageCnt': 0,
+                'nextPage': nextPage,
+                'size': size,
+                'isFetch': false
+            }));
+        };
     }, [nextPage, size]);
 
     const handleAddGearboxType = (event) => {
@@ -95,22 +104,22 @@ const GearboxTypeContainer = () => {
             <FormModalContainer show={showEditForm} setShow={setShowEditForm} name={'Tip mjenjaca'} footer={false} onSubmit={handleEditGearboxType} selectedItem={selectedItem} validated={validated} component={CodebookEditFormComponent} />
             <DeleteModalContainer show={showDeleteModal} setShow={setShowDeleteModal} onDelete={handleDeleteGearboxType} />
             <Row>
-                <Col md={{ span: 6, offset: 3 }} xs={12}>
+                <Col md={6} xs={12}>
                     <h2 className="border-bottom">Šifarnik tipova mjenjača</h2>
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 2, offset: 3 }} xs={12}>
+                <Col md={2} xs={12}>
                     <Button className="mb-5" variant="outline-primary" onClick={() => setShowAdForm(true)}>Dodaj</Button>
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 12, offset: 3 }} xs={12}>
+                <Col md={12} xs={12}>
                     <PaginationSize size={size} setSize={setSize} />
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 12, offset: 3 }} xs={12}>
+                <Col md={12} xs={12}>
 
                     {
                         gearboxTypes.isFetch ? <GearboxTypeComponent gearboxTypes={gearboxTypes.data} handleEdit={handleEdit} handleDelete={handleDelete} /> : <SpinnerContainer />
@@ -118,7 +127,9 @@ const GearboxTypeContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <PaginationContainer setNextPage={setNextPage} totalPageCnt={gearboxTypes.totalPageCnt} nextPage={nextPage} />
+                <Col md={6} xs={12}>
+                    <PaginationContainer setNextPage={setNextPage} totalPageCnt={gearboxTypes.totalPageCnt} nextPage={nextPage} />
+                </Col>
             </Row>
         </Container >
     );

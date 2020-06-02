@@ -1,0 +1,29 @@
+package agent.app.model;
+
+import agent.app.common.db.DbColumnConstants;
+import agent.app.common.db.DbTableConstants;
+import lombok.*;
+
+import javax.persistence.*;
+
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Builder
+@Entity(name = DbTableConstants.IMAGE)
+public class Image {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = DbColumnConstants.PHOTO, nullable = false)
+    private String name;
+
+    @Column(name = DbColumnConstants.COVERPHOTO, nullable = false)
+    private Boolean coverPhoto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Ad ad;
+}
