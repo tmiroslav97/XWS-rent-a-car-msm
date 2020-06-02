@@ -7,11 +7,9 @@ import 'nouislider/src/nouislider.tooltips.less';
 import 'nouislider/src/nouislider.pips.less';
 
 const OrdinarySearchComponent = (props) => {
-    console.log(props);
+    // console.log(props);
 
     return (
-
-
         <Card >
             <Card.Body>
                 <Form id="search" onSubmit={props.onSubmit} noValidate validated={props.validated}>

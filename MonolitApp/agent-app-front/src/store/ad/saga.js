@@ -11,7 +11,8 @@ import {
 } from './constants';
 
 import {
-    putAds
+    putAds,
+    putAd
 } from './actions';
 
 import {
@@ -43,14 +44,12 @@ export function* fetchAds() {
 
 export function* fetchAd() {
     const { payload } = yield take(FETCH_AD);
-
     console.log("SAGA  ADDDD")
-    console.log(payload.adId)
     var id = payload.adId
-    yield put(putAds({ 'isFetch': false }));
+    yield put(putAd({ 'isFetch': false }));
     const data = yield call(AdServices.fetchAd, id);
     console.log(data);
-    yield put(putAds({
+    yield put(putAd({
         'data': data,
         'isFetch': true
     }));
