@@ -56,12 +56,13 @@ public class AdController {
 //        adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
 
 //        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
-        Integer flag = adService.createAd(adCreateDTO);
-        if (flag == 1) {
-            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
-        }
+//        Integer flag = adService.createAd(adCreateDTO);
+        return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+//        if (flag == 1) {
+//            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+//        } else {
+//            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
+//        }
 
     }
 

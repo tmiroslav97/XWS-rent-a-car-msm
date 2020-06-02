@@ -12,7 +12,7 @@ const Form5CreateAd = (props) => {
                             <Form.Label>Dodaj sliku</Form.Label>
 
                             <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike" label={props.coverPhotoName}
-                                onChange={props.onPhotoChange} custom
+                                onChange={props.onPhotoChange} custom multiple
                             >
                             </Form.File>
 
