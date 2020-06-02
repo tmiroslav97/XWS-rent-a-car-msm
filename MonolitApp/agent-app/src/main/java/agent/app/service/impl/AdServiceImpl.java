@@ -141,6 +141,7 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public AdPageContentDTO findAllOrdinarySearch(Integer page, Integer size, String location, DateTime startDate, DateTime endDate) {
+        System.out.println("METODAAAAAAAAAAAAAAAAAAAAA ZAAA PRETRAGU");
         Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
         Page<Ad> ads = adRepository.findAllOrdinarySearch(false, location, startDate, endDate, pageable);
         System.out.println(ads.getSize());

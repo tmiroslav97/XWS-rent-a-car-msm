@@ -4,6 +4,7 @@ import agent.app.converter.AdConverter;
 import agent.app.dto.ad.AdCreateDTO;
 import agent.app.model.CarManufacturer;
 import agent.app.service.intf.AdService;
+import org.joda.time.DateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -124,4 +125,19 @@ public class AdController {
 
     }
 
+
+    //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
+    public ResponseEntity<?> findAllSearch(@RequestParam(value = "nextPage", required = false) Integer nextPage,
+                                           @RequestParam(value = "size", required = false) Integer size,
+                                           @RequestParam(value = "location", required = true) String location,
+                                           @RequestParam(value = "startDate", required = true) DateTime startDate,
+                                           @RequestParam(value = "endDate", required = true) DateTime endDate) {
+
+
+            System.out.println("AD KONTROLEERRRR PRETRAGAAAAAAAAAAAAAAAAA");
+            return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startDate, endDate), HttpStatus.OK);
+
+
+    }
 }
