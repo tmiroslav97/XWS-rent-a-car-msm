@@ -41,6 +41,7 @@ public class AdServiceImpl implements AdService {
     @Autowired
     private CarCalendarTermService carCalendarTermService;
 
+
     @Override
     public Ad findById(Long id) {
         return adRepository.findById(id).orElseThrow(()-> new NotFoundException("Oglas ne postoi."));
@@ -76,12 +77,19 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Integer createAd(AdCreateDTO adCreateDTO) {
+        //TODO 2: POZVATI PUBLISH USER SERVIS I DOBITI PUBLISHERA NA OSNOVU EMAIL-A TJ USERNAME-A
+        //TODO 3: POZVATI METODU IZ END USER SERVISA ZA DOBAVLJANJE AD LIMIT NUM-A,
+        // AKO JE 4 ZNACI DA NIJE U PITANJU END USER VEC AGENT I NE TREBA NISTA OGRANICAVATI
+        // A AKO JE BROJ 0, U PITANJU JE END USER I ZABRANITI MU DA POSTAVI OGLAS
+        // ILI TO NA POCETKU PROVERITI KROZ NEKU METODU.. DA LI JE END USER I KOLIKI MU JE
+        // LIMIT NUM PA U ZAVISNOSTI OD TOGA DOZVOLITI ILI NE DODAVANJE OGLASA
+//        PublisherUser publisherUser =
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
 
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
         ad.setCar(car);
 
-        if(adCreateDTO.getPriceListCreateDTO().getId() == 0){
+        if(adCreateDTO.getPriceListCreateDTO().getId() == null){
             //pravljenje novog cenovnika
             PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
             ad.setPriceList(priceList);

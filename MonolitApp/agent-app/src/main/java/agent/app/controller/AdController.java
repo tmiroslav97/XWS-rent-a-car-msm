@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/ad", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,10 +50,12 @@ public class AdController {
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createAd(@RequestBody AdCreateDTO adCreateDTO) {
+    public ResponseEntity<?> createAd(@RequestBody AdCreateDTO adCreateDTO, Principal principal) {
         System.out.println(adCreateDTO);
 //        AdCreateDTO adCreateDTO = objectMapper.readValue(data, AdCreateDTO.class);
 //        adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
+
+//        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
         Integer flag = adService.createAd(adCreateDTO);
         if (flag == 1) {
             return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);

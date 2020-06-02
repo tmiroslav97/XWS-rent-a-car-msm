@@ -19,7 +19,26 @@ public class EndUserImpl implements EndUserService {
     }
 
     @Override
+    public Boolean existsByEmail(String email) {
+        return endUserRepository.existsByEmail(email);
+    }
+
+    @Override
+    public EndUser findByEmail(String email) {
+        return endUserRepository.findByEmail(email);
+    }
+
+    @Override
     public EndUser save(EndUser endUser) {
         return endUserRepository.save(endUser);
+    }
+
+    @Override
+    public Integer getAdLimitNum(String email) {
+        EndUser endUser = this.findByEmail(email);
+        if(endUser != null){
+            return 4; //non limit it's not end user, it is agent
+        }
+        return endUser.getAdLimitNum();
     }
 }
