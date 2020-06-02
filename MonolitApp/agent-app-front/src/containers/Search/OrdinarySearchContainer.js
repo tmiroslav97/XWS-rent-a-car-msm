@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import OrdinarySearchComponent from '../../components/Search/OrdinarySearchComponent';
 import { carManufacturersSelector, carTypesSelector, carModelsSelector, gearboxTypesSelector, fuelTypesSelector } from '../../store/codebook/selectors';
 import { fetchAllCarManufacturers, fetchAllCarTypes, fetchAllCarModels, fetchAllGearboxTypes, fetchAllFuelTypes, putCarManufacturers, putCarModels, putCarTypes, putFuelTypes, putGearboxTypes } from '../../store/codebook/actions';
+import { searchAd } from '../../store/ad/actions';
 
 
 const OrdinarySearchContainer = () => {
@@ -221,7 +222,7 @@ const OrdinarySearchContainer = () => {
             console.log(data)
             let formData = new FormData(form);
             formData.append('data', JSON.stringify(data));
-            // dispatch(createdAd(formData));
+            dispatch(searchAd(formData));
             setValidated(false);
         }
     };

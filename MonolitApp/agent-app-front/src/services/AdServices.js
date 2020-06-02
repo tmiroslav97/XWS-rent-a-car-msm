@@ -43,6 +43,20 @@ class AdServices extends HttpBaseClient {
 
         return response.data;
     };
+
+    fetchAdsPaginatedSearch = async payload => {
+        console.log("SERVICEEE SEARCH")
+        const response = await this.getApiClient().get(
+            FINALPOINTS.AD_BASE + "/search", {
+                params: {
+                    nextPage: payload.nextPage,
+                    size: payload.size
+                }
+            }
+        );
+
+        return response.data;
+    };
 }
 
 export default new AdServices();

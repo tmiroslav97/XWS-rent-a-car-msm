@@ -7,7 +7,8 @@ import AdServices from '../../services/AdServices';
 import {
     CREATED_AD,
     FETCH_ADS,
-    FETCH_AD
+    FETCH_AD,
+    SEARCH_AD
 } from './constants';
 
 import {
@@ -55,3 +56,18 @@ export function* fetchAd() {
     }));
 }
 
+export function* searchAd(){
+    console.log("SAGA PRETRAGAAA")
+    const { payload } = yield take(SEARCH_AD);
+    yield put(putAds({ 'isFetch': false }));
+    const data = yield call(AdServices.fetchAdsPaginatedSearch, payload);
+    console.log(data);
+    yield put(putAds({
+        'data': data.ads,
+        'totalPageCnt': data.totalPageCnt,
+        'nextPage': payload.nextPage,
+        'size': payload.size,
+        'isFetch': true
+    }));
+    
+}
