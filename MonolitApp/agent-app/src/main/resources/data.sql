@@ -13,6 +13,8 @@ INSERT INTO user(id, email, first_name, last_name, password)
 VALUES (3, 'svetlana@gmail.com', 'Svetlana', 'Antesevic', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
 INSERT INTO user(id, email, first_name, last_name, password)
 VALUES (4, 'magdalena@gmail.com', 'Magdalena', 'Lakic', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
+INSERT INTO user(id, email, first_name, last_name, password)
+VALUES (5, 'end@end.com', 'Krajnji', 'Korisnik', '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS');
 
 INSERT INTO user_authority(user_id, authority_id)
 VALUES (1,1);
@@ -22,12 +24,20 @@ INSERT INTO user_authority(user_id, authority_id)
 VALUES (3,2);
 INSERT INTO user_authority(user_id, authority_id)
 VALUES (4,2);
+INSERT INTO user_authority(user_id, authority_id)
+VALUES (5,3);
 
 INSERT INTO publisher_user(id, deleted)
 VALUES (1, false);
 
 INSERT INTO agent(id)
 VALUES (1);
+
+INSERT INTO publisher_user(id, deleted)
+VALUES (5, false);
+
+INSERT INTO end_user(id, ad_limit_num, canceled_cnt, enabled, obliged)
+VALUES (5, 3, 0, true, false);
 
 --car manufacturers
 INSERT INTO car_manufacturer(id, name)
@@ -138,5 +148,4 @@ INSERT INTO gearbox_type(id, name)
 VALUES (4, 'DSG');
 INSERT INTO gearbox_type(id, name)
 VALUES (5, 'Tiptronik');
-
 

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import OrdinarySearchComponent from '../../components/Search/OrdinarySearchComponent';
-import { carManufacturersSelector, carTypesSelector, carModelsSelector, gearboxTypesSelector, fuelTypesSelector  } from '../../store/codebook/selectors';
-import { fetchAllCarManufacturers, fetchAllCarTypes, fetchAllCarModels, fetchAllGearboxTypes, fetchAllFuelTypes } from '../../store/codebook/actions';
+import { carManufacturersSelector, carTypesSelector, carModelsSelector, gearboxTypesSelector, fuelTypesSelector } from '../../store/codebook/selectors';
+import { fetchAllCarManufacturers, fetchAllCarTypes, fetchAllCarModels, fetchAllGearboxTypes, fetchAllFuelTypes, putCarManufacturers, putCarModels, putCarTypes, putFuelTypes, putGearboxTypes } from '../../store/codebook/actions';
 
 
 const OrdinarySearchContainer = () => {
@@ -36,6 +36,47 @@ const OrdinarySearchContainer = () => {
         dispatch(
             fetchAllFuelTypes()
         );
+        return () => {
+            dispatch(putCarManufacturers({
+                'data': [],
+                'totalPageCnt': 0,
+                'nextPage': 0,
+                'size': 10,
+                'isFetch': false
+            }));
+
+            dispatch(putCarModels({
+                'data': [],
+                'totalPageCnt': 0,
+                'nextPage': 0,
+                'size': 10,
+                'isFetch': false
+            }));
+
+            dispatch(putCarTypes({
+                'data': [],
+                'totalPageCnt': 0,
+                'nextPage': 0,
+                'size': 10,
+                'isFetch': false
+            }));
+
+            dispatch(putFuelTypes({
+                'data': [],
+                'totalPageCnt': 0,
+                'nextPage': 0,
+                'size': 10,
+                'isFetch': false
+            }));
+
+            dispatch(putGearboxTypes({
+                'data': [],
+                'totalPageCnt': 0,
+                'nextPage': 0,
+                'size': 10,
+                'isFetch': false
+            }));
+        };
     }, []);
 
     const getCarManufacturers = () => {
@@ -52,7 +93,7 @@ const OrdinarySearchContainer = () => {
         let index = event.target.options.selectedIndex;
         dispatch(
             fetchAllCarModels({
-                "id" : carManufacturers.data[index].id
+                "id": carManufacturers.data[index].id
             })
         );
     };
@@ -61,7 +102,7 @@ const OrdinarySearchContainer = () => {
         const listCarModel = [];
         if (carModels.isFetch) {
             let i = 0;
-            carModels.data.map((carModel)=> {
+            carModels.data.map((carModel) => {
                 listCarModel.push(<option key={i}>{carModel}</option>);
                 i++
             })
@@ -136,9 +177,9 @@ const OrdinarySearchContainer = () => {
         console.log(e.target.value)
     }
 
-    const handleCDW = (e) =>{
+    const handleCDW = (e) => {
         console.log(e.target.checked)
-        
+
     }
 
     const handleForm = (event) => {
@@ -153,7 +194,7 @@ const OrdinarySearchContainer = () => {
                 'location': form.location.value,
                 'startDateTime': startDate,
                 'endDate': endDate,
-                
+
             }
             console.log(data)
             let formData = new FormData(form);

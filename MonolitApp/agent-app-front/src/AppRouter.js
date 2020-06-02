@@ -7,7 +7,6 @@ import HomePage from './containers/HomePage';
 import LoginContainter from './containers/Authorization/LoginContainer';
 import RegContainer from './containers/Authorization/RegContainer';
 import AgentFirmHomePage from './components/AgentFirm/AgentFirmHomePage';
-import EndUserHomePage from './components/EndUser/EndUserHomePage';
 import CreateAdContainer from './containers/Ad/CreateAdContainer';
 import AdListContainer from './containers/Ad/AdListContainer';
 import AdDetailViewContainer from './containers/Ad/AdDetailViewContainer';
@@ -20,7 +19,6 @@ const AppRouter = () => {
       <Route exact path="/" component={HomePage} />
       <Route exact path="/login" render={props => token == null ? (<LoginContainter {...props} />) : (<Redirect to="/" />)} />
       <Route exact path="/sign-up" render={props => token == null ? (<RegContainer {...props} />) : (<Redirect to="/" />)} />
-      <PrivateRoute exact path="/end-user" component={EndUserHomePage} accessRole={["ROLE_USER"]} />
 
       <PrivateRoute exact path="/agent-firm" component={AgentFirmHomePage} accessRole={["ROLE_AGENT"]} />
       <PrivateRoute exact path="/agent-firm/create-ad" component={CreateAdContainer} accessRole={["ROLE_AGENT", "ROLE_USER"]} />
