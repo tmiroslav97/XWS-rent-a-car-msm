@@ -21,9 +21,6 @@ public class Image {
     @Column(name = DbColumnConstants.PHOTO, nullable = false)
     private String name;
 
-    @Column(name = DbColumnConstants.COVERPHOTO, nullable = false)
-    private Boolean coverPhoto;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Ad ad;
 }
