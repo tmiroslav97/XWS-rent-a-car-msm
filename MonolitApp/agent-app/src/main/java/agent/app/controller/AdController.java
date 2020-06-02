@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/ad", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,9 +28,10 @@ public class AdController {
     ObjectMapper objectMapper = new ObjectMapper();
 
 
+
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> createAd(@RequestParam(value="coverPhoto", required = true) MultipartFile coverPhoto, @RequestParam(value="data", required = true)  String data) throws IOException{
+    public ResponseEntity<?> createAd(@RequestParam(value="coverPhoto", required = true) MultipartFile coverPhoto, @RequestParam(value="data", required = true)  String data, Principal principal) throws IOException{
         System.out.println("-----------------------UPLOAD FILE---------------------");
         System.out.println("slika : " + coverPhoto.getOriginalFilename());
         File file = new File("photos");
@@ -44,6 +46,7 @@ public class AdController {
         System.out.println(data.toString());
         AdCreateDTO adCreateDTO = objectMapper.readValue(data, AdCreateDTO.class);
         adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
+        //TODO 3: DODATI PUBLISHERA U PRICE LIST DTO
         Integer flag = adService.createAd(adCreateDTO);
         if(flag == 1){
             return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
