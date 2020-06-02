@@ -11,5 +11,5 @@ import org.joda.time.DateTime;
 public class AdOrdinarySearchDTO {
     private DateTime startDate;
     private DateTime endDate;
-    private String loation;
+    private String location;
 }

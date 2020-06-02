@@ -1,5 +1,6 @@
 package agent.app.controller;
 
+import agent.app.converter.AdConverter;
 import agent.app.dto.ad.AdCreateDTO;
 import agent.app.model.CarManufacturer;
 import agent.app.service.intf.AdService;
@@ -28,6 +29,12 @@ public class AdController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
+//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
+        System.out.println("Service ad !!!!!");
+        return new ResponseEntity<>(AdConverter.toAdDetailViewDTOFromAd(adService.findById(id)), HttpStatus.OK);
+    }
 
 //    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
 //    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -104,7 +111,7 @@ public class AdController {
 //        return new ResponseEntity<>(adService.findAllPageAd(page, size, sort), HttpStatus.OK);
 //    }
 
-    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+    //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage, @RequestParam(value = "size", required = false) Integer size) {
 

@@ -44,6 +44,7 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ad findById(Long id) {
+
         return adRepository.findById(id).orElseThrow(()-> new NotFoundException("Oglas ne postoi."));
     }
 
