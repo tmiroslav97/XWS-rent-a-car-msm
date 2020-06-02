@@ -149,3 +149,5 @@ VALUES (4, 'DSG');
 INSERT INTO gearbox_type(id, name)
 VALUES (5, 'Tiptronik');
 
+INSERT INTO car_calendar_term(start_date, end_date, ad_id)
+VALUES ('02.06.2020.', '02.09.2020.', 1);

@@ -96,6 +96,7 @@ const OrdinarySearchContainer = () => {
                 "id": carManufacturers.data[index].id
             })
         );
+       
     };
 
     const getCarModels = () => {
@@ -182,20 +183,41 @@ const OrdinarySearchContainer = () => {
 
     }
 
+    console.log("Dugme: ");
+    console.log(toggleAdvancedSearch)
+
     const handleForm = (event) => {
         event.preventDefault();
-        console.log("aaaaaaaaaaaaaaaaaaa")
         const form = event.target;
+        console.log(form);
+        let data = null;
         if (form.checkValidity() === false) {
             event.stopPropagation();
             setValidated(true);
         } else {
-            let data = {
-                'location': form.location.value,
-                'startDateTime': startDate,
-                'endDate': endDate,
-
+            if(toggleAdvancedSearch === false){
+                data = {
+                    'location': form.location.value,
+                    'startDate': startDate,
+                    'endDate': endDate
+                }
+            }else{
+                data = {
+                    'location': form.location.value,
+                    'startDate': startDate,
+                    'endDate': endDate,
+                    'carManufacturer': form.carManufacturer.value,
+                    'carModel': form.carModel.value,
+                    'carType': form.carType.value,
+                    'mileage': form.mileage.value,
+                    'mileageKM': form.mileageKM.value,
+                    'gearboxType': form.gearboxType.value,
+                    'fuelType': form.fuelType.value,
+                    'childrenSeatNum': form.childrenSeatNum.value,
+                    'cdw': cdw
+                } 
             }
+          
             console.log(data)
             let formData = new FormData(form);
             formData.append('data', JSON.stringify(data));
