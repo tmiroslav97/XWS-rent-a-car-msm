@@ -8,7 +8,7 @@ U okviru codebook servisa se nalaze sledeci entiteti trazeni u specifikaciji:
 
 U paketu service i njegovom potpaketu intf nalaze se definicije metoda, onoga sta bi trebao ovaj servis da realizuje.
 
-###CarManufacturerService
+### CarManufacturerService
 Realizuje:
 * dobavljanje proizvodjaca automobila
 * dobavljanje liste proizvodjaca automobila
@@ -17,7 +17,7 @@ Realizuje:
 * brisanje proizvodjaca automobila 
 * izmjena podataka o proizvodjacu automobila
 
-###CarModelService
+### CarModelService
 Realizuje: 
 * dobavljanje modela automobila
 * dobavljanje liste modela automobila
@@ -26,7 +26,7 @@ Realizuje:
 * brisanje modela automobila
 * izmena podataka o modelu automobila
 
-###CarTypeService
+### CarTypeService
 Realizuje: 
 * dobavljanje tipa automobila
 * dobavljanje liste tipova automobila
@@ -35,7 +35,7 @@ Realizuje:
 * brisanje tipa automobila
 * izmena podataka o tipu automobila
 
-###FuelTypeService
+### FuelTypeService
 Realizuje: 
 * dobavljanje tipa goriva
 * dobavljanje liste tipova goriva
@@ -44,7 +44,7 @@ Realizuje:
 * brisanje tipa goriva
 * izmena podataka o tipu goriva
 
-###GearboxTypeService
+### GearboxTypeService
 Realizuje: 
 * dobavljanje tipa menjaca
 * dobavljanje liste tipova menjaca

@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CreateAd from '../../components/Ad/CreateAd';
 import { createdAd } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
 import Form2CreateAdContainer from './Form2CreateAdContainer';
+import Form3CreateAdContainer from './Form3CreateAdContainer';
+import Form4CreateAdContainer from './Form4CreateAdContainer';
+import Form5CreateAdContainer from './Form5CreateAdContainer';
 import { Container, Row, Col, Button } from 'react-bootstrap'
+
 
 const CreateAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
-    const [coverPhoto, setCoverPhoto] = useState();
+
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
-    const [distanceLimit, setDistanceLimit] = useState();
+    const [distanceLimit, setDistanceLimit] = useState(null);
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
+    const [pricePerKm, setPricePerKm] = useState(null);
+    const [pricePerKmCDW, setPricePerKmCDW] = useState(null);
+    const [id, setId] = useState(null);
+    const [carCalendarTermList, setCarCalendarTermList] = useState([]);
+
+
     const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
-    const [stepLabel, setStepLabel] = useState(1);
+    const [coverPhoto, setCoverPhoto] = useState();
+
+    const [activeStep, setActiveStep] = useState(0);
+    const [skipped, setSkipped] = useState(new Set());
+    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];
 
 
     const [formData, setFormData] = useState({
@@ -40,9 +54,7 @@ const CreateAdContainer = () => {
         id: null,
         carCalendarTermCreateDTOList: null
     });
-
-
-
+    
     const handleCreatedAd = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -73,8 +85,7 @@ const CreateAdContainer = () => {
                     'pricePerKm': form.pricePerKm.value,
                     'pricePerKmCDW': form.pricePerKmCDW.value,
                     'pricePerDay': form.pricePerDay.value,
-                    'id': 0,
-                    // 'id': form.id.value,
+                    'id': form.id.value,
                 },
                 'carCalendarTermCreateDTOList': null
             }
@@ -139,24 +150,45 @@ const CreateAdContainer = () => {
 
     };
 
-    const onButton1 = (event) => {
-        setStepLabel(1);
+    const isStepOptional = (step) => {
+        // return step === 3;
     };
-    const onButton2 = (event) => {
-        setStepLabel(2);
+
+    const isStepSkipped = (step) => {
+        return skipped.has(step);
     };
-    const onButton3 = (event) => {
-        setStepLabel(3);
+
+    const handleNext = () => {
+        let newSkipped = skipped;
+        if (isStepSkipped(activeStep)) {
+            newSkipped = new Set(newSkipped.values());
+            newSkipped.delete(activeStep);
+        }
+        setSkipped(newSkipped);
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-    const onButton4 = (event) => {
-        setStepLabel(4);
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-    const onButton5 = (event) => {
-        setStepLabel(5);
+
+    const handleSkip = () => {
+        if (!isStepOptional(activeStep)) {
+            throw new Error("You can't skip a step that isn't optional.");
+        }
+
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setSkipped((prevSkipped) => {
+            const newSkipped = new Set(prevSkipped.values());
+            newSkipped.add(activeStep);
+            return newSkipped;
+        });
     };
-    const onButton6 = (event) => {
-        setStepLabel(6);
+
+    const handleReset = () => {
+        setActiveStep(0);
     };
+      
 
     return (
         <Container>
@@ -170,22 +202,98 @@ const CreateAdContainer = () => {
                 onPhotoChange={onPhotoChange}
                 handleAndroidFlag={handleAndroidFlag}
                 handleCDW={handleCDW}
-                stepLabel={stepLabel}
-                onButton1={onButton1}
-                onButton2={onButton2}
-                onButton3={onButton3}
-                onButton4={onButton4}
-                onButton5={onButton5}
-                onButton6={onButton6}
+                skipped={skipped}
+                setSkipped={setSkipped}
+                isStepOptional={isStepOptional}
+                isStepSkipped={isStepSkipped}
+                // classes={classes}
+                steps={steps}
+                handleNext={handleNext}
+                handleBack={handleBack}
+                handleSkip={handleSkip}
+                handleReset={handleReset}
+                formData={formData} setFormData={setFormData}
+                activeStep={activeStep} setActiveStep={setActiveStep}
             />
-            {stepLabel === 1 ?
-                <Form1CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form1CreateAdContainer>
+            {activeStep === 0 ?
+                <Form1CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    distanceLimitFlag={distanceLimitFlag} setDistanceLimitFlag={setDistanceLimitFlag}
+                    distanceLimit={distanceLimit} setDistanceLimit={setDistanceLimit}
+                ></Form1CreateAdContainer>
                 : null
             }
-            {stepLabel === 2 ?
-                <Form2CreateAdContainer formData={formData} setFormData={setFormData} setStepLabel={setStepLabel}></Form2CreateAdContainer>
+            {activeStep === 1 ?
+                <Form2CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    cdw={cdw} setCdw={setCdw}
+                    androidFlag={androidFlag} setAndroidFlag={setAndroidFlag}
+                ></Form2CreateAdContainer>
                 : null
             }
+            {activeStep === 2 ?
+                <Form3CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    cdw={cdw} setCdw={setCdw}
+                    distanceLimitFlag={distanceLimitFlag} setDistanceLimitFlag={setDistanceLimitFlag}
+                    pricePerKm={pricePerKm} setPricePerKm={setPricePerKm}
+                    pricePerKmCDW={pricePerKmCDW} setPricePerKmCDW={setPricePerKmCDW}
+                    id={id} setId={setId}
+
+                ></Form3CreateAdContainer>
+                : null
+            }
+            {activeStep === 3 ?
+                <Form4CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    carCalendarTermList={carCalendarTermList} 
+                    setCarCalendarTermList={setCarCalendarTermList}
+                ></Form4CreateAdContainer>
+                : null
+            }
+            {activeStep === 4 ?
+                <Form5CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    handleCreatedAd={handleCreatedAd}
+                ></Form5CreateAdContainer>
+                : null
+            }
+
         </Container>
 
 
