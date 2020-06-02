@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Form5CreateAd from '../../components/Ad/Form5CreateAd'
 import { createdAd, uploadImage } from '../../store/ad/actions';
-import ImagesContainer from './ImagesContainer'
 import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image, Card } from 'react-bootstrap';
 
 const Form5CreateAdContainer = (props) => {
