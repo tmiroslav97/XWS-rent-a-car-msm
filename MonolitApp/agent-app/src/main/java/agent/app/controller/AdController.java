@@ -11,11 +11,17 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/ad", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,12 +45,11 @@ public class AdController {
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadImage(@RequestParam(value = "photo", required = true) MultipartFile photo,
-                                         @RequestParam(value = "data", required = true) String data) throws IOException {
+                                         @RequestParam(value = "data", required = true) String data
+        ) throws IOException {
         System.out.println("-----------------------UPLOAD FILE---------------------");
-
         System.out.println(data);
         try{
-            System.out.println(photo);
             File file = new File("photos");
             String uploadDirectory = file.getAbsolutePath() + "\\" + photo.getOriginalFilename();
 
@@ -59,7 +64,6 @@ public class AdController {
             //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
             return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
         }catch(Exception e){
-
             return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
         }
 

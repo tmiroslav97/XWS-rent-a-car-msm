@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Form5CreateAd from '../../components/Ad/Form5CreateAd'
+import { createdAd, uploadImage } from '../../store/ad/actions';
+import ImagesContainer from './ImagesContainer'
+import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image, Card } from 'react-bootstrap';
 
 const Form5CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
-
-    
 
     const handleForm5 = (event) => {
         event.preventDefault();
@@ -37,62 +38,107 @@ const Form5CreateAdContainer = (props) => {
         }
     };
 
-    const [coverPhotoName, setCoverPhotoName] = useState("");
     const [photos, setPhotos] = useState([]);
-    const [coverPhoto, setCoverPhoto] = useState();
-    const onPhotoChange = (event) => {
+    const [photo, setPhoto] = useState();
+    const [photoName, setPhotoName] = useState("");
+    const [imagePreviewUrl, setImagePreviewUrl] = useState();
+    const [file, setFile] = useState();
 
-        if (event.target.files != null) {
-            let p = photos;
-            let name = event.target.files[0].name;
-            console.log(event.target);
-            console.log(event.target.files[0]);
-            let flag = 0;
-
-            p.map((photo) => {
-                if (photo.photoName === name) {
-                    flag = 1;
-                    console.log("Isti fajl");
-                }
-
-            })
-            if (flag != 1) {
-                p.push(
-                    {
-                        photoName: event.target.files[0].name,
-                        photo: event.target.files[0]
-                    }
-                )
-                setPhotos(p);
+    const handleImageChange = (e) => {
+        let reader = new FileReader();
+        let files = e.target.files[0];
+        setFile(e.target.files[0]);
+        let name = e.target.files[0].name;
+        let flag = 0
+        props.imagesDTO.map((image) => {
+            if (image.name === name) {
+                flag = 1;
             }
-            let nazivi = "";
-            let slike = [];
-            p.map((photo) => {
-                slike.push(photo.photo);
-                nazivi += " " + photo.photoName;
-            })
-            console.log(nazivi);
-            console.log(slike);
+        })
+        if (flag === 0) {
+            reader.onloadend = () => {
+                setImagePreviewUrl(reader.result);
+                let i = photos.length;
+                let temp = {
+                    "id": i,
+                    "imagePreviewUrl": reader.result,
+                    "name": name
+                };
+                setPhotos([...photos, temp]);
+                props.setImagesDTO([...props.imagesDTO, name]);
+            }
+            reader.readAsDataURL(e.target.files[0])
+            console.log(photos);
 
+            let formData = new FormData();
+            formData.append('photo', e.target.files[0]);
+            formData.append('data', JSON.stringify(files.name));
 
-            setCoverPhoto(event.target.files[0]);
-            setCoverPhotoName(event.target.files[0].name);
+            dispatch(
+                uploadImage(formData)
+            );
         }
 
-    };
+    }
+
+
+    const removeImage = (id) => {
+        console.log("brisanje")
+        // console.log(event.target.value);
+        console.log(id);
+        // let id = event.target.value;
+        // photos.map((photo)=>{
+        //     if(photo.id === id){
+        //         console.log(photo.name + " " + photo.id);
+        //     }
+        // })
+        // this.setState({
+        //   images: this.state.images.filter(image => image.public_id !== id)
+        // })
+    }
+
+    const setCoverPhoto = (event) => {
+        console.log("stisnuto dugme");
+        console.log(event)
+
+    }
+
+    const previewImage = () => {
+        let rez = [];
+        photos.map((photo) => {
+            rez.push(
+                <Card key={photo.name} id={photo.id} className="imgPreview" id={photo.id} border="secondary" style={{ height: "140px", width: "140px", margin: "10px" }} >
+
+                    <ButtonGroup style={{ height: "40px", width: "140px" }} >
+                        <Button onChange={(key)=>removeImage(key)}>X</Button>
+                        <Button  onChange={(key)=>setCoverPhoto(key)}>Cover</Button>
+                    </ButtonGroup>
+                    <img style={{ height: "100px", width: "140px" }} src={photo.imagePreviewUrl} />
+                    {/* <div style={{ height: "20px", width: "140px" }}>{photo.name}</div> */}
+
+                </Card>
+            )
+        });
+        return rez;
+    }
 
     return (
         <Form5CreateAd
             onSubmit={handleForm5}
             validated={validated}
-
             activeStep={props.activeStep}
             steps={props.steps}
             isStepOptional={props.isStepOptional}
-            // handleNext={props.handleNext}
             handleBack={props.handleBack}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
+            handleImageChange={handleImageChange}
+            imagePreviewUrl={imagePreviewUrl}
+            previewImage={previewImage}
+            coverPhoto={props.coverPhoto} setCoverPhoto={props.setCoverPhoto}
+            imagesDTO={props.imagesDTO} setImagesDTO={props.setImagesDTO}
+            setCoverPhoto={setCoverPhoto}
+            removeImage={removeImage}
         />
     );
 }

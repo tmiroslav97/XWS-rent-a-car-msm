@@ -1,20 +1,22 @@
 import React from 'react';
-import { Form, Col, Container, Button } from 'react-bootstrap';
+import { Form, Row, Col, Container, Button } from 'react-bootstrap';
 import { Typography } from '@material-ui/core';
+
 
 const Form5CreateAd = (props) => {
     return (
         <Container>
             <Form id="step5" onSubmit={props.onSubmit} noValidate validated={props.validated}>
+
                 <Form.Row>
                     <Col>
                         <Form.Group as={Col}>
-                            <Form.Label>Dodaj sliku</Form.Label>
+                            <Form.Label>Dodaj slike</Form.Label>
 
-                            <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike" 
-                                // label={props.coverPhotoName}
-                                // onChange={props.onPhotoChange} 
-                                custom multiple
+                            <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike"
+                                label="Dodaj sliku"
+                                onChange={props.handleImageChange}
+                                custom
                             >
                             </Form.File>
 
@@ -22,6 +24,9 @@ const Form5CreateAd = (props) => {
                         </Form.Group>
                     </Col>
 
+                </Form.Row>
+                <Form.Row>
+                    {props.previewImage()}
                 </Form.Row>
                 <Form.Row>
                     <Col>

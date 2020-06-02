@@ -29,20 +29,10 @@ const CreateAd = (props) => {
             </Row>
             <Row>
                 <Col>
-                    {props.imagePreviewUrl ?
-                        <div className="imgPreview" >
-                            <img style={{height:"100px", width:"100px"}} src={props.imagePreviewUrl} />
-                        </div>
-
-                        :
-                        <div className="previewText">Please select an Image for Preview</div>
-                    }
-                    <input className="fileInput"
-                        type="file"
-                        onChange={props._handleImageChange} />
-                    {/* {props.content()} */}
+                    
                     <Form id="createAdFrom" onSubmit={props.onSubmit} noValidate
                         validated={props.validated}>
+                        
                     </Form>
                 </Col>
             </Row>
