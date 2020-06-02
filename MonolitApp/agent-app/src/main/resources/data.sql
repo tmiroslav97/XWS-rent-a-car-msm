@@ -18,6 +18,9 @@ VALUES (2,1);
 INSERT INTO publisher_user(id, deleted)
 VALUES (1, false);
 
+INSERT INTO agent(id)
+VALUES (1);
+
 --car manufacturers
 INSERT INTO car_manufacturer(id, name)
 VALUES (1, 'BMW');

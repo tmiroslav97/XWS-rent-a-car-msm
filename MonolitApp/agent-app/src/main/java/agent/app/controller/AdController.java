@@ -28,25 +28,57 @@ public class AdController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadImage(@RequestParam(value = "coverPhoto", required = true) MultipartFile coverPhoto) throws IOException {
-        System.out.println("-----------------------UPLOAD FILE---------------------");
 
-        File file = new File("photos");
-        String uploadDirectory = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
+//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+//    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ResponseEntity<?> uploadImage(@RequestParam(value = "coverPhoto", required = true) MultipartFile coverPhoto) throws IOException {
+//        System.out.println("-----------------------UPLOAD FILE---------------------");
+//
+//        File file = new File("photos");
+//        String uploadDirectory = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
+//
+//        System.out.println(uploadDirectory);
+//        System.out.println("slika : " + coverPhoto.getOriginalFilename());
+//
+//        File convertFile = new File(uploadDirectory.toString());
+//        convertFile.createNewFile();
+//        FileOutputStream fout = new FileOutputStream(convertFile);
+//        fout.write(coverPhoto.getBytes());
+//        fout.close();
+//        //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
+//        return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
+//    }
 
-        System.out.println(uploadDirectory);
-        System.out.println("slika : " + coverPhoto.getOriginalFilename());
 
-        File convertFile = new File(uploadDirectory.toString());
-        convertFile.createNewFile();
-        FileOutputStream fout = new FileOutputStream(convertFile);
-        fout.write(coverPhoto.getBytes());
-        fout.close();
-        //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
-        return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
-    }
+
+//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+//    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ResponseEntity<?> createAd(@RequestParam(value="coverPhoto", required = true) MultipartFile coverPhoto, @RequestParam(value="data", required = true)  String data, Principal principal) throws IOException{
+//
+//        System.out.println("-----------------------UPLOAD FILE---------------------");
+//
+//        File file = new File("photos");
+//        String uploadDirectory = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
+//
+//        System.out.println(uploadDirectory);
+//        System.out.println("slika : " + coverPhoto.getOriginalFilename());
+//
+//        File convertFile = new File(uploadDirectory.toString());
+//        convertFile.createNewFile();
+//        FileOutputStream fout = new FileOutputStream(convertFile);
+//        fout.write(coverPhoto.getBytes());
+//        fout.close();
+//        System.out.println(data.toString());
+//        AdCreateDTO adCreateDTO = objectMapper.readValue(data, AdCreateDTO.class);
+//        adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
+//        Integer flag = adService.createAd(adCreateDTO);
+//        if(flag == 1){
+//            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+//        }else{
+//            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
+//        }
+//    }
+
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -55,16 +87,16 @@ public class AdController {
 //        AdCreateDTO adCreateDTO = objectMapper.readValue(data, AdCreateDTO.class);
 //        adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
 
-//        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
-//        Integer flag = adService.createAd(adCreateDTO);
-        return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
-//        if (flag == 1) {
-//            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
-//        } else {
-//            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
-//        }
+        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
+        Integer flag = adService.createAd(adCreateDTO);
 
+        if (flag == 1) {
+            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
+        }
     }
+
 
     //    @RequestMapping(value = "{?page,size,sort}", method = RequestMethod.GET)
 //    public ResponseEntity<?> findAllPageAd(@PathVariable("page") Integer page,@PathVariable("size") Integer size,
