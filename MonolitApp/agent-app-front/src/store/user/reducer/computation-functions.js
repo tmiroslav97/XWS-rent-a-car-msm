@@ -4,4 +4,11 @@ export function putToken(state, payload) {
         token: payload
     };
 }
+
+export function putEndUsers(state, payload) {
+    return {
+        ...state,
+        endUsers: payload
+    };
+}
   

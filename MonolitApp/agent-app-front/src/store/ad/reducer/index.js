@@ -6,6 +6,7 @@ import {
 
 const initialState = {
    ads: {
+       id: 0,
        data: [],
        totalPageCnt: 0,
        nextPage: 0,

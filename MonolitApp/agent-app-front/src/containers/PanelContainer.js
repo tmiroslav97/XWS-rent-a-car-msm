@@ -8,6 +8,7 @@ import CarModelContainer from '../containers/Codebooks/CarModelContainer';
 import CarTypeContainer from '../containers/Codebooks/CarTypeContainer';
 import FuelTypeContainer from '../containers/Codebooks/FuelTypeContainer';
 import GearboxTypeContainer from '../containers/Codebooks/GearboxTypeContainer';
+import EndUsersContainer from '../containers/Users/EndUsersContainer';
 import CreateAdContainer from '../containers/Ad/CreateAdContainer';
 
 const PanelContainer = () => {
@@ -54,6 +55,11 @@ const PanelContainer = () => {
                                     <Nav.Link eventKey="gearbox-type">Tipovi mjenjača</Nav.Link>
                                 </Nav.Item>
                             }
+                            {hasRole(['ROLE_ADMIN']) &&
+                                <Nav.Item>
+                                    <Nav.Link eventKey="end-users">Krajnji korisnici</Nav.Link>
+                                </Nav.Item>
+                            }
                             {hasRole(['ROLE_AGENT']) &&
                                 <Nav.Item>
                                     <Nav.Link eventKey="create-ad">Dodaj oglas</Nav.Link>
@@ -77,6 +83,9 @@ const PanelContainer = () => {
                             </Tab.Pane>
                             <Tab.Pane eventKey="gearbox-type">
                                 <GearboxTypeContainer />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="end-users">
+                                <EndUsersContainer />
                             </Tab.Pane>
                             <Tab.Pane eventKey="create-ad">
                                 <CreateAdContainer />
