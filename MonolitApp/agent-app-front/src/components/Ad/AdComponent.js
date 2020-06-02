@@ -12,7 +12,7 @@ const AdComponent = (props) => {
             <>
                 <br />
                 <Card
-                    // key={idx}
+                    key={idx}
                     border="secondary"
                 >
                     <Card.Body>

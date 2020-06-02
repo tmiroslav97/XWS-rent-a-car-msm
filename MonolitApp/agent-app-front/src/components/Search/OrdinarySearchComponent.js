@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Button, Card } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import Nouislider from 'react-nouislider';
-import 'nouislider/nouislider.css';
+import 'nouislider/distribute/nouislider.css';
 import 'nouislider/src/nouislider.tooltips.less';
 import 'nouislider/src/nouislider.pips.less';
 
