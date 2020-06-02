@@ -4,8 +4,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import FuelTypeComponent from '../../components/Codebooks/FuelTypeComponent';
-import { fuelTypesSelector } from '../../store/codebook/selectors';
-import { fetchFuelTypes, addFuelType, editFuelType, deleteFuelType, putFuelTypes } from '../../store/codebook/actions';
+import { fuelTypesPaginatedSelector } from '../../store/codebook/selectors';
+import { fetchFuelTypes, addFuelType, editFuelType, deleteFuelType, putFuelTypesPaginated } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
@@ -14,7 +14,7 @@ import SpinnerContainer from '../Common/SpinnerContainer';
 
 const FuelTypeContainer = () => {
     const dispatch = useDispatch();
-    const fuelTypes = useSelector(fuelTypesSelector);
+    const fuelTypes = useSelector(fuelTypesPaginatedSelector);
     const [nextPage, setNextPage] = useState(fuelTypes.nextPage);
     const [size, setSize] = useState(fuelTypes.size);
     const [validated, setValidated] = useState(false);
@@ -31,7 +31,7 @@ const FuelTypeContainer = () => {
             })
         );
         return () => {
-            dispatch(putFuelTypes({
+            dispatch(putFuelTypesPaginated({
                 'data': [],
                 'totalPageCnt': 0,
                 'nextPage': nextPage,

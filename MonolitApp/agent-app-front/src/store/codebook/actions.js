@@ -2,30 +2,35 @@ import {
     FETCH_CAR_MANUFACTURERS,
     FETCH_ALL_CAR_MANUFACTURERS,
     PUT_CAR_MANUFACTURERS,
+    PUT_CAR_MANUFACTURERS_PAGINATED,
     ADD_CAR_MANUFACTURER,
     EDIT_CAR_MANUFACTURER,
     DELETE_CAR_MANUFACTURER,
     FETCH_CAR_TYPES,
     FETCH_ALL_CAR_TYPES,
     PUT_CAR_TYPES,
+    PUT_CAR_TYPES_PAGINATED,
     ADD_CAR_TYPE,
     EDIT_CAR_TYPE,
     DELETE_CAR_TYPE,
     FETCH_GEARBOX_TYPES,
     FETCH_ALL_GEARBOX_TYPES,
     PUT_GEARBOX_TYPES,
+    PUT_GEARBOX_TYPES_PAGINATED,
     ADD_GEARBOX_TYPE,
     EDIT_GEARBOX_TYPE,
     DELETE_GEARBOX_TYPE,
     FETCH_FUEL_TYPES,
     FETCH_ALL_FUEL_TYPES,
     PUT_FUEL_TYPES,
+    PUT_FUEL_TYPES_PAGINATED,
     ADD_FUEL_TYPE,
     EDIT_FUEL_TYPE,
     DELETE_FUEL_TYPE,
     FETCH_CAR_MODELS,
     FETCH_ALL_CAR_MODELS,
     PUT_CAR_MODELS,
+    PUT_CAR_MODELS_PAGINATED,
     ADD_CAR_MODEL,
     EDIT_CAR_MODEL,
     DELETE_CAR_MODEL
@@ -44,6 +49,11 @@ export const editCarModel = payload => ({
 
 export const addCarModel = payload => ({
     type: ADD_CAR_MODEL,
+    payload
+});
+
+export const putCarModelsPaginated = payload => ({
+    type: PUT_CAR_MODELS_PAGINATED,
     payload
 });
 
@@ -78,6 +88,11 @@ export const addGearboxType = payload => ({
     payload
 });
 
+export const putGearboxTypesPaginated = payload => ({
+    type: PUT_GEARBOX_TYPES_PAGINATED,
+    payload
+});
+
 export const putGearboxTypes = payload => ({
     type: PUT_GEARBOX_TYPES,
     payload
@@ -106,6 +121,11 @@ export const editFuelType = payload => ({
 
 export const addFuelType = payload => ({
     type: ADD_FUEL_TYPE,
+    payload
+});
+
+export const putFuelTypesPaginated = payload => ({
+    type: PUT_FUEL_TYPES_PAGINATED,
     payload
 });
 
@@ -140,6 +160,11 @@ export const addCarType = payload => ({
     payload
 });
 
+export const putCarTypesPaginated = payload => ({
+    type: PUT_CAR_TYPES_PAGINATED,
+    payload
+});
+
 export const putCarTypes = payload => ({
     type: PUT_CAR_TYPES,
     payload
@@ -168,6 +193,11 @@ export const editCarManufacturer = payload => ({
 
 export const addCarManufacturer = payload => ({
     type: ADD_CAR_MANUFACTURER,
+    payload
+});
+
+export const putCarManufacturersPaginated = payload => ({
+    type: PUT_CAR_MANUFACTURERS_PAGINATED,
     payload
 });
 

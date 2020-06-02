@@ -4,8 +4,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import CarManufacturerComponent from '../../components/Codebooks/CarManufacturerComponent';
-import { carManufacturersSelector } from '../../store/codebook/selectors';
-import { fetchCarManufacturers, addCarManufacturer, editCarManufacturer, deleteCarManufacturer, putCarManufacturers } from '../../store/codebook/actions';
+import { carManufacturersPaginatedSelector } from '../../store/codebook/selectors';
+import { fetchCarManufacturers, addCarManufacturer, editCarManufacturer, deleteCarManufacturer, putCarManufacturersPaginated } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
@@ -14,7 +14,7 @@ import SpinnerContainer from '../Common/SpinnerContainer';
 
 const CarManufacturerContainer = () => {
     const dispatch = useDispatch();
-    const carManufacturers = useSelector(carManufacturersSelector);
+    const carManufacturers = useSelector(carManufacturersPaginatedSelector);
     const [nextPage, setNextPage] = useState(carManufacturers.nextPage);
     const [size, setSize] = useState(carManufacturers.size);
     const [validated, setValidated] = useState(false);
@@ -31,7 +31,7 @@ const CarManufacturerContainer = () => {
             })
         );
         return () => {
-            dispatch(putCarManufacturers({
+            dispatch(putCarManufacturersPaginated({
                 'data': [],
                 'totalPageCnt': 0,
                 'nextPage': nextPage,
