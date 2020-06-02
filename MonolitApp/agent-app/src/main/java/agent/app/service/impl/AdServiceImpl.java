@@ -18,6 +18,7 @@ import agent.app.service.intf.AdService;
 import agent.app.service.intf.CarCalendarTermService;
 import agent.app.service.intf.CarService;
 import agent.app.service.intf.PriceListService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -139,6 +140,22 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public AdPageContentDTO findAllOrdinarySearch(Integer page, Integer size, String location, DateTime startDate, DateTime endDate) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<Ad> ads = adRepository.findAllOrdinarySearch(false, location, startDate, endDate, pageable);
+        System.out.println(ads.getSize());
+        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
+                .totalPageCnt(ads.getTotalPages())
+                .ads(ret)
+                .build();
+
+        System.out.println(adPageContentDTO);
+
+        return adPageContentDTO;
+    }
+
+    @Override
     public AdPageContentDTO findAll(Integer page, Integer size) {
 
 //        Pageable pageable;
@@ -161,8 +178,6 @@ public class AdServiceImpl implements AdService {
                 .totalPageCnt(ads.getTotalPages())
                 .ads(ret)
                 .build();
-
-        System.out.println(adPageContentDTO);
 
         return adPageContentDTO;
     }
