@@ -3,7 +3,7 @@ import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image } 
 import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
 
 const CreateAd = (props) => {
-    
+
     return (
         <Container>
             <Row>
@@ -29,9 +29,20 @@ const CreateAd = (props) => {
             </Row>
             <Row>
                 <Col>
-                    {props.content()}
-                    <Form id="createAdFrom" onSubmit={props.onSubmit} noValidate 
-                    validated={props.validated}>
+                    {props.imagePreviewUrl ?
+                        <div className="imgPreview" >
+                            <img style={{height:"100px", width:"100px"}} src={props.imagePreviewUrl} />
+                        </div>
+
+                        :
+                        <div className="previewText">Please select an Image for Preview</div>
+                    }
+                    <input className="fileInput"
+                        type="file"
+                        onChange={props._handleImageChange} />
+                    {/* {props.content()} */}
+                    <Form id="createAdFrom" onSubmit={props.onSubmit} noValidate
+                        validated={props.validated}>
                     </Form>
                 </Col>
             </Row>

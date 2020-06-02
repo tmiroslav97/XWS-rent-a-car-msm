@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateAd from '../../components/Ad/CreateAd';
-import { createdAd } from '../../store/ad/actions';
+import { createdAd, uploadImage } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
 import Form2CreateAdContainer from './Form2CreateAdContainer';
 import Form3CreateAdContainer from './Form3CreateAdContainer';
@@ -30,12 +30,46 @@ const CreateAdContainer = () => {
     const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];
 
 
-    const [uploading, setUploading] = useState(false);
-    // const [images, setImages] = useState([]);
-    const [imagesDTO, setImagesDTO] = useState([]);
-    const [coverPhotoName, setCoverPhotoName] = useState("");
-    const [photos, setPhotos] = useState([]);
+
     const [coverPhoto, setCoverPhoto] = useState();
+    const [imagesDTO, setImagesDTO] = useState([]);
+    const [uploading, setUploading] = useState(false);
+    const [photos, setPhotos] = useState([]);
+    const [photo, setPhoto] = useState();
+    const [photoName, setPhotoName] = useState("");
+    const [slika, setSlika] = useState([]);
+    const [imagePreviewUrl, setImagePreviewUrl] = useState();
+    const [file, setFile] = useState();
+
+    const _handleImageChange = (e) => {
+        // e.preventDefault();
+        let reader = new FileReader();
+        let files = e.target.files[0];
+        setFile(e.target.files[0]);
+
+        reader.onloadend = () => {
+            let sl = [];
+            // sl.push(
+            //     {
+            //         file: files,
+            //         imagePreviewUrl: reader.result
+            //     }
+            // )
+            setImagePreviewUrl(reader.result);
+            // setSlika(sl);
+
+        }
+        reader.readAsDataURL(e.target.files[0])
+
+        console.log(imagePreviewUrl);
+        let imagePreview = null;
+        if (imagePreviewUrl) {
+            imagePreview = (<img src={imagePreviewUrl} />);
+        } else {
+            imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        }
+        console.log(imagePreview);
+    }
 
     const content = () => {
         switch (true) {
@@ -56,52 +90,56 @@ const CreateAdContainer = () => {
     }
     const buttonImageChange = (event) => {
         console.log("stisnuto dugme");
+        console.log(photos);
+        console.log(imagesDTO);
         if (event.target.files != null) {
-            const files = Array.from(event.target.files)
-            console.log(files[0]);
-            
-            let name = event.target.files[0].name;
+            const files = event.target.files[0];
+
+            let reader = new FileReader();
+
+
+            // reader.onloadend = () => {
+            //   this.setState({
+            //     file: files,
+            //     imagePreviewUrl: reader.result
+            //   });
+            // }
+
+            // reader.readAsDataURL(files);
+
+            console.log(files);
+            console.log(files.name);
+            let name = files.name;
             let flag = 0;
 
             photos.map((photo) => {
-                if (photo.photoName === name) {
+                if (photo.name === name) {
                     flag = 1;
                     console.log("Vec ste dodali ovu sliku");
                 }
             })
             if (flag != 1) {
                 let temp = {
-                            photoName: event.target.files[0].name,
-                            photo: event.target.files[0]
-                        }
-                setPhotos(...photos, temp);
+                    name: files.name,
+                    data: files
+                }
+                photos.push(temp);
+                setPhotos(photos);
+                imagesDTO.push(name);
+                setImagesDTO(imagesDTO);
                 setUploading(true);
+                setPhoto(files)
+                setPhotoName(files.name)
 
+                let formData = new FormData();
+                formData.append('photo', files);
+                formData.append('data', JSON.stringify(files.name));
 
-
+                dispatch(
+                    uploadImage(formData)
+                );
             }
-
         }
-       
-        // const podaci = new FormData();
-
-        // files.forEach((file, i) => {
-        //     podaci.append(i, file)
-        // })
-
-        // fetch(`${API_URL}/image-upload`, {
-        //     method: 'POST',
-        //     body: podaci
-        // })
-        // .then(res => res.json())
-        // .then(images => {
-        //     this.setState({
-        //         uploading: false,
-        //         images
-        //     })
-        // })
-
-        
     }
 
 
@@ -137,7 +175,7 @@ const CreateAdContainer = () => {
         } else {
             let data = {
                 'name': form.name.value,
-                'coverPhoto': coverPhotoName,
+                'coverPhoto': coverPhoto,
                 'location': form.location.value,
                 'distanceLimitFlag': distanceLimitFlag,
                 'distanceLimit': distanceLimit,
@@ -159,7 +197,8 @@ const CreateAdContainer = () => {
                     'pricePerDay': form.pricePerDay.value,
                     'id': form.id.value,
                 },
-                'carCalendarTermCreateDTOList': null
+                'carCalendarTermCreateDTOList': null,
+                'imagesDTO': imagesDTO
             }
             let formData = new FormData(form);
             formData.append('data', JSON.stringify(data));
@@ -179,47 +218,6 @@ const CreateAdContainer = () => {
 
     const handleAndroidFlag = (event) => {
         setAndroidFlag(event.target.checked);
-    };
-
-    const onPhotoChange = (event) => {
-
-        if (event.target.files != null) {
-            let p = photos;
-            let name = event.target.files[0].name;
-            console.log(event.target);
-            console.log(event.target.files[0]);
-            let flag = 0;
-
-            p.map((photo) => {
-                if (photo.photoName === name) {
-                    flag = 1;
-                    console.log("Isti fajl");
-                }
-
-            })
-            if (flag != 1) {
-                p.push(
-                    {
-                        photoName: event.target.files[0].name,
-                        photo: event.target.files[0]
-                    }
-                )
-                setPhotos(p);
-            }
-            let nazivi = "";
-            let slike = [];
-            p.map((photo) => {
-                slike.push(photo.photo);
-                nazivi += " " + photo.photoName;
-            })
-            console.log(nazivi);
-            console.log(slike);
-
-
-            setCoverPhoto(event.target.files[0]);
-            setCoverPhotoName(event.target.files[0].name);
-        }
-
     };
 
     const isStepOptional = (step) => {
@@ -269,9 +267,9 @@ const CreateAdContainer = () => {
                 distanceLimitFlag={distanceLimitFlag}
                 cdw={cdw}
                 androidFlag={androidFlag}
-                coverPhotoName={coverPhotoName}
+                // coverPhotoName={coverPhotoName}
                 handleDistanceLimitFlag={handleDistanceLimitFlag}
-                onPhotoChange={onPhotoChange}
+                // onPhotoChange={onPhotoChange}
                 handleAndroidFlag={handleAndroidFlag}
                 handleCDW={handleCDW}
                 skipped={skipped}
@@ -287,6 +285,8 @@ const CreateAdContainer = () => {
                 formData={formData} setFormData={setFormData}
                 activeStep={activeStep} setActiveStep={setActiveStep}
                 content={content}
+                _handleImageChange={_handleImageChange}
+                imagePreviewUrl={imagePreviewUrl}
             />
 
             {activeStep === 0 ?

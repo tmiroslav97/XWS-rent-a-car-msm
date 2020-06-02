@@ -1,7 +1,8 @@
 import * as computationFunctions from './computation-functions';
 
 import {
-    PUT_ADS
+    PUT_ADS,
+    PUT_IMAGE
 } from '../constants';
 
 const initialState = {

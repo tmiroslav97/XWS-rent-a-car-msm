@@ -7,7 +7,8 @@ import AdServices from '../../services/AdServices';
 import {
     CREATED_AD,
     FETCH_ADS,
-    FETCH_AD
+    FETCH_AD,
+    UPLOAD_IMAGE
 } from './constants';
 
 import {
@@ -54,5 +55,11 @@ export function* fetchAd() {
         'data': data,
         'isFetch': true
     }));
+}
+
+export function* uploadImage(){
+    const { payload } = yield take(UPLOAD_IMAGE);
+    const data = yield call(AdServices.uploadImage, payload); 
+    yield put(putSuccessMsg(data));
 }
 

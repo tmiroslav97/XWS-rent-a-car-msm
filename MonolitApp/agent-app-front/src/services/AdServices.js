@@ -10,12 +10,22 @@ class AdServices extends HttpBaseClient {
     createdAd = async payload => {
         const response = await this.getApiClient().post(
             FINALPOINTS.AD_BASE,
+            payload
+        );
+        
+        return response.data;
+    };
+
+    uploadImage = async payload => {
+        const response = await this.getApiClient().post(
+            FINALPOINTS.AD_BASE + "/upload",
             payload,
             {
                 headers : {
                     'Content-Type': 'multipart/form-data',
                 },
-            });
+            }
+            );
         
         return response.data;
     };

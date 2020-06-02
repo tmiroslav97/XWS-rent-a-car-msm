@@ -37,24 +37,32 @@ public class AdController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadImage(@RequestParam(value = "coverPhoto", required = true) MultipartFile coverPhoto) throws IOException {
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadImage(@RequestParam(value = "photo", required = true) MultipartFile photo,
+                                         @RequestParam(value = "data", required = true) String data) throws IOException {
         System.out.println("-----------------------UPLOAD FILE---------------------");
 
-        File file = new File("photos");
-        String uploadDirectory = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
+        System.out.println(data);
+        try{
+            System.out.println(photo);
+            File file = new File("photos");
+            String uploadDirectory = file.getAbsolutePath() + "\\" + photo.getOriginalFilename();
 
-        System.out.println(uploadDirectory);
-        System.out.println("slika : " + coverPhoto.getOriginalFilename());
+            System.out.println(uploadDirectory);
+            System.out.println("slika : " + photo.getOriginalFilename());
 
-        File convertFile = new File(uploadDirectory.toString());
-        convertFile.createNewFile();
-        FileOutputStream fout = new FileOutputStream(convertFile);
-        fout.write(coverPhoto.getBytes());
-        fout.close();
+            File convertFile = new File(uploadDirectory.toString());
+            convertFile.createNewFile();
+            FileOutputStream fout = new FileOutputStream(convertFile);
+            fout.write(photo.getBytes());
+            fout.close();
+            //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
+            return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
+        }catch(Exception e){
 
-        //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
-        return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
+            return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
+        }
+
     }
 
 
