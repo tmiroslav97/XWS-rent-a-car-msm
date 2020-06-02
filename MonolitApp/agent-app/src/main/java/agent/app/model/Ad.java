@@ -93,9 +93,4 @@ public class Ad {
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Request> requests = new HashSet<>();
 
-
-
-
-
-
 }
