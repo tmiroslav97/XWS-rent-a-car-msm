@@ -32,8 +32,7 @@ const OrdinarySearchComponent = (props) => {
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Label>Izaberite datum i vrijeme preuzimanja</Form.Label>
                                 <Form.Control type="datetime-local" required name="startDateTime"
-                                    min={new Date()}
-                                    selected={props.startDate}
+                                    min={props.getCurrentDate()}
                                     onChange={props.handleChange1}
                                 />
 
@@ -45,7 +44,6 @@ const OrdinarySearchComponent = (props) => {
                                 <Form.Label>Izaberite datum i vrijeme povratka</Form.Label>
                                 <Form.Control type="datetime-local" required name="endDateTime"
                                     min={props.startDate}
-                                    selected={props.endDate}
                                     onChange={props.handleChange2}
                                 />
                             </Form.Group>

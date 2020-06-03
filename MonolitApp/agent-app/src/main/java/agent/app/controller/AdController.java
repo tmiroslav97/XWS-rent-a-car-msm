@@ -138,34 +138,16 @@ public class AdController {
                                            @RequestParam(value = "endDate", required = true) String endDate) {
 
 
-
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("hh:mm dd-MM-yyyy");
-
-        System.out.println("Splitovanje");
-        String startD = startDate.replace("T", " ");
+        DateTime startD = DateAPI.dateStringToDateTime(startDate);
+        DateTime endD = DateAPI.dateStringToDateTime(endDate);
         System.out.println(startD);
-        String[] dat = startD.split(" ");
-        String datum = dat[0];
-        System.out.println("DATUMMM : " + datum);
-        String[] s  = datum.split("-");
-        String yyyy = s[0]; // 004
-        String MM = s[1];
-        String dd = s[2];
+        System.out.println(endD);
+        System.out.println(startD.toString(DateTimeFormat.forPattern("hh:mm dd-MM-yyyy")));
+        System.out.println(endD.toString(DateTimeFormat.forPattern("hh:mm dd-MM-yyyy")));
+        System.out.println(location);
 
-        String vrijeme = dat[1];
-        String[] dio  = vrijeme.split(":");
-        String hh = dio[0]; // 004
-        String mm = dio[1];
-
-
-        String noviDatum = vrijeme + " " + dd + "-" + MM + "-" + yyyy;
-        System.out.println(noviDatum);
-        DateTime startdateTime = DateTime.parse(noviDatum, formatter);
-        System.out.println("Ispravka start date: dd-MM-yyyy = " + startdateTime.toString(DateTimeFormat.forPattern("hh:mm dd-MM-yyyy")));
-
-
-        //            return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startDate, endDate), HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.OK);
+                    return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startD, endD), HttpStatus.OK);
+//        return new ResponseEntity<>(HttpStatus.OK);
 
 
     }

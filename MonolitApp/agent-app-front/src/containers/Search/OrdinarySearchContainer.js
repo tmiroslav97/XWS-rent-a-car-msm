@@ -5,11 +5,15 @@ import OrdinarySearchComponent from '../../components/Search/OrdinarySearchCompo
 import { carManufacturersSelector, carTypesSelector, carModelsSelector, gearboxTypesSelector, fuelTypesSelector } from '../../store/codebook/selectors';
 import { fetchAllCarManufacturers, fetchAllCarTypes, fetchAllCarModels, fetchAllGearboxTypes, fetchAllFuelTypes, putCarManufacturers, putCarModels, putCarTypes, putFuelTypes, putGearboxTypes } from '../../store/codebook/actions';
 import { searchAd } from '../../store/ad/actions';
-
+import { adsSelector } from '../../store/ad/selectors';
 
 const OrdinarySearchContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
+
+    const ads = useSelector(adsSelector);
+    const [nextPage, setNextPage] = useState(ads.nextPage);
+    const [size, setSize] = useState(ads.size);
 
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
@@ -145,7 +149,9 @@ const OrdinarySearchContainer = () => {
 
     const handleChange1 = (date) => {
         setStartDate(date.target.value);
-
+        let dateCurrent = new Date();
+        console.log("Trenutni datum: ");
+        console.log(dateCurrent);
     };
 
     const handleChange2 = (date) => {
@@ -182,11 +188,29 @@ const OrdinarySearchContainer = () => {
 
     }
 
-    const currentDate = () =>{
-        let minDate = new Date()
-        console.log("ZABRANA DATUMA ");
-        console.log(minDate);
-        return minDate;
+    const getCurrentDate = () => {
+        // let minDate = new Date();
+        // console.log("ZABRANA DATUMA ");
+        // console.log(minDate);
+        // return minDate;
+        let newDate = new Date()
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        let hours = newDate.getHours();
+        let minutes = newDate.getMinutes();
+        let rez = "";
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        rez = year + "-" + month + "-" + date + "T" + hours + ":" + minutes;
+        return rez;
     }
 
     const handleForm = (event) => {
@@ -226,7 +250,12 @@ const OrdinarySearchContainer = () => {
             // formData.append('data', JSON.stringify(data));
             // console.log(formData);
             // dispatch(searchAd(formData));
-            dispatch(searchAd(data));
+            dispatch(searchAd({
+                data,
+                nextPage,
+                size
+            }));
+           
             setValidated(false);
         }
     };
@@ -263,7 +292,7 @@ const OrdinarySearchContainer = () => {
                         getCarTypes={getCarTypes}
                         getGearboxTypes={getGearboxTypes}
                         getFuelTypes={getFuelTypes}
-                        currentDate={currentDate}
+                        getCurrentDate={getCurrentDate}
 
                     />
                 </Col>

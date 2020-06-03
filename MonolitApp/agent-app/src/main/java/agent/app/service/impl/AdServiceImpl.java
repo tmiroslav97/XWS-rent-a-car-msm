@@ -144,14 +144,14 @@ public class AdServiceImpl implements AdService {
         System.out.println("METODAAAAAAAAAAAAAAAAAAAAA ZAAA PRETRAGU");
         Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
         Page<Ad> ads = adRepository.findAllOrdinarySearch(false, location, startDate, endDate, pageable);
-        System.out.println(ads.getSize());
+        System.out.println("Broj oglasa koji upadaju u datum : " + ads.getSize());
         List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
         AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
                 .totalPageCnt(ads.getTotalPages())
                 .ads(ret)
                 .build();
 
-        System.out.println(adPageContentDTO);
+//        System.out.println(adPageContentDTO);
 
         return adPageContentDTO;
     }

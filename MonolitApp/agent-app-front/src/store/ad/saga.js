@@ -63,11 +63,10 @@ export function* searchAd(){
     const data = yield call(AdServices.fetchAdsPaginatedSearch, payload);
     console.log(data);
     // yield put(putAds({
-    //     'data': data.ads,
-    //     'totalPageCnt': data.totalPageCnt,
+    //     // 'data': data.a,
     //     'nextPage': payload.nextPage,
-    //     'size': payload.size,
-    //     'isFetch': true
+    //     'size': payload.size
+
     // }));
     
 }

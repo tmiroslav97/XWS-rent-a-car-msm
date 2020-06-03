@@ -52,7 +52,9 @@ class AdServices extends HttpBaseClient {
                 params: {
                     location: payload.location,
                     startDate: payload.startDate,
-                    endDate: payload.endDate
+                    endDate: payload.endDate,
+                    nextPage: payload.nextPage,
+                    size: payload.size
                 }
             }
         );
