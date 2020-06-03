@@ -8,40 +8,37 @@ const Form5CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
-    const handleForm5 = (event) => {
-        event.preventDefault();
-        const form = event.target;
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-            setValidated(true);
-        } else {
-            // props.setFormData({
-            //     ...props.formData,
-            //     name: form.name.value,
-            //     location: form.location.value,
-            //     distanceLimitFlag: distanceLimitFlag,
-            //     distanceLimit: distanceLimit,
-            //     carManufacturer: form.carManufacturer.value,
-            //     carModel: form.carModel.value,
-            //     carType: form.carType.value,
-            //     year: form.year.value,
-            //     mileage: form.mileage.value
-            // });
-            // props.setActiveStep(2);
-            // props.setActiveStep(4);
-            console.log(props.formData);
-            setValidated(false);
-            props.handleNext();
-            //treba dodati oglas.... 
-            // props.handleCreatedAd();
-        }
-    };
-
     const [photos, setPhotos] = useState([]);
     const [photo, setPhoto] = useState();
     const [photoName, setPhotoName] = useState("");
     const [imagePreviewUrl, setImagePreviewUrl] = useState();
     const [file, setFile] = useState();
+    const [brPhotos, setBrPhotos] = useState(0);
+
+    const handleForm5 = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        if(brPhotos === 4){
+            let dto = [];
+            
+            props.setFormData({
+                ...props.formData,
+                imagesDTO: JSON.stringify(props.imagesDTO)
+            });
+            console.log(props.formData);
+            setValidated(false);
+            props.handleNext();
+            //treba dodati oglas.... 
+            // props.handleCreatedAd();
+        }else{
+            event.stopPropagation();
+            setValidated(true);
+        }
+       
+       
+    };
+
+   
 
     const handleImageChange = (e) => {
         let reader = new FileReader();
@@ -65,6 +62,7 @@ const Form5CreateAdContainer = (props) => {
                 };
                 setPhotos([...photos, temp]);
                 props.setImagesDTO([...props.imagesDTO, name]);
+                setBrPhotos(brPhotos + 1);
             }
             reader.readAsDataURL(e.target.files[0])
             console.log(photos);

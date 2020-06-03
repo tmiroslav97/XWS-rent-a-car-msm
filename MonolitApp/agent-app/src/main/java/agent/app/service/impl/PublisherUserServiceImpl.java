@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PublisherUserServiceImpl implements PublisherUserService {
@@ -95,7 +96,11 @@ public class PublisherUserServiceImpl implements PublisherUserService {
     @Override
     public List<PriceList> findPriceListsFromPublishUser(String publishUserUsername) {
         PublisherUser publisherUser = this.findByEmail(publishUserUsername);
-        List<PriceList> priceLists = (List<PriceList>) publisherUser.getPriceLists();
-        return priceLists;
+        Set<PriceList> priceLists = publisherUser.getPriceLists();
+        if(priceLists == null){
+            return null;
+        }
+        //TODO 1: GRESKAAAA
+        return null;
     }
 }

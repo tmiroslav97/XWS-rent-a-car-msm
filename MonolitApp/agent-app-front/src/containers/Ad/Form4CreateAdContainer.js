@@ -27,6 +27,11 @@ const Form4CreateAdContainer = (props) => {
                 'endDate': ee
             };
             props.setCarCalendarTermList([...props.carCalendarTermList, temp]);
+            props.setFormData({
+                ...props.formData,
+                carCalendarTermCreateDTOList: JSON.stringify(props.carCalendarTermList)
+            });
+            console.log(props.formData);
             setValidated(false);
         }
     }
@@ -40,6 +45,9 @@ const Form4CreateAdContainer = (props) => {
         let rez = "";
         if (month < 10) {
             month = "0" + month;
+        }
+        if (date < 10) {
+            date = "0" + date;
         }
         if (hours < 10) {
             hours = "0" + hours;
@@ -82,6 +90,7 @@ const Form4CreateAdContainer = (props) => {
             setFlag(0);
         }else{
             setFlag(1);
+            console.log(props.formData);
             props.handleNext();
         }
     }

@@ -9,54 +9,14 @@ const Form3CreateAd = (props) => {
                 <Form.Row>
                     <Col>
                         <ButtonGroup variant="outline" >
-                            <Button onClick={props.handleActiveToggle0}>Izaberi cenovnik</Button>
                             <Button onClick={props.handleActiveToggle1}>Dodaj cenovnik</Button>
+                            <Button onClick={props.handleActiveToggle0}>Izaberi cenovnik</Button>
                         </ButtonGroup>
                         <br />
                         <br />
                     </Col>
                 </Form.Row>
                 <Form.Row>
-                    {props.activeToggle === 0 ?
-                        <Col>
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>Rbr.</th>
-                                        <th className="text-right">Cena po danu</th>
-                                        <th className="text-right">Cena po km</th>
-                                        <th className="text-right">Cena po km (CDW)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {/* {
-                                                props.carManufacturers.map((carManufacturer) => {
-                                                    return (
-                                                        <tr key={carManufacturer.id}>
-                                                            <td>{carManufacturer.name}</td>
-                                                            <td align="right">
-                                                                <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
-                                                            </td>
-                                                            <td align="right">
-                                                                <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                })
-                                            } */}
-                                    {/* <Form.Group as={Col}>
-                                        <Form.Label>Check box za biranje vec postojeceg cenovnika</Form.Label>
-                                        <Form.Control name="id" id="selectId" placeholder="Cena po danu" as="select" type="text" >
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                        </Form.Control>
-                                    </Form.Group> */}
-                                </tbody>
-                            </Table>
-                        </Col>
-                        : null
-                    }
                     {props.activeToggle === 1 ?
                         <Col>
                             <Form.Group as={Col}>
@@ -107,6 +67,25 @@ const Form3CreateAd = (props) => {
                         </Col>
                         : null
                     }
+                    {props.activeToggle === 0 ?
+                        <Col>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Rbr.</th>
+                                        <th className="text-right">Cena po danu</th>
+                                        <th className="text-right">Cena po km</th>
+                                        <th className="text-right">Cena po km (CDW)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {props.getPriceLists()}
+                                </tbody>
+                            </Table>
+                        </Col>
+                        : null
+                    }
+
                 </Form.Row>
                 <Form.Row>
                     <Col>

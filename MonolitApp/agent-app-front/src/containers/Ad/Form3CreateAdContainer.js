@@ -1,11 +1,45 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import Form3CreateAd from '../../components/Ad/Form3CreateAd'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Form3CreateAd from '../../components/Ad/Form3CreateAd';
+import { pricelistsSelector } from '../../store/pricelist/selectors';
+import { fetchPriceListsFromPublisher } from '../../store/pricelist/actions';
 
 const Form3CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
-    const [activeToggle, setActiveToggle] = useState(0);
+    const [activeToggle, setActiveToggle] = useState(1);
+
+    const pricelists = useSelector(pricelistsSelector);
+
+    // useEffect(() => {
+    //     dispatch(
+    //         fetchPriceListsFromPublisher()
+    //     );
+    // }, []);
+
+    const getPriceLists = () => {
+        const list = [];
+        // if (pricelists.isFetch) {
+        //     console.log(pricelists);
+        //     // priceLists.data.map((pricelist) => {
+        //     //     list.push(
+        //     //     <tr key={pricelist.id}>
+        //     //         <td>{priceLists.data.length}</td>
+        //     //         <td>{pricelist.pricePerDay}</td>
+        //     //         <td>{pricelist.pricePerKm}</td>
+        //     //         <td>{pricelist.pricePerKmCDW}</td>
+        //     //         {/* <td align="right">
+        //     //             <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
+        //     //         </td>
+        //     //         <td align="right">
+        //     //             <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
+        //     //         </td> */}
+        //     //     </tr>);
+        //     // })
+
+        // }
+        return list;
+    }
 
     const handleForm3 = (event) => {
         event.preventDefault();
@@ -57,10 +91,10 @@ const Form3CreateAdContainer = (props) => {
             handleBack={props.handleBack}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
-            cdw={props.cdw} 
-            distanceLimitFlag={props.distanceLimitFlag} 
-            pricePerKm={props.pricePerKm} 
-            pricePerKmCDW={props.pricePerKmCDW} 
+            cdw={props.cdw}
+            distanceLimitFlag={props.distanceLimitFlag}
+            pricePerKm={props.pricePerKm}
+            pricePerKmCDW={props.pricePerKmCDW}
             id={props.id}
             handlePricePerKm={handlePricePerKm}
             handlePricePerKmCDW={handlePricePerKmCDW}
@@ -68,7 +102,8 @@ const Form3CreateAdContainer = (props) => {
             activeToggle={activeToggle}
             handleActiveToggle0={handleActiveToggle0}
             handleActiveToggle1={handleActiveToggle1}
-            
+            getPriceLists={getPriceLists}
+
         />
     );
 }

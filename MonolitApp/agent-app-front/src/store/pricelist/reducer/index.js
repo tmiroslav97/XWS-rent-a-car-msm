@@ -28,4 +28,4 @@ const actionHandler = {
     [PUT_PRICE_LIST]: computationFunctions.putPriceList
 };
 
-export default adReducer;
+export default pricelistReducer;

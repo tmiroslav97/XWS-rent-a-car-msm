@@ -4,6 +4,7 @@ import flatten from 'lodash/flatten';
 import * as userSaga from './user/saga';
 import * as adSaga from './ad/saga';
 import * as codebookSaga from './codebook/saga';
+import * as pricelistSaga from './pricelist/saga';
 
 
 import {
@@ -15,7 +16,8 @@ export default function* rootSaga() {
     [
       userSaga,
       adSaga,
-      codebookSaga
+      codebookSaga,
+      pricelistSaga
     ].map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
   );
 

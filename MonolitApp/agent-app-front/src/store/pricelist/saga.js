@@ -1,5 +1,5 @@
 
-import { take, put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import { history } from '../../index';
 
 import PriceListService from '../../services/PriceListService';

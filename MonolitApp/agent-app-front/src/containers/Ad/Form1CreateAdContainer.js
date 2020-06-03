@@ -105,10 +105,13 @@ const Form1CreateAdContainer = (props) => {
         let year = newDate.getFullYear();
         let rez = "";
         if (month < 10) {
-            rez = year + "-0" + month + "-" + date;
-        } else {
-            rez = year + "-" + month + "-" + date;
+            month = "0" + month;
         }
+        if (date < 10) {
+            date = "0" + date;
+        }
+        
+        rez = year + "-" + month + "-" + date;
         return rez;
     }
 

@@ -48,8 +48,14 @@ const CreateAdContainer = () => {
         pricePerKmCDW: null,
         pricePerDay: null,
         id: null,
-        carCalendarTermCreateDTOList: null
+        carCalendarTermCreateDTOList: null,
+        imagesDTO: null
+
     });
+
+    const printFormData = () => {
+        console.log(formData);
+    }
 
     const handleCreatedAd = (event) => {
         event.preventDefault();
@@ -249,6 +255,14 @@ const CreateAdContainer = () => {
                     imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
                 ></Form5CreateAdContainer>
                 : null
+            }
+            {activeStep === 5 ?
+            <div>
+                ISPIS
+                {this.printFormData}
+            </div>
+
+            :null
             }
 
         </Container>
