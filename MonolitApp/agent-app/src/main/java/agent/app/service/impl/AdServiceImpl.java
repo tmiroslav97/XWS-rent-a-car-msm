@@ -12,6 +12,8 @@ import agent.app.exception.NotFoundException;
 import agent.app.model.*;
 import agent.app.repository.AdRepository;
 import agent.app.service.intf.*;
+import org.joda.time.DateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -149,6 +151,21 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public AdPageContentDTO findAllOrdinarySearch(Integer page, Integer size, String location, DateTime startDate, DateTime endDate) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<Ad> ads = adRepository.findByDeletedAndLocationAndCarCalendarTermsStartDateBeforeAndCarCalendarTermsEndDateAfter(false, location, startDate, endDate, pageable);
+        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+
+        System.out.println(ret.size());
+        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
+                .totalPageCnt(ads.getTotalPages())
+                .ads(ret)
+                .build();
+
+        return adPageContentDTO;
+    }
+
+    @Override
     public AdPageContentDTO findAll(Integer page, Integer size) {
 
 //        Pageable pageable;
@@ -165,14 +182,15 @@ public class AdServiceImpl implements AdService {
 //        }
         Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
         Page<Ad> ads = adRepository.findAllByDeleted(false, pageable);
-        System.out.println(ads.getSize());
+
         List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+        System.out.println(ret.size());
         AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
                 .totalPageCnt(ads.getTotalPages())
                 .ads(ret)
                 .build();
 
-        System.out.println(adPageContentDTO);
+
 
         return adPageContentDTO;
     }

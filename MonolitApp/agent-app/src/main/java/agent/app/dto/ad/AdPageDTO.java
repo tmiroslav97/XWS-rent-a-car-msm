@@ -22,4 +22,12 @@ public class AdPageDTO {
     private Integer childrenSeatNum;
     private Float mileage;
 
+    @Override
+    public String toString() {
+        return "AdPageDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }

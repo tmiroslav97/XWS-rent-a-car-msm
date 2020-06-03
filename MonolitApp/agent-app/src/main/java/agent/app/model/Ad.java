@@ -93,9 +93,14 @@ public class Ad {
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Request> requests = new HashSet<>();
 
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Ad{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", deleted=" + deleted +
+                ", carCalendarTerms=" + carCalendarTerms +
+                '}';
+    }
 }

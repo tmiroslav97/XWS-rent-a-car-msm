@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Table, Card } from 'react-bootstrap'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 const AdDetailViewComponent = (props) => {
-    console.log(props);
+
     var androidFlag = props.ad.androidFlag;
     if(androidFlag===false){
         androidFlag = "Ne"
@@ -13,6 +13,7 @@ const AdDetailViewComponent = (props) => {
 
     return(
 
+        
         <>
                  <br />
                  <Card 

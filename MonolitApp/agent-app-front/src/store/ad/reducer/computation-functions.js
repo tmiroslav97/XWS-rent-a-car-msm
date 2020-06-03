@@ -11,3 +11,10 @@ export function putImageName(state, payload) {
         imageName: payload
     };
 }
+export function putAd(state, payload) {
+    return {
+        ...state,
+        ad: payload
+    };
+}
+
