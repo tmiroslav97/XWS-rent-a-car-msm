@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import services.app.authenticationservice.authentication.JwtAuthenticationRequest;
 import services.app.authenticationservice.dto.SignUpDTO;
+import services.app.authenticationservice.exception.NotFoundException;
 import services.app.authenticationservice.model.Authority;
 import services.app.authenticationservice.model.EndUser;
 import services.app.authenticationservice.model.User;
@@ -99,7 +100,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Boolean verify(HttpServletRequest request) {
-        return null;
+    public Boolean verify(String email) {
+        if(!userService.existsByEmail(email)){
+            throw new NotFoundException("Korisnik ne postoji u sistemu!");
+        }
+        return true;
     }
 }

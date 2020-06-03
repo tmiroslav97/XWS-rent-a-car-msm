@@ -13,9 +13,9 @@ import services.app.authenticationservice.model.UserTokenState;
 import services.app.authenticationservice.service.intf.AuthenticationService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @RestController
-@RequestMapping(value = "/auth")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
@@ -26,6 +26,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> login(@RequestBody JwtAuthenticationRequest authenticationRequest) {
+        System.out.println("login");
         return new ResponseEntity<>(authenticationService.login(authenticationRequest), HttpStatus.OK);
     }
 
@@ -54,8 +55,9 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/verify", method = RequestMethod.GET)
-    public ResponseEntity<?> verify(HttpServletRequest request) {
-        Boolean flag = authenticationService.verify(request);
+    public ResponseEntity<?> verify(Principal principal) {
+        String email = principal.getName();
+        Boolean flag = authenticationService.verify(email);
         if (flag) {
             return new ResponseEntity<>("Korisnik postoji u sistemu", HttpStatus.OK);
         } else {
