@@ -28,8 +28,6 @@ public interface AdService {
     Integer createAd(AdCreateDTO adCreateDTO);
 
     void syncData();
-//    AdPageContentDTO findAllPageAd(Integer page, Integer size, String sort);
-//    AdSearchDTO findAllSearchAdd(Integer page, Integer size, String sort)
 
     AdPageContentDTO findAllOrdinarySearch(Integer page, Integer size, String location, DateTime startDate, DateTime endDate);
 

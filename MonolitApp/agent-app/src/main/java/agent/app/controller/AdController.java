@@ -33,7 +33,7 @@ public class AdController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+    //    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
         System.out.println("Service ad !!!!!");
@@ -59,7 +59,6 @@ public class AdController {
 //        //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
 //        return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
 //    }
-
 
 
 //    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
@@ -108,16 +107,10 @@ public class AdController {
         }
     }
 
-
-    //    @RequestMapping(value = "{?page,size,sort}", method = RequestMethod.GET)
-//    public ResponseEntity<?> findAllPageAd(@PathVariable("page") Integer page,@PathVariable("size") Integer size,
-//                                         @PathVariable("sort") String sort) {
-//        return new ResponseEntity<>(adService.findAllPageAd(page, size, sort), HttpStatus.OK);
-//    }
-
     //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage, @RequestParam(value = "size", required = false) Integer size) {
+    public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage,
+                                           @RequestParam(value = "size", required = false) Integer size) {
 
         if (nextPage != null) {
             System.out.println("ima 1 str");
@@ -128,7 +121,6 @@ public class AdController {
 
     }
 
-
     //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(path = "/search", method = RequestMethod.GET)
     public ResponseEntity<?> findAllSearch(@RequestParam(value = "nextPage", required = false) Integer nextPage,
@@ -137,23 +129,15 @@ public class AdController {
                                            @RequestParam(value = "startDate") String startDate,
                                            @RequestParam(value = "endDate") String endDate) {
 
-        System.out.println(nextPage);
-        System.out.println(size);
-        System.out.println(location);
-        System.out.println(startDate);
-        System.out.println(endDate);
 
         DateTime startD = DateAPI.dateStringToDateTime(startDate);
         DateTime endD = DateAPI.dateStringToDateTime(endDate);
-        System.out.println(startD);
-        System.out.println(endD);
-        System.out.println(startD.toString(DateTimeFormat.forPattern("HH:mm dd-MM-yyyy")));
-        System.out.println(endD.toString(DateTimeFormat.forPattern("HH:mm dd-MM-yyyy")));
-        System.out.println(location);
+//        System.out.println(startD);
+//        System.out.println(endD);
+//        System.out.println(startD.toString(DateTimeFormat.forPattern("HH:mm dd-MM-yyyy")));
+//        System.out.println(endD.toString(DateTimeFormat.forPattern("HH:mm dd-MM-yyyy")));
+//        System.out.println(location);
 
-                    return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startD, endD), HttpStatus.OK);
-//        return new ResponseEntity<>(HttpStatus.OK);
-
-
+        return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startD, endD), HttpStatus.OK);
     }
 }

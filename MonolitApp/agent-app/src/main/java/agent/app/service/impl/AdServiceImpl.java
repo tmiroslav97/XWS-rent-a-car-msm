@@ -141,35 +141,14 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public AdPageContentDTO findAllOrdinarySearch(Integer page, Integer size, String location, DateTime startDate, DateTime endDate) {
-        System.out.println("METODAAAAAAAAAAAAAAAAAAAAA ZAAA PRETRAGU");
         Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
-
-        System.out.println("*****************************************************************");
-        System.out.println( carCalendarTermService.findById(2L).getStartDate());
-        System.out.println(startDate);
-        System.out.println("--------------------------------------------------------------");
-        System.out.println( carCalendarTermService.findById(2L).getEndDate());
-        System.out.println(endDate);
-        System.out.println("--------------------------------------------------------------");
-        System.out.println(findById(2L).getLocation());
-        System.out.println(location);
-        System.out.println("*****************************************************************");
-
         Page<Ad> ads = adRepository.findByDeletedAndLocationAndCarCalendarTermsStartDateBeforeAndCarCalendarTermsEndDateAfter(false, location, startDate, endDate, pageable);
-//        Page<Ad> ads = adRepository.findByDeletedAndLocation(false, location, pageable);
-
-        System.out.println("Broj oglasa koji upadaju u datum : " + ads.getSize());
         List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
-        for(AdPageDTO ad :ret){
-            System.out.println(ad.getName() + " " + ad.getId());
-        }
         System.out.println(ret.size());
         AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
                 .totalPageCnt(ads.getTotalPages())
                 .ads(ret)
                 .build();
-
-//        System.out.println(adPageContentDTO);
 
         return adPageContentDTO;
     }
