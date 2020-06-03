@@ -4,11 +4,16 @@ import { Container, Row, Col } from 'react-bootstrap';
 import OrdinarySearchComponent from '../../components/Search/OrdinarySearchComponent';
 import { carManufacturersSelector, carTypesSelector, carModelsSelector, gearboxTypesSelector, fuelTypesSelector } from '../../store/codebook/selectors';
 import { fetchAllCarManufacturers, fetchAllCarTypes, fetchAllCarModels, fetchAllGearboxTypes, fetchAllFuelTypes, putCarManufacturers, putCarModels, putCarTypes, putFuelTypes, putGearboxTypes } from '../../store/codebook/actions';
-
+import { searchAd } from '../../store/ad/actions';
+import { adsSelector } from '../../store/ad/selectors';
 
 const OrdinarySearchContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
+
+    const ads = useSelector(adsSelector);
+    const [nextPage, setNextPage] = useState(ads.nextPage);
+    const [size, setSize] = useState(ads.size);
 
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
@@ -96,6 +101,7 @@ const OrdinarySearchContainer = () => {
                 "id": carManufacturers.data[index].id
             })
         );
+       
     };
 
     const getCarModels = () => {
@@ -143,13 +149,13 @@ const OrdinarySearchContainer = () => {
 
     const handleChange1 = (date) => {
         setStartDate(date.target.value);
-        console.log(startDate);
-
+        let dateCurrent = new Date();
+        console.log("Trenutni datum: ");
+        console.log(dateCurrent);
     };
 
     const handleChange2 = (date) => {
         setEndDate(date.target.value);
-        console.log(date.target.value);
     };
 
     const hanleLocation = (location) => {
@@ -182,24 +188,72 @@ const OrdinarySearchContainer = () => {
 
     }
 
+    const getCurrentDate = () => {
+        let newDate = new Date()
+        //48h od trenutka pretrage
+        newDate.setHours(48);
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        let hours = newDate.getHours();
+        let minutes = newDate.getMinutes();
+        let rez = "";
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (date < 10) {
+            date = "0" + date;
+        }
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        rez = year + "-" + month + "-" + date + "T" + hours + ":" + minutes;
+  
+        return rez;
+    }
+
     const handleForm = (event) => {
         event.preventDefault();
-        console.log("aaaaaaaaaaaaaaaaaaa")
         const form = event.target;
+        console.log(form);
+        let data = null;
         if (form.checkValidity() === false) {
             event.stopPropagation();
             setValidated(true);
         } else {
-            let data = {
-                'location': form.location.value,
-                'startDateTime': startDate,
-                'endDate': endDate,
-
+            if(toggleAdvancedSearch === false){
+                data = {
+                    'location': form.location.value,
+                    'startDate': startDate,
+                    'endDate': endDate,
+                    'nextPage': nextPage,
+                    'size' : size
+                }
+            }else{
+                data = {
+                    'location': form.location.value,
+                    'startDate': startDate,
+                    'endDate': endDate,
+                    'carManufacturer': form.carManufacturer.value,
+                    'carModel': form.carModel.value,
+                    'carType': form.carType.value,
+                    'mileage': form.mileage.value,
+                    'mileageKM': form.mileageKM.value,
+                    'gearboxType': form.gearboxType.value,
+                    'fuelType': form.fuelType.value,
+                    'childrenSeatNum': form.childrenSeatNum.value,
+                    'cdw': cdw
+                } 
             }
+          
             console.log(data)
-            let formData = new FormData(form);
-            formData.append('data', JSON.stringify(data));
-            // dispatch(createdAd(formData));
+            dispatch(searchAd({
+                data
+            }));
+           
             setValidated(false);
         }
     };
@@ -236,7 +290,7 @@ const OrdinarySearchContainer = () => {
                         getCarTypes={getCarTypes}
                         getGearboxTypes={getGearboxTypes}
                         getFuelTypes={getFuelTypes}
-
+                        getCurrentDate={getCurrentDate}
                     />
                 </Col>
             </Row>

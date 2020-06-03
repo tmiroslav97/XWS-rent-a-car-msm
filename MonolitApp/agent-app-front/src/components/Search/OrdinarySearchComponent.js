@@ -7,11 +7,9 @@ import 'nouislider/src/nouislider.tooltips.less';
 import 'nouislider/src/nouislider.pips.less';
 
 const OrdinarySearchComponent = (props) => {
-    console.log(props);
+    // console.log(props);
 
     return (
-
-
         <Card >
             <Card.Body>
                 <Form id="search" onSubmit={props.onSubmit} noValidate validated={props.validated}>
@@ -31,21 +29,19 @@ const OrdinarySearchComponent = (props) => {
                     </Row>
                     <Row>
                         <Col>
-                            <Form.Group controlId="formBasicPassword">
+                            <Form.Group >
                                 <Form.Label>Izaberite datum i vrijeme preuzimanja</Form.Label>
                                 <Form.Control type="datetime-local" required name="startDateTime"
-                                    selected={props.startDate}
+                                    min={props.getCurrentDate()}
                                     onChange={props.handleChange1}
                                 />
-
-
                             </Form.Group>
                         </Col>
                         <Col>
                             <Form.Group>
                                 <Form.Label>Izaberite datum i vrijeme povratka</Form.Label>
-                                <Form.Control type="datetime-local" required name="startDateTime"
-                                    selected={props.endDate}
+                                <Form.Control type="datetime-local" required name="endDateTime"
+                                    min={props.startDate}
                                     onChange={props.handleChange2}
                                 />
                             </Form.Group>
@@ -58,37 +54,37 @@ const OrdinarySearchComponent = (props) => {
                     <br />
                     <br />
                     {props.toggleAdvancedSearch &&
-                        <Form>
+                       
                             <Row>
                                 <Col>
                                     <Form.Group>
                                         <Form.Label>Proizvodjac</Form.Label>
-                                        <Form.Control as="select" defaultValue="Choose..." required name="carManufacturer" id="txtCarManufacturer" placeholder="Proizvodjac"
+                                        <Form.Control as="select" required name="carManufacturer" id="txtCarManufacturer"
                                             onChange={props.handleCarManufacturers} >
                                             {props.getCarManufacturers()}
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group >
                                         <Form.Label>Model</Form.Label>
-                                        <Form.Control as="select" defaultValue="Choose..." required name="carModel" id="txtCarModel" placeholder="Model">
+                                        <Form.Control as="select"  required name="carModel" id="txtCarModel" placeholder="Model">
                                             {props.getCarModels()}  
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group >
                                         <Form.Label>Tip</Form.Label>
-                                        <Form.Control as="select" defaultValue="Choose..." required name="carType" id="txtCarType" placeholder="Tip" >
+                                        <Form.Control as="select" required name="carType" id="txtCarType" placeholder="Tip" >
                                             {props.getCarTypes()}
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group >
                                         <Form.Label>Menjac</Form.Label>
-                                        <Form.Control as="select" defaultValue="Choose..." required name="gearboxType" id="txtGearboxType" type="text" placeholder="Menjac" >
+                                        <Form.Control as="select" required name="gearboxType" id="txtGearboxType" type="text" placeholder="Menjac" >
                                             {props.getGearboxTypes()}   
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Tip goriva</Form.Label>
-                                        <Form.Control as="select" defaultValue="Choose..." required name="fuelType" id="txtFuelType" type="text" placeholder="Tip goriva" >
+                                        <Form.Control as="select" required name="fuelType" id="txtFuelType" type="text" placeholder="Tip goriva" >
                                             {props.getFuelTypes()}
                                         </Form.Control>
                                     </Form.Group>
@@ -128,7 +124,7 @@ const OrdinarySearchComponent = (props) => {
                                     </Form.Group>
                                 </Col>
                             </Row>
-                        </Form>
+             
                     }
                     <br />
 

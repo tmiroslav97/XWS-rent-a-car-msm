@@ -4,6 +4,7 @@ package agent.app.service.intf;
 import agent.app.dto.ad.AdCreateDTO;
 import agent.app.dto.ad.AdPageContentDTO;
 import agent.app.model.Ad;
+import org.joda.time.DateTime;
 
 import java.util.List;
 
@@ -27,8 +28,7 @@ public interface AdService {
     Integer createAd(AdCreateDTO adCreateDTO);
 
     void syncData();
-//    AdPageContentDTO findAllPageAd(Integer page, Integer size, String sort);
-//    AdSearchDTO findAllSearchAdd(Integer page, Integer size, String sort)
 
+    AdPageContentDTO findAllOrdinarySearch(Integer page, Integer size, String location, DateTime startDate, DateTime endDate);
 
 }
