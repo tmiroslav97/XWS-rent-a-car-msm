@@ -42,10 +42,11 @@ public class PriceListServiceImpl implements PriceListService {
     @Override
     public List<PriceListCreateDTO> findAllListDTOFromPublisher(String publisherUsername) {
         List<PriceList> priceLists = publisherUserService.findPriceListsFromPublishUser(publisherUsername);
-        if(priceLists.isEmpty()){
-            return null;
-        }
-        return PriceListConverter.fromEntityList(priceLists, PriceListConverter::toCreatePriceListCreateDTOFromPriceList);
+//        if(priceLists.isEmpty()){
+//            return null;
+//        }
+        return null;
+//        return PriceListConverter.fromEntityList(priceLists, PriceListConverter::toCreatePriceListCreateDTOFromPriceList);
     }
 
     @Override

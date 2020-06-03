@@ -14,6 +14,7 @@ const CreateAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
+    const [carModel, setCarModel] = useState(null);
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
     const [distanceLimit, setDistanceLimit] = useState(null);
     const [cdw, setCdw] = useState(false);
@@ -60,44 +61,45 @@ const CreateAdContainer = () => {
 
     const handleCreatedAd = (event) => {
         // event.preventDefault();
-        const form = event.target;
+        // console.log(event.target);
+        // const form = event.target;
 
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-            setValidated(true);
-        } else {
-            let data = {
-                'name': form.name.value,
-                'coverPhoto': coverPhoto,
-                'location': form.location.value,
-                'distanceLimitFlag': distanceLimitFlag,
-                'distanceLimit': distanceLimit,
-                'carCreateDTO': {
-                    'carManufacturer': form.carManufacturer.value,
-                    'carModel': form.carModel.value,
-                    'carType': form.carType.value,
-                    'year': form.year.value,
-                    'mileage': form.mileage.value,
-                    'gearboxType': form.gearboxType.value,
-                    'fuelType': form.fuelType.value,
-                    'childrenSeatNum': form.childrenSeatNum.value,
-                    'cdw': cdw,
-                    'androidFlag': androidFlag,
-                },
-                'priceListCreateDTO': {
-                    'pricePerKm': pricePerKm,
-                    'pricePerKmCDW': pricePerKmCDW,
-                    'pricePerDay': form.pricePerDay.value,
-                    'id': form.id.value,
-                },
-                'carCalendarTermCreateDTOList': carCalendarTermList,
-                'imagesDTO': imagesDTO
-            }
-            let formData = new FormData(form);
-            formData.append('data', JSON.stringify(data));
-            // dispatch(createdAd(formData));
-            setValidated(false);
-        }
+        // if (form.checkValidity() === false) {
+        //     event.stopPropagation();
+        //     setValidated(true);
+        // } else {
+        //     let data = {
+        //         'name': form.name.value,
+        //         'coverPhoto': coverPhoto,
+        //         'location': form.location.value,
+        //         'distanceLimitFlag': distanceLimitFlag,
+        //         'distanceLimit': distanceLimit,
+        //         'carCreateDTO': {
+        //             'carManufacturer': form.carManufacturer.value,
+        //             'carModel': form.carModel.value,
+        //             'carType': form.carType.value,
+        //             'year': form.year.value,
+        //             'mileage': form.mileage.value,
+        //             'gearboxType': form.gearboxType.value,
+        //             'fuelType': form.fuelType.value,
+        //             'childrenSeatNum': form.childrenSeatNum.value,
+        //             'cdw': cdw,
+        //             'androidFlag': androidFlag,
+        //         },
+        //         'priceListCreateDTO': {
+        //             'pricePerKm': pricePerKm,
+        //             'pricePerKmCDW': pricePerKmCDW,
+        //             'pricePerDay': form.pricePerDay.value,
+        //             'id': form.id.value,
+        //         },
+        //         'carCalendarTermCreateDTOList': carCalendarTermList,
+        //         'imagesDTO': imagesDTO
+        //     }
+        //     let formData = new FormData(form);
+        //     formData.append('data', JSON.stringify(data));
+        //     // dispatch(createdAd(formData));
+        //     setValidated(false);
+        // }
     };
 
     const handleDistanceLimitFlag = (event) => {
@@ -182,6 +184,7 @@ const CreateAdContainer = () => {
                     formData={formData} setFormData={setFormData}
                     activeStep={activeStep} setActiveStep={setActiveStep}
                     steps={steps}
+                    carModel={carModel} setCarModel={setCarModel}
                     isStepOptional={isStepOptional}
                     handleNext={handleNext}
                     handleBack={handleBack}

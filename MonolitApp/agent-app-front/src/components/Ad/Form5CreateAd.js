@@ -9,21 +9,21 @@ const Form5CreateAd = (props) => {
             <Form id="step5" onSubmit={props.onSubmit} noValidate validated={props.validated}>
 
                 <Form.Row>
-                    <Col>
-                        <Form.Group as={Col}>
-                            <Form.Label>Dodaj slike</Form.Label>
-
-                            <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike"
-                                label="Dodaj sliku"
-                                onChange={props.handleImageChange}
-                                custom
-                            >
-                            </Form.File>
-
-
-                        </Form.Group>
-                    </Col>
-
+                    {
+                        (props.brPhotos < 4) ?
+                            <Col>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Dodaj slike</Form.Label>
+                                    <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike"
+                                        label="Dodaj sliku"
+                                        onChange={props.handleImageChange}
+                                        custom
+                                    >
+                                    </Form.File>
+                                </Form.Group>
+                            </Col>
+                            : null
+                    }
                 </Form.Row>
                 <Form.Row>
                     {props.previewImage()}

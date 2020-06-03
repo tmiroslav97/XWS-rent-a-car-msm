@@ -97,6 +97,10 @@ VALUES (21, 'Proche');
 
 INSERT INTO price_list(id, creation_date, price_per_day, price_per_km, price_per_cwd, publisher_user_id)
 VALUES (1, '20.04.2020', 20, 10, 0, 3);
+INSERT INTO price_list(id, creation_date, price_per_day, price_per_km, price_per_cwd, publisher_user_id)
+VALUES (2, '25.05.2020', 20, 10, 0, 3);
+INSERT INTO price_list(id, creation_date, price_per_day, price_per_km, price_per_cwd, publisher_user_id)
+VALUES (3, '24.04.2020', 20, 10, 0, 3);
 
 INSERT INTO car (id, android_flag, car_manufacturer, car_model, car_type, cdw, children_seat_num, fuel_type, gearbox_type, mileage, token, year)
 VALUES (1, false, 'Fiat', '500', 'Limuzina', false, 2, 'Dizel', 'Automatski', 120, null, '2020-05-20 17:00:00');

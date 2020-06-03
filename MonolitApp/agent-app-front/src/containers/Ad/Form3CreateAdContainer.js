@@ -11,33 +11,33 @@ const Form3CreateAdContainer = (props) => {
 
     const pricelists = useSelector(pricelistsSelector);
 
-    // useEffect(() => {
-    //     dispatch(
-    //         fetchPriceListsFromPublisher()
-    //     );
-    // }, []);
+    useEffect(() => {
+        dispatch(
+            fetchPriceListsFromPublisher()
+        );
+    }, []);
 
     const getPriceLists = () => {
         const list = [];
-        // if (pricelists.isFetch) {
-        //     console.log(pricelists);
-        //     // priceLists.data.map((pricelist) => {
-        //     //     list.push(
-        //     //     <tr key={pricelist.id}>
-        //     //         <td>{priceLists.data.length}</td>
-        //     //         <td>{pricelist.pricePerDay}</td>
-        //     //         <td>{pricelist.pricePerKm}</td>
-        //     //         <td>{pricelist.pricePerKmCDW}</td>
-        //     //         {/* <td align="right">
-        //     //             <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
-        //     //         </td>
-        //     //         <td align="right">
-        //     //             <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
-        //     //         </td> */}
-        //     //     </tr>);
-        //     // })
+        if (pricelists.isFetch) {
+            console.log(pricelists);
+            // priceLists.data.map((pricelist) => {
+            //     list.push(
+            //     <tr key={pricelist.id}>
+            //         <td>{priceLists.data.length}</td>
+            //         <td>{pricelist.pricePerDay}</td>
+            //         <td>{pricelist.pricePerKm}</td>
+            //         <td>{pricelist.pricePerKmCDW}</td>
+            //         {/* <td align="right">
+            //             <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
+            //         </td>
+            //         <td align="right">
+            //             <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
+            //         </td> */}
+            //     </tr>);
+            // })
 
-        // }
+        }
         return list;
     }
 

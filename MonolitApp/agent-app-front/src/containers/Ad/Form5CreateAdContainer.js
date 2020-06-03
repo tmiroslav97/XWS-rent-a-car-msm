@@ -14,11 +14,12 @@ const Form5CreateAdContainer = (props) => {
     const [imagePreviewUrl, setImagePreviewUrl] = useState();
     const [file, setFile] = useState();
     const [brPhotos, setBrPhotos] = useState(0);
+    const [flagCover, setFlagCover] = useState();
 
     const handleForm5 = (event) => {
         event.preventDefault();
         const form = event.target;
-        if(brPhotos === 4){
+        if(brPhotos === 4 && props.coverPhoto != null){
             let dto = [];
             
             props.setFormData({
@@ -34,18 +35,15 @@ const Form5CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         }
-       
-       
     };
-
-   
 
     const handleImageChange = (e) => {
         let reader = new FileReader();
         let files = e.target.files[0];
         setFile(e.target.files[0]);
         let name = e.target.files[0].name;
-        let flag = 0
+        let naziv = "image" + photos.length;
+        let flag = 0;
         props.imagesDTO.map((image) => {
             if (image.name === name) {
                 flag = 1;
@@ -61,7 +59,8 @@ const Form5CreateAdContainer = (props) => {
                     "name": name
                 };
                 setPhotos([...photos, temp]);
-                props.setImagesDTO([...props.imagesDTO, name]);
+                
+                props.setImagesDTO([...props.imagesDTO, naziv]);
                 setBrPhotos(brPhotos + 1);
             }
             reader.readAsDataURL(e.target.files[0])
@@ -75,44 +74,78 @@ const Form5CreateAdContainer = (props) => {
                 uploadImage(formData)
             );
         }
-
-    }
-
+    };
 
     const removeImage = (id) => {
         console.log("brisanje")
-        // console.log(event.target.value);
         console.log(id);
-        // let id = event.target.value;
-        // photos.map((photo)=>{
-        //     if(photo.id === id){
-        //         console.log(photo.name + " " + photo.id);
-        //     }
-        // })
-        // this.setState({
-        //   images: this.state.images.filter(image => image.public_id !== id)
-        // })
-    }
+        let temp = [];
+        let t = [];
+        props.setImagesDTO([]);
+        
+        photos.map((photo)=>{
+            if(photo.id === id){
+                console.log(photo.name + " " + photo.id);
+            }
+            let naziv = "image" + temp.length;
+            if(photo.id != id){
+                let p = {
+                    "id": temp.length,
+                    "imagePreviewUrl": photo.imagePreviewUrl,
+                    "name": photo.name
+                };
+                temp.push(p);
+                t.push(naziv);
+            }
+        })
+        console.log(temp);
+        setPhotos(temp);
+        props.setImagesDTO(t);
+        setBrPhotos(brPhotos - 1);
+        console.log(photos);
+    };
 
-    const setCoverPhoto = (event) => {
+    const setCoverPhoto = (id) => {
         console.log("stisnuto dugme");
-        console.log(event)
-
-    }
+        console.log(id);
+        photos.map((photo)=>{
+            if(photo.id === id){
+                console.log(photo.name + " " + photo.id);
+                props.setCoverPhoto(photo.name);
+                setFlagCover(id);
+            }
+        })
+    };
+    const removeCoverPhoto = (id) => {
+        console.log("stisnuto dugme");
+        console.log(id);
+        photos.map((photo)=>{
+            if(photo.id === id){
+                console.log(photo.name + " " + photo.id);
+                props.setCoverPhoto();
+                setFlagCover();
+            }
+        })
+    };
 
     const previewImage = () => {
         let rez = [];
         photos.map((photo) => {
             rez.push(
-                <Card key={photo.name} id={photo.id} className="imgPreview" id={photo.id} border="secondary" style={{ height: "140px", width: "140px", margin: "10px" }} >
-
+                <Card key={photo.id} id={photo.id} className="imgPreview" id={photo.id} border="secondary" style={{ height: "140px", width: "140px", margin: "10px" }} >
                     <ButtonGroup style={{ height: "40px", width: "140px" }} >
-                        <Button onChange={(key)=>removeImage(key)}>X</Button>
-                        <Button  onChange={(key)=>setCoverPhoto(key)}>Cover</Button>
+                        
+                        {
+                            (flagCover === photo.id) ?
+                            <Button  onClick={() => {removeCoverPhoto(photo.id)}} >Uncover</Button> 
+                            :
+                            <Button onClick={() => {setCoverPhoto(photo.id)}} >Cover</Button> 
+                        }
+                        <Button onClick={() => {removeImage(photo.id)}}>X</Button>
+                        
                     </ButtonGroup>
                     <img style={{ height: "100px", width: "140px" }} src={photo.imagePreviewUrl} />
                     {/* <div style={{ height: "20px", width: "140px" }}>{photo.name}</div> */}
-
                 </Card>
             )
         });
@@ -136,6 +169,7 @@ const Form5CreateAdContainer = (props) => {
             imagesDTO={props.imagesDTO} setImagesDTO={props.setImagesDTO}
             setCoverPhoto={setCoverPhoto}
             removeImage={removeImage}
+            brPhotos={brPhotos}
         />
     );
 }

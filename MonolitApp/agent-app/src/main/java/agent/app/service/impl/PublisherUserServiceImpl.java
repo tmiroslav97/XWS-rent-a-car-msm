@@ -96,10 +96,11 @@ public class PublisherUserServiceImpl implements PublisherUserService {
     @Override
     public List<PriceList> findPriceListsFromPublishUser(String publishUserUsername) {
         PublisherUser publisherUser = this.findByEmail(publishUserUsername);
-        Set<PriceList> priceLists = publisherUser.getPriceLists();
-        if(priceLists == null){
-            return null;
-        }
+        System.out.println(publisherUser.getPriceLists());
+//        Set<PriceList> priceLists = publisherUser.getPriceLists();
+//        if(priceLists == null){
+//            return null;
+//        }
         //TODO 1: GRESKAAAA
         return null;
     }
