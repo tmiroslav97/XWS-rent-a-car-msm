@@ -3,6 +3,8 @@ import{
     FETCH_ADS,
     FETCH_AD,
     PUT_ADS,
+    UPLOAD_IMAGE,
+    PUT_IMAGE_NAME,
     PUT_AD,
     SEARCH_AD
 } from './constants';
@@ -27,6 +29,15 @@ export const putAds = payload => ({
     payload
 });
 
+export const uploadImage = payload => ({
+    type: UPLOAD_IMAGE,
+    payload
+});
+
+export const putImageName = payload => ({
+    type: PUT_IMAGE_NAME,
+    payload
+});
 export const putAd = payload => ({
     type: PUT_AD,
     payload

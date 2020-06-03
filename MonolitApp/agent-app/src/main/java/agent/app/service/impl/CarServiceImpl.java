@@ -44,14 +44,14 @@ public class CarServiceImpl implements CarService {
     @Override
     public Car createCar(CarCreateDTO carCreateDTO) {
        Car car = CarConverter.toCreateCarFromRequest(carCreateDTO);
-       car = this.carRepository.save(car);
+       car = this.save(car);
        return car;
     }
 
     @Override
     public Car editCar(Car car) {
         this.finById(car.getId());
-        Car car1 = carRepository.save(car);
+        Car car1 = this.save(car);
         return car1;
     }
 

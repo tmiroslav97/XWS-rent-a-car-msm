@@ -15,11 +15,17 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/ad", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,25 +46,36 @@ public class AdController {
         return new ResponseEntity<>(AdConverter.toAdDetailViewDTOFromAd(adService.findById(id)), HttpStatus.OK);
     }
 
-//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-//    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<?> uploadImage(@RequestParam(value = "coverPhoto", required = true) MultipartFile coverPhoto) throws IOException {
-//        System.out.println("-----------------------UPLOAD FILE---------------------");
-//
-//        File file = new File("photos");
-//        String uploadDirectory = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
-//
-//        System.out.println(uploadDirectory);
-//        System.out.println("slika : " + coverPhoto.getOriginalFilename());
-//
-//        File convertFile = new File(uploadDirectory.toString());
-//        convertFile.createNewFile();
-//        FileOutputStream fout = new FileOutputStream(convertFile);
-//        fout.write(coverPhoto.getBytes());
-//        fout.close();
-//        //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
-//        return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
-//    }
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadImage(@RequestParam(value = "photo", required = true) MultipartFile photo,
+                                         @RequestParam(value = "data", required = true) String data
+        ) throws IOException {
+        System.out.println("-----------------------UPLOAD FILE---------------------");
+        String name = adService.getImageName();
+        System.out.println("slika : " + photo.getOriginalFilename());
+        System.out.println("slika u bazi : " + name);
+        try{
+            File file = new File("photos");
+
+            String uploadDirectory = file.getAbsolutePath() + "\\" + name;
+            File convertFile = new File(uploadDirectory.toString());
+            convertFile.createNewFile();
+            FileOutputStream fout = new FileOutputStream(convertFile);
+            fout.write(photo.getBytes());
+            fout.close();
+
+            Integer rez = adService.addImage(adService.getImageName());
+            if(rez != 1){
+                System.out.println("desila se greska prilikom dodavanja slike");
+            }
+            System.out.println("dodata slika");
+            return new ResponseEntity<>(name, HttpStatus.CREATED);
+        }catch(Exception e){
+            return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
+        }
+
+    }
 
 
 //    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")

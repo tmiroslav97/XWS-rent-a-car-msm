@@ -8,11 +8,13 @@ import {
     CREATED_AD,
     FETCH_ADS,
     FETCH_AD,
+    UPLOAD_IMAGE,
     SEARCH_AD
 } from './constants';
 
 import {
     putAds,
+    putImageName,
     putAd
 } from './actions';
 
@@ -51,6 +53,16 @@ export function* fetchAd() {
     const data = yield call(AdServices.fetchAd, id);
     console.log(data);
     yield put(putAd({
+        'data': data,
+        'isFetch': true
+    }));
+}
+
+export function* uploadImage(){
+    const { payload } = yield take(UPLOAD_IMAGE);
+    yield put(putImageName({ 'isFetch': false }));
+    const data = yield call(AdServices.uploadImage, payload); 
+    yield put(putImageName({
         'data': data,
         'isFetch': true
     }));

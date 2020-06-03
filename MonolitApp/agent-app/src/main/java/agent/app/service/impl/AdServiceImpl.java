@@ -9,16 +9,11 @@ import agent.app.dto.ad.AdPageDTO;
 import agent.app.dto.car.CarCalendarTermCreateDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
-import agent.app.model.Ad;
-import agent.app.model.Car;
-import agent.app.model.CarCalendarTerm;
-import agent.app.model.PriceList;
+import agent.app.model.*;
 import agent.app.repository.AdRepository;
-import agent.app.service.intf.AdService;
-import agent.app.service.intf.CarCalendarTermService;
-import agent.app.service.intf.CarService;
-import agent.app.service.intf.PriceListService;
+import agent.app.service.intf.*;
 import org.joda.time.DateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,6 +39,9 @@ public class AdServiceImpl implements AdService {
 
     @Autowired
     private CarCalendarTermService carCalendarTermService;
+
+    @Autowired
+    private ImageService imageService;
 
 
     @Override
@@ -131,6 +129,19 @@ public class AdServiceImpl implements AdService {
 //        PriceList priceList = ad.getPriceList();
 //        priceList.getAds().add(ad);
 
+        return 1;
+    }
+
+    @Override
+    public String getImageName() {
+        String imageName = "slika" + imageService.getImageSize();
+        return imageName;
+    }
+
+    @Override
+    public Integer addImage(String imageName) {
+        Image img = imageService.createImage(imageName);
+        System.out.println(img.getId() + " " + img.getName());
         return 1;
     }
 

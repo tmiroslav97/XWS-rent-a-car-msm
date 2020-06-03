@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Spinner } from 'react-bootstrap'
 
-const SpinnerContainer = () => {
+const SpinnerImageContainer = () => {
 
     return (
         <Container>
@@ -18,4 +18,4 @@ const SpinnerContainer = () => {
     );
 }
 
-export default SpinnerContainer;
+export default SpinnerImageContainer;
