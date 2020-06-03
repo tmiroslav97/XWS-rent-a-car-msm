@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Form3CreateAd from '../../components/Ad/Form3CreateAd';
 import { pricelistsSelector } from '../../store/pricelist/selectors';
 import { fetchPriceListsFromPublisher } from '../../store/pricelist/actions';
+import { Form, Col, Container, Button, InputGroup, Card, ButtonGroup, Table } from 'react-bootstrap';
 
 const Form3CreateAdContainer = (props) => {
     const dispatch = useDispatch();
@@ -21,24 +22,46 @@ const Form3CreateAdContainer = (props) => {
         const list = [];
         if (pricelists.isFetch) {
             console.log(pricelists);
-            // priceLists.data.map((pricelist) => {
-            //     list.push(
-            //     <tr key={pricelist.id}>
-            //         <td>{priceLists.data.length}</td>
-            //         <td>{pricelist.pricePerDay}</td>
-            //         <td>{pricelist.pricePerKm}</td>
-            //         <td>{pricelist.pricePerKmCDW}</td>
-            //         {/* <td align="right">
-            //             <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
-            //         </td>
-            //         <td align="right">
-            //             <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
-            //         </td> */}
-            //     </tr>);
-            // })
+            pricelists.data.map((pricelist) => {
+                let ss = pricelist.creationDate.substring(0, 10);
+                let ss2 = pricelist.creationDate.substring(11, 16);
+                ss = ss + " " + ss2;
+
+                list.push(
+                    <tr key={pricelist.id}>
+                        <td>{ss}</td>
+                        <td>{pricelist.pricePerDay}</td>
+                        <td>{pricelist.pricePerKm}</td>
+                        <td>{pricelist.pricePerKmCDW}</td>
+                        {props.id === pricelist.id ?
+                            <td align="right">
+                                <Button variant="outline-success"
+                                    onClick={() => { handlePriceListDeleteId(pricelist.id); }}
+                                >Ukloni</Button>
+                            </td>
+                            :
+                            <td align="right">
+                                <Button variant="outline-primary"
+                                    onClick={() => { handlePriceListChooseId(pricelist.id); }}
+                                >Izaberi</Button>
+                            </td>
+                        }
+
+
+                    </tr>);
+            })
 
         }
         return list;
+    }
+
+    const handlePriceListChooseId = (id) => {
+        console.log(id);
+        props.setId(id);
+    }
+    const handlePriceListDeleteId = (id) => {
+        console.log(id)
+        props.setId();
     }
 
     const handleForm3 = (event) => {
@@ -51,7 +74,7 @@ const Form3CreateAdContainer = (props) => {
             props.setFormData({
                 ...props.formData,
                 id: props.id,
-                pricePerDay: form.pricePerDay.value,
+                pricePerDay: props.pricePerDay,
                 pricePerKm: props.pricePerKm,
                 pricePerKmCDW: props.pricePerKmCDW,
             });
@@ -59,6 +82,10 @@ const Form3CreateAdContainer = (props) => {
             setValidated(false);
             props.handleNext();
         }
+    };
+
+    const handlePricePerDay = (event) => {
+        props.setPricePerDay(event.target.value);
     };
 
     const handlePricePerKm = (event) => {
@@ -93,9 +120,11 @@ const Form3CreateAdContainer = (props) => {
             handleReset={props.handleReset}
             cdw={props.cdw}
             distanceLimitFlag={props.distanceLimitFlag}
+            pricePerDay={props.pricePerDay} setPricePerDay={props.setPricePerDay}
             pricePerKm={props.pricePerKm}
             pricePerKmCDW={props.pricePerKmCDW}
             id={props.id}
+            handlePricePerDay={handlePricePerDay}
             handlePricePerKm={handlePricePerKm}
             handlePricePerKmCDW={handlePricePerKmCDW}
             handleId={handleId}

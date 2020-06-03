@@ -81,17 +81,17 @@ const Form1CreateAdContainer = (props) => {
                 listCarModel.push(<option key={i}>{carModel}</option>);
                 i++
             })
-            if (carModels.data.length != 0) {
-                rez.push(< Form.Group as={Col}>
-                    <Form.Label>Model</Form.Label>
-                    <Form.Control as="select" name="carModel" id="txtCarModel" placeholder="Model"
-                    onChange={handleCarModel}>
-                        {listCarModel}
-                    </Form.Control>
-                </Form.Group >);
-            }
+            // if (carModels.data.length != 0) {
+            //     rez.push(< Form.Group as={Col}>
+            //         <Form.Label>Model</Form.Label>
+            //         <Form.Control as="select" name="carModel" id="txtCarModel" placeholder="Model"
+            //         onChange={handleCarModel}>
+            //             {listCarModel}
+            //         </Form.Control>
+            //     </Form.Group >);
+            // }
         }
-        return rez;
+        return listCarModel;
     }
 
     const handleCarManufacturers = (event) => {

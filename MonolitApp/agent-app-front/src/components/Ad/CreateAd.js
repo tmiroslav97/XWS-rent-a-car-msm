@@ -27,7 +27,7 @@ const CreateAd = (props) => {
                     </Stepper>
                 </Col>
             </Row>
-            <Row>
+            {/* <Row>
                 <Col>
                     
                     <Form id="createAdFrom" onSubmit={props.onSubmit} noValidate
@@ -35,7 +35,7 @@ const CreateAd = (props) => {
                         
                     </Form>
                 </Col>
-            </Row>
+            </Row> */}
         </Container>
     );
 

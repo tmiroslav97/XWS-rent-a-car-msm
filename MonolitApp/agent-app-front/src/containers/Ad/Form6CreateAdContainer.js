@@ -13,14 +13,14 @@ const Form6CreateAdContainer = (props) => {
         console.log(props.formData);
         props.handleCreatedAd();
         setValidated(true);
-        
-       
+
+
     };
 
 
     return (
         <Form6CreateAd
-            onSubmit={handleForm6}
+            handleForm6={handleForm6}
             validated={validated}
             activeStep={props.activeStep}
             steps={props.steps}
@@ -28,7 +28,7 @@ const Form6CreateAdContainer = (props) => {
             handleBack={props.handleBack}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
-            
+
         />
     );
 }

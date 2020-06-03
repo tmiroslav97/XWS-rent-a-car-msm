@@ -9,7 +9,12 @@ const Form3CreateAd = (props) => {
                 <Form.Row>
                     <Col>
                         <ButtonGroup variant="outline" >
-                            <Button onClick={props.handleActiveToggle1}>Dodaj cenovnik</Button>
+                            {props.id ?
+                                null
+                                :
+                                <Button onClick={props.handleActiveToggle1}>Dodaj cenovnik</Button>
+                            }
+
                             <Button onClick={props.handleActiveToggle0}>Izaberi cenovnik</Button>
                         </ButtonGroup>
                         <br />
@@ -26,7 +31,8 @@ const Form3CreateAd = (props) => {
                                         <InputGroup.Text>RSD</InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <Form.Control name="pricePerDay" required id="numPricePerDay"
-                                        type="number" placeholder="Cena po danu" />
+                                        type="number" placeholder="Cena po danu"
+                                        onChange={props.handlePricePerDay}  />
                                     <InputGroup.Append>
                                         <InputGroup.Text>.00</InputGroup.Text>
                                     </InputGroup.Append>
@@ -40,7 +46,8 @@ const Form3CreateAd = (props) => {
                                             <InputGroup.Text>RSD</InputGroup.Text>
                                         </InputGroup.Prepend>
                                         <Form.Control name="pricePerKm" required id="numPricePerKm"
-                                            type="number" placeholder="Cena po kilometru" onChange={props.handlePricePerKm} />
+                                            type="number" placeholder="Cena po kilometru" 
+                                            onChange={props.handlePricePerKm} />
                                         <InputGroup.Append>
                                             <InputGroup.Text>.00</InputGroup.Text>
                                         </InputGroup.Append>
@@ -72,10 +79,11 @@ const Form3CreateAd = (props) => {
                             <Table striped bordered hover>
                                 <thead>
                                     <tr>
-                                        <th>Rbr.</th>
-                                        <th className="text-right">Cena po danu</th>
-                                        <th className="text-right">Cena po km</th>
-                                        <th className="text-right">Cena po km (CDW)</th>
+                                        <th >Datum kreiranja</th>
+                                        <th >Cena po danu</th>
+                                        <th >Cena po km</th>
+                                        <th >Cena po km (CDW)</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>

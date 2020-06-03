@@ -8,7 +8,7 @@ const Form4CreateAdContainer = (props) => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [flag, setFlag] = useState(true);
-    
+
     const addTerm = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -16,17 +16,17 @@ const Form4CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-            let ss = startDate.substring(0, 10);
-            let ss2 = startDate.substring(11, 16);
-            let ee = startDate.substring(0, 10);
-            let ee2 = startDate.substring(11, 16);
-            ss = ss + " " + ss2;
-            ee = ee + " " + ee2;
+            
             let temp = {
-                'startDate': ss,
-                'endDate': ee
+                'startDate': startDate,
+                'endDate': endDate
             };
-            props.setCarCalendarTermList([...props.carCalendarTermList, temp]);
+            let cctl = props.carCalendarTermList;
+            cctl.push(temp);
+            props.setCarCalendarTermList(cctl);
+            // props.setCarCalendarTermList([...props.carCalendarTermList, temp]);
+            console.log("--------------------------")
+            console.log(props.carCalendarTermList)
             props.setFormData({
                 ...props.formData,
                 carCalendarTermCreateDTOList: JSON.stringify(props.carCalendarTermList)
@@ -68,11 +68,17 @@ const Form4CreateAdContainer = (props) => {
         let list = [];
         let i = 1;
         props.carCalendarTermList.map((term) => {
+            let ss = term.startDate.substring(0, 10);
+            let ss2 = term.startDate.substring(11, 16);
+            let ee = term.endDate.substring(0, 10);
+            let ee2 = term.endDate.substring(11, 16);
+            ss = ss + " " + ss2;
+            ee = ee + " " + ee2;
             list.push(
                 <tr key={i}>
                     <td>{i}</td>
-                    <td>{term.startDate}</td>
-                    <td>{term.endDate}</td>
+                    <td>{ss}</td>
+                    <td>{ee}</td>
                     {/* <td align="right">
                         <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
                     </td>
@@ -85,10 +91,10 @@ const Form4CreateAdContainer = (props) => {
         })
         return list;
     }
-    const handlerForm4 = ()=>{
-        if(props.carCalendarTermList.length == 0){
+    const handlerForm4 = () => {
+        if (props.carCalendarTermList.length == 0) {
             setFlag(0);
-        }else{
+        } else {
             setFlag(1);
             console.log(props.formData);
             props.handleNext();

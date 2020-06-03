@@ -14,11 +14,19 @@ const CreateAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
-    const [carModel, setCarModel] = useState(null);
+    // const [name, setName] = useState();
+    // const [location, setLocation] = useState();
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
     const [distanceLimit, setDistanceLimit] = useState(null);
+    const [carModel, setCarModel] = useState(null);
+    // const [carManufacturer, setCarManufacturer] = useState();
+    // const [carType, setCarType] = useState();
+    // const [year, setYear] = useState();
+    // const [mileage, setMileage] = useState();
+
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
+    const [pricePerDay, setPricePerDay] = useState(null);
     const [pricePerKm, setPricePerKm] = useState(null);
     const [pricePerKmCDW, setPricePerKmCDW] = useState(null);
     const [id, setId] = useState(null);
@@ -60,6 +68,8 @@ const CreateAdContainer = () => {
     }
 
     const handleCreatedAd = (event) => {
+        console.log(formData);
+
         // event.preventDefault();
         // console.log(event.target);
         // const form = event.target;
@@ -157,7 +167,8 @@ const CreateAdContainer = () => {
 
     return (
         <Container>
-            <CreateAd onSubmit={handleCreatedAd}
+            <CreateAd 
+                // onSubmit={handleCreatedAd}
                 validated={validated}
                 distanceLimitFlag={distanceLimitFlag}
                 cdw={cdw}
@@ -222,6 +233,7 @@ const CreateAdContainer = () => {
                     handleReset={handleReset}
                     cdw={cdw} setCdw={setCdw}
                     distanceLimitFlag={distanceLimitFlag} setDistanceLimitFlag={setDistanceLimitFlag}
+                    pricePerDay={pricePerDay} setPricePerDay={setPricePerDay}
                     pricePerKm={pricePerKm} setPricePerKm={setPricePerKm}
                     pricePerKmCDW={pricePerKmCDW} setPricePerKmCDW={setPricePerKmCDW}
                     id={id} setId={setId}
@@ -254,7 +266,6 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
-                    handleCreatedAd={handleCreatedAd}
                     coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
                     imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
                 ></Form5CreateAdContainer>

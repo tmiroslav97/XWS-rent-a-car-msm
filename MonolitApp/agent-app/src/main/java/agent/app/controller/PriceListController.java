@@ -39,7 +39,7 @@ public class PriceListController {
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(value = "/publisher", method = RequestMethod.GET)
     public ResponseEntity<?> getPriceListsFromPublishUser(Principal principal) {
-        System.out.println(principal.getName());
+        System.out.println("---------------" + principal.getName());
         return new ResponseEntity<>(priceListService.findAllListDTOFromPublisher(principal.getName()), HttpStatus.OK);
     }
 

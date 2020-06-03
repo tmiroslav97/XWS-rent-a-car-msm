@@ -25,6 +25,14 @@ const Form5CreateAd = (props) => {
                             : null
                     }
                 </Form.Row>
+                {props.flag1 ?
+                    <label style={{color:"red"}}>Morate uneti 4 slike</label>
+                    :null
+                }
+                {props.flag2 ?
+                    <label style={{color:"red"}}>Morate oznaciti naslovnu fotografiju</label>
+                    :null
+                }
                 <Form.Row>
                     {props.previewImage()}
                 </Form.Row>

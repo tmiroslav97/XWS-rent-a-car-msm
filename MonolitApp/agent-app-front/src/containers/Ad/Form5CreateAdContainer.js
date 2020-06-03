@@ -15,6 +15,8 @@ const Form5CreateAdContainer = (props) => {
     const [file, setFile] = useState();
     const [brPhotos, setBrPhotos] = useState(0);
     const [flagCover, setFlagCover] = useState();
+    const [flag1, setFlag1] = useState();
+    const [flag2, setFlag2] = useState();
 
     const handleForm5 = (event) => {
         event.preventDefault();
@@ -29,11 +31,15 @@ const Form5CreateAdContainer = (props) => {
             console.log(props.formData);
             setValidated(false);
             props.handleNext();
-            //treba dodati oglas.... 
-            // props.handleCreatedAd();
         }else{
             event.stopPropagation();
             setValidated(true);
+        }
+        if(brPhotos < 4){
+            setFlag1(true);
+        }
+        if(props.coverPhoto == null){
+            setFlag2(true);
         }
     };
 
@@ -62,6 +68,9 @@ const Form5CreateAdContainer = (props) => {
                 
                 props.setImagesDTO([...props.imagesDTO, naziv]);
                 setBrPhotos(brPhotos + 1);
+                if(brPhotos === 4){
+                    setFlag1(false);
+                }
             }
             reader.readAsDataURL(e.target.files[0])
             console.log(photos);
@@ -113,6 +122,7 @@ const Form5CreateAdContainer = (props) => {
                 console.log(photo.name + " " + photo.id);
                 props.setCoverPhoto(photo.name);
                 setFlagCover(id);
+                setFlag2(false);
             }
         })
     };
@@ -170,6 +180,7 @@ const Form5CreateAdContainer = (props) => {
             setCoverPhoto={setCoverPhoto}
             removeImage={removeImage}
             brPhotos={brPhotos}
+            flag1={flag1} flag2={flag2}
         />
     );
 }

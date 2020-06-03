@@ -8,7 +8,7 @@ const Form6CreateAd = (props) => {
         <Container>
             <Form id="step6" onSubmit={props.onSubmit} noValidate validated={props.validated}>
 
-                
+
                 <Form.Row>
                     <Col>
                         <Form.Group as={Col} >
@@ -26,14 +26,14 @@ const Form6CreateAd = (props) => {
                                         Reset
                                     </Button>
                                     <Button
-                                                // variant="contained"
-                                                // color="primary"
-                                                onClick={props.onSubmit}
-                                                // className={classes.button}
-                                                // type="submit"
-                                                className="float-right"
-                                            >
-                                                Dodaj
+                                        // variant="contained"
+                                        // color="primary"
+                                        onClick={props.handleForm6}
+                                        // className={classes.button}
+                                        // type="submit"
+                                        className="float-right"
+                                    >
+                                        Dodaj
                                             </Button>
                                 </div>
                             ) : (

@@ -11,6 +11,7 @@ import agent.app.service.intf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -96,12 +97,7 @@ public class PublisherUserServiceImpl implements PublisherUserService {
     @Override
     public List<PriceList> findPriceListsFromPublishUser(String publishUserUsername) {
         PublisherUser publisherUser = this.findByEmail(publishUserUsername);
-        System.out.println(publisherUser.getPriceLists());
-//        Set<PriceList> priceLists = publisherUser.getPriceLists();
-//        if(priceLists == null){
-//            return null;
-//        }
-        //TODO 1: GRESKAAAA
-        return null;
+        List<PriceList> priceLists = new ArrayList<>(publisherUser.getPriceLists());
+        return priceLists;
     }
 }

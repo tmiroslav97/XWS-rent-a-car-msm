@@ -1,6 +1,8 @@
 package agent.app.service.impl;
 
+import agent.app.converter.AdConverter;
 import agent.app.converter.PriceListConverter;
+import agent.app.dto.ad.AdPageDTO;
 import agent.app.dto.pricelist.PriceListCreateDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -42,11 +45,11 @@ public class PriceListServiceImpl implements PriceListService {
     @Override
     public List<PriceListCreateDTO> findAllListDTOFromPublisher(String publisherUsername) {
         List<PriceList> priceLists = publisherUserService.findPriceListsFromPublishUser(publisherUsername);
-//        if(priceLists.isEmpty()){
-//            return null;
-//        }
-        return null;
-//        return PriceListConverter.fromEntityList(priceLists, PriceListConverter::toCreatePriceListCreateDTOFromPriceList);
+        if(priceLists.isEmpty()){
+            return null;
+        }
+        List<PriceListCreateDTO> ret = priceLists.stream().map(PriceListConverter::toCreatePriceListCreateDTOFromPriceList).collect(Collectors.toList());
+        return ret;
     }
 
     @Override
