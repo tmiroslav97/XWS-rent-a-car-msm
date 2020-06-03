@@ -1,12 +1,8 @@
 import React from 'react';
 import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image } from 'react-bootstrap';
 import { Stepper, Step, StepLabel, makeStyles, Typography } from '@material-ui/core';
-import Form1CreateAdContainer from '../../containers/Ad/Form1CreateAdContainer';
-import Form2CreateAdContainer from '../../containers/Ad/Form2CreateAdContainer';
 
 const CreateAd = (props) => {
-    
-    
 
     return (
         <Container>
@@ -31,13 +27,15 @@ const CreateAd = (props) => {
                     </Stepper>
                 </Col>
             </Row>
-            <Row>
+            {/* <Row>
                 <Col>
-                    <Form id="createAdFrom" onSubmit={props.onSubmit} noValidate 
-                    validated={props.validated}>
+                    
+                    <Form id="createAdFrom" onSubmit={props.onSubmit} noValidate
+                        validated={props.validated}>
+                        
                     </Form>
                 </Col>
-            </Row>
+            </Row> */}
         </Container>
     );
 

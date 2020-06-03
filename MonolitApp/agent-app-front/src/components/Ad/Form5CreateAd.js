@@ -1,25 +1,40 @@
 import React from 'react';
-import { Form, Col, Container, Button } from 'react-bootstrap';
+import { Form, Row, Col, Container, Button } from 'react-bootstrap';
 import { Typography } from '@material-ui/core';
+
 
 const Form5CreateAd = (props) => {
     return (
         <Container>
             <Form id="step5" onSubmit={props.onSubmit} noValidate validated={props.validated}>
+
                 <Form.Row>
-                    <Col>
-                        <Form.Group as={Col}>
-                            <Form.Label>Dodaj sliku</Form.Label>
-
-                            <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike" label={props.coverPhotoName}
-                                onChange={props.onPhotoChange} custom multiple
-                            >
-                            </Form.File>
-
-
-                        </Form.Group>
-                    </Col>
-
+                    {
+                        (props.brPhotos < 4) ?
+                            <Col>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Dodaj slike</Form.Label>
+                                    <Form.File name="coverPhoto" id="fileCoverPhoto" placeholder="Slike"
+                                        label="Dodaj sliku"
+                                        onChange={props.handleImageChange}
+                                        custom
+                                    >
+                                    </Form.File>
+                                </Form.Group>
+                            </Col>
+                            : null
+                    }
+                </Form.Row>
+                {props.flag1 ?
+                    <label style={{color:"red"}}>Morate uneti 4 slike</label>
+                    :null
+                }
+                {props.flag2 ?
+                    <label style={{color:"red"}}>Morate oznaciti naslovnu fotografiju</label>
+                    :null
+                }
+                <Form.Row>
+                    {props.previewImage()}
                 </Form.Row>
                 <Form.Row>
                     <Col>
@@ -66,8 +81,6 @@ const Form5CreateAd = (props) => {
                                                 className="float-right"
                                             >
                                                 Dodaj
-                                                {/* Dalje */}
-                                                {/* {props.activeStep === props.steps.length - 1 ? 'Dodaj' : 'Dalje'} */}
                                             </Button>
                                         </div>
                                     </div>

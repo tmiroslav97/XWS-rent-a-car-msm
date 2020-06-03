@@ -10,12 +10,22 @@ class AdServices extends HttpBaseClient {
     createdAd = async payload => {
         const response = await this.getApiClient().post(
             FINALPOINTS.AD_BASE,
+            payload
+        );
+        
+        return response.data;
+    };
+
+    uploadImage = async payload => {
+        const response = await this.getApiClient().post(
+            FINALPOINTS.AD_BASE + "/upload",
             payload,
             {
                 headers : {
                     'Content-Type': 'multipart/form-data',
                 },
-            });
+            }
+            );
         
         return response.data;
     };
@@ -41,6 +51,24 @@ class AdServices extends HttpBaseClient {
         
         );
 
+        return response.data;
+    };
+
+    fetchAdsPaginatedSearch = async payload => {
+        console.log("SERVICEEE SEARCH")
+        console.log(payload);
+        const response = await this.getApiClient().get(
+            FINALPOINTS.AD_BASE + "/search", {
+                params: {
+                    location: payload.location,
+                    startDate: payload.startDate,
+                    endDate: payload.endDate,
+                    nextPage: payload.nextPage,
+                    size: payload.size
+                }
+            }
+        );
+            console.log(response);
         return response.data;
     };
 }

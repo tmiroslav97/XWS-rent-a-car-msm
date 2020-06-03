@@ -13,4 +13,11 @@ import java.util.List;
 public class AdPageContentDTO {
     private Integer totalPageCnt;
     List<AdPageDTO> ads;
+
+//    @Override
+//    public String toString() {
+//        return "AdPageContentDTO{" +
+//                "ads=" + ads +
+//                '}';
+//    }
 }

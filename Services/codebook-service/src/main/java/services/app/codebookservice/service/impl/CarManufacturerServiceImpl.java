@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import services.app.codebookservice.converter.CarModelConverter;
 import services.app.codebookservice.dto.CarManufacturerDTO;
 import services.app.codebookservice.exception.ExistsException;
 import services.app.codebookservice.exception.NotFoundException;
@@ -14,6 +15,7 @@ import services.app.codebookservice.model.CarManufacturer;
 import services.app.codebookservice.repository.CarManufacturerRepository;
 import services.app.codebookservice.service.intf.CarManufacturerService;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -43,6 +45,12 @@ public class CarManufacturerServiceImpl implements CarManufacturerService {
                 .build();
 
         return carManufacturerDTO;
+    }
+
+    @Override
+    public List<String> findCarModelsById(Long id) {
+        CarManufacturer carManufacturer = findById(id);
+        return CarModelConverter.fromEntityList(new ArrayList<>(carManufacturer.getCarModels()), CarModelConverter::fromEntityToString);
     }
 
     @Override

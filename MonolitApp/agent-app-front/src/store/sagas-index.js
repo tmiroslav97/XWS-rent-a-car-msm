@@ -5,6 +5,7 @@ import * as userSaga from './user/saga';
 import * as adSaga from './ad/saga';
 import * as codebookSaga from './codebook/saga';
 import * as requestCartSaga from './request-cart/saga';
+import * as pricelistSaga from './pricelist/saga';
 
 
 import {
@@ -17,7 +18,8 @@ export default function* rootSaga() {
       userSaga,
       adSaga,
       codebookSaga,
-      requestCartSaga
+      requestCartSaga,
+      pricelistSaga
     ].map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
   );
 

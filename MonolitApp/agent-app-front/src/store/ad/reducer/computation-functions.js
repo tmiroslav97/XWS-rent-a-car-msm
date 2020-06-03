@@ -4,3 +4,17 @@ export function putAds(state, payload) {
         ads: payload
     };
 }
+
+export function putImageName(state, payload) {
+    return {
+        ...state,
+        imageName: payload
+    };
+}
+export function putAd(state, payload) {
+    return {
+        ...state,
+        ad: payload
+    };
+}
+

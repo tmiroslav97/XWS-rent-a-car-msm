@@ -1,37 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateAd from '../../components/Ad/CreateAd';
-import { createdAd } from '../../store/ad/actions';
+import { createdAd, uploadImage } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
 import Form2CreateAdContainer from './Form2CreateAdContainer';
 import Form3CreateAdContainer from './Form3CreateAdContainer';
 import Form4CreateAdContainer from './Form4CreateAdContainer';
 import Form5CreateAdContainer from './Form5CreateAdContainer';
-import { Container, Row, Col, Button } from 'react-bootstrap'
-
+import Form6CreateAdContainer from './Form6CreateAdContainer';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const CreateAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
+    // const [name, setName] = useState();
+    // const [location, setLocation] = useState();
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
     const [distanceLimit, setDistanceLimit] = useState(null);
+    const [carModel, setCarModel] = useState(null);
+    // const [carManufacturer, setCarManufacturer] = useState();
+    // const [carType, setCarType] = useState();
+    // const [year, setYear] = useState();
+    // const [mileage, setMileage] = useState();
+
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
+    const [pricePerDay, setPricePerDay] = useState(null);
     const [pricePerKm, setPricePerKm] = useState(null);
     const [pricePerKmCDW, setPricePerKmCDW] = useState(null);
     const [id, setId] = useState(null);
     const [carCalendarTermList, setCarCalendarTermList] = useState([]);
 
-
-    const [coverPhotoName, setCoverPhotoName] = useState("");
-    const [photos, setPhotos] = useState([]);
-    const [coverPhoto, setCoverPhoto] = useState();
-
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
     const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];
 
+    const [coverPhoto, setCoverPhoto] = useState();
+    const [imagesDTO, setImagesDTO] = useState([]);
 
     const [formData, setFormData] = useState({
         name: null,
@@ -52,48 +58,61 @@ const CreateAdContainer = () => {
         pricePerKmCDW: null,
         pricePerDay: null,
         id: null,
-        carCalendarTermCreateDTOList: null
-    });
-    
-    const handleCreatedAd = (event) => {
-        event.preventDefault();
-        const form = event.target;
+        carCalendarTermCreateDTOList: null,
+        imagesDTO: null
 
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-            setValidated(true);
-        } else {
-            let data = {
-                'name': form.name.value,
-                'coverPhoto': coverPhotoName,
-                'location': form.location.value,
-                'distanceLimitFlag': distanceLimitFlag,
-                'distanceLimit': distanceLimit,
-                'carCreateDTO': {
-                    'carManufacturer': form.carManufacturer.value,
-                    'carModel': form.carModel.value,
-                    'carType': form.carType.value,
-                    'year': form.year.value,
-                    'mileage': form.mileage.value,
-                    'gearboxType': form.gearboxType.value,
-                    'fuelType': form.fuelType.value,
-                    'childrenSeatNum': form.childrenSeatNum.value,
-                    'cdw': cdw,
-                    'androidFlag': androidFlag,
-                },
-                'priceListCreateDTO': {
-                    'pricePerKm': form.pricePerKm.value,
-                    'pricePerKmCDW': form.pricePerKmCDW.value,
-                    'pricePerDay': form.pricePerDay.value,
-                    'id': form.id.value,
-                },
-                'carCalendarTermCreateDTOList': null
-            }
-            let formData = new FormData(form);
-            formData.append('data', JSON.stringify(data));
-            dispatch(createdAd(formData));
-            setValidated(false);
-        }
+    });
+
+    const printFormData = () => {
+        console.log(formData);
+    }
+
+    const handleCreatedAd = (event) => {
+        console.log(formData);
+        dispatch(createdAd(JSON.stringify(formData)));
+
+
+        // event.preventDefault();
+        // console.log(event.target);
+        // const form = event.target;
+
+        // if (form.checkValidity() === false) {
+        //     event.stopPropagation();
+        //     setValidated(true);
+        // } else {
+        // let data = {
+        //     'name': form.name.value,
+        //     'coverPhoto': coverPhoto,
+        //     'location': form.location.value,
+        //     'distanceLimitFlag': distanceLimitFlag,
+        //     'distanceLimit': distanceLimit,
+        //     'carCreateDTO': {
+        //         'carManufacturer': form.carManufacturer.value,
+        //         'carModel': form.carModel.value,
+        //         'carType': form.carType.value,
+        //         'year': form.year.value,
+        //         'mileage': form.mileage.value,
+        //         'gearboxType': form.gearboxType.value,
+        //         'fuelType': form.fuelType.value,
+        //         'childrenSeatNum': form.childrenSeatNum.value,
+        //         'cdw': cdw,
+        //         'androidFlag': androidFlag,
+        //     },
+        //     'priceListCreateDTO': {
+        //         'pricePerKm': pricePerKm,
+        //         'pricePerKmCDW': pricePerKmCDW,
+        //         'pricePerDay': form.pricePerDay.value,
+        //         'id': form.id.value,
+        //     },
+        //     'carCalendarTermCreateDTOList': carCalendarTermList,
+        //     'imagesDTO': imagesDTO
+        // }
+        // let formData = new FormData(form);
+        //     formData.append('data', JSON.stringify(data));
+            // dispatch(createdAd(formData));
+            
+        //     setValidated(false);
+        // }
     };
 
     const handleDistanceLimitFlag = (event) => {
@@ -107,47 +126,6 @@ const CreateAdContainer = () => {
 
     const handleAndroidFlag = (event) => {
         setAndroidFlag(event.target.checked);
-    };
-
-    const onPhotoChange = (event) => {
-
-        if (event.target.files != null) {
-            let p = photos;
-            let name = event.target.files[0].name;
-            console.log(event.target);
-            console.log(event.target.files[0]);
-            let flag = 0;
-
-            p.map((photo) => {
-                if (photo.photoName === name) {
-                    flag = 1;
-                    console.log("Isti fajl");
-                }
-
-            })
-            if (flag != 1) {
-                p.push(
-                    {
-                        photoName: event.target.files[0].name,
-                        photo: event.target.files[0]
-                    }
-                )
-                setPhotos(p);
-            }
-            let nazivi = "";
-            let slike = [];
-            p.map((photo) => {
-                slike.push(photo.photo);
-                nazivi += " " + photo.photoName;
-            })
-            console.log(nazivi);
-            console.log(slike);
-
-
-            setCoverPhoto(event.target.files[0]);
-            setCoverPhotoName(event.target.files[0].name);
-        }
-
     };
 
     const isStepOptional = (step) => {
@@ -188,25 +166,23 @@ const CreateAdContainer = () => {
     const handleReset = () => {
         setActiveStep(0);
     };
-      
+
 
     return (
         <Container>
-            <CreateAd onSubmit={handleCreatedAd}
+            <CreateAd
+                // onSubmit={handleCreatedAd}
                 validated={validated}
                 distanceLimitFlag={distanceLimitFlag}
                 cdw={cdw}
                 androidFlag={androidFlag}
-                coverPhotoName={coverPhotoName}
                 handleDistanceLimitFlag={handleDistanceLimitFlag}
-                onPhotoChange={onPhotoChange}
                 handleAndroidFlag={handleAndroidFlag}
                 handleCDW={handleCDW}
                 skipped={skipped}
                 setSkipped={setSkipped}
                 isStepOptional={isStepOptional}
                 isStepSkipped={isStepSkipped}
-                // classes={classes}
                 steps={steps}
                 handleNext={handleNext}
                 handleBack={handleBack}
@@ -214,12 +190,15 @@ const CreateAdContainer = () => {
                 handleReset={handleReset}
                 formData={formData} setFormData={setFormData}
                 activeStep={activeStep} setActiveStep={setActiveStep}
+
             />
+
             {activeStep === 0 ?
                 <Form1CreateAdContainer
                     formData={formData} setFormData={setFormData}
                     activeStep={activeStep} setActiveStep={setActiveStep}
                     steps={steps}
+                    carModel={carModel} setCarModel={setCarModel}
                     isStepOptional={isStepOptional}
                     handleNext={handleNext}
                     handleBack={handleBack}
@@ -257,6 +236,7 @@ const CreateAdContainer = () => {
                     handleReset={handleReset}
                     cdw={cdw} setCdw={setCdw}
                     distanceLimitFlag={distanceLimitFlag} setDistanceLimitFlag={setDistanceLimitFlag}
+                    pricePerDay={pricePerDay} setPricePerDay={setPricePerDay}
                     pricePerKm={pricePerKm} setPricePerKm={setPricePerKm}
                     pricePerKmCDW={pricePerKmCDW} setPricePerKmCDW={setPricePerKmCDW}
                     id={id} setId={setId}
@@ -274,7 +254,7 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
-                    carCalendarTermList={carCalendarTermList} 
+                    carCalendarTermList={carCalendarTermList}
                     setCarCalendarTermList={setCarCalendarTermList}
                 ></Form4CreateAdContainer>
                 : null
@@ -289,8 +269,24 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
-                    handleCreatedAd={handleCreatedAd}
+                    coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
+                    imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
                 ></Form5CreateAdContainer>
+                : null
+            }
+            {activeStep === 5 ?
+                <Form6CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    handleCreatedAd={handleCreatedAd}>
+                </Form6CreateAdContainer>
+
                 : null
             }
 
