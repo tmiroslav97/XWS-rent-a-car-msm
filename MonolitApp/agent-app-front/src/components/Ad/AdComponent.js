@@ -4,7 +4,10 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 
 
 const AdComponent = (props) => {
-    console.log(props);
+    var disable = false;
+    if(props.token===null){
+        disable = true;
+    }
 
     return (
 
@@ -74,7 +77,10 @@ const AdComponent = (props) => {
                             <Col>
                                 <br />
                                 <br />
-                                <Button variant="outline-success">Dodja u korpu</Button>{' '}
+                               
+                                {
+                                    disable ?  null :  <Button variant="outline-success">Dodja u korpu</Button>
+                                }
                             </Col>
                         </Row>
                     </Card.Body>

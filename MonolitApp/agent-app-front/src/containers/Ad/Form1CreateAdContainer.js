@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Form1CreateAd from '../../components/Ad/Form1CreateAd';
 import { carManufacturersSelector, carTypesSelector, carModelsSelector } from '../../store/codebook/selectors';
 import { fetchAllCarManufacturers, fetchAllCarTypes, fetchAllCarModels } from '../../store/codebook/actions';
-import SpinnerContainer from '../Common/SpinnerContainer';
+import { Form, Col, Container, Button } from 'react-bootstrap';
 
 const Form1CreateAdContainer = (props) => {
     const dispatch = useDispatch();
@@ -12,7 +12,6 @@ const Form1CreateAdContainer = (props) => {
     const carManufacturers = useSelector(carManufacturersSelector);
     const carTypes = useSelector(carTypesSelector);
     const carModels = useSelector(carModelsSelector);
-
     useEffect(() => {
         dispatch(
             fetchAllCarManufacturers()
@@ -36,7 +35,7 @@ const Form1CreateAdContainer = (props) => {
                 distanceLimitFlag: props.distanceLimitFlag,
                 distanceLimit: props.distanceLimit,
                 carManufacturer: form.carManufacturer.value,
-                carModel: form.carModel.value,
+                carModel: props.carModel,
                 carType: form.carType.value,
                 year: form.year.value,
                 mileage: form.mileage.value
@@ -56,6 +55,11 @@ const Form1CreateAdContainer = (props) => {
         props.setDistanceLimit(event.target.value);
     };
 
+    const handleCarModel = (event) => {
+        // let index = event.target.options.selectedIndex;
+        props.setCarModel(event.target.value);
+    };
+
     const getCarManufacturers = () => {
         const listCarMan = [];
         if (carManufacturers.isFetch) {
@@ -68,14 +72,25 @@ const Form1CreateAdContainer = (props) => {
 
     const getCarModels = () => {
         const listCarModel = [];
+        let rez = [];
+
         if (carModels.isFetch) {
             let i = 0;
-            carModels.data.map((carModel)=> {
+
+            carModels.data.map((carModel) => {
                 listCarModel.push(<option key={i}>{carModel}</option>);
                 i++
             })
+            // if (carModels.data.length != 0) {
+            //     rez.push(< Form.Group as={Col}>
+            //         <Form.Label>Model</Form.Label>
+            //         <Form.Control as="select" name="carModel" id="txtCarModel" placeholder="Model"
+            //         onChange={handleCarModel}>
+            //             {listCarModel}
+            //         </Form.Control>
+            //     </Form.Group >);
+            // }
         }
-
         return listCarModel;
     }
 
@@ -83,7 +98,7 @@ const Form1CreateAdContainer = (props) => {
         let index = event.target.options.selectedIndex;
         dispatch(
             fetchAllCarModels({
-                "id" : carManufacturers.data[index].id
+                "id": carManufacturers.data[index].id
             })
         );
     };
@@ -105,13 +120,15 @@ const Form1CreateAdContainer = (props) => {
         let year = newDate.getFullYear();
         let rez = "";
         if (month < 10) {
-            rez = year + "-0" + month + "-" + date;
-        } else {
-            rez = year + "-" + month + "-" + date;
+            month = "0" + month;
         }
+        if (date < 10) {
+            date = "0" + date;
+        }
+
+        rez = year + "-" + month + "-" + date;
         return rez;
     }
-
 
     return (
         <Form1CreateAd
@@ -130,7 +147,7 @@ const Form1CreateAdContainer = (props) => {
             getCarModels={getCarModels}
             getCarTypes={getCarTypes}
             getCurrentDate={getCurrentDate}
-            
+
         />
 
     );

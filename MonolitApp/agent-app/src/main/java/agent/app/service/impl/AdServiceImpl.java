@@ -9,15 +9,11 @@ import agent.app.dto.ad.AdPageDTO;
 import agent.app.dto.car.CarCalendarTermCreateDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
-import agent.app.model.Ad;
-import agent.app.model.Car;
-import agent.app.model.CarCalendarTerm;
-import agent.app.model.PriceList;
+import agent.app.model.*;
 import agent.app.repository.AdRepository;
-import agent.app.service.intf.AdService;
-import agent.app.service.intf.CarCalendarTermService;
-import agent.app.service.intf.CarService;
-import agent.app.service.intf.PriceListService;
+import agent.app.service.intf.*;
+import org.joda.time.DateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +39,9 @@ public class AdServiceImpl implements AdService {
 
     @Autowired
     private CarCalendarTermService carCalendarTermService;
+
+    @Autowired
+    private ImageService imageService;
 
 
     @Override
@@ -134,8 +133,36 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public String getImageName() {
+        String imageName = "slika" + imageService.getImageSize();
+        return imageName;
+    }
+
+    @Override
+    public Integer addImage(String imageName) {
+        Image img = imageService.createImage(imageName);
+        System.out.println(img.getId() + " " + img.getName());
+        return 1;
+    }
+
+    @Override
     public void syncData() {
 
+    }
+
+    @Override
+    public AdPageContentDTO findAllOrdinarySearch(Integer page, Integer size, String location, DateTime startDate, DateTime endDate) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<Ad> ads = adRepository.findByDeletedAndLocationAndCarCalendarTermsStartDateBeforeAndCarCalendarTermsEndDateAfter(false, location, startDate, endDate, pageable);
+        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+
+        System.out.println(ret.size());
+        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
+                .totalPageCnt(ads.getTotalPages())
+                .ads(ret)
+                .build();
+
+        return adPageContentDTO;
     }
 
     @Override
@@ -155,14 +182,15 @@ public class AdServiceImpl implements AdService {
 //        }
         Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
         Page<Ad> ads = adRepository.findAllByDeleted(false, pageable);
-        System.out.println(ads.getSize());
+
         List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+        System.out.println(ret.size());
         AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
                 .totalPageCnt(ads.getTotalPages())
                 .ads(ret)
                 .build();
 
-        System.out.println(adPageContentDTO);
+
 
         return adPageContentDTO;
     }
