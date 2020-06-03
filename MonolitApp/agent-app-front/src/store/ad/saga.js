@@ -22,6 +22,10 @@ import {
     putSuccessMsg
 } from '../common/actions';
 
+import {
+    imageNameSelector
+} from './selectors';
+
 
 export function* createdAd(){
     const { payload } = yield take(CREATED_AD);
@@ -62,6 +66,9 @@ export function* uploadImage(){
     const { payload } = yield take(UPLOAD_IMAGE);
     yield put(putImageName({ 'isFetch': false }));
     const data = yield call(AdServices.uploadImage, payload); 
+    console.log(data);
+    const temp = yield select(imageNameSelector);
+    console.log(temp);
     yield put(putImageName({
         'data': data,
         'isFetch': true
