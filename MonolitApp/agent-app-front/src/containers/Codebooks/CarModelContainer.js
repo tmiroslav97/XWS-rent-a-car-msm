@@ -4,8 +4,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import CarModelComponent from '../../components/Codebooks/CarModelComponent';
-import { carModelsSelector, carManufacturersSelector } from '../../store/codebook/selectors';
-import { fetchCarModels, addCarModel, editCarModel, deleteCarModel, putCarModels } from '../../store/codebook/actions';
+import { carModelsPaginatedSelector, carManufacturersSelector } from '../../store/codebook/selectors';
+import { fetchCarModels, fetchAllCarManufacturers, addCarModel, editCarModel, deleteCarModel, putCarModelsPaginated } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
@@ -14,7 +14,7 @@ import SpinnerContainer from '../Common/SpinnerContainer';
 
 const CarModelContainer = () => {
     const dispatch = useDispatch();
-    const carModels = useSelector(carModelsSelector);
+    const carModels = useSelector(carModelsPaginatedSelector);
     const carManufacturers = useSelector(carManufacturersSelector);
     const [nextPage, setNextPage] = useState(carModels.nextPage);
     const [size, setSize] = useState(carModels.size);
@@ -31,8 +31,11 @@ const CarModelContainer = () => {
                 size
             })
         );
+        dispatch(
+            fetchAllCarManufacturers()
+        );
         return () => {
-            dispatch(putCarModels({
+            dispatch(putCarModelsPaginated({
                 'data': [],
                 'totalPageCnt': 0,
                 'nextPage': nextPage,

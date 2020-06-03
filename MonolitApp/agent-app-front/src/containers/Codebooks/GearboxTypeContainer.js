@@ -4,8 +4,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import GearboxTypeComponent from '../../components/Codebooks/GearboxTypeComponent';
-import { gearboxTypesSelector } from '../../store/codebook/selectors';
-import { fetchGearboxTypes, addGearboxType, editGearboxType, deleteGearboxType, putGearboxTypes } from '../../store/codebook/actions';
+import { gearboxTypesPaginatedSelector } from '../../store/codebook/selectors';
+import { fetchGearboxTypes, addGearboxType, editGearboxType, deleteGearboxType, putGearboxTypesPaginated } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
@@ -14,7 +14,7 @@ import SpinnerContainer from '../Common/SpinnerContainer';
 
 const GearboxTypeContainer = () => {
     const dispatch = useDispatch();
-    const gearboxTypes = useSelector(gearboxTypesSelector);
+    const gearboxTypes = useSelector(gearboxTypesPaginatedSelector);
     const [nextPage, setNextPage] = useState(gearboxTypes.nextPage);
     const [size, setSize] = useState(gearboxTypes.size);
     const [validated, setValidated] = useState(false);
@@ -31,7 +31,7 @@ const GearboxTypeContainer = () => {
             })
         );
         return () => {
-            dispatch(putGearboxTypes({
+            dispatch(putGearboxTypesPaginated({
                 'data': [],
                 'totalPageCnt': 0,
                 'nextPage': nextPage,

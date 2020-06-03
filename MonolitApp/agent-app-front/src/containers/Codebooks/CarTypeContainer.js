@@ -4,8 +4,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import CarTypeComponent from '../../components/Codebooks/CarTypeComponent';
-import { carTypesSelector } from '../../store/codebook/selectors';
-import { fetchCarTypes, addCarType, editCarType, deleteCarType, putCarTypes } from '../../store/codebook/actions';
+import { carTypesPaginatedSelector } from '../../store/codebook/selectors';
+import { fetchCarTypes, addCarType, editCarType, deleteCarType, putCarTypesPaginated } from '../../store/codebook/actions';
 import FormModalContainer from '../Common/FormModalContainer';
 import DeleteModalContainer from '../Common/DeleteModalContainer';
 import CodebookAdFormComponent from '../../components/Codebooks/CodebookAdFormComponent';
@@ -14,7 +14,7 @@ import SpinnerContainer from '../Common/SpinnerContainer';
 
 const CarTypeContainer = () => {
     const dispatch = useDispatch();
-    const carTypes = useSelector(carTypesSelector);
+    const carTypes = useSelector(carTypesPaginatedSelector);
     const [nextPage, setNextPage] = useState(carTypes.nextPage);
     const [size, setSize] = useState(carTypes.size);
     const [validated, setValidated] = useState(false);
@@ -31,7 +31,7 @@ const CarTypeContainer = () => {
             })
         );
         return () => {
-            dispatch(putCarTypes({
+            dispatch(putCarTypesPaginated({
                 'data': [],
                 'totalPageCnt': 0,
                 'nextPage': nextPage,
