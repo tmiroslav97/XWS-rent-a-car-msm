@@ -189,11 +189,9 @@ const OrdinarySearchContainer = () => {
     }
 
     const getCurrentDate = () => {
-        // let minDate = new Date();
-        // console.log("ZABRANA DATUMA ");
-        // console.log(minDate);
-        // return minDate;
         let newDate = new Date()
+        //48h od trenutka pretrage
+        newDate.setHours(48);
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
@@ -203,6 +201,9 @@ const OrdinarySearchContainer = () => {
         if (month < 10) {
             month = "0" + month;
         }
+        if (date < 10) {
+            date = "0" + date;
+        }
         if (hours < 10) {
             hours = "0" + hours;
         }
@@ -210,14 +211,8 @@ const OrdinarySearchContainer = () => {
             minutes = "0" + minutes;
         }
         rez = year + "-" + month + "-" + date + "T" + hours + ":" + minutes;
+  
         return rez;
-    }
-
-    const minEndDate = () => {
-        // console.log("min end date");
-        // let dateD = startDate.getDate() + 2;
-        // console.log(dateD);
-        // return dateD;
     }
 
     const handleForm = (event) => {
@@ -255,14 +250,8 @@ const OrdinarySearchContainer = () => {
             }
           
             console.log(data)
-            // let formData = new FormData(form);
-            // formData.append('data', JSON.stringify(data));
-            // console.log(formData);
-            // dispatch(searchAd(formData));
             dispatch(searchAd({
                 data
-                // nextPage,
-                // size
             }));
            
             setValidated(false);
@@ -302,8 +291,6 @@ const OrdinarySearchContainer = () => {
                         getGearboxTypes={getGearboxTypes}
                         getFuelTypes={getFuelTypes}
                         getCurrentDate={getCurrentDate}
-                        minEndDate={minEndDate}
-
                     />
                 </Col>
             </Row>
