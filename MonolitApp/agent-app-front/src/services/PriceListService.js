@@ -1,8 +1,7 @@
 import HttpBaseClient from './HttpBaseClient';
 
 const FINALPOINTS = {
-    PRICE_LIST_BASE: '/pricelist',
-    
+    PRICE_LIST_BASE: '/pricelist'
 };
 
 class PriceListService extends HttpBaseClient {
