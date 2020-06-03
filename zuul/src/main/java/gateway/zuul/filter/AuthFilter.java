@@ -44,14 +44,17 @@ public class AuthFilter extends ZuulFilter {
 
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-
+        System.out.println("Usao u zull");
         if (request.getHeader("Auth") == null) {
             return null;
         }
 
+        System.out.println(request);
+
         String token = request.getHeader("Auth");
+        System.out.println(token);
         try {
-            authClient.verify(request);
+            authClient.verify();
 
             ctx.addZuulRequestHeader("Auth", token);
         } catch (FeignException.NotFound e) {

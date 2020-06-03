@@ -32,3 +32,38 @@ export function putCarModels(state, payload) {
         carModels: payload
     };
 }
+
+export function putCarManufacturersPaginated(state, payload) {
+    return {
+        ...state,
+        carManufacturersPaginated: payload
+    };
+}
+
+export function putCarTypesPaginated(state, payload) {
+    return {
+        ...state,
+        carTypesPaginated: payload
+    };
+}
+
+export function putFuelTypesPaginated(state, payload) {
+    return {
+        ...state,
+        fuelTypesPaginated: payload
+    };
+}
+
+export function putGearboxTypesPaginated(state, payload) {
+    return {
+        ...state,
+        gearboxTypesPaginated: payload
+    };
+}
+
+export function putCarModelsPaginated(state, payload) {
+    return {
+        ...state,
+        carModelsPaginated: payload
+    };
+}
