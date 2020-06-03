@@ -5,6 +5,9 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 
 public class DateAPI {
 
@@ -24,7 +27,8 @@ public class DateAPI {
 
     //za datume sa fronta koji stizu u formatu: 2020-06-03T03:03
     public static DateTime dateStringToDateTime(String date){
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("hh:mm dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm dd-MM-yyyy");
+//        DateFormat formatter = new SimpleDateFormat("hh:mm dd-MM-yyyy");
         String dateString = date.replace("T", " ");
 //        System.out.println(dateString);
         String[] res = dateString.split(" ");

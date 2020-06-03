@@ -133,17 +133,22 @@ public class AdController {
     @RequestMapping(path = "/search", method = RequestMethod.GET)
     public ResponseEntity<?> findAllSearch(@RequestParam(value = "nextPage", required = false) Integer nextPage,
                                            @RequestParam(value = "size", required = false) Integer size,
-                                           @RequestParam(value = "location", required = true) String location,
-                                           @RequestParam(value = "startDate", required = true) String startDate,
-                                           @RequestParam(value = "endDate", required = true) String endDate) {
+                                           @RequestParam(value = "location") String location,
+                                           @RequestParam(value = "startDate") String startDate,
+                                           @RequestParam(value = "endDate") String endDate) {
 
+        System.out.println(nextPage);
+        System.out.println(size);
+        System.out.println(location);
+        System.out.println(startDate);
+        System.out.println(endDate);
 
         DateTime startD = DateAPI.dateStringToDateTime(startDate);
         DateTime endD = DateAPI.dateStringToDateTime(endDate);
         System.out.println(startD);
         System.out.println(endD);
-        System.out.println(startD.toString(DateTimeFormat.forPattern("hh:mm dd-MM-yyyy")));
-        System.out.println(endD.toString(DateTimeFormat.forPattern("hh:mm dd-MM-yyyy")));
+        System.out.println(startD.toString(DateTimeFormat.forPattern("HH:mm dd-MM-yyyy")));
+        System.out.println(endD.toString(DateTimeFormat.forPattern("HH:mm dd-MM-yyyy")));
         System.out.println(location);
 
                     return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startD, endD), HttpStatus.OK);

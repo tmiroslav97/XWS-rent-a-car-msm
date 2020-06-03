@@ -92,7 +92,7 @@ INSERT INTO car (id, android_flag, car_manufacturer, car_model, car_type, cdw, c
 VALUES (2, false, 'Mercedes-Benz', 'C-klasa', 'Limuzina', false, 2, 'Dizel', 'Automatski', 200, null, '2020-05-20 17:00:00');
 
 INSERT INTO ad(id, cover_photo, deleted, distance_limit, distance_limit_flag, enabled, location, name, publish_date, rating_count, rating_num, rent_cnt, price_list_id, publisher_user_id)
-VALUES (1, 'fiat.jpg', false, 20, 'LIMITED', true, 'Novi Sad', 'Oglas1', '20.04.2020.', 0, 0, 5, 1, 1);
+VALUES (1, 'fiat.jpg', false, 20, 'LIMITED', true, 'Beograd', 'Oglas1', '20.04.2020.', 0, 0, 5, 1, 1);
 INSERT INTO ad(id, cover_photo, deleted, distance_limit, distance_limit_flag, enabled, location, name, publish_date, rating_count, rating_num, rent_cnt, price_list_id, publisher_user_id)
 VALUES (2, 'mercedesC.jpeg', false, 25, 'LIMITED', true, 'Zrenjanin', 'Oglas2', '20.04.2020.', 0, 0, 1100, 1, 1);
 
@@ -150,6 +150,6 @@ INSERT INTO gearbox_type(id, name)
 VALUES (5, 'Tiptronik');
 
 INSERT INTO car_calendar_term(start_date, end_date, ad_id)
-VALUES ('02.06.2020.', '02.09.2020.', 1);
+VALUES ('2020.06.02.', '2020.09.02', 1);
 INSERT INTO car_calendar_term(start_date, end_date, ad_id)
-VALUES ('03.06.2020.', '05.06.2020.', 2);
+VALUES ('2020.06.03.', '2020.06.08.', 2);

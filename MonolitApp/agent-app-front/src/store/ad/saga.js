@@ -60,13 +60,17 @@ export function* searchAd(){
     console.log("SAGA PRETRAGAAA")
     const { payload } = yield take(SEARCH_AD);
     yield put(putAds({ 'isFetch': false }));
-    const data = yield call(AdServices.fetchAdsPaginatedSearch, payload);
+    console.log("Payload objekat");
+    console.log(payload.data)
+    const data = yield call(AdServices.fetchAdsPaginatedSearch, payload.data);
     console.log(data);
-    // yield put(putAds({
-    //     // 'data': data.a,
-    //     'nextPage': payload.nextPage,
-    //     'size': payload.size
-
-    // }));
+    console.log("PODACII ISPISANI III");
+    yield put(putAds({
+        'data': data.ads,
+        'totalPageCnt': data.totalPageCnt,
+        'nextPage': payload.nextPage,
+        'size': payload.size,
+        'isFetch': true
+    }));
     
 }

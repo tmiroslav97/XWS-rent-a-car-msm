@@ -214,10 +214,10 @@ const OrdinarySearchContainer = () => {
     }
 
     const minEndDate = () => {
-        console.log("min end date");
-        let dateD = startDate.getDate() + 2;
-        console.log(dateD);
-        return dateD;
+        // console.log("min end date");
+        // let dateD = startDate.getDate() + 2;
+        // console.log(dateD);
+        // return dateD;
     }
 
     const handleForm = (event) => {
@@ -233,7 +233,9 @@ const OrdinarySearchContainer = () => {
                 data = {
                     'location': form.location.value,
                     'startDate': startDate,
-                    'endDate': endDate
+                    'endDate': endDate,
+                    'nextPage': nextPage,
+                    'size' : size
                 }
             }else{
                 data = {
@@ -258,9 +260,9 @@ const OrdinarySearchContainer = () => {
             // console.log(formData);
             // dispatch(searchAd(formData));
             dispatch(searchAd({
-                data,
-                nextPage,
-                size
+                data
+                // nextPage,
+                // size
             }));
            
             setValidated(false);
