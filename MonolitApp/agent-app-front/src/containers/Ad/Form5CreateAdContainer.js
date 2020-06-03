@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Form5CreateAd from '../../components/Ad/Form5CreateAd'
 import { createdAd, uploadImage } from '../../store/ad/actions';
 import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image, Card } from 'react-bootstrap';
+import { imageNameSelector  } from '../../store/ad/selectors';
 
 const Form5CreateAdContainer = (props) => {
     const dispatch = useDispatch();
@@ -17,6 +18,9 @@ const Form5CreateAdContainer = (props) => {
     const [flagCover, setFlagCover] = useState();
     const [flag1, setFlag1] = useState();
     const [flag2, setFlag2] = useState();
+
+    const imageName = useSelector(imageNameSelector);
+    
 
     const handleForm5 = (event) => {
         event.preventDefault();
@@ -44,45 +48,59 @@ const Form5CreateAdContainer = (props) => {
     };
 
     const handleImageChange = (e) => {
-        let reader = new FileReader();
-        let files = e.target.files[0];
-        setFile(e.target.files[0]);
-        let name = e.target.files[0].name;
-        let naziv = "image" + photos.length;
-        let flag = 0;
-        props.imagesDTO.map((image) => {
-            if (image.name === name) {
-                flag = 1;
-            }
-        })
-        if (flag === 0) {
-            reader.onloadend = () => {
-                setImagePreviewUrl(reader.result);
-                let i = photos.length;
-                let temp = {
-                    "id": i,
-                    "imagePreviewUrl": reader.result,
-                    "name": name
-                };
-                setPhotos([...photos, temp]);
-                
-                props.setImagesDTO([...props.imagesDTO, naziv]);
-                setBrPhotos(brPhotos + 1);
-                if(brPhotos === 4){
-                    setFlag1(false);
+
+        if(e.target.files[0] != null){
+            let reader = new FileReader();
+            let files = e.target.files[0];
+            setFile(e.target.files[0]);
+            let name = e.target.files[0].name;
+            let naziv = "image" + photos.length;
+            let flag = 0;
+            props.imagesDTO.map((image) => {
+                if (image.name === name) {
+                    flag = 1;
+                }
+            })
+            if (flag === 0) {
+                reader.onloadend = () => {
+                    setImagePreviewUrl(reader.result);
+                    let i = photos.length;
+                    let temp = {
+                        "id": i,
+                        "imagePreviewUrl": reader.result,
+                        "name": name
+                    };
+                    setPhotos([...photos, temp]);
+                    
+                    // props.setImagesDTO([...props.imagesDTO, naziv]);
+                    setBrPhotos(brPhotos + 1);
+                    if(brPhotos === 4){
+                        setFlag1(false);
+                    }
+                }
+                reader.readAsDataURL(e.target.files[0])
+                console.log(photos);
+    
+                let formData = new FormData();
+                formData.append('photo', e.target.files[0]);
+                formData.append('data', JSON.stringify(files.name));
+    
+                dispatch(
+                    uploadImage(formData)
+                );
+
+                if(imageName.isFetch){
+                    console.log(imageName);
+                    console.log(props.imageDTO);
+                    let s = props.imageDTO;
+                    s.push(imageName.data);
+                    console.log(s);
+                    props.setImagesDTO(s);
+                    // props.setImagesDTO([...props.imagesDTO, naziv]);
                 }
             }
-            reader.readAsDataURL(e.target.files[0])
-            console.log(photos);
-
-            let formData = new FormData();
-            formData.append('photo', e.target.files[0]);
-            formData.append('data', JSON.stringify(files.name));
-
-            dispatch(
-                uploadImage(formData)
-            );
         }
+      
     };
 
     const removeImage = (id) => {

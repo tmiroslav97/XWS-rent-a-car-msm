@@ -11,8 +11,9 @@ public interface ImageService {
     List<Image> findAll();
     Image save(Image image);
     void delete(Image image);
-    Image createImage(Image image);
+    Image createImage(String imageName);
     Image editImage(Image image);
     Integer deleteById(Long id);
+    Integer getImageSize();
 
 }

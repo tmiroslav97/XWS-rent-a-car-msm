@@ -48,21 +48,25 @@ public class AdController {
                                          @RequestParam(value = "data", required = true) String data
         ) throws IOException {
         System.out.println("-----------------------UPLOAD FILE---------------------");
-        System.out.println(data);
+        String name = adService.getImageName();
+        System.out.println("slika : " + photo.getOriginalFilename());
+        System.out.println("slika u bazi : " + name);
         try{
             File file = new File("photos");
-            String uploadDirectory = file.getAbsolutePath() + "\\" + photo.getOriginalFilename();
 
-            System.out.println(uploadDirectory);
-            System.out.println("slika : " + photo.getOriginalFilename());
-
+            String uploadDirectory = file.getAbsolutePath() + "\\" + name;
             File convertFile = new File(uploadDirectory.toString());
             convertFile.createNewFile();
             FileOutputStream fout = new FileOutputStream(convertFile);
             fout.write(photo.getBytes());
             fout.close();
-            //TODO 1: POZVATI METODE IMAGE SERVISA ZA UPLOAD SLIKE
-            return new ResponseEntity<>("Slika uspesno dodata.", HttpStatus.CREATED);
+
+            Integer rez = adService.addImage(adService.getImageName());
+            if(rez != 1){
+                System.out.println("desila se greska prilikom dodavanja slike");
+            }
+            System.out.println("dodata slika");
+            return new ResponseEntity<>(name, HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
         }

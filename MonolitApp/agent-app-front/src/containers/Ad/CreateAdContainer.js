@@ -69,6 +69,8 @@ const CreateAdContainer = () => {
 
     const handleCreatedAd = (event) => {
         console.log(formData);
+        dispatch(createdAd(JSON.stringify(formData)));
+
 
         // event.preventDefault();
         // console.log(event.target);
@@ -78,36 +80,37 @@ const CreateAdContainer = () => {
         //     event.stopPropagation();
         //     setValidated(true);
         // } else {
-        //     let data = {
-        //         'name': form.name.value,
-        //         'coverPhoto': coverPhoto,
-        //         'location': form.location.value,
-        //         'distanceLimitFlag': distanceLimitFlag,
-        //         'distanceLimit': distanceLimit,
-        //         'carCreateDTO': {
-        //             'carManufacturer': form.carManufacturer.value,
-        //             'carModel': form.carModel.value,
-        //             'carType': form.carType.value,
-        //             'year': form.year.value,
-        //             'mileage': form.mileage.value,
-        //             'gearboxType': form.gearboxType.value,
-        //             'fuelType': form.fuelType.value,
-        //             'childrenSeatNum': form.childrenSeatNum.value,
-        //             'cdw': cdw,
-        //             'androidFlag': androidFlag,
-        //         },
-        //         'priceListCreateDTO': {
-        //             'pricePerKm': pricePerKm,
-        //             'pricePerKmCDW': pricePerKmCDW,
-        //             'pricePerDay': form.pricePerDay.value,
-        //             'id': form.id.value,
-        //         },
-        //         'carCalendarTermCreateDTOList': carCalendarTermList,
-        //         'imagesDTO': imagesDTO
-        //     }
-        //     let formData = new FormData(form);
+        // let data = {
+        //     'name': form.name.value,
+        //     'coverPhoto': coverPhoto,
+        //     'location': form.location.value,
+        //     'distanceLimitFlag': distanceLimitFlag,
+        //     'distanceLimit': distanceLimit,
+        //     'carCreateDTO': {
+        //         'carManufacturer': form.carManufacturer.value,
+        //         'carModel': form.carModel.value,
+        //         'carType': form.carType.value,
+        //         'year': form.year.value,
+        //         'mileage': form.mileage.value,
+        //         'gearboxType': form.gearboxType.value,
+        //         'fuelType': form.fuelType.value,
+        //         'childrenSeatNum': form.childrenSeatNum.value,
+        //         'cdw': cdw,
+        //         'androidFlag': androidFlag,
+        //     },
+        //     'priceListCreateDTO': {
+        //         'pricePerKm': pricePerKm,
+        //         'pricePerKmCDW': pricePerKmCDW,
+        //         'pricePerDay': form.pricePerDay.value,
+        //         'id': form.id.value,
+        //     },
+        //     'carCalendarTermCreateDTOList': carCalendarTermList,
+        //     'imagesDTO': imagesDTO
+        // }
+        // let formData = new FormData(form);
         //     formData.append('data', JSON.stringify(data));
-        //     // dispatch(createdAd(formData));
+            // dispatch(createdAd(formData));
+            
         //     setValidated(false);
         // }
     };
@@ -167,7 +170,7 @@ const CreateAdContainer = () => {
 
     return (
         <Container>
-            <CreateAd 
+            <CreateAd
                 // onSubmit={handleCreatedAd}
                 validated={validated}
                 distanceLimitFlag={distanceLimitFlag}

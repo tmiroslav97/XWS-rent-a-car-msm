@@ -2,7 +2,7 @@ import * as computationFunctions from './computation-functions';
 
 import {
     PUT_ADS,
-    PUT_IMAGE
+    PUT_IMAGE_NAME
 } from '../constants';
 
 const initialState = {
@@ -13,7 +13,12 @@ const initialState = {
        nextPage: 0,
        size: 10,
        isFetch: false
+   },
+   imageName: {
+       data:[],
+       isFetch: false
    }
+
 };
 
 const adReducer = (state = initialState,{ type, payload }) => {
@@ -24,7 +29,8 @@ const adReducer = (state = initialState,{ type, payload }) => {
 };
 
 const actionHandler = {
-    [PUT_ADS]: computationFunctions.putAds
+    [PUT_ADS]: computationFunctions.putAds,
+    [PUT_IMAGE_NAME]: computationFunctions.putImageName
 };
 
 export default adReducer;

@@ -29,8 +29,10 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image save(Image image) {
-        if(imageRepository.existsById(image.getId())){
-            throw new ExistsException(String.format("Slika vec postoji."));
+        if(image.getId() != null){
+            if(imageRepository.existsById(image.getId())){
+                throw new ExistsException(String.format("Slika vec postoji."));
+            }
         }
         return imageRepository.save(image);
     }
@@ -41,8 +43,11 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Image createImage(Image image) {
-        return this.save(image);
+    public Image createImage(String imageName) {
+        Image img = new Image();
+        img.setName(imageName);
+        img = this.save(img);
+        return img;
     }
 
     @Override
@@ -56,5 +61,14 @@ public class ImageServiceImpl implements ImageService {
         Image image = this.finById(id);
         this.delete(image);
         return 1;
+    }
+
+    @Override
+    public Integer getImageSize() {
+        if(this.findAll() == null){
+            return 0;
+        }
+        Integer i = this.findAll().size();
+        return i;
     }
 }

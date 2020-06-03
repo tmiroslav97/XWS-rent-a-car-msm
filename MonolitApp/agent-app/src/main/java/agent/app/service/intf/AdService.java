@@ -26,6 +26,10 @@ public interface AdService {
 
     Integer createAd(AdCreateDTO adCreateDTO);
 
+    String getImageName();
+
+    Integer addImage(String imageName);
+
     void syncData();
 //    AdPageContentDTO findAllPageAd(Integer page, Integer size, String sort);
 //    AdSearchDTO findAllSearchAdd(Integer page, Integer size, String sort)
