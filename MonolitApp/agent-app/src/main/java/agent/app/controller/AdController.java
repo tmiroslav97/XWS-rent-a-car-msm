@@ -1,10 +1,13 @@
 package agent.app.controller;
 
 import agent.app.converter.AdConverter;
+import agent.app.converter.DateAPI;
 import agent.app.dto.ad.AdCreateDTO;
 import agent.app.model.CarManufacturer;
 import agent.app.service.intf.AdService;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -131,12 +134,38 @@ public class AdController {
     public ResponseEntity<?> findAllSearch(@RequestParam(value = "nextPage", required = false) Integer nextPage,
                                            @RequestParam(value = "size", required = false) Integer size,
                                            @RequestParam(value = "location", required = true) String location,
-                                           @RequestParam(value = "startDate", required = true) DateTime startDate,
-                                           @RequestParam(value = "endDate", required = true) DateTime endDate) {
+                                           @RequestParam(value = "startDate", required = true) String startDate,
+                                           @RequestParam(value = "endDate", required = true) String endDate) {
 
 
-            System.out.println("AD KONTROLEERRRR PRETRAGAAAAAAAAAAAAAAAAA");
-            return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startDate, endDate), HttpStatus.OK);
+
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("hh:mm dd-MM-yyyy");
+
+        System.out.println("Splitovanje");
+        String startD = startDate.replace("T", " ");
+        System.out.println(startD);
+        String[] dat = startD.split(" ");
+        String datum = dat[0];
+        System.out.println("DATUMMM : " + datum);
+        String[] s  = datum.split("-");
+        String yyyy = s[0]; // 004
+        String MM = s[1];
+        String dd = s[2];
+
+        String vrijeme = dat[1];
+        String[] dio  = vrijeme.split(":");
+        String hh = dio[0]; // 004
+        String mm = dio[1];
+
+
+        String noviDatum = vrijeme + " " + dd + "-" + MM + "-" + yyyy;
+        System.out.println(noviDatum);
+        DateTime startdateTime = DateTime.parse(noviDatum, formatter);
+        System.out.println("Ispravka start date: dd-MM-yyyy = " + startdateTime.toString(DateTimeFormat.forPattern("hh:mm dd-MM-yyyy")));
+
+
+        //            return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startDate, endDate), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
 
 
     }

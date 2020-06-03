@@ -62,12 +62,12 @@ export function* searchAd(){
     yield put(putAds({ 'isFetch': false }));
     const data = yield call(AdServices.fetchAdsPaginatedSearch, payload);
     console.log(data);
-    yield put(putAds({
-        'data': data.ads,
-        'totalPageCnt': data.totalPageCnt,
-        'nextPage': payload.nextPage,
-        'size': payload.size,
-        'isFetch': true
-    }));
+    // yield put(putAds({
+    //     'data': data.ads,
+    //     'totalPageCnt': data.totalPageCnt,
+    //     'nextPage': payload.nextPage,
+    //     'size': payload.size,
+    //     'isFetch': true
+    // }));
     
 }

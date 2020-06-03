@@ -145,13 +145,11 @@ const OrdinarySearchContainer = () => {
 
     const handleChange1 = (date) => {
         setStartDate(date.target.value);
-        console.log(startDate);
 
     };
 
     const handleChange2 = (date) => {
         setEndDate(date.target.value);
-        console.log(date.target.value);
     };
 
     const hanleLocation = (location) => {
@@ -184,8 +182,12 @@ const OrdinarySearchContainer = () => {
 
     }
 
-    console.log("Dugme: ");
-    console.log(toggleAdvancedSearch)
+    const currentDate = () =>{
+        let minDate = new Date()
+        console.log("ZABRANA DATUMA ");
+        console.log(minDate);
+        return minDate;
+    }
 
     const handleForm = (event) => {
         event.preventDefault();
@@ -220,9 +222,11 @@ const OrdinarySearchContainer = () => {
             }
           
             console.log(data)
-            let formData = new FormData(form);
-            formData.append('data', JSON.stringify(data));
-            dispatch(searchAd(formData));
+            // let formData = new FormData(form);
+            // formData.append('data', JSON.stringify(data));
+            // console.log(formData);
+            // dispatch(searchAd(formData));
+            dispatch(searchAd(data));
             setValidated(false);
         }
     };
@@ -259,6 +263,7 @@ const OrdinarySearchContainer = () => {
                         getCarTypes={getCarTypes}
                         getGearboxTypes={getGearboxTypes}
                         getFuelTypes={getFuelTypes}
+                        currentDate={currentDate}
 
                     />
                 </Col>
