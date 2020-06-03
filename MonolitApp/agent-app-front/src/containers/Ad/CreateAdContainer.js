@@ -7,6 +7,7 @@ import Form2CreateAdContainer from './Form2CreateAdContainer';
 import Form3CreateAdContainer from './Form3CreateAdContainer';
 import Form4CreateAdContainer from './Form4CreateAdContainer';
 import Form5CreateAdContainer from './Form5CreateAdContainer';
+import Form6CreateAdContainer from './Form6CreateAdContainer';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const CreateAdContainer = () => {
@@ -58,7 +59,7 @@ const CreateAdContainer = () => {
     }
 
     const handleCreatedAd = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         const form = event.target;
 
         if (form.checkValidity() === false) {
@@ -84,17 +85,17 @@ const CreateAdContainer = () => {
                     'androidFlag': androidFlag,
                 },
                 'priceListCreateDTO': {
-                    'pricePerKm': form.pricePerKm.value,
-                    'pricePerKmCDW': form.pricePerKmCDW.value,
+                    'pricePerKm': pricePerKm,
+                    'pricePerKmCDW': pricePerKmCDW,
                     'pricePerDay': form.pricePerDay.value,
                     'id': form.id.value,
                 },
-                'carCalendarTermCreateDTOList': null,
+                'carCalendarTermCreateDTOList': carCalendarTermList,
                 'imagesDTO': imagesDTO
             }
             let formData = new FormData(form);
             formData.append('data', JSON.stringify(data));
-            dispatch(createdAd(formData));
+            // dispatch(createdAd(formData));
             setValidated(false);
         }
     };
@@ -173,7 +174,7 @@ const CreateAdContainer = () => {
                 handleReset={handleReset}
                 formData={formData} setFormData={setFormData}
                 activeStep={activeStep} setActiveStep={setActiveStep}
-               
+
             />
 
             {activeStep === 0 ?
@@ -257,12 +258,19 @@ const CreateAdContainer = () => {
                 : null
             }
             {activeStep === 5 ?
-            <div>
-                ISPIS
-                {this.printFormData}
-            </div>
+                <Form6CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    handleCreatedAd={handleCreatedAd}>
+                </Form6CreateAdContainer>
 
-            :null
+                : null
             }
 
         </Container>
