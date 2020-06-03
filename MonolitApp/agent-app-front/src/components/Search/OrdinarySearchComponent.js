@@ -29,14 +29,12 @@ const OrdinarySearchComponent = (props) => {
                     </Row>
                     <Row>
                         <Col>
-                            <Form.Group controlId="formBasicPassword">
+                            <Form.Group >
                                 <Form.Label>Izaberite datum i vrijeme preuzimanja</Form.Label>
                                 <Form.Control type="datetime-local" required name="startDateTime"
                                     min={props.getCurrentDate()}
                                     onChange={props.handleChange1}
                                 />
-
-
                             </Form.Group>
                         </Col>
                         <Col>

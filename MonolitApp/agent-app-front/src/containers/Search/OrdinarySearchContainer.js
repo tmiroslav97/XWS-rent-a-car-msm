@@ -213,6 +213,13 @@ const OrdinarySearchContainer = () => {
         return rez;
     }
 
+    const minEndDate = () => {
+        console.log("min end date");
+        let dateD = startDate.getDate() + 2;
+        console.log(dateD);
+        return dateD;
+    }
+
     const handleForm = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -293,6 +300,7 @@ const OrdinarySearchContainer = () => {
                         getGearboxTypes={getGearboxTypes}
                         getFuelTypes={getFuelTypes}
                         getCurrentDate={getCurrentDate}
+                        minEndDate={minEndDate}
 
                     />
                 </Col>
