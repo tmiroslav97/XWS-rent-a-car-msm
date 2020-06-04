@@ -27,7 +27,7 @@ public interface AdService {
 
     Integer deleteById(Long id);
 
-    Integer createAd(AdCreateDTO adCreateDTO);
+    Integer createAd(AdCreateDTO adCreateDTO, String email);
 
     void syncData();
 

@@ -9,9 +9,17 @@ const FINALPOINTS = {
 class AdServices extends HttpBaseClient {
 
     createdAd = async payload => {
+        console.log("********************")
+        console.log(payload);
         const response = await this.getApiClient().post(
             FINALPOINTS.AD_BASE,
-            payload
+            payload,
+            {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }
+            
         );
         
         return response.data;

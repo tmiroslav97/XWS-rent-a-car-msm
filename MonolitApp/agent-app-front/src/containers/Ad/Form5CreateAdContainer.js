@@ -8,14 +8,14 @@ const Form5CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
-    const [flagCover, setFlagCover] = useState();
+    // const [flagCover, setFlagCover] = useState();
     const [flag1, setFlag1] = useState();
     const [flag2, setFlag2] = useState();
 
     const handleForm5 = (event) => {
         event.preventDefault();
         const form = event.target;
-        if (props.brPhotos === 4 && props.coverPhoto != null) {
+        if (props.brPhotos === 4 && props.flagCover != null) {
             let dto = [];
 
             // props.setFormData({
@@ -42,7 +42,7 @@ const Form5CreateAdContainer = (props) => {
         if (e.target.files[0] != null) {
             let reader = new FileReader();
             let name = e.target.files[0].name;
- 
+
             let flag = 0;
             props.photos.map((image) => {
                 if (image.name === name) {
@@ -83,7 +83,7 @@ const Form5CreateAdContainer = (props) => {
                     uploadImage(formData)
                 );
 
-                
+
             }
         }
 
@@ -124,9 +124,10 @@ const Form5CreateAdContainer = (props) => {
         props.photos.map((photo) => {
             if (photo.id === id) {
                 console.log(photo.name + " " + photo.id);
-                props.setCoverPhoto(photo.name);
-                setFlagCover(id);
+                // props.setCoverPhoto(photo.name);
+                props.setFlagCover(id);
                 setFlag2(false);
+                
             }
         })
     };
@@ -136,8 +137,8 @@ const Form5CreateAdContainer = (props) => {
         props.photos.map((photo) => {
             if (photo.id === id) {
                 console.log(photo.name + " " + photo.id);
-                props.setCoverPhoto();
-                setFlagCover();
+                // props.setCoverPhoto();
+                props.setFlagCover();
             }
         })
     };
@@ -150,7 +151,7 @@ const Form5CreateAdContainer = (props) => {
                     <ButtonGroup style={{ height: "40px", width: "140px" }} >
 
                         {
-                            (flagCover === photo.id) ?
+                            (props.flagCover === photo.id) ?
                                 <Button onClick={() => { removeCoverPhoto(photo.id) }} >Uncover</Button>
                                 :
                                 <Button onClick={() => { setCoverPhoto(photo.id) }} >Cover</Button>
@@ -179,7 +180,8 @@ const Form5CreateAdContainer = (props) => {
             handleImageChange={handleImageChange}
             previewImage={previewImage}
             coverPhoto={props.coverPhoto} setCoverPhoto={props.setCoverPhoto}
-            // imagesDTO={props.imagesDTO} setImagesDTO={props.setImagesDTO}
+            imagesDTO={props.imagesDTO} setImagesDTO={props.setImagesDTO}
+            flagCover={props.flagCover} setFlagCover={props.setFlagCover}
             setCoverPhoto={setCoverPhoto}
             removeImage={removeImage}
             photos={props.photos} setPhotos={props.setPhotos}

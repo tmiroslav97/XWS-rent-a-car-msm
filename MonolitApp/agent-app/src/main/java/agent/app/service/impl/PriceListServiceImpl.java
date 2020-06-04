@@ -54,9 +54,12 @@ public class PriceListServiceImpl implements PriceListService {
 
     @Override
     public PriceList save(PriceList priceList) {
-        if(priceListRepository.existsById(priceList.getId())){
-            throw new ExistsException(String.format("Cenovnik vec postoji."));
+        if(priceList.getId() != null){
+            if(priceListRepository.existsById(priceList.getId())){
+                throw new ExistsException(String.format("Cenovnik vec postoji."));
+            }
         }
+
         return priceListRepository.save(priceList);
     }
 

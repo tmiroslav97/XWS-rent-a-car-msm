@@ -51,18 +51,17 @@ public class AdController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createAd(@RequestBody AdCreateDTO adCreateDTO, Principal principal) {
         System.out.println(adCreateDTO);
-//        AdCreateDTO adCreateDTO = objectMapper.readValue(data, AdCreateDTO.class);
-//        adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
 
-//        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
-//        Integer flag = adService.createAd(adCreateDTO);
-//
-//        if (flag == 1) {
-//            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
-//        } else {
-//            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
-//        }
-        return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
+        Integer flag = adService.createAd(adCreateDTO, principal.getName());
+
+        if (flag == 1) {
+            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+        }else if (flag == 2){
+            return new ResponseEntity<>("Dozvoljeno je dodati samo 3 oglasa.", HttpStatus.BAD_REQUEST);
+        }else {
+            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
