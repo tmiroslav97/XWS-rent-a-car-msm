@@ -15,7 +15,7 @@ const Form5CreateAdContainer = (props) => {
     const handleForm5 = (event) => {
         event.preventDefault();
         const form = event.target;
-        if (props.brPhotos === 4 && props.coverPhoto != null) {
+        if (props.brPhotos === 4 && props.flagCover != null) {
             let dto = [];
 
             // props.setFormData({
