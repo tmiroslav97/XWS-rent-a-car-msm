@@ -52,6 +52,19 @@ class AdServices extends HttpBaseClient {
         return response.data;
     };
 
+    fetchAdsPaginatedfFromPublisher = async payload => {
+        const response = await this.getApiClient().get(
+            FINALPOINTS.AD_BASE + "/publisher", {
+                params: {
+                    nextPage: payload.nextPage,
+                    size: payload.size
+                }
+            }
+        );
+
+        return response.data;
+    };
+
     fetchAd = async payload => {
         console.log("SERVICE AD")
         console.log(payload)

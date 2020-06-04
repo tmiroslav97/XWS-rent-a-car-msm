@@ -6,7 +6,7 @@ import { adsSelector } from '../../store/ad/selectors';
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import OrdinarySearchContainer from '../../containers/Search/OrdinarySearchContainer'
-import { fetchAds } from '../../store/ad/actions';
+import { fetchAdsFromPublisher } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
 
 const MyAdsContainer = () => {
@@ -19,7 +19,7 @@ const MyAdsContainer = () => {
 
     useEffect(() => {
         dispatch(
-            fetchAds({
+            fetchAdsFromPublisher({
                 nextPage,
                 size
             })
