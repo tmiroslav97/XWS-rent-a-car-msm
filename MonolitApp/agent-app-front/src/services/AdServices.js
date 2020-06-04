@@ -72,6 +72,24 @@ class AdServices extends HttpBaseClient {
             console.log(response);
         return response.data;
     };
+
+    loadImage = async payload => {
+        console.log("SERVICEEE LOAD SRC")
+        console.log(payload);
+        const response = await this.getApiClient().get(
+            FINALPOINTS.IMAGE_BASE + "/getSrc", {
+                params: {
+                    ad_id: payload.ad_id,
+                    name: payload.name,
+                   
+                }
+            }
+        );
+            console.log(response);
+        return response.data;
+    };
 }
+
+    
 
 export default new AdServices();

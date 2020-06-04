@@ -7,6 +7,7 @@ import agent.app.dto.ad.AdCreateDTO;
 import agent.app.dto.ad.AdPageContentDTO;
 import agent.app.dto.ad.AdPageDTO;
 import agent.app.dto.car.CarCalendarTermCreateDTO;
+import agent.app.dto.image.ImageDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.*;
@@ -21,6 +22,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -178,7 +180,6 @@ public class AdServiceImpl implements AdService {
                 .totalPageCnt(ads.getTotalPages())
                 .ads(ret)
                 .build();
-
 
 
         return adPageContentDTO;

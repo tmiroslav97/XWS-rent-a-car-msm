@@ -9,13 +9,15 @@ import {
     FETCH_ADS,
     FETCH_AD,
     UPLOAD_IMAGE,
-    SEARCH_AD
+    SEARCH_AD,
+    PUT_IMAGE_SRC
 } from './constants';
 
 import {
     putAds,
     putImageName,
-    putAd
+    putAd,
+    putImageSrc
 } from './actions';
 
 import {
@@ -46,6 +48,10 @@ export function* fetchAds() {
         'size': payload.size,
         'isFetch': true
     }));
+    for(let i=0; i<data.ads.size;i++){
+        const temp = yield call(AdServices.loadImage, payload);
+        console.log(temp)
+    }
 }
 
 export function* fetchAd() {
@@ -94,3 +100,4 @@ export function* searchAd(){
     }));
     
 }
+

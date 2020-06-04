@@ -8,6 +8,7 @@ import PaginationSize from '../../components/Pagination/PaginationSize';
 import OrdinarySearchContainer from '../../containers/Search/OrdinarySearchContainer'
 import { fetchAds } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
+import { loadImage } from '../../store/ad/saga';
 
 
 

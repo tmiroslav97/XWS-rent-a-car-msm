@@ -26,6 +26,7 @@ public class ImageController {
     public ImageController(ImageService imageService) {
         this.imageService = imageService;
     }
+
     ObjectMapper objectMapper = new ObjectMapper();
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -57,4 +58,6 @@ public class ImageController {
         }
 
     }
+
+    
 }
