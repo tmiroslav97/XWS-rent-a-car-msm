@@ -1,6 +1,7 @@
 import{
     CREATED_AD,
     FETCH_ADS,
+    FETCH_ADS_FROM_PUBLISHER,
     FETCH_AD,
     PUT_ADS,
     UPLOAD_IMAGE,
@@ -17,6 +18,11 @@ export const createdAd = payload => ({
 
 export const fetchAds = payload => ({
     type: FETCH_ADS,
+    payload
+});
+
+export const fetchAdsFromPublisher = payload => ({
+    type: FETCH_ADS_FROM_PUBLISHER,
     payload
 });
 

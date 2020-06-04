@@ -7,6 +7,7 @@ import AdServices from '../../services/AdServices';
 import {
     CREATED_AD,
     FETCH_ADS,
+    FETCH_ADS_FROM_PUBLISHER,
     FETCH_AD,
     UPLOAD_IMAGE,
     SEARCH_AD,
@@ -49,12 +50,21 @@ export function* fetchAds() {
         'size': payload.size,
         'isFetch': true
     }));
-    // console.log("ispred FOR")
-    // for(let i=0; i<data.ads.size;i++){
-    //     console.log("FOR")
-    //     const temp = yield call(AdServices.loadImage, payload);
-    //     console.log(temp)
-    // }
+}
+
+export function* fetchAdsFromPublisher() {
+    console.log("Dobavaljenje oglasa sagaaa")
+    const { payload } = yield take(FETCH_ADS_FROM_PUBLISHER);
+    yield put(putAds({ 'isFetch': false }));
+    const data = yield call(AdServices.fetchAdsPaginatedfFromPublisher, payload);
+    console.log(data);
+    yield put(putAds({
+        'data': data.ads,
+        'totalPageCnt': data.totalPageCnt,
+        'nextPage': payload.nextPage,
+        'size': payload.size,
+        'isFetch': true
+    }));
 }
 
 export function* fetchAd() {
@@ -104,3 +114,18 @@ export function* searchAd(){
     
 }
 
+export function* loadImage(){
+    console.log("SAGA LOAD")
+    const { payload } = yield take(PUT_IMAGE_SRC);
+    console.log(payload);
+    const data = yield call(AdServices.loadImage, payload); 
+
+    // yield temp.push(data);
+    // console.log("listaaaaa u sagiiii")
+    // console.log(temp);
+    // yield put(putImageName({
+    //     'data': temp,
+    //     'isFetch': true
+    // }));
+    
+}

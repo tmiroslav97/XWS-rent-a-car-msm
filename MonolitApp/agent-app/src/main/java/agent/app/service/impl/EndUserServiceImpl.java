@@ -116,7 +116,7 @@ public class EndUserServiceImpl implements EndUserService {
     @Override
     public Integer getAdLimitNum(String email) {
         EndUser endUser = this.findByEmail(email);
-        if (endUser != null) {
+        if (endUser == null) {
             return 4; //non limit it's not end user, it is agent
         }
         return endUser.getAdLimitNum();

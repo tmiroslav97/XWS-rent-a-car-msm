@@ -78,6 +78,16 @@ public class AdController {
 
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+    @RequestMapping(value="/publisher",method = RequestMethod.GET)
+    public ResponseEntity<?> findAllPageAdFromPublisher(@RequestParam(value = "nextPage", required = false) Integer nextPage,
+                                                        @RequestParam(value = "size", required = false) Integer size,
+                                                        Principal principal) {
+
+        return new ResponseEntity<>(adService.findAll(nextPage, size, principal.getName()), HttpStatus.OK);
+    }
+
+
     //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(path = "/search", method = RequestMethod.GET)
     public ResponseEntity<?> findAllSearch(@RequestParam(value = "nextPage", required = false) Integer nextPage,

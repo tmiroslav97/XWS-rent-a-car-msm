@@ -11,6 +11,7 @@ const AdComponent = (props) => {
         props.ads.map((variant, idx) => (
             <>
                 <br />
+              
                 <Card
                     key={idx}
                     border="secondary"
