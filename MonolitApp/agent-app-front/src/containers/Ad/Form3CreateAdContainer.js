@@ -8,7 +8,7 @@ import { Form, Col, Container, Button, InputGroup, Card, ButtonGroup, Table } fr
 const Form3CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
-    const [activeToggle, setActiveToggle] = useState(1);
+    // const [activeToggle, setActiveToggle] = useState(1);
 
     const pricelists = useSelector(pricelistsSelector);
 
@@ -101,11 +101,11 @@ const Form3CreateAdContainer = (props) => {
     };
 
     const handleActiveToggle0 = (event) => {
-        setActiveToggle(0);
+        props.setActiveToggle(0);
     };
 
     const handleActiveToggle1 = (event) => {
-        setActiveToggle(1);
+        props.setActiveToggle(1);
     };
 
     return (
@@ -118,17 +118,20 @@ const Form3CreateAdContainer = (props) => {
             handleBack={props.handleBack}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
+
             cdw={props.cdw}
             distanceLimitFlag={props.distanceLimitFlag}
             pricePerDay={props.pricePerDay} setPricePerDay={props.setPricePerDay}
             pricePerKm={props.pricePerKm}
             pricePerKmCDW={props.pricePerKmCDW}
             id={props.id}
+
             handlePricePerDay={handlePricePerDay}
             handlePricePerKm={handlePricePerKm}
             handlePricePerKmCDW={handlePricePerKmCDW}
             handleId={handleId}
-            activeToggle={activeToggle}
+            
+            activeToggle={props.activeToggle} setActiveToggle={props.setActiveToggle}
             handleActiveToggle0={handleActiveToggle0}
             handleActiveToggle1={handleActiveToggle1}
             getPriceLists={getPriceLists}

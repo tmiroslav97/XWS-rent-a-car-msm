@@ -29,7 +29,7 @@ const Form4CreateAdContainer = (props) => {
             console.log(props.carCalendarTermList)
             props.setFormData({
                 ...props.formData,
-                carCalendarTermCreateDTOList: JSON.stringify(props.carCalendarTermList)
+                carCalendarTermCreateDTOList: props.carCalendarTermList
             });
             console.log(props.formData);
             setValidated(false);

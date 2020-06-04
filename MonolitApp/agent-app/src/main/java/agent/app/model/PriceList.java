@@ -16,6 +16,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Builder
+@ToString
 @Table(name = DbTableConstants.PRICELIST)
 public class PriceList {
 

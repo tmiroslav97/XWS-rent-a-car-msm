@@ -13,6 +13,9 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 const CreateAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
+    const [activeStep, setActiveStep] = useState(0);
+    const [skipped, setSkipped] = useState(new Set());
+    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike', 'Kraj'];
 //forma 1 
     const [name, setName] = useState();
     const [location, setLocation] = useState();
@@ -24,24 +27,26 @@ const CreateAdContainer = () => {
     const [year, setYear] = useState();
     const [mileage, setMileage] = useState();
 //forma 2
+    const [gearboxType, setGearboxType] = useState();
+    const [fuelType, setFuelType] = useState();
+    const [childrenSeatNum, setChildrenSeatNum] = useState();
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
+//forma 3
     const [pricePerDay, setPricePerDay] = useState(null);
     const [pricePerKm, setPricePerKm] = useState(null);
     const [pricePerKmCDW, setPricePerKmCDW] = useState(null);
     const [id, setId] = useState(null);
+    const [activeToggle, setActiveToggle] = useState(1);
+//forma 4
     const [carCalendarTermList, setCarCalendarTermList] = useState([]);
-
-    const [activeStep, setActiveStep] = useState(0);
-    const [skipped, setSkipped] = useState(new Set());
-    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike', 'Kraj'];
-
+//forma 5
     const [coverPhoto, setCoverPhoto] = useState();
-    // const [imagesDTO, setImagesDTO] = useState([]);
-
+    const [flagCover, setFlagCover] = useState();
+    const [imagesDTO, setImagesDTO] = useState([]);
     const [photos, setPhotos] = useState([]);
     const [brPhotos, setBrPhotos] = useState(0);
-
+//konacna forma
     const [formData, setFormData] = useState({
         name: null,
         location: null,
@@ -69,7 +74,35 @@ const CreateAdContainer = () => {
 
     const handleCreatedAd = () => {
         console.log(formData);
-        // dispatch(createdAd(JSON.stringify(formData)));
+        let data = {
+            "name": name,
+            "coverPhoto": coverPhoto,
+            "location": location,
+            "distanceLimitFlag": distanceLimitFlag,
+            "distanceLimit": distanceLimit,
+            "carCreateDTO" : {
+                "year": year,
+                "carManufacturer": carManufacturer,
+                "carModel": carModel,
+                "gearboxType":gearboxType,
+                "fuelType": fuelType,
+                "carType":carType,
+                "mileage":mileage,
+                "childrenSeatNum":childrenSeatNum,
+                "cdw":cdw,
+                "androidFlag":androidFlag
+            },
+            "priceListCreateDTO":{
+                // "creationDate":"2014-01-01",
+                "pricePerKm":pricePerKm,
+                "pricePerKmCWD":pricePerKmCDW,
+                "pricePerDay":pricePerDay,
+                "id":id
+            },
+            "carCalendarTermCreateDTOList": carCalendarTermList
+            
+        }
+        dispatch(createdAd(JSON.stringify(data)));
 
     };
  
@@ -177,6 +210,9 @@ const CreateAdContainer = () => {
                     handleReset={handleReset}
                     cdw={cdw} setCdw={setCdw}
                     androidFlag={androidFlag} setAndroidFlag={setAndroidFlag}
+                    gearboxType={gearboxType} setGearboxType={setGearboxType}
+                    fuelType={fuelType} setFuelType={setFuelType}
+                    childrenSeatNum={childrenSeatNum} setChildrenSeatNum={setChildrenSeatNum}
                 ></Form2CreateAdContainer>
                 : null
             }
@@ -196,6 +232,7 @@ const CreateAdContainer = () => {
                     pricePerKm={pricePerKm} setPricePerKm={setPricePerKm}
                     pricePerKmCDW={pricePerKmCDW} setPricePerKmCDW={setPricePerKmCDW}
                     id={id} setId={setId}
+                    activeToggle={activeToggle} setActiveToggle={setActiveToggle}
 
                 ></Form3CreateAdContainer>
                 : null
@@ -226,7 +263,8 @@ const CreateAdContainer = () => {
                     handleSkip={handleSkip}
                     handleReset={handleReset}
                     coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
-                    // imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    flagCover={flagCover} setFlagCover={setFlagCover}
                     photos={photos} setPhotos={setPhotos} 
                     brPhotos={brPhotos} setBrPhotos={setBrPhotos}
                 ></Form5CreateAdContainer>
@@ -243,7 +281,9 @@ const CreateAdContainer = () => {
                     handleSkip={handleSkip}
                     handleReset={handleReset}
                     handleCreatedAd={handleCreatedAd}
-                    // imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    flagCover={flagCover} setFlagCover={setFlagCover}
+                    coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
                     >
                 </Form6CreateAdContainer>
 

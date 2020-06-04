@@ -22,9 +22,9 @@ const Form6CreateAd = (props) => {
                                     <Button
                                         // variant="contained"
                                         // color="primary"
-                                        // onClick={props.handleForm6}
+                                        onClick={props.handleCreatedAd}
                                         // className={classes.button}
-                                        type="submit"
+                                        // type="submit"
                                         className="float-right"
                                     >
                                         Dodaj
@@ -59,7 +59,7 @@ const Form6CreateAd = (props) => {
                                                 // type="submit"
                                                 className="float-right"
                                             >
-                                                Dodaj
+                                                Dodaj nije poslednji
                                             </Button>
                                         </div>
                                     </div>
