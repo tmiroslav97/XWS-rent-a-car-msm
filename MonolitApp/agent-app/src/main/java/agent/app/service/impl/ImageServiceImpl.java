@@ -81,6 +81,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public ImageDTO findImageLocationByName(String name, Long ad_id)   {
+        System.out.println("SERVICE METODA ZA SRC LOAD SLIKE");
         Image image = imageRepository.findByName(name);
 
         File folder = new File("images");

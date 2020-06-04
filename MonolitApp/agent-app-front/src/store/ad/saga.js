@@ -37,6 +37,7 @@ export function* createdAd(){
 }
 
 export function* fetchAds() {
+    console.log("Dobavaljenje oglasa sagaaa")
     const { payload } = yield take(FETCH_ADS);
     yield put(putAds({ 'isFetch': false }));
     const data = yield call(AdServices.fetchAdsPaginated, payload);
@@ -48,10 +49,12 @@ export function* fetchAds() {
         'size': payload.size,
         'isFetch': true
     }));
-    for(let i=0; i<data.ads.size;i++){
-        const temp = yield call(AdServices.loadImage, payload);
-        console.log(temp)
-    }
+    // console.log("ispred FOR")
+    // for(let i=0; i<data.ads.size;i++){
+    //     console.log("FOR")
+    //     const temp = yield call(AdServices.loadImage, payload);
+    //     console.log(temp)
+    // }
 }
 
 export function* fetchAd() {

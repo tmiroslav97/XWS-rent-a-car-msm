@@ -58,6 +58,12 @@ public class ImageController {
         }
 
     }
+    @RequestMapping(path = "/load", method = RequestMethod.GET)
+    public ResponseEntity<?> loadImage(@RequestParam(value = "ad_id", required = true) Long ad_id,
+                                         @RequestParam(value = "name", required = true) String name
+    ){
+        System.out.println("METODAA ZA LOAD SLIKE SRC");
+        return new ResponseEntity<>(imageService.findImageLocationByName(name,ad_id), HttpStatus.BAD_REQUEST);
+    }
 
-    
 }

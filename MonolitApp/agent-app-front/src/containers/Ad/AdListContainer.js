@@ -18,7 +18,7 @@ const AdListContainer = () => {
     const isFetchAds = ads.isFetch;
     const [nextPage, setNextPage] = useState(ads.nextPage);
     const [size, setSize] = useState(ads.size);
-   
+
 
 
     useEffect(() => {
@@ -29,7 +29,6 @@ const AdListContainer = () => {
             })
         );
     }, [nextPage, size]);
-
 
     return(
        
