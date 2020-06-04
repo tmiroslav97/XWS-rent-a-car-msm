@@ -114,3 +114,18 @@ export function* searchAd(){
     
 }
 
+export function* loadImage(){
+    console.log("SAGA LOAD")
+    const { payload } = yield take(PUT_IMAGE_SRC);
+    console.log(payload);
+    const data = yield call(AdServices.loadImage, payload); 
+
+    // yield temp.push(data);
+    // console.log("listaaaaa u sagiiii")
+    // console.log(temp);
+    // yield put(putImageName({
+    //     'data': temp,
+    //     'isFetch': true
+    // }));
+    
+}

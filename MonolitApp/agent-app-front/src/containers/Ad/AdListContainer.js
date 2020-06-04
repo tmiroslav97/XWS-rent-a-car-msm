@@ -18,7 +18,7 @@ const AdListContainer = () => {
     const isFetchAds = ads.isFetch;
     const [nextPage, setNextPage] = useState(ads.nextPage);
     const [size, setSize] = useState(ads.size);
-
+    const [namePhoto, setNamePhoto] = useState();
 
 
     useEffect(() => {
@@ -28,7 +28,16 @@ const AdListContainer = () => {
                 size
             })
         );
+    
     }, [nextPage, size]);
+
+
+    const handleCoverPh =  (event) => {
+        console.log("ISPISIIIIIII")
+        console.log(event);
+        setNamePhoto(event)
+        console.log(namePhoto)
+    }
 
     return(
        
@@ -48,7 +57,7 @@ const AdListContainer = () => {
                 <Col >
 
                     {
-                        isFetchAds ?  <AdComponent ads={ads.data}/> : <SpinnerContainer />
+                        isFetchAds ?  <AdComponent ads={ads.data} handleCoverPh={handleCoverPh}/> : <SpinnerContainer />
                     }
                 </Col>
             </Row>
