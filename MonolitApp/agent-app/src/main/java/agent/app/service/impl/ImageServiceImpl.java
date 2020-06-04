@@ -9,6 +9,7 @@ import agent.app.service.intf.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -71,4 +72,6 @@ public class ImageServiceImpl implements ImageService {
         Integer i = this.findAll().size();
         return i;
     }
+
+
 }

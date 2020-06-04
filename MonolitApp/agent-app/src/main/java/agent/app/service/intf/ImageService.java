@@ -15,5 +15,4 @@ public interface ImageService {
     Image editImage(Image image);
     Integer deleteById(Long id);
     Integer getImageSize();
-
 }
