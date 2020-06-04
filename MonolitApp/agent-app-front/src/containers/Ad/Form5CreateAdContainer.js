@@ -88,16 +88,16 @@ const Form5CreateAdContainer = (props) => {
                 dispatch(
                     uploadImage(formData)
                 );
-
-                if(imageName.isFetch){
-                    console.log(imageName);
-                    console.log(props.imageDTO);
-                    let s = props.imageDTO;
-                    s.push(imageName.data);
-                    console.log(s);
-                    props.setImagesDTO(s);
-                    // props.setImagesDTO([...props.imagesDTO, naziv]);
-                }
+                
+            //     if(imageName.isFetch){
+            //         console.log(imageName);
+            //         console.log(props.imageDTO);
+            //         let s = props.imageDTO;
+            //         s.push(imageName.data);
+            //         console.log(s);
+            //         props.setImagesDTO(s);
+            //         // props.setImagesDTO([...props.imagesDTO, naziv]);
+            //     }
             }
         }
       

@@ -1,5 +1,5 @@
 
-import { take, put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import { history } from '../../index';
 
 import AdServices from '../../services/AdServices';
@@ -69,6 +69,14 @@ export function* uploadImage(){
     console.log(data);
     const temp = yield select(imageNameSelector);
     console.log(temp);
+    // let l = temp.data;
+    // let rez = [];
+    // temp.data.map((t)=>{
+    //     rez.push(t);
+    // })
+    // rez.push(data);
+    // console.log(rez);
+
     yield put(putImageName({
         'data': data,
         'isFetch': true
