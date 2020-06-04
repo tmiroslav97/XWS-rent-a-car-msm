@@ -26,5 +26,5 @@ public class CarServiceImpl implements CarService {
         return carRepository.findAll();
     }
 
- 
+
 }
