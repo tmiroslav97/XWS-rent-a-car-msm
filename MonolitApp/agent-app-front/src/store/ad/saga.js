@@ -64,23 +64,17 @@ export function* fetchAd() {
 
 export function* uploadImage(){
     const { payload } = yield take(UPLOAD_IMAGE);
+    const temp = yield select(imageNameSelector);
     yield put(putImageName({ 'isFetch': false }));
     const data = yield call(AdServices.uploadImage, payload); 
-    console.log(data);
-    const temp = yield select(imageNameSelector);
+    yield temp.push(data);
+    console.log("listaaaaa u sagiiii")
     console.log(temp);
-    // let l = temp.data;
-    // let rez = [];
-    // temp.data.map((t)=>{
-    //     rez.push(t);
-    // })
-    // rez.push(data);
-    // console.log(rez);
-
     yield put(putImageName({
-        'data': data,
+        'data': temp,
         'isFetch': true
     }));
+    
 }
 
 export function* searchAd(){

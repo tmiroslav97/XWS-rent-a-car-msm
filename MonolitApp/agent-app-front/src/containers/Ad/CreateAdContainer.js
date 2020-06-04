@@ -37,7 +37,10 @@ const CreateAdContainer = () => {
     const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];
 
     const [coverPhoto, setCoverPhoto] = useState();
-    const [imagesDTO, setImagesDTO] = useState([]);
+    // const [imagesDTO, setImagesDTO] = useState([]);
+
+    const [photos, setPhotos] = useState([]);
+    const [brPhotos, setBrPhotos] = useState(0);
 
     const [formData, setFormData] = useState({
         name: null,
@@ -63,13 +66,11 @@ const CreateAdContainer = () => {
 
     });
 
-    const printFormData = () => {
-        console.log(formData);
-    }
 
-    const handleCreatedAd = (event) => {
+    const handleCreatedAd = () => {
         console.log(formData);
-        dispatch(createdAd(JSON.stringify(formData)));
+       
+        // dispatch(createdAd(JSON.stringify(formData)));
 
 
         // event.preventDefault();
@@ -114,7 +115,7 @@ const CreateAdContainer = () => {
         //     setValidated(false);
         // }
     };
-
+ 
     const handleDistanceLimitFlag = (event) => {
         setDistanceLimitFlag(event.target.checked);
         setDistanceLimit(null);
@@ -270,7 +271,9 @@ const CreateAdContainer = () => {
                     handleSkip={handleSkip}
                     handleReset={handleReset}
                     coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
-                    imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    // imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    photos={photos} setPhotos={setPhotos} 
+                    brPhotos={brPhotos} setBrPhotos={setBrPhotos}
                 ></Form5CreateAdContainer>
                 : null
             }
@@ -284,7 +287,9 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
-                    handleCreatedAd={handleCreatedAd}>
+                    handleCreatedAd={handleCreatedAd}
+                    // imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    >
                 </Form6CreateAdContainer>
 
                 : null

@@ -1,21 +1,39 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Form6CreateAd from '../../components/Ad/Form6CreateAd'
 import { Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Container, Image, Card } from 'react-bootstrap';
+import { imageNameSelector } from '../../store/ad/selectors';
 
 const Form6CreateAdContainer = (props) => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
 
+    const imageName = useSelector(imageNameSelector);
+
     const handleForm6 = (event) => {
         event.preventDefault();
-        const form = event.target;
-        console.log(props.formData);
-        props.handleCreatedAd();
-        setValidated(true);
+        console.log("FORMA 6")
 
+        if (imageName != null) {
+            console.log(imageName);
 
+            console.log(JSON.stringify(imageName));
+
+            props.setFormData({
+                ...props.formData,
+                imagesDTO: JSON.stringify(imageName)
+            });
+            props.setFormData(...props.formData, props.formData);
+            
+           
+            setValidated(true);
+
+            props.handleCreatedAd();
+        }
+
+         console.log(props.formData);
     };
+
 
 
     return (
