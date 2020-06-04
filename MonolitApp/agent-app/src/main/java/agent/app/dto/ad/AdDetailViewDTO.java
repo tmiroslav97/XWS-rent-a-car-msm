@@ -35,4 +35,7 @@ public class AdDetailViewDTO {
     private Float pricePerKm;
     private Float pricePerKmCDW;
     private Float pricePerDay;
+    private Long publisherUserId;
+    private String publisherUserFirstName;
+    private String publisherUserLastName;
 }
