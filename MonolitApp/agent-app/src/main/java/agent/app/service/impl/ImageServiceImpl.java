@@ -78,5 +78,18 @@ public class ImageServiceImpl implements ImageService {
         return null;
     }
 
+    @Override
+    public String getImageName() {
+        Integer broj = this.getImageSize() + 1;
+        String imageName = "slika" + broj;
+        return imageName;
+    }
+
+    @Override
+    public Integer addImage(String imageName) {
+        Image img = this.createImage(imageName);
+        System.out.println(img.getId() + " " + img.getName());
+        return 1;
+    }
 
 }

@@ -2,6 +2,7 @@ import HttpBaseClient from './HttpBaseClient';
 
 const FINALPOINTS = {
     AD_BASE: '/ad',
+    IMAGE_BASE: 'image'
     
 };
 
@@ -18,7 +19,7 @@ class AdServices extends HttpBaseClient {
 
     uploadImage = async payload => {
         const response = await this.getApiClient().post(
-            FINALPOINTS.AD_BASE + "/upload",
+            FINALPOINTS.IMAGE_BASE + "/upload",
             payload,
             {
                 headers : {

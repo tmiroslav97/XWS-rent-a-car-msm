@@ -133,18 +133,6 @@ public class AdServiceImpl implements AdService {
         return 1;
     }
 
-    @Override
-    public String getImageName() {
-        String imageName = "slika" + imageService.getImageSize();
-        return imageName;
-    }
-
-    @Override
-    public Integer addImage(String imageName) {
-        Image img = imageService.createImage(imageName);
-        System.out.println(img.getId() + " " + img.getName());
-        return 1;
-    }
 
     @Override
     public void syncData() {

@@ -1,5 +1,5 @@
 
-import { take, put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import { history } from '../../index';
 
 import AdServices from '../../services/AdServices';
@@ -22,13 +22,16 @@ import {
     putSuccessMsg
 } from '../common/actions';
 
+import {
+    imageNameSelector
+} from './selectors';
+
 
 export function* createdAd(){
     const { payload } = yield take(CREATED_AD);
     const data = yield call(AdServices.createdAd, payload); 
     yield put(putSuccessMsg(data));
-    history.push('/');
-    
+    // history.push('/');
 }
 
 export function* fetchAds() {
@@ -60,12 +63,17 @@ export function* fetchAd() {
 
 export function* uploadImage(){
     const { payload } = yield take(UPLOAD_IMAGE);
+    const temp = yield select(imageNameSelector);
     yield put(putImageName({ 'isFetch': false }));
     const data = yield call(AdServices.uploadImage, payload); 
+    yield temp.push(data);
+    console.log("listaaaaa u sagiiii")
+    console.log(temp);
     yield put(putImageName({
-        'data': data,
+        'data': temp,
         'isFetch': true
     }));
+    
 }
 
 export function* searchAd(){

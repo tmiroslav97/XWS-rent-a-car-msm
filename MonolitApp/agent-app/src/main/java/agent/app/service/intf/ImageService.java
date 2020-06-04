@@ -15,5 +15,10 @@ public interface ImageService {
     Image editImage(Image image);
     Integer deleteById(Long id);
     Integer getImageSize();
+
     String findImageLocationByName(String name);
+
+    String getImageName();
+    Integer addImage(String imageName);
+
 }

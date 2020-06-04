@@ -46,66 +46,6 @@ public class AdController {
         return new ResponseEntity<>(AdConverter.toAdDetailViewDTOFromAd(adService.findById(id)), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-    @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadImage(@RequestParam(value = "photo", required = true) MultipartFile photo,
-                                         @RequestParam(value = "data", required = true) String data
-        ) throws IOException {
-        System.out.println("-----------------------UPLOAD FILE---------------------");
-        String name = adService.getImageName();
-        System.out.println("slika : " + photo.getOriginalFilename());
-        System.out.println("slika u bazi : " + name);
-        try{
-            File file = new File("photos");
-
-            String uploadDirectory = file.getAbsolutePath() + "\\" + name;
-            File convertFile = new File(uploadDirectory.toString());
-            convertFile.createNewFile();
-            FileOutputStream fout = new FileOutputStream(convertFile);
-            fout.write(photo.getBytes());
-            fout.close();
-
-            Integer rez = adService.addImage(adService.getImageName());
-            if(rez != 1){
-                System.out.println("desila se greska prilikom dodavanja slike");
-            }
-            System.out.println("dodata slika");
-            return new ResponseEntity<>(name, HttpStatus.CREATED);
-        }catch(Exception e){
-            return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
-        }
-
-    }
-
-
-//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-//    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<?> createAd(@RequestParam(value="coverPhoto", required = true) MultipartFile coverPhoto, @RequestParam(value="data", required = true)  String data, Principal principal) throws IOException{
-//
-//        System.out.println("-----------------------UPLOAD FILE---------------------");
-//
-//        File file = new File("photos");
-//        String uploadDirectory = file.getAbsolutePath() + "\\" + coverPhoto.getOriginalFilename();
-//
-//        System.out.println(uploadDirectory);
-//        System.out.println("slika : " + coverPhoto.getOriginalFilename());
-//
-//        File convertFile = new File(uploadDirectory.toString());
-//        convertFile.createNewFile();
-//        FileOutputStream fout = new FileOutputStream(convertFile);
-//        fout.write(coverPhoto.getBytes());
-//        fout.close();
-//        System.out.println(data.toString());
-//        AdCreateDTO adCreateDTO = objectMapper.readValue(data, AdCreateDTO.class);
-//        adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
-//        Integer flag = adService.createAd(adCreateDTO);
-//        if(flag == 1){
-//            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
-//        }else{
-//            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
-//        }
-//    }
-
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -114,14 +54,15 @@ public class AdController {
 //        AdCreateDTO adCreateDTO = objectMapper.readValue(data, AdCreateDTO.class);
 //        adCreateDTO.setCoverPhoto(coverPhoto.getOriginalFilename());
 
-        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
-        Integer flag = adService.createAd(adCreateDTO);
-
-        if (flag == 1) {
-            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
-        }
+//        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
+//        Integer flag = adService.createAd(adCreateDTO);
+//
+//        if (flag == 1) {
+//            return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+//        } else {
+//            return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
+//        }
+        return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
     }
 
     //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
