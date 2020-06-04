@@ -73,5 +73,10 @@ public class ImageServiceImpl implements ImageService {
         return i;
     }
 
+    @Override
+    public String findImageLocationByName(String name) {
+        return null;
+    }
+
 
 }
