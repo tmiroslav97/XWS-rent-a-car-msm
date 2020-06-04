@@ -23,22 +23,19 @@ const Form6CreateAdContainer = (props) => {
                 ...props.formData,
                 imagesDTO: JSON.stringify(imageName)
             });
-            props.setFormData(...props.formData, props.formData);
-            
-           
-            setValidated(true);
 
-            props.handleCreatedAd();
+            
+            
+            setValidated(true);
+            props.handleNext();
         }
 
          console.log(props.formData);
     };
-
-
-
     return (
         <Form6CreateAd
             handleForm6={handleForm6}
+            handleCreatedAd={props.handleCreatedAd}
             validated={validated}
             activeStep={props.activeStep}
             steps={props.steps}

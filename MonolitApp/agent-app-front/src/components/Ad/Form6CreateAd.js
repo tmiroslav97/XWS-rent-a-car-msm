@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 const Form6CreateAd = (props) => {
     return (
         <Container>
-            <Form id="step6" onSubmit={props.handleForm6} noValidate validated={props.validated}>
+            <Form id="step6" onSubmit={props.handleCreatedAd} noValidate validated={props.validated}>
                 <Form.Row>
                     <Col>
                         <Form.Group as={Col} >
@@ -16,9 +16,9 @@ const Form6CreateAd = (props) => {
                                         Svi koraci su zavrseni. Uspesno ste dodadali oglas!
                                     </Typography>
 
-                                    <Button onClick={props.handleReset} >
+                                    {/* <Button onClick={props.handleReset} >
                                         Reset
-                                    </Button>
+                                    </Button> */}
                                     <Button
                                         // variant="contained"
                                         // color="primary"
@@ -30,39 +30,40 @@ const Form6CreateAd = (props) => {
                                         Dodaj
                                     </Button>
                                 </div>
-                            ) : null
-                            // (
-                            //         <div>
-                            //             <div>
-                            //                 {/* <Button disabled={props.activeStep === 0} onClick={props.handleBack} className="float-left" >
-                            //                     Nazad
-                            //                 </Button>
+                            ) : 
+                            (
+                                    <div>
+                                        <div>prikaz </div>
+                                        <div>
+                                            <Button disabled={props.activeStep === 0} onClick={props.handleBack} className="float-left" >
+                                                Nazad
+                                            </Button>
+                                            
+                                            {/* {props.isStepOptional(props.activeStep) && (
+                                                <Button
+                                                    variant="contained"
+                                                    // color="primary"
+                                                    onClick={props.handleSkip}
+                                                    // className={classes.button}
+                                                    className="float-right"
+                                                >
+                                                    Preskoci
+                                                </Button>
+                                            )} */}
 
-                            //                 {props.isStepOptional(props.activeStep) && (
-                            //                     <Button
-                            //                         variant="contained"
-                            //                         // color="primary"
-                            //                         onClick={props.handleSkip}
-                            //                         // className={classes.button}
-                            //                         className="float-right"
-                            //                     >
-                            //                         Preskoci
-                            //                     </Button>
-                            //                 )}
-
-                            //                 <Button
-                            //                     // variant="contained"
-                            //                     // color="primary"
-                            //                     // onClick={props.handleNext}
-                            //                     // className={classes.button}
-                            //                     type="submit"
-                            //                     className="float-right"
-                            //                 >
-                            //                     Dodaj
-                            //                 </Button> */}
-                            //             </div>
-                            //         </div>
-                            //     )
+                                            <Button
+                                                // variant="contained"
+                                                // color="primary"
+                                                onClick={props.handleForm6}
+                                                // className={classes.button}
+                                                // type="submit"
+                                                className="float-right"
+                                            >
+                                                Dodaj
+                                            </Button>
+                                        </div>
+                                    </div>
+                                )
                                 }
                         </Form.Group>
                     </Col>

@@ -31,7 +31,7 @@ export function* createdAd(){
     const { payload } = yield take(CREATED_AD);
     const data = yield call(AdServices.createdAd, payload); 
     yield put(putSuccessMsg(data));
-    history.push('/');
+    // history.push('/');
 }
 
 export function* fetchAds() {

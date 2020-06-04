@@ -12,6 +12,7 @@ const Form1CreateAdContainer = (props) => {
     const carManufacturers = useSelector(carManufacturersSelector);
     const carTypes = useSelector(carTypesSelector);
     const carModels = useSelector(carModelsSelector);
+
     useEffect(() => {
         dispatch(
             fetchAllCarManufacturers()
@@ -30,34 +31,20 @@ const Form1CreateAdContainer = (props) => {
         } else {
             props.setFormData({
                 ...props.formData,
-                name: form.name.value,
-                location: form.location.value,
+                name: props.name,
+                location: props.location,
                 distanceLimitFlag: props.distanceLimitFlag,
                 distanceLimit: props.distanceLimit,
-                carManufacturer: form.carManufacturer.value,
+                carManufacturer: props.carManufacturer,
                 carModel: props.carModel,
-                carType: form.carType.value,
-                year: form.year.value,
-                mileage: form.mileage.value
+                carType: props.carType,
+                year: props.year,
+                mileage: props.mileage
             });
             props.handleNext();
             console.log(props.formData);
             setValidated(false);
-
         }
-    };
-
-    const handleDistanceLimitFlag = (event) => {
-        props.setDistanceLimitFlag(event.target.checked);
-    };
-
-    const handleDistanceLimit = (event) => {
-        props.setDistanceLimit(event.target.value);
-    };
-
-    const handleCarModel = (event) => {
-        // let index = event.target.options.selectedIndex;
-        props.setCarModel(event.target.value);
     };
 
     const getCarManufacturers = () => {
@@ -94,15 +81,6 @@ const Form1CreateAdContainer = (props) => {
         return listCarModel;
     }
 
-    const handleCarManufacturers = (event) => {
-        let index = event.target.options.selectedIndex;
-        dispatch(
-            fetchAllCarModels({
-                "id": carManufacturers.data[index].id
-            })
-        );
-    };
-
     const getCarTypes = () => {
         const listCarType = [];
         if (carTypes.isFetch) {
@@ -130,23 +108,82 @@ const Form1CreateAdContainer = (props) => {
         return rez;
     }
 
+    const handleName = (event) => {
+        props.setName(event.target.value);
+    };
+    const handleLocation = (event) => {
+        props.setLocation(event.target.value);
+    };
+
+    const handleDistanceLimitFlag = (event) => {
+        props.setDistanceLimitFlag(event.target.checked);
+    };
+
+    const handleDistanceLimit = (event) => {
+        props.setDistanceLimit(event.target.value);
+    };
+
+    const handleCarModel = (event) => {
+        // let index = event.target.options.selectedIndex;
+        props.setCarModel(event.target.value);
+    };
+
+    const handleCarManufacturers = (event) => {
+        props.setCarManufacturer(event.target.value);
+        let index = event.target.options.selectedIndex;
+        dispatch(
+            fetchAllCarModels({
+                "id": carManufacturers.data[index].id
+            })
+        );
+    };
+
+    const handleCarType = (event) => {
+        props.setCarType(event.target.value);
+    };
+
+    const handleYear = (event) => {
+        props.setYear(event.target.value);
+    };
+    const handleMileage = (event) => {
+        props.setMileage(event.target.value);
+    };
+
     return (
         <Form1CreateAd
             onSubmit={handleForm1}
             validated={validated}
-            distanceLimitFlag={props.distanceLimitFlag}
-            handleDistanceLimitFlag={handleDistanceLimitFlag}
-            handleDistanceLimit={handleDistanceLimit}
             activeStep={props.activeStep}
             steps={props.steps}
             isStepOptional={props.isStepOptional}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
+
             getCarManufacturers={getCarManufacturers}
-            handleCarManufacturers={handleCarManufacturers}
             getCarModels={getCarModels}
             getCarTypes={getCarTypes}
             getCurrentDate={getCurrentDate}
+
+            name={props.name} setName={props.setName}
+            location={props.location} setLocation={props.setLocation}
+            distanceLimitFlag={props.distanceLimitFlag} setDistanceLimitFlag={props.setDistanceLimitFlag}
+            distanceLimit={props.distanceLimit} setDistanceLimit={props.setDistanceLimit}
+            carModel={props.carModel} setCarModel={props.setCarModel}
+            carManufacturer={props.carManufacturer} setCarManufacturer={props.setCarManufacturer}
+            carType={props.carType} setCarType={props.setCarType}
+            year={props.year} setYear={props.setYear}
+            mileage={props.mileage} setMileage={props.setMileage}
+
+            handleDistanceLimitFlag={handleDistanceLimitFlag}
+            handleDistanceLimit={handleDistanceLimit}
+            handleCarManufacturers={handleCarManufacturers}
+            handleName={handleName}
+            handleLocation={handleLocation}
+            handleCarType={handleCarType}
+            handleYear={handleYear}
+            handleMileage={handleMileage}
+
+
 
         />
 
