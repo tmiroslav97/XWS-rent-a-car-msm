@@ -46,6 +46,9 @@ public class AdServiceImpl implements AdService {
     @Autowired
     private ImageService imageService;
 
+    @Autowired
+    private UserService userService;
+
 
     @Override
     public Ad findById(Long id) {
@@ -173,6 +176,7 @@ public class AdServiceImpl implements AdService {
 //        }
         Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
         Page<Ad> ads = adRepository.findAllByDeleted(false, pageable);
+      
 
         List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
         System.out.println(ret.size());
@@ -185,6 +189,23 @@ public class AdServiceImpl implements AdService {
         return adPageContentDTO;
     }
 
+    @Override
+    public AdPageContentDTO findAll(Integer page, Integer size, String email) {
+        User pu = userService.findByEmail(email);
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<Ad> ads = adRepository.findAllByDeletedAndPublisherUserEmail(false, email, pageable);
+
+        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+        System.out.println(ret.size());
+        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
+                .totalPageCnt(ads.getTotalPages())
+                .ads(ret)
+                .build();
+
+
+        return adPageContentDTO;
+    }
 
 
 }

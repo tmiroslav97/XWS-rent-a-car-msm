@@ -15,6 +15,8 @@ public interface AdService {
 
     AdPageContentDTO findAll(Integer page, Integer size);
 
+    AdPageContentDTO findAll(Integer page, Integer size, String email);
+
     Ad save(Ad ad);
 
     void delete(Ad ad);
