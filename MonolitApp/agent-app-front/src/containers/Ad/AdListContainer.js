@@ -8,6 +8,7 @@ import PaginationSize from '../../components/Pagination/PaginationSize';
 import OrdinarySearchContainer from '../../containers/Search/OrdinarySearchContainer'
 import { fetchAds } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
+import { loadImage } from '../../store/ad/saga';
 
 
 
@@ -17,7 +18,7 @@ const AdListContainer = () => {
     const isFetchAds = ads.isFetch;
     const [nextPage, setNextPage] = useState(ads.nextPage);
     const [size, setSize] = useState(ads.size);
-    const token = localStorage.getItem('token');
+
 
 
     useEffect(() => {
@@ -28,7 +29,6 @@ const AdListContainer = () => {
             })
         );
     }, [nextPage, size]);
-
 
     return(
        
@@ -48,7 +48,7 @@ const AdListContainer = () => {
                 <Col >
 
                     {
-                        isFetchAds ?  <AdComponent ads={ads.data} token={token}/> : <SpinnerContainer />
+                        isFetchAds ?  <AdComponent ads={ads.data}/> : <SpinnerContainer />
                     }
                 </Col>
             </Row>

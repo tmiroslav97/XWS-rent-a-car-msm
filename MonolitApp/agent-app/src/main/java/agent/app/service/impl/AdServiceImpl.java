@@ -7,6 +7,7 @@ import agent.app.dto.ad.AdCreateDTO;
 import agent.app.dto.ad.AdPageContentDTO;
 import agent.app.dto.ad.AdPageDTO;
 import agent.app.dto.car.CarCalendarTermCreateDTO;
+import agent.app.dto.image.ImageDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.*;
@@ -21,6 +22,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +45,9 @@ public class AdServiceImpl implements AdService {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private UserService userService;
 
 
     @Override
@@ -132,18 +138,6 @@ public class AdServiceImpl implements AdService {
         return 1;
     }
 
-    @Override
-    public String getImageName() {
-        String imageName = "slika" + imageService.getImageSize();
-        return imageName;
-    }
-
-    @Override
-    public Integer addImage(String imageName) {
-        Image img = imageService.createImage(imageName);
-        System.out.println(img.getId() + " " + img.getName());
-        return 1;
-    }
 
     @Override
     public void syncData() {
@@ -182,6 +176,7 @@ public class AdServiceImpl implements AdService {
 //        }
         Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
         Page<Ad> ads = adRepository.findAllByDeleted(false, pageable);
+      
 
         List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
         System.out.println(ret.size());
@@ -190,6 +185,23 @@ public class AdServiceImpl implements AdService {
                 .ads(ret)
                 .build();
 
+
+        return adPageContentDTO;
+    }
+
+    @Override
+    public AdPageContentDTO findAll(Integer page, Integer size, String email) {
+        User pu = userService.findByEmail(email);
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<Ad> ads = adRepository.findAllByDeletedAndPublisherUserEmail(false, email, pageable);
+
+        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+        System.out.println(ret.size());
+        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
+                .totalPageCnt(ads.getTotalPages())
+                .ads(ret)
+                .build();
 
 
         return adPageContentDTO;

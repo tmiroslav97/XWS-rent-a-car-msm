@@ -3,13 +3,24 @@ import { Container, Row, Col, Button, Table, Card } from 'react-bootstrap'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 const AdDetailViewComponent = (props) => {
-
+    
     var androidFlag = props.ad.androidFlag;
-    if(androidFlag===false){
+    var disable = false;
+
+    if(androidFlag === false){
         androidFlag = "Ne"
     }else{
         androidFlag = "Da"
     }
+
+   
+    if(props.token === null){
+        disable = true;
+    }
+
+
+
+
 
     return(
 
@@ -23,7 +34,16 @@ const AdDetailViewComponent = (props) => {
                         <Card.Title as="h4">{props.ad.name}</Card.Title>
                         <Row>
                             <Col md={5}>
-                                <Card.Img src="/img-ad/fiat.jpg" />               
+                                <Card.Img src="/img-ad/fiat.jpg" />   
+                                <>
+                                <br/>
+                             
+                                </>            
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item>Datum objavljivanja: {props.handleDateFormat(props.ad.publishedDate)}</ListGroup.Item>
+                                    <ListGroup.Item>Oglas objavio: {props.ad.publisherUserFirstName} {props.ad.publisherUserLastName} </ListGroup.Item>
+                                    <ListGroup.Item></ListGroup.Item>
+                                </ListGroup>
                             </Col>
                             <Col >
                                 <ListGroup variant="flush">
@@ -31,46 +51,22 @@ const AdDetailViewComponent = (props) => {
                                     <ListGroup.Item>Model: {props.ad.carModel}</ListGroup.Item>
                                     <ListGroup.Item>Tip: {props.ad.carType}</ListGroup.Item>
                                     <ListGroup.Item>Mjenjac: {props.ad.gearboxType}</ListGroup.Item>
-                                </ListGroup>
-                            </Col>
-                        </Row>
-                            <>
-                                <br/>
-                            </>
-                        <Row>
-                            <Col md={5}>
-                                <ListGroup variant="flush">
-                                    <ListGroup.Item>Datum objavljivanja: {props.ad.publishedDate}</ListGroup.Item>
+                                    <ListGroup.Item>Broj sjedista za djecu:  {props.ad.childrenSeatNum}</ListGroup.Item>
+                                    <ListGroup.Item>Godiste: {props.handleYear(props.ad.year)}</ListGroup.Item>
+                                    <ListGroup.Item>Posjedovanje android uredjaja: {androidFlag}</ListGroup.Item>
                                     <ListGroup.Item>Broj rentiranja: {props.ad.rentCnt}</ListGroup.Item>
                                     <ListGroup.Item>Ocjena: neki broj </ListGroup.Item>
-                                </ListGroup>
-                            </Col>
-                            <Col>
-                                <ListGroup variant="flush">
-                                    <ListGroup.Item>Broj sjedista za djecu:  {props.ad.childrenSeatNum}</ListGroup.Item>
-                                    <ListGroup.Item>Godiste: {props.ad.year}</ListGroup.Item>
-                                    <ListGroup.Item>Posjedovanje android uredjaja: {androidFlag}</ListGroup.Item>
+                                    <ListGroup.Item></ListGroup.Item>
+
                                 </ListGroup>
                             </Col>
                         </Row>
-                            <>
-                                <br/>
-                            </>
-                        <Row>
+                          
+                        <Row>  
                             <Col>
-                                <Card>
-                                    <Card.Title as="h6">
-                                        Opis oglasa  
-                                    </Card.Title>
-                                    <Card.Body>
-                                        dsdsdsadsadasdsan
-                                        asfafddsfsddddddddddddddddddddddddddd
-                                        Opisss nekii fdffdsfdsfdsfdsfdsfdsfdsfdsfcddsc
-                                        cdscdscsdc
-                                        cdscdscs
-                                    </Card.Body>
-                                </Card>
-                                
+                                {
+                                    disable ?  null :  <Button variant="outline-success" >Dodaj u korpu</Button>
+                                }
                             </Col>
                         </Row>
                     </Card.Body>

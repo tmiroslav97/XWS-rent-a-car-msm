@@ -6,3 +6,5 @@ export const UPLOAD_IMAGE = 'uploadImage';
 export const PUT_IMAGE_NAME = 'putImageName';
 export const PUT_AD = 'put_ad';
 export const SEARCH_AD ='search_ad';
+export const PUT_IMAGE_SRC ='put_image_src';
+

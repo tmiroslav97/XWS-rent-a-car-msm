@@ -13,17 +13,17 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 const CreateAdContainer = () => {
     const dispatch = useDispatch();
     const [validated, setValidated] = useState(false);
-
-    // const [name, setName] = useState();
-    // const [location, setLocation] = useState();
+//forma 1 
+    const [name, setName] = useState();
+    const [location, setLocation] = useState();
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
-    const [distanceLimit, setDistanceLimit] = useState(null);
-    const [carModel, setCarModel] = useState(null);
-    // const [carManufacturer, setCarManufacturer] = useState();
-    // const [carType, setCarType] = useState();
-    // const [year, setYear] = useState();
-    // const [mileage, setMileage] = useState();
-
+    const [distanceLimit, setDistanceLimit] = useState();
+    const [carModel, setCarModel] = useState();
+    const [carManufacturer, setCarManufacturer] = useState();
+    const [carType, setCarType] = useState();
+    const [year, setYear] = useState();
+    const [mileage, setMileage] = useState();
+//forma 2
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
     const [pricePerDay, setPricePerDay] = useState(null);
@@ -34,10 +34,13 @@ const CreateAdContainer = () => {
 
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
-    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike'];
+    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike', 'Kraj'];
 
     const [coverPhoto, setCoverPhoto] = useState();
-    const [imagesDTO, setImagesDTO] = useState([]);
+    // const [imagesDTO, setImagesDTO] = useState([]);
+
+    const [photos, setPhotos] = useState([]);
+    const [brPhotos, setBrPhotos] = useState(0);
 
     const [formData, setFormData] = useState({
         name: null,
@@ -63,58 +66,13 @@ const CreateAdContainer = () => {
 
     });
 
-    const printFormData = () => {
+
+    const handleCreatedAd = () => {
         console.log(formData);
-    }
+        // dispatch(createdAd(JSON.stringify(formData)));
 
-    const handleCreatedAd = (event) => {
-        console.log(formData);
-        dispatch(createdAd(JSON.stringify(formData)));
-
-
-        // event.preventDefault();
-        // console.log(event.target);
-        // const form = event.target;
-
-        // if (form.checkValidity() === false) {
-        //     event.stopPropagation();
-        //     setValidated(true);
-        // } else {
-        // let data = {
-        //     'name': form.name.value,
-        //     'coverPhoto': coverPhoto,
-        //     'location': form.location.value,
-        //     'distanceLimitFlag': distanceLimitFlag,
-        //     'distanceLimit': distanceLimit,
-        //     'carCreateDTO': {
-        //         'carManufacturer': form.carManufacturer.value,
-        //         'carModel': form.carModel.value,
-        //         'carType': form.carType.value,
-        //         'year': form.year.value,
-        //         'mileage': form.mileage.value,
-        //         'gearboxType': form.gearboxType.value,
-        //         'fuelType': form.fuelType.value,
-        //         'childrenSeatNum': form.childrenSeatNum.value,
-        //         'cdw': cdw,
-        //         'androidFlag': androidFlag,
-        //     },
-        //     'priceListCreateDTO': {
-        //         'pricePerKm': pricePerKm,
-        //         'pricePerKmCDW': pricePerKmCDW,
-        //         'pricePerDay': form.pricePerDay.value,
-        //         'id': form.id.value,
-        //     },
-        //     'carCalendarTermCreateDTOList': carCalendarTermList,
-        //     'imagesDTO': imagesDTO
-        // }
-        // let formData = new FormData(form);
-        //     formData.append('data', JSON.stringify(data));
-            // dispatch(createdAd(formData));
-            
-        //     setValidated(false);
-        // }
     };
-
+ 
     const handleDistanceLimitFlag = (event) => {
         setDistanceLimitFlag(event.target.checked);
         setDistanceLimit(null);
@@ -171,14 +129,6 @@ const CreateAdContainer = () => {
     return (
         <Container>
             <CreateAd
-                // onSubmit={handleCreatedAd}
-                validated={validated}
-                distanceLimitFlag={distanceLimitFlag}
-                cdw={cdw}
-                androidFlag={androidFlag}
-                handleDistanceLimitFlag={handleDistanceLimitFlag}
-                handleAndroidFlag={handleAndroidFlag}
-                handleCDW={handleCDW}
                 skipped={skipped}
                 setSkipped={setSkipped}
                 isStepOptional={isStepOptional}
@@ -198,14 +148,20 @@ const CreateAdContainer = () => {
                     formData={formData} setFormData={setFormData}
                     activeStep={activeStep} setActiveStep={setActiveStep}
                     steps={steps}
-                    carModel={carModel} setCarModel={setCarModel}
                     isStepOptional={isStepOptional}
                     handleNext={handleNext}
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
+                    name={name} setName={setName}
+                    location={location} setLocation={setLocation}
                     distanceLimitFlag={distanceLimitFlag} setDistanceLimitFlag={setDistanceLimitFlag}
                     distanceLimit={distanceLimit} setDistanceLimit={setDistanceLimit}
+                    carModel={carModel} setCarModel={setCarModel}
+                    carManufacturer={carManufacturer} setCarManufacturer={setCarManufacturer}
+                    carType={carType} setCarType={setCarType}
+                    year={year} setYear={setYear}
+                    mileage={mileage} setMileage={setMileage}
                 ></Form1CreateAdContainer>
                 : null
             }
@@ -270,7 +226,9 @@ const CreateAdContainer = () => {
                     handleSkip={handleSkip}
                     handleReset={handleReset}
                     coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
-                    imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    // imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    photos={photos} setPhotos={setPhotos} 
+                    brPhotos={brPhotos} setBrPhotos={setBrPhotos}
                 ></Form5CreateAdContainer>
                 : null
             }
@@ -284,10 +242,28 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
-                    handleCreatedAd={handleCreatedAd}>
+                    handleCreatedAd={handleCreatedAd}
+                    // imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    >
                 </Form6CreateAdContainer>
 
                 : null
+            }{
+                activeStep === 6 ?
+                <Form6CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    handleCreatedAd={handleCreatedAd}
+                    // imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    >
+                </Form6CreateAdContainer>
+                :null
             }
 
         </Container>

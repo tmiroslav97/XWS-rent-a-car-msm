@@ -12,13 +12,14 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Builder
-@Entity(name = DbTableConstants.IMAGE)
+@Entity
+@Table(name = DbTableConstants.IMAGE)
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.PHOTO, unique = true, nullable = false)
+    @Column(name = DbColumnConstants.NAME, unique = true, nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)

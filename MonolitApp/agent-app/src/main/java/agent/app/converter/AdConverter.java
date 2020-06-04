@@ -69,6 +69,9 @@ public class AdConverter {
                 .pricePerKm(ad.getPriceList().getPricePerKm())
                 .pricePerKmCDW(ad.getPriceList().getPricePerKmCDW())
                 .pricePerDay(ad.getPriceList().getPricePerDay())
+                .publisherUserId(ad.getPublisherUser().getId())
+                .publisherUserFirstName(ad.getPublisherUser().getFirstName())
+                .publisherUserLastName(ad.getPublisherUser().getLastName())
                 .build();
     }
 }
