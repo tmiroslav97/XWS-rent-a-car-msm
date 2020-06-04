@@ -34,42 +34,6 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Ad save(Ad ad) {
-        if (ad.getId() != null) {
-            if (adRepository.existsById(ad.getId())) {
-                throw new ExistsException(String.format("Oglas vec postoji."));
-            }
-        }
-
-        return adRepository.save(ad);
-    }
-
-    @Override
-    public void delete(Ad ad) {
-        adRepository.delete(ad);
-    }
-
-    @Override
-    public void logicalDeleteOrRevertAds(List<Ad> ads, Boolean status) {
-        for (Ad ad : ads) {
-            this.logicalDeleteOrRevert(ad, status);
-        }
-    }
-
-    @Override
-    public void logicalDeleteOrRevert(Ad ad, Boolean status) {
-        ad.setDeleted(status);
-        this.save(ad);
-    }
-
-    @Override
-    public Integer deleteById(Long id) {
-        Ad ad = this.findById(id);
-        this.delete(ad);
-        return 1;
-    }
-
-    @Override
     public void syncData() {
 
     }
@@ -125,6 +89,5 @@ public class AdServiceImpl implements AdService {
 
         return adPageContentDTO;
     }
-
 
 }
