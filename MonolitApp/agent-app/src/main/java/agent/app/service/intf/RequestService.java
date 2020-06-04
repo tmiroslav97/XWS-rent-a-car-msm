@@ -10,7 +10,7 @@ public interface RequestService {
     List<Request> findAll();
 
     Integer deleteById(Long id);
-    
+
     void delete(Request request);
 
     Request save(Request request);
