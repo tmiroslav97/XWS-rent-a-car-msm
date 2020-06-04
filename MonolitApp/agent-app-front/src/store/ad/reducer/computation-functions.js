@@ -17,4 +17,10 @@ export function putAd(state, payload) {
         ad: payload
     };
 }
+export function putImageSrc(state, payload) {
+    return {
+        ...state,
+        imagesSrc: payload
+    };
+}
 

@@ -9,13 +9,15 @@ import {
     FETCH_ADS,
     FETCH_AD,
     UPLOAD_IMAGE,
-    SEARCH_AD
+    SEARCH_AD,
+    PUT_IMAGE_SRC
 } from './constants';
 
 import {
     putAds,
     putImageName,
-    putAd
+    putAd,
+    putImageSrc
 } from './actions';
 
 import {
@@ -35,6 +37,7 @@ export function* createdAd(){
 }
 
 export function* fetchAds() {
+    console.log("Dobavaljenje oglasa sagaaa")
     const { payload } = yield take(FETCH_ADS);
     yield put(putAds({ 'isFetch': false }));
     const data = yield call(AdServices.fetchAdsPaginated, payload);
@@ -46,6 +49,12 @@ export function* fetchAds() {
         'size': payload.size,
         'isFetch': true
     }));
+    // console.log("ispred FOR")
+    // for(let i=0; i<data.ads.size;i++){
+    //     console.log("FOR")
+    //     const temp = yield call(AdServices.loadImage, payload);
+    //     console.log(temp)
+    // }
 }
 
 export function* fetchAd() {
@@ -94,3 +103,4 @@ export function* searchAd(){
     }));
     
 }
+

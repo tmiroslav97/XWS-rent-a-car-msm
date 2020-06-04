@@ -26,6 +26,7 @@ public class ImageController {
     public ImageController(ImageService imageService) {
         this.imageService = imageService;
     }
+
     ObjectMapper objectMapper = new ObjectMapper();
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -57,4 +58,12 @@ public class ImageController {
         }
 
     }
+    @RequestMapping(path = "/load", method = RequestMethod.GET)
+    public ResponseEntity<?> loadImage(@RequestParam(value = "ad_id", required = true) Long ad_id,
+                                         @RequestParam(value = "name", required = true) String name
+    ){
+        System.out.println("METODAA ZA LOAD SLIKE SRC");
+        return new ResponseEntity<>(imageService.findImageLocationByName(name,ad_id), HttpStatus.BAD_REQUEST);
+    }
+
 }

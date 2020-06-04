@@ -15,6 +15,8 @@ const AdDetailViewContainer = (props) => {
     const ad = useSelector(adSelector);
     const isFetchAd = ad.isFetch;
     const adId = props.match.params.ad;
+    const token = localStorage.getItem('token');
+
     useEffect(() => {
         dispatch(
             fetchAd({
@@ -23,7 +25,37 @@ const AdDetailViewContainer = (props) => {
         );
     }, []);
     
-console.log(ad.data);
+    console.log(ad.data);
+    
+    const handleDateFormat = (event) => {
+        var datum = new Date(event);
+        let date = datum.getDate();
+        let month = datum.getMonth() + 1;
+        let year = datum.getFullYear();
+        let hours = datum.getHours();
+        let minutes = datum.getMinutes();
+        let ret = "";
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (date < 10) {
+            date = "0" + date;
+        }
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        ret = + hours + ":" + minutes + " " +  date  + "-" + month + "-" + year;
+        return ret;
+    }
+    
+    const handleYear = (event) => {
+        var datum = new Date(event);
+        var year = datum.getFullYear();
+        return year;
+    }
 
     return(
        
@@ -32,8 +64,15 @@ console.log(ad.data);
             <Row>
                 <Col >
                 {/* <AdDetailViewComponent id={adId} ad={ad.data}/> */}
+                
+
                     {
-                        isFetchAd ?  <AdDetailViewComponent id={adId} ad={ad.data}/> : <SpinnerContainer />
+                        isFetchAd ?  <AdDetailViewComponent id={adId} 
+                                                            ad={ad.data} 
+                                                            token={token}
+                                                            handleDateFormat={handleDateFormat}
+                                                            handleYear={handleYear}
+                                                            /> : <SpinnerContainer />
                     }
                 </Col>
             </Row>

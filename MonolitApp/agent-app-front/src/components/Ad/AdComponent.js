@@ -4,10 +4,7 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 
 
 const AdComponent = (props) => {
-    var disable = false;
-    if(props.token===null){
-        disable = true;
-    }
+
 
     return (
 
@@ -74,14 +71,7 @@ const AdComponent = (props) => {
                                 <Card.Link href={'/agent-firm/ad-detail-view/' + variant.id} >Vise detalja ></Card.Link>
 
                             </Col>
-                            <Col>
-                                <br />
-                                <br />
-                               
-                                {
-                                    disable ?  null :  <Button variant="outline-success">Dodja u korpu</Button>
-                                }
-                            </Col>
+                           
                         </Row>
                     </Card.Body>
                 </Card>
