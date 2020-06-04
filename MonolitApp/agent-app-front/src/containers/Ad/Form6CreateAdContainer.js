@@ -21,6 +21,9 @@ const Form6CreateAdContainer = (props) => {
             props.setImagesDTO(JSON.stringify(imageName));
             console.log(imageName[props.flagCover])
             props.setCoverPhoto(imageName[props.flagCover]);
+            // if(props.carModel === null){
+            //     props.setCarModel("");
+            // }
             props.setFormData({
                 ...props.formData,
                 imagesDTO: JSON.stringify(imageName),
@@ -45,6 +48,7 @@ const Form6CreateAdContainer = (props) => {
                 // mileage: props.mileage
             });
             setValidated(true);
+            // props.handleCreatedAd();
             props.handleNext();
         }
 

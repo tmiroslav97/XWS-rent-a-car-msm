@@ -29,4 +29,6 @@ public interface EndUserService {
     EndUser save(EndUser endUser);
 
     Integer getAdLimitNum(String email);
+
+    Integer reduceAdLimitNum(String email);
 }

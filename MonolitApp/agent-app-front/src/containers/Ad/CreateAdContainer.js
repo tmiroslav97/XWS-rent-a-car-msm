@@ -15,20 +15,20 @@ const CreateAdContainer = () => {
     const [validated, setValidated] = useState(false);
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
-    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike', 'Kraj'];
+    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike', "Kraj"];
 //forma 1 
-    const [name, setName] = useState();
-    const [location, setLocation] = useState();
+    const [name, setName] = useState("");
+    const [location, setLocation] = useState("");
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
     const [distanceLimit, setDistanceLimit] = useState();
-    const [carModel, setCarModel] = useState();
-    const [carManufacturer, setCarManufacturer] = useState();
-    const [carType, setCarType] = useState();
+    const [carModel, setCarModel] = useState("");
+    const [carManufacturer, setCarManufacturer] = useState("");
+    const [carType, setCarType] = useState("");
     const [year, setYear] = useState();
     const [mileage, setMileage] = useState();
 //forma 2
-    const [gearboxType, setGearboxType] = useState();
-    const [fuelType, setFuelType] = useState();
+    const [gearboxType, setGearboxType] = useState("");
+    const [fuelType, setFuelType] = useState("");
     const [childrenSeatNum, setChildrenSeatNum] = useState();
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
@@ -284,11 +284,13 @@ const CreateAdContainer = () => {
                     imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
                     flagCover={flagCover} setFlagCover={setFlagCover}
                     coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
+                    carModel={carModel} setCarModel={setCarModel}
                     >
                 </Form6CreateAdContainer>
 
                 : null
-            }{
+            }
+            {
                 activeStep === 6 ?
                 <Form6CreateAdContainer
                     formData={formData} setFormData={setFormData}
@@ -300,7 +302,6 @@ const CreateAdContainer = () => {
                     handleSkip={handleSkip}
                     handleReset={handleReset}
                     handleCreatedAd={handleCreatedAd}
-                    // imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
                     >
                 </Form6CreateAdContainer>
                 :null

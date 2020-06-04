@@ -121,4 +121,12 @@ public class EndUserServiceImpl implements EndUserService {
         }
         return endUser.getAdLimitNum();
     }
+
+    @Override
+    public Integer reduceAdLimitNum(String email) {
+        EndUser endUser = this.findByEmail(email);
+        Integer br = getAdLimitNum(email);
+        endUser.setAdLimitNum(br - 1);
+        return br - 1;
+    }
 }

@@ -41,7 +41,10 @@ public class AdServiceImpl implements AdService {
     private CarCalendarTermService carCalendarTermService;
 
     @Autowired
-    private ImageService imageService;
+    private EndUserService endUserService;
+
+    @Autowired
+    private PublisherUserService publisherUserService;
 
 
     @Override
@@ -91,14 +94,17 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Integer createAd(AdCreateDTO adCreateDTO) {
-        //TODO 2: POZVATI PUBLISH USER SERVIS I DOBITI PUBLISHERA NA OSNOVU EMAIL-A TJ USERNAME-A
-        //TODO 3: POZVATI METODU IZ END USER SERVISA ZA DOBAVLJANJE AD LIMIT NUM-A,
-        // AKO JE 4 ZNACI DA NIJE U PITANJU END USER VEC AGENT I NE TREBA NISTA OGRANICAVATI
-        // A AKO JE BROJ 0, U PITANJU JE END USER I ZABRANITI MU DA POSTAVI OGLAS
-        // ILI TO NA POCETKU PROVERITI KROZ NEKU METODU.. DA LI JE END USER I KOLIKI MU JE
-        // LIMIT NUM PA U ZAVISNOSTI OD TOGA DOZVOLITI ILI NE DODAVANJE OGLASA
-//        PublisherUser publisherUser =
+    public Integer createAd(AdCreateDTO adCreateDTO, String email) {
+        Integer rez = endUserService.getAdLimitNum(email);
+        if(rez == 4){
+            System.out.println("nije end userrrr");
+        }else if(rez == 0){
+            System.out.println("end user");
+            System.out.println("ne sme dodavati vise oglasa");
+            return 2;
+        }
+
+
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
 
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
@@ -124,11 +130,14 @@ public class AdServiceImpl implements AdService {
                 ad.getCarCalendarTerms().add(carCalendarTerm);
             }
         }
-
+        PublisherUser publisherUser = publisherUserService.findByEmail(email);
+        ad.setPublisherUser(publisherUser);
         ad = this.save(ad);
-//        PriceList priceList = ad.getPriceList();
-//        priceList.getAds().add(ad);
 
+        if(rez != 4){
+            Integer r = endUserService.reduceAdLimitNum(email);
+            System.out.println("Limit num: "+ r);
+        }
         return 1;
     }
 

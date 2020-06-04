@@ -13,7 +13,7 @@ const Form6CreateAd = (props) => {
                             {props.activeStep === props.steps.length ? (
                                 <div>
                                     <Typography>
-                                        Svi koraci su zavrseni. Uspesno ste dodadali oglas!
+                                        Potvrdite dodavanje
                                     </Typography>
 
                                     {/* <Button onClick={props.handleReset} >
@@ -23,6 +23,7 @@ const Form6CreateAd = (props) => {
                                         // variant="contained"
                                         // color="primary"
                                         onClick={props.handleCreatedAd}
+                                        // onClick={props.handleForm6}
                                         // className={classes.button}
                                         // type="submit"
                                         className="float-right"
@@ -30,15 +31,18 @@ const Form6CreateAd = (props) => {
                                         Dodaj
                                     </Button>
                                 </div>
-                            ) : 
-                            (
+                            ) :
+                                (
                                     <div>
-                                        <div>prikaz </div>
+
+                                        <Typography>
+                                            Pritisnite dodaj ako zelite da dodate oglas.
+                                        </Typography>
                                         <div>
                                             <Button disabled={props.activeStep === 0} onClick={props.handleBack} className="float-left" >
                                                 Nazad
                                             </Button>
-                                            
+
                                             {/* {props.isStepOptional(props.activeStep) && (
                                                 <Button
                                                     variant="contained"
@@ -59,12 +63,12 @@ const Form6CreateAd = (props) => {
                                                 // type="submit"
                                                 className="float-right"
                                             >
-                                                Dodaj nije poslednji
+                                                Dodaj
                                             </Button>
                                         </div>
                                     </div>
                                 )
-                                }
+                            }
                         </Form.Group>
                     </Col>
                 </Form.Row>
