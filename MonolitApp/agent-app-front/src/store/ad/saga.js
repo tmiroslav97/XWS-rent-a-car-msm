@@ -49,8 +49,10 @@ export function* fetchAds() {
         'size': payload.size,
         'isFetch': true
     }));
+    // var lista = data.ads;
+    // console.log(lista)
     // console.log("ispred FOR")
-    // for(let i=0; i<data.ads.size;i++){
+    // for(let i=0; i<lista.size;i++){
     //     console.log("FOR")
     //     const temp = yield call(AdServices.loadImage, payload);
     //     console.log(temp)
@@ -104,3 +106,18 @@ export function* searchAd(){
     
 }
 
+export function* loadImage(){
+    console.log("SAGA LOAD")
+    const { payload } = yield take(PUT_IMAGE_SRC);
+    console.log(payload);
+    const data = yield call(AdServices.loadImage, payload); 
+
+    // yield temp.push(data);
+    // console.log("listaaaaa u sagiiii")
+    // console.log(temp);
+    // yield put(putImageName({
+    //     'data': temp,
+    //     'isFetch': true
+    // }));
+    
+}
