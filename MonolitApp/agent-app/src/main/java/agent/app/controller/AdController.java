@@ -38,7 +38,7 @@ public class AdController {
     }
 
     ObjectMapper objectMapper = new ObjectMapper();
-    
+
     //    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
