@@ -3,6 +3,7 @@ package services.app.adsearchservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import services.app.adsearchservice.dto.image.ImageDTO;
 import services.app.adsearchservice.exception.ExistsException;
 import services.app.adsearchservice.exception.NotFoundException;
 import services.app.adsearchservice.model.Image;
@@ -73,27 +74,27 @@ public class ImageServiceImpl implements ImageService {
         return i;
     }
 
-//
-//    @Override
-//    public ImageDTO findImageLocationByName(String name, Long ad_id)   {
-//        System.out.println("SERVICE METODA ZA SRC LOAD SLIKE");
-//        Image image = imageRepository.findByName(name);
-//
-//        File folder = new File("images");
-//        File[] listOfFiles = folder.listFiles();
-//
-//        for (File file : listOfFiles) {
-//            String namePhoto = stripExtension(file.getName());
-//            if(file.isFile() && namePhoto.equals(image.getName())){
-//                System.out.println(namePhoto);
-//                ImageDTO.builder()
-//                        .src(file.getAbsolutePath())
-//                        .build();
-//            }
-//        }
-//
-//        return null;
-//    }
+
+    @Override
+    public ImageDTO findImageLocationByName(String name, Long ad_id)   {
+        System.out.println("SERVICE METODA ZA SRC LOAD SLIKE");
+        Image image = imageRepository.findByName(name);
+
+        File folder = new File("images");
+        File[] listOfFiles = folder.listFiles();
+
+        for (File file : listOfFiles) {
+            String namePhoto = stripExtension(file.getName());
+            if(file.isFile() && namePhoto.equals(image.getName())){
+                System.out.println(namePhoto);
+                ImageDTO.builder()
+                        .src(file.getAbsolutePath())
+                        .build();
+            }
+        }
+
+        return null;
+    }
 
     @Override
     public String getImageName() {

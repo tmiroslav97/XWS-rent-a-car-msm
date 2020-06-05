@@ -2,6 +2,7 @@ package services.app.adsearchservice.service.intf;
 
 
 
+import services.app.adsearchservice.dto.image.ImageDTO;
 import services.app.adsearchservice.model.Image;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface ImageService {
     Integer deleteById(Long id);
     Integer getImageSize();
 
-//    ImageDTO findImageLocationByName(String name, Long ad_id);
+    ImageDTO findImageLocationByName(String name, Long ad_id);
 
     String getImageName();
     Integer addImage(String imageName);
