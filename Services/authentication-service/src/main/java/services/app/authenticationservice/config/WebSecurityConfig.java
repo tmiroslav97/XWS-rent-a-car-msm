@@ -57,8 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .and()
                 .cors()
                 .and()
@@ -68,8 +68,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
-        web.ignoring().antMatchers(HttpMethod.POST, "/auth/sign-up");
+        web.ignoring().antMatchers(HttpMethod.POST, "/login");
+        web.ignoring().antMatchers(HttpMethod.POST, "/sign-up");
+        web.ignoring().antMatchers(HttpMethod.POST, "/verify");
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js", "/**/assets/**");
     }

@@ -1,9 +1,10 @@
 package gateway.zuul.filter;
 
-import gateway.zuul.client.AuthClient;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import feign.FeignException;
+import gateway.zuul.client.AuthClient;
+import gateway.zuul.client.VerificationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -54,11 +55,16 @@ public class AuthFilter extends ZuulFilter {
         String token = request.getHeader("Auth");
         System.out.println(token);
         try {
-            authClient.verify();
-
+            VerificationResponse vr = authClient.verify(token);
+            if (vr == null) {
+                setFailedRequest("Token nije validan", 403);
+            }
+            ctx.addZuulRequestHeader("userId", vr.getUserId());
+            ctx.addZuulRequestHeader("email", vr.getEmail());
+            ctx.addZuulRequestHeader("roles", vr.getRoles());
             ctx.addZuulRequestHeader("Auth", token);
         } catch (FeignException.NotFound e) {
-            setFailedRequest("User doesn't exist!", 403);
+            setFailedRequest("Korisnik ne postoji", 403);
         }
         return null;
     }
