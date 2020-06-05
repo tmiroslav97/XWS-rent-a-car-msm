@@ -1,4 +1,4 @@
-package services.app.adservice.converter;
+package services.app.pricelistanddiscountservice.converter;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;

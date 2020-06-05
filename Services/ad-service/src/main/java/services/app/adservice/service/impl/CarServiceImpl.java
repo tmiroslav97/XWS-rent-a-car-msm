@@ -1,6 +1,7 @@
 package services.app.adservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import services.app.adservice.converter.CarConverter;
 import services.app.adservice.dto.car.StatisticCarDTO;
 import services.app.adservice.dto.car.CarCreateDTO;
@@ -12,6 +13,7 @@ import services.app.adservice.service.intf.CarService;
 
 import java.util.List;
 
+@Service
 public class CarServiceImpl implements CarService {
 
     @Autowired
