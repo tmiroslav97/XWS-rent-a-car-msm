@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import services.app.authenticationservice.authentication.JwtAuthenticationRequest;
 import services.app.authenticationservice.dto.SignUpDTO;
+import services.app.authenticationservice.dto.VerificationResponse;
 import services.app.authenticationservice.model.UserTokenState;
 import services.app.authenticationservice.service.intf.AuthenticationService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 @RestController
 public class AuthenticationController {
@@ -54,15 +54,9 @@ public class AuthenticationController {
         }
     }
 
-    @RequestMapping(value = "/verify", method = RequestMethod.GET)
-    public ResponseEntity<?> verify(Principal principal) {
-        String email = principal.getName();
-        Boolean flag = authenticationService.verify(email);
-        if (flag) {
-            return new ResponseEntity<>("Korisnik postoji u sistemu", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Korisnik ne postoji u sistemu", HttpStatus.NOT_FOUND);
-        }
+    @RequestMapping(value = "/verify", method = RequestMethod.POST)
+    public VerificationResponse verify(@RequestBody String token) {
+        return authenticationService.verify(token);
     }
 
 }
