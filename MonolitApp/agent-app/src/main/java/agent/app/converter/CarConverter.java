@@ -7,7 +7,7 @@ public class CarConverter {
     public static Car toCreateCarFromRequest(CarCreateDTO carCreateDTO){
 //        DateTime dt = DateAPI.DateTimeFromString(carCreateDTO.getYear());
         return Car.builder()
-                .year(DateAPI.DateTimeNow())
+                .year(DateAPI.dateStringToDateTime(carCreateDTO.getYear()))
                 .carManufacturer(carCreateDTO.getCarManufacturer())
                 .carModel(carCreateDTO.getCarModel())
                 .gearboxType(carCreateDTO.getGearboxType())

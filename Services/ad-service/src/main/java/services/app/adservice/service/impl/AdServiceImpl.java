@@ -182,4 +182,17 @@ public class AdServiceImpl implements AdService {
     public void setRating(AdRatingDTO ad) {
 
     }
+
+    @Override
+    public void logicalDeleteOrRevertAds(List<Ad> ads, Boolean status) {
+        for (Ad ad : ads) {
+            this.logicalDeleteOrRevert(ad, status);
+        }
+    }
+
+    @Override
+    public void logicalDeleteOrRevert(Ad ad, Boolean status) {
+        ad.setDeleted(status);
+        this.save(ad);
+    }
 }

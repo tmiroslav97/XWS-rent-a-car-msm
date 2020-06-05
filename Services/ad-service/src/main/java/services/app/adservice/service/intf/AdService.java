@@ -22,5 +22,7 @@ public interface AdService {
     List<StatisticCarDTO> getCarsWithBestRating(Long publisherId);
     void syncData();
     void setRating(AdRatingDTO ad);
+    void logicalDeleteOrRevertAds(List<Ad> ads, Boolean status);
+    void logicalDeleteOrRevert(Ad ad, Boolean status);
 
 }
