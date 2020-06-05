@@ -104,7 +104,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public VerificationResponse verify(String token) {
         String authToken = token.substring(7);
         String email = tokenUtils.getUsernameFromToken(authToken);
-        System.out.println(email);
         if (!userService.existsByEmail(email)) {
             throw new NotFoundException("Korisnik ne postoji u sistemu!");
         }
@@ -116,7 +115,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 roles += authority.getName() + "|";
             }
             roles = roles.substring(0, roles.length() - 1);
-            System.out.println(roles);
             VerificationResponse vr = new VerificationResponse(userId, email, roles);
             return vr;
         } else {

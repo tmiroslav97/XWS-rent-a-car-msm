@@ -61,6 +61,7 @@ public class AuthFilter extends ZuulFilter {
             ctx.addZuulRequestHeader("email", vr.getEmail());
             ctx.addZuulRequestHeader("roles", vr.getRoles());
             ctx.addZuulRequestHeader("Auth", token);
+            ctx.addZuulRequestHeader("Authorization", token);
         } catch (FeignException.NotFound e) {
             setFailedRequest("Korisnik ne postoji", 403);
         }
