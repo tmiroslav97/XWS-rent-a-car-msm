@@ -13,7 +13,6 @@ import services.app.pricelistanddiscountservice.model.CustomPrincipal;
 import services.app.pricelistanddiscountservice.model.PriceList;
 import services.app.pricelistanddiscountservice.service.intf.PriceListService;
 
-import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/pricelist", produces = MediaType.APPLICATION_JSON_VALUE)
