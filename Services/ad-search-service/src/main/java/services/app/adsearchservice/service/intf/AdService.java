@@ -3,8 +3,8 @@ package services.app.adsearchservice.service.intf;
 
 
 import org.joda.time.DateTime;
-import services.app.adsearchservice.dto.AdPageContentDTO;
-import services.app.adsearchservice.dto.AdPageDTO;
+import services.app.adsearchservice.dto.ad.AdPageContentDTO;
+import services.app.adsearchservice.dto.ad.AdPageDTO;
 import services.app.adsearchservice.model.Ad;
 
 import java.util.List;

@@ -7,8 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import services.app.adsearchservice.dto.AdPageContentDTO;
-import services.app.adsearchservice.dto.AdPageDTO;
+import services.app.adsearchservice.dto.ad.AdPageContentDTO;
+import services.app.adsearchservice.dto.ad.AdPageDTO;
 import services.app.adsearchservice.exception.ExistsException;
 import services.app.adsearchservice.exception.NotFoundException;
 import services.app.adsearchservice.model.Ad;
@@ -17,7 +17,7 @@ import services.app.adsearchservice.service.intf.AdService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 @Service
 public class AdServiceImpl implements AdService {
 
