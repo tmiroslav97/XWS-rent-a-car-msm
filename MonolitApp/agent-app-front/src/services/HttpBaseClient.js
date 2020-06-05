@@ -16,7 +16,7 @@ class HttpBaseClient {
 
             if (!!token) {
                 Object.assign(config.headers, {
-                    Auth: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 });
             }
 

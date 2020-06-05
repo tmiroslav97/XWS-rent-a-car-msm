@@ -63,6 +63,7 @@ public class RequestServiceImpl implements RequestService {
                         .endUser(endUser)
                         .messages(new HashSet<>())
                         .build();
+                this.save(request);
             } else {
                 for (Long adId : submitRequestDTO.getAdIds()) {
                     Ad ad = adService.findById(adId);
@@ -72,15 +73,15 @@ public class RequestServiceImpl implements RequestService {
                             .bundle(false)
                             .startDate(DateAPI.dateStringToDateTime(submitRequestDTO.getStartDate()))
                             .endDate(DateAPI.dateStringToDateTime(submitRequestDTO.getEndDate()))
-                            .submitDate(DateAPI.DateTimeNow())
+                            .submitDate(DateAPI.dateTimeNow())
                             .status(RequestStatusEnum.PENDING)
                             .ads(ads)
                             .endUser(endUser)
                             .messages(new HashSet<>())
                             .build();
+                    this.save(request);
                 }
             }
-            this.save(request);
         }
         return 1;
     }
