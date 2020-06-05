@@ -55,9 +55,6 @@ public class Request {
     @Column(name = DbColumnConstants.ENDDATE, nullable = false)
     private DateTime endDate;
 
-    @Column(name = DbColumnConstants.LOCATION, nullable = false)
-    private String location;
-
     @Column(name = DbColumnConstants.BUNDLE, nullable = false)
     private Boolean bundle;
 

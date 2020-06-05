@@ -1,22 +1,21 @@
-package agent.app.service.impl;
+package services.app.carrequestservice.service.impl;
 
-import agent.app.converter.DateAPI;
-import agent.app.dto.carreq.SubmitRequestDTO;
-import agent.app.exception.NotFoundException;
-import agent.app.model.Ad;
-import agent.app.model.EndUser;
-import agent.app.model.Request;
-import agent.app.model.enumeration.RequestStatusEnum;
-import agent.app.repository.RequestRepository;
-import agent.app.service.intf.AdService;
-import agent.app.service.intf.EndUserService;
-import agent.app.service.intf.RequestService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import services.app.carrequestservice.converter.DateAPI;
+import services.app.carrequestservice.dto.carreq.SubmitRequestDTO;
+import services.app.carrequestservice.exception.NotFoundException;
+import services.app.carrequestservice.model.Ad;
+import services.app.carrequestservice.model.Request;
+import services.app.carrequestservice.model.enumeration.RequestStatusEnum;
+import services.app.carrequestservice.repository.RequestRepository;
+import services.app.carrequestservice.service.intf.RequestService;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 @Service
 public class RequestServiceImpl implements RequestService {
@@ -24,11 +23,6 @@ public class RequestServiceImpl implements RequestService {
     @Autowired
     private RequestRepository requestRepository;
 
-    @Autowired
-    private AdService adService;
-
-    @Autowired
-    private EndUserService endUserService;
 
     @Override
     public Request findById(Long id) {
@@ -48,26 +42,33 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public Integer submitRequest(List<SubmitRequestDTO> submitRequestDTOS, String email) {
-        EndUser endUser = endUserService.findByEmail(email);
+    public Integer submitRequest(List<SubmitRequestDTO> submitRequestDTOS, Long userId) {
         for (SubmitRequestDTO submitRequestDTO : submitRequestDTOS) {
             Request request = null;
             if (submitRequestDTO.getBundle()) {
+                Set<Ad> ads = new HashSet<>();
+                for (Long adId : submitRequestDTO.getAdIds()) {
+                    Ad ad = Ad.builder()
+                            .id(adId)
+                            .build();
+                    ads.add(ad);
+                }
                 request = Request.builder()
                         .bundle(true)
                         .startDate(DateAPI.dateStringToDateTime(submitRequestDTO.getStartDate()))
                         .endDate(DateAPI.dateStringToDateTime(submitRequestDTO.getEndDate()))
                         .submitDate(DateAPI.DateTimeNow())
                         .status(RequestStatusEnum.PENDING)
-                        .ads(adService.findAllByIds(submitRequestDTO.getAdIds()))
-                        .endUser(endUser)
-                        .messages(new HashSet<>())
+                        .ads(ads)
+                        .endUser(userId)
                         .build();
                 this.save(request);
             } else {
                 for (Long adId : submitRequestDTO.getAdIds()) {
-                    Ad ad = adService.findById(adId);
                     Set<Ad> ads = new HashSet<>();
+                    Ad ad = Ad.builder()
+                            .id(adId)
+                            .build();
                     ads.add(ad);
                     request = Request.builder()
                             .bundle(false)
@@ -76,8 +77,7 @@ public class RequestServiceImpl implements RequestService {
                             .submitDate(DateAPI.dateTimeNow())
                             .status(RequestStatusEnum.PENDING)
                             .ads(ads)
-                            .endUser(endUser)
-                            .messages(new HashSet<>())
+                            .endUser(userId)
                             .build();
                     this.save(request);
                 }
