@@ -9,6 +9,8 @@ import services.app.authenticationservice.dto.VerificationResponse;
 import services.app.authenticationservice.service.intf.EndUserService;
 import services.app.authenticationservice.service.intf.UserService;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
@@ -20,7 +22,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/find-publish-user", method = RequestMethod.POST)
-    public Long findPublishUserByEmail(@RequestBody String email) {
-        return userService.findByEmail(email).getId();
+    public Long findPublishUserByEmail(Principal principal) {
+        return userService.findByEmail(principal.getName()).getId();
     }
 }
