@@ -4,7 +4,7 @@ const FINALPOINTS = {
     AD_SEARCH_BASE: '/ad-search',
     AD_BASE: '/ad/ad',
     IMAGE_BASE: '/ad/image'
-    
+
 };
 
 class AdServices extends HttpBaseClient {
@@ -20,9 +20,9 @@ class AdServices extends HttpBaseClient {
                     'Content-Type': 'application/json; charset=utf-8'
                 }
             }
-            
+
         );
-        
+
         return response.data;
     };
 
@@ -31,23 +31,23 @@ class AdServices extends HttpBaseClient {
             FINALPOINTS.IMAGE_BASE + "/upload",
             payload,
             {
-                headers : {
+                headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             }
-            );
-        
+        );
+
         return response.data;
     };
 
     fetchAdsPaginated = async payload => {
         const response = await this.getApiClient().get(
-            FINALPOINTS.AD_BASE, {
-                params: {
-                    nextPage: payload.nextPage,
-                    size: payload.size
-                }
+            FINALPOINTS.AD_SEARCH_BASE + '/ad', {
+            params: {
+                nextPage: payload.nextPage,
+                size: payload.size
             }
+        }
         );
 
         return response.data;
@@ -56,11 +56,11 @@ class AdServices extends HttpBaseClient {
     fetchAdsPaginatedfFromPublisher = async payload => {
         const response = await this.getApiClient().get(
             FINALPOINTS.AD_BASE + "/publisher", {
-                params: {
-                    nextPage: payload.nextPage,
-                    size: payload.size
-                }
+            params: {
+                nextPage: payload.nextPage,
+                size: payload.size
             }
+        }
         );
 
         return response.data;
@@ -70,8 +70,8 @@ class AdServices extends HttpBaseClient {
         console.log("SERVICE AD")
         console.log(payload)
         const response = await this.getApiClient().get(
-            FINALPOINTS.AD_BASE + "/"  + payload
-        
+            FINALPOINTS.AD_BASE + "/" + payload
+
         );
 
         return response.data;
@@ -81,17 +81,17 @@ class AdServices extends HttpBaseClient {
         console.log("SERVICEEE SEARCH")
         console.log(payload);
         const response = await this.getApiClient().get(
-            FINALPOINTS.AD_SEARCH_BASE+FINALPOINTS.AD_BASE + "/search", {
-                params: {
-                    location: payload.location,
-                    startDate: payload.startDate,
-                    endDate: payload.endDate,
-                    nextPage: payload.nextPage,
-                    size: payload.size
-                }
+            FINALPOINTS.AD_SEARCH_BASE + '/ad/search', {
+            params: {
+                location: payload.location,
+                startDate: payload.startDate,
+                endDate: payload.endDate,
+                nextPage: payload.nextPage,
+                size: payload.size
             }
+        }
         );
-            console.log(response);
+        console.log(response);
         return response.data;
     };
 
@@ -100,18 +100,18 @@ class AdServices extends HttpBaseClient {
         console.log(payload);
         const response = await this.getApiClient().get(
             FINALPOINTS.IMAGE_BASE + "/getSrc", {
-                params: {
-                    ad_id: payload.ad_id,
-                    name: payload.name,
-                   
-                }
+            params: {
+                ad_id: payload.ad_id,
+                name: payload.name,
+
             }
+        }
         );
-            console.log(response);
+        console.log(response);
         return response.data;
     };
 }
 
-    
+
 
 export default new AdServices();
