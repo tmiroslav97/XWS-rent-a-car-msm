@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import services.app.authenticationservice.authentication.JwtAuthenticationRequest;
 import services.app.authenticationservice.dto.SignUpDTO;
+import services.app.authenticationservice.dto.VerificationResponse;
 import services.app.authenticationservice.exception.NotFoundException;
 import services.app.authenticationservice.model.Authority;
 import services.app.authenticationservice.model.EndUser;
@@ -100,10 +101,26 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Boolean verify(String email) {
-        if(!userService.existsByEmail(email)){
+    public VerificationResponse verify(String token) {
+        String authToken = token.substring(7);
+        String email = tokenUtils.getUsernameFromToken(authToken);
+        System.out.println(email);
+        if (!userService.existsByEmail(email)) {
             throw new NotFoundException("Korisnik ne postoji u sistemu!");
         }
-        return true;
+        User user = userService.findByEmail(email);
+        String userId = user.getId().toString();
+        String roles = "";
+        if (tokenUtils.validateToken(authToken, user)) {
+            for (Authority authority : user.getAuthorities()) {
+                roles += authority.getName() + "|";
+            }
+            roles = roles.substring(0, roles.length() - 1);
+            System.out.println(roles);
+            VerificationResponse vr = new VerificationResponse(userId, email, roles);
+            return vr;
+        } else {
+            return null;
+        }
     }
 }
