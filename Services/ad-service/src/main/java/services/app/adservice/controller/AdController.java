@@ -73,13 +73,13 @@ public class AdController {
 
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-    @RequestMapping(value="/publisher",method = RequestMethod.GET)
-    public ResponseEntity<?> findAllPageAdFromPublisher(@RequestParam(value = "nextPage", required = false) Integer nextPage,
-                                                        @RequestParam(value = "size", required = false) Integer size) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
-        return new ResponseEntity<>(adService.findAll(nextPage, size, principal.getEmail()), HttpStatus.OK);
-    }
+//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+//    @RequestMapping(value="/publisher",method = RequestMethod.GET)
+//    public ResponseEntity<?> findAllPageAdFromPublisher(@RequestParam(value = "nextPage", required = false) Integer nextPage,
+//                                                        @RequestParam(value = "size", required = false) Integer size) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
+//        return new ResponseEntity<>(adService.findAll(nextPage, size, principal.getEmail()), HttpStatus.OK);
+//    }
 
 }

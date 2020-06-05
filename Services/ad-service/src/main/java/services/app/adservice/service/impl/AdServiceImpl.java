@@ -49,23 +49,23 @@ public class AdServiceImpl implements AdService {
         return adRepository.findAll();
     }
 
-    @Override
-    public AdPageContentDTO findAll(Integer page, Integer size, String email) {
-//        User pu = userService.findByEmail(email);
-
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
-        Page<Ad> ads = adRepository.findAllByDeletedAndPublisherUserEmail(false, email, pageable);
-
-        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
-        System.out.println(ret.size());
-        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
-                .totalPageCnt(ads.getTotalPages())
-                .ads(ret)
-                .build();
-
-
-        return adPageContentDTO;
-    }
+//    @Override
+//    public AdPageContentDTO findAll(Integer page, Integer size, String email) {
+////        User pu = userService.findByEmail(email);
+//
+//        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+//        Page<Ad> ads = adRepository.findAllByDeletedAndPublisherUserEmail(false, email, pageable);
+//
+//        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+//        System.out.println(ret.size());
+//        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
+//                .totalPageCnt(ads.getTotalPages())
+//                .ads(ret)
+//                .build();
+//
+//
+//        return adPageContentDTO;
+//    }
 
     @Override
     public Ad save(Ad ad) {
