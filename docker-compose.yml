@@ -188,25 +188,25 @@ services:
       - car-request-service
       - ad-service
 
-  # agent-app:
-  #   image: agent-app
-  #   container_name: agent-app
-  #   build: 
-  #     context: ./MonolitApp
-  #     dockerfile: Dockerfile
-  #   tty: true
-  #   restart: on-failure
-  #   networks:
-  #     - static-network
-  #   ports:
-  #     - "8083:8083"
-  #   environment:
-  #     DATABASE_USERNAME: root
-  #     DATABASE_PASSWORD: root
-  #     DATABASE_DOMAIN: mysql
-  #     DATABASE_SCHEMA: rent_a_car?createDatabaseIfNotExist=true&serverTimezone=UTC
-  #   depends_on: 
-  #     - mysql
+  agent-app:
+    image: agent-app
+    container_name: agent-app
+    build: 
+      context: ./MonolitApp
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
+    ports:
+      - "8083:8083"
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: rent_a_car?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - mysql
   
   mysql:
     image: mysql:8.0.19
