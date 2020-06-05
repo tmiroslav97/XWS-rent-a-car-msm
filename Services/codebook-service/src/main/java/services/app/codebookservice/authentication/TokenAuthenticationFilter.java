@@ -31,6 +31,7 @@ public class TokenAuthenticationFilter extends UsernamePasswordAuthenticationFil
         String roles = httpServletRequest.getHeader("roles");
         String token = httpServletRequest.getHeader("Auth");
 
+        System.out.println("filter");
         System.out.println(userId);
         System.out.println(email);
         System.out.println(roles);
