@@ -19,7 +19,7 @@ const AdListContainer = () => {
     const [nextPage, setNextPage] = useState(ads.nextPage);
     const [size, setSize] = useState(ads.size);
     const [namePhoto, setNamePhoto] = useState();
-
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         dispatch(
@@ -57,7 +57,7 @@ const AdListContainer = () => {
                 <Col >
 
                     {
-                        isFetchAds ?  <AdComponent ads={ads.data} handleCoverPh={handleCoverPh}/> : <SpinnerContainer />
+                        isFetchAds ?  <AdComponent ads={ads.data} token={token} handleCoverPh={handleCoverPh}/> : <SpinnerContainer />
                     }
                 </Col>
             </Row>

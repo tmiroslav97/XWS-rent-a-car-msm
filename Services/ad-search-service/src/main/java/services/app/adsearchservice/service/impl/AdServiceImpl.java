@@ -60,6 +60,11 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public void addAd(Ad ad) {
+
+    }
+
+    @Override
     public AdPageContentDTO findAll(Integer page, Integer size) {
 
 //        Pageable pageable;
@@ -90,5 +95,15 @@ public class AdServiceImpl implements AdService {
 
         return adPageContentDTO;
     }
+
+    @Override
+    public Ad save(Ad ad) {
+        if(ad.getId() != null){
+            if(adRepository.existsById(ad.getId())){
+                throw new ExistsException(String.format("Oglas vec postoji."));
+            }
+        }
+
+        return adRepository.save(ad);    }
 
 }

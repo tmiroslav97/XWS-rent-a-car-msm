@@ -20,8 +20,6 @@ public class AdController {
         this.adService = adService;
     }
 
-    ObjectMapper objectMapper = new ObjectMapper();
-
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage,
                                            @RequestParam(value = "size", required = false) Integer size) {
