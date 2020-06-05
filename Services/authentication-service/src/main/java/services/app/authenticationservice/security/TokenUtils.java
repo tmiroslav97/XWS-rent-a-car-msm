@@ -27,7 +27,7 @@ public class TokenUtils {
     @Value("300000")
     private int EXPIRES_IN;
 
-    @Value("Auth")
+    @Value("Authorization")
     private String AUTH_HEADER;
 
     static final String AUDIENCE_UNKNOWN = "unknown";
