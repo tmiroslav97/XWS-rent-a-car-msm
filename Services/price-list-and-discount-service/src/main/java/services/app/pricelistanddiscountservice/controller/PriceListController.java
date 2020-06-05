@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import services.app.pricelistanddiscountservice.converter.PriceListConverter;
 import services.app.pricelistanddiscountservice.dto.pricelist.PriceListCreateDTO;
+import services.app.pricelistanddiscountservice.model.CustomPrincipal;
 import services.app.pricelistanddiscountservice.model.PriceList;
 import services.app.pricelistanddiscountservice.service.intf.PriceListService;
 
@@ -37,15 +38,15 @@ public class PriceListController {
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(value = "/publisher", method = RequestMethod.GET)
-    public ResponseEntity<?> getPriceListsFromPublishUser(Principal principal) {
-        System.out.println("---------------" + principal.getName());
-        return new ResponseEntity<>(priceListService.findAllListDTOFromPublisher(principal.getName()), HttpStatus.OK);
+    public ResponseEntity<?> getPriceListsFromPublishUser(CustomPrincipal principal) {
+        System.out.println("---------------" + principal.getEmail());
+        return new ResponseEntity<>(priceListService.findAllListDTOFromPublisher(principal.getEmail()), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createPriceList(@RequestBody PriceListCreateDTO priceListCreateDTO, Principal principal) {
-        System.out.println(principal.getName());
+    public ResponseEntity<?> createPriceList(@RequestBody PriceListCreateDTO priceListCreateDTO, CustomPrincipal principal) {
+        System.out.println(principal.getEmail());
 //        priceListCreateDTO.setPublisherUsername(principal.getName());
         PriceList priceList = priceListService.createPriceList(priceListCreateDTO);
         return new ResponseEntity<>("Cenovnik uspesno kreiran.", HttpStatus.OK);
