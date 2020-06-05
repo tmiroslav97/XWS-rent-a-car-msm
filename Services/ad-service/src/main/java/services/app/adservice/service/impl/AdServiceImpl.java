@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import services.app.adservice.client.AuthenticationClient;
 import services.app.adservice.client.PricelistAndDiscountClient;
@@ -21,6 +23,7 @@ import services.app.adservice.exception.NotFoundException;
 import services.app.adservice.model.Ad;
 import services.app.adservice.model.Car;
 import services.app.adservice.model.CarCalendarTerm;
+import services.app.adservice.model.CustomPrincipal;
 import services.app.adservice.repository.AdRepository;
 import services.app.adservice.service.intf.AdService;
 import services.app.adservice.service.intf.CarCalendarTermService;
@@ -41,7 +44,9 @@ public class AdServiceImpl implements AdService {
     @Autowired
     private CarCalendarTermService carCalendarTermService;
 
+    @Autowired
     private PricelistAndDiscountClient pricelistAndDiscountClient;
+    @Autowired
     private AuthenticationClient authenticationClient;
 
     @Override
@@ -127,8 +132,10 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Integer createAd(AdCreateDTO adCreateDTO , String email) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
 
-        Integer rez = authenticationClient.getAdLimitNum(email);
+        Integer rez = authenticationClient.getAdLimitNum(principal.getToken());
 
         if(rez == 4){
             System.out.println("nije end userrrr");
@@ -144,12 +151,14 @@ public class AdServiceImpl implements AdService {
 
         if (adCreateDTO.getPriceListCreateDTO().getId() == null) {
             //pravljenje novog cenovnika
-            Long priceList = pricelistAndDiscountClient.createPricelist(adCreateDTO.getPriceListCreateDTO());
+            Long priceList = pricelistAndDiscountClient.createPricelist(adCreateDTO.getPriceListCreateDTO(),principal.getUserId(), principal.getEmail(),
+                    principal.getRoles(), principal.getToken());
             //TODO 1: DODATI PUBLISHERA I DODATI OGLAS TAJ PRICE LISTI
             ad.setPriceList(priceList);
         } else {
             //dodavanje vec postojeceg cenovnika
-            Long priceList = pricelistAndDiscountClient.findPriceList(adCreateDTO.getPriceListCreateDTO().getId());
+            Long priceList = pricelistAndDiscountClient.findPriceList(adCreateDTO.getPriceListCreateDTO().getId(), principal.getUserId(), principal.getEmail(),
+                    principal.getRoles(), principal.getToken());
             ad.setPriceList(priceList);
         }
 
@@ -161,12 +170,12 @@ public class AdServiceImpl implements AdService {
                 ad.getCarCalendarTerms().add(carCalendarTerm);
             }
         }
-        Long publisherUser = authenticationClient.findPublishUserByEmail(email);
+        Long publisherUser = authenticationClient.findPublishUserByEmail(principal.getToken());
         ad.setPublisherUser(publisherUser);
         ad = this.save(ad);
 
         if(rez != 4){
-            Integer r = authenticationClient.reduceLimitNum(email);
+            Integer r = authenticationClient.reduceLimitNum(principal.getToken());
             System.out.println("Limit num: "+ r);
         }
         return 1;

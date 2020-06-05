@@ -1,6 +1,6 @@
 package services.app.carrequestservice.service.intf;
 
-import services.app.carrequestservice.dto.RequestDTO;
+import services.app.carrequestservice.dto.carreq.SubmitRequestDTO;
 import services.app.carrequestservice.model.Request;
 
 import java.util.List;
@@ -8,14 +8,14 @@ import java.util.List;
 public interface RequestService {
 
     Request findById(Long id);
-    List<Request> findAll();
-    Request save(Request request);
-    void delete(Request request);
-    Integer deleteById(Long id);
-    Integer createRequest(RequestDTO request);
-    Integer confirmRequest(Long id, Boolean status);
-    Integer cancelRequest(Long id);
-    Integer scheduleCancelRequest(Long id);
-    Integer cancelRequestUser(Long id);
 
+    List<Request> findAll();
+
+    Integer deleteById(Long id);
+
+    Integer submitRequest(List<SubmitRequestDTO> submitRequestDTOS, Long userId);
+
+    void delete(Request request);
+
+    Request save(Request request);
 }

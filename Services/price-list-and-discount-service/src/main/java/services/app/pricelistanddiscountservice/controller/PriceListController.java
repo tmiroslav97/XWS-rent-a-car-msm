@@ -84,8 +84,8 @@ public class PriceListController {
         return priceListService.createPriceList(priceListCreateDTO).getId();
     }
 
-    @RequestMapping(value = "/find-pricelist", method = RequestMethod.POST)
-    public Long findPriceList(@RequestBody Long id) {
+    @RequestMapping(value = "/find-pricelist/{id}", method = RequestMethod.GET)
+    public Long findPriceList(@PathVariable Long id) {
         return priceListService.findById(id).getId();
     }
 

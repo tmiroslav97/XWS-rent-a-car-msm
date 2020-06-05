@@ -1,0 +1,8 @@
+INSERT INTO ad(id)
+VALUES (1);
+
+INSERT INTO ad(id)
+VALUES (2);
+
+INSERT INTO ad(id)
+VALUES (3);

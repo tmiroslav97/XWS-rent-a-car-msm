@@ -1,7 +1,6 @@
 package services.app.carrequestservice.common.db;
 
 public class DbColumnConstants {
-    public static final String LOCATION = "location";
     public static final String STARTDATE = "startDate";
     public static final String ENDDATE = "endDate";
     public static final String STATUS = "status";

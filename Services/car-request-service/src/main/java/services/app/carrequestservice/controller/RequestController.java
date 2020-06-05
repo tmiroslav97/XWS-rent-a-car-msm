@@ -1,19 +1,19 @@
-package agent.app.controller;
+package services.app.carrequestservice.controller;
 
-import agent.app.dto.carreq.ListSubmitRequestDTO;
-import agent.app.service.intf.RequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.security.Principal;
+import services.app.carrequestservice.dto.carreq.ListSubmitRequestDTO;
+import services.app.carrequestservice.model.CustomPrincipal;
+import services.app.carrequestservice.service.intf.RequestService;
 
 @RestController
-@RequestMapping(value = "/req")
 public class RequestController {
 
     private final RequestService requestService;
@@ -24,9 +24,10 @@ public class RequestController {
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> submitRequest(@RequestBody ListSubmitRequestDTO listSubmitRequestDTO, Principal principal) {
-        String email = principal.getName();
-        Integer flag = requestService.submitRequest(listSubmitRequestDTO.getSubmitRequestDTOS(), email);
+    public ResponseEntity<?> submitRequest(@RequestBody ListSubmitRequestDTO listSubmitRequestDTO) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal cp = (CustomPrincipal) auth.getPrincipal();
+        Integer flag = requestService.submitRequest(listSubmitRequestDTO.getSubmitRequestDTOS(), Long.valueOf(cp.getUserId()));
         if (flag == 1) {
             return new ResponseEntity<>("Zahtjev uspjesno kreiran.", HttpStatus.OK);
         } else {

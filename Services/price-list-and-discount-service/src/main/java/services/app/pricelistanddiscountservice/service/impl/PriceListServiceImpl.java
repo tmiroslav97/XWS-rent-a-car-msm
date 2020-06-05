@@ -2,12 +2,15 @@ package services.app.pricelistanddiscountservice.service.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import services.app.pricelistanddiscountservice.client.AuthenticationClient;
 import services.app.pricelistanddiscountservice.converter.PriceListConverter;
 import services.app.pricelistanddiscountservice.dto.pricelist.PriceListCreateDTO;
 import services.app.pricelistanddiscountservice.exception.ExistsException;
 import services.app.pricelistanddiscountservice.exception.NotFoundException;
+import services.app.pricelistanddiscountservice.model.CustomPrincipal;
 import services.app.pricelistanddiscountservice.model.PriceList;
 import services.app.pricelistanddiscountservice.repository.PriceListRepository;
 import services.app.pricelistanddiscountservice.service.intf.PriceListService;
@@ -21,8 +24,7 @@ public class PriceListServiceImpl implements PriceListService {
     @Autowired
     PriceListRepository priceListRepository;
 
-//    @Autowired
-//    private PublisherUserService publisherUserService;
+    @Autowired
     private AuthenticationClient authenticationClient;
 
     @Override
@@ -70,7 +72,9 @@ public class PriceListServiceImpl implements PriceListService {
     @Override
     public PriceList createPriceList(PriceListCreateDTO priceListCreateDTO) {
         PriceList priceList = PriceListConverter.toCreatePriceListFromRequest(priceListCreateDTO);
-        Long publisherUser = authenticationClient.findPublishUserByEmail(priceListCreateDTO.getPublisherUsername());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
+        Long publisherUser = authenticationClient.findPublishUserByEmail(principal.getToken());
         priceList.setPublisherUser(publisherUser);
         priceList = this.priceListRepository.save(priceList);
         return priceList;
