@@ -13,7 +13,7 @@ public interface AdService {
 
     Ad findById(Long id);
     List<Ad> findAll();
-//    AdPageContentDTO findAll(Integer page, Integer size, String email);
+    AdPageContentDTO findAll(Integer page, Integer size, String userId);
     Ad save(Ad ad);
     void delete(Ad ad);
     Integer deleteById(Long id);
