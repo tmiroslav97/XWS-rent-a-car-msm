@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 @Getter
+@ToString
 public class PriceListCreateDTO {
     private String creationDate;
     private Float pricePerKm;

@@ -6,47 +6,31 @@ import { adsSelector } from '../../store/ad/selectors';
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import OrdinarySearchContainer from '../../containers/Search/OrdinarySearchContainer'
-import { fetchAds } from '../../store/ad/actions';
+import { fetchAdsFromPublisher } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
-import { loadImage } from '../../store/ad/saga';
 
-
-
-const AdListContainer = () => {
+const MyAdsContainer = () => {
     const dispatch = useDispatch();
     const ads = useSelector(adsSelector);
     const isFetchAds = ads.isFetch;
     const [nextPage, setNextPage] = useState(ads.nextPage);
     const [size, setSize] = useState(ads.size);
-    const [namePhoto, setNamePhoto] = useState();
-
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         dispatch(
-            fetchAds({
+            fetchAdsFromPublisher({
                 nextPage,
                 size
             })
         );
-    
     }, [nextPage, size]);
 
-
-    const handleCoverPh =  (event) => {
-        console.log("ISPISIIIIIII")
-        console.log(event);
-        setNamePhoto(event)
-        console.log(namePhoto)
-    }
 
     return(
        
         <Container>
-            <Row>
-                <Col>
-                    <OrdinarySearchContainer></OrdinarySearchContainer>
-                </Col>
-            </Row>
+            
             <Row>
                 <Col md={{ span: 12, offset: 3 }} xs={12}>
     
@@ -57,7 +41,7 @@ const AdListContainer = () => {
                 <Col >
 
                     {
-                        isFetchAds ?  <AdComponent ads={ads.data} handleCoverPh={handleCoverPh}/> : <SpinnerContainer />
+                        isFetchAds ?  <AdComponent ads={ads.data} token={token}/> : <SpinnerContainer />
                     }
                 </Col>
             </Row>
@@ -70,4 +54,4 @@ const AdListContainer = () => {
     );
 }
 
-export default AdListContainer;
+export default MyAdsContainer;

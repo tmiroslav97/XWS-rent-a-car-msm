@@ -6,7 +6,7 @@ const Form3CreateAd = (props) => {
     return (
         <Container>
             <Form id="step3" onSubmit={props.onSubmit} noValidate validated={props.validated}>
-                <Form.Row>
+                {/* <Form.Row>
                     <Col>
                         <ButtonGroup variant="outline" >
                             {props.id ?
@@ -14,16 +14,24 @@ const Form3CreateAd = (props) => {
                                 :
                                 <Button onClick={props.handleActiveToggle1}>Dodaj cenovnik</Button>
                             }
+                            {props.pricePerDay ?
+                                null :
+                                <Button onClick={props.handleActiveToggle0}>Izaberi cenovnik</Button>
+                            }
 
-                            <Button onClick={props.handleActiveToggle0}>Izaberi cenovnik</Button>
+
                         </ButtonGroup>
                         <br />
                         <br />
                     </Col>
-                </Form.Row>
+                </Form.Row> */}
                 <Form.Row>
                     {props.activeToggle === 1 ?
                         <Col>
+                            {props.pricePerDay ?
+                                null :
+                                <Button onClick={props.handleActiveToggle0}>Izaberi cenovnik</Button>
+                            }
                             <Form.Group as={Col}>
                                 <Form.Label>Cena po danu</Form.Label>
                                 <InputGroup className="mb-3">
@@ -32,7 +40,8 @@ const Form3CreateAd = (props) => {
                                     </InputGroup.Prepend>
                                     <Form.Control name="pricePerDay" required id="numPricePerDay"
                                         type="number" placeholder="Cena po danu"
-                                        onChange={props.handlePricePerDay}  />
+                                        defaultValue={props.pricePerDay}
+                                        onChange={props.handlePricePerDay} />
                                     <InputGroup.Append>
                                         <InputGroup.Text>.00</InputGroup.Text>
                                     </InputGroup.Append>
@@ -46,7 +55,8 @@ const Form3CreateAd = (props) => {
                                             <InputGroup.Text>RSD</InputGroup.Text>
                                         </InputGroup.Prepend>
                                         <Form.Control name="pricePerKm" required id="numPricePerKm"
-                                            type="number" placeholder="Cena po kilometru" 
+                                            type="number" placeholder="Cena po kilometru"
+                                            defaultValue={props.pricePerKm}
                                             onChange={props.handlePricePerKm} />
                                         <InputGroup.Append>
                                             <InputGroup.Text>.00</InputGroup.Text>
@@ -63,7 +73,9 @@ const Form3CreateAd = (props) => {
                                             <InputGroup.Text>RSD</InputGroup.Text>
                                         </InputGroup.Prepend>
                                         <Form.Control name="pricePerKmCDW" required id="numPricePerKmCDW"
-                                            type="number" placeholder="Cena po kilometru (CDW)" onChange={props.handlePricePerKmCDW} />
+                                            type="number" placeholder="Cena po kilometru (CDW)"
+                                            defaultValue={props.pricePerKmCDW}
+                                            onChange={props.handlePricePerKmCDW} />
                                         <InputGroup.Append>
                                             <InputGroup.Text>.00</InputGroup.Text>
                                         </InputGroup.Append>
@@ -76,6 +88,11 @@ const Form3CreateAd = (props) => {
                     }
                     {props.activeToggle === 0 ?
                         <Col>
+                            {props.id ?
+                                null
+                                :
+                                <Button onClick={props.handleActiveToggle1}>Dodaj cenovnik</Button>
+                            }
                             <Table striped bordered hover>
                                 <thead>
                                     <tr>

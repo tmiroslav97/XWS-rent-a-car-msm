@@ -2,15 +2,24 @@ import HttpBaseClient from './HttpBaseClient';
 
 const FINALPOINTS = {
     AD_BASE: '/ad',
+    IMAGE_BASE: 'image'
     
 };
 
 class AdServices extends HttpBaseClient {
 
     createdAd = async payload => {
+        console.log("********************")
+        console.log(payload);
         const response = await this.getApiClient().post(
             FINALPOINTS.AD_BASE,
-            payload
+            payload,
+            {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }
+            
         );
         
         return response.data;
@@ -18,7 +27,7 @@ class AdServices extends HttpBaseClient {
 
     uploadImage = async payload => {
         const response = await this.getApiClient().post(
-            FINALPOINTS.AD_BASE + "/upload",
+            FINALPOINTS.IMAGE_BASE + "/upload",
             payload,
             {
                 headers : {
@@ -33,6 +42,19 @@ class AdServices extends HttpBaseClient {
     fetchAdsPaginated = async payload => {
         const response = await this.getApiClient().get(
             FINALPOINTS.AD_BASE, {
+                params: {
+                    nextPage: payload.nextPage,
+                    size: payload.size
+                }
+            }
+        );
+
+        return response.data;
+    };
+
+    fetchAdsPaginatedfFromPublisher = async payload => {
+        const response = await this.getApiClient().get(
+            FINALPOINTS.AD_BASE + "/publisher", {
                 params: {
                     nextPage: payload.nextPage,
                     size: payload.size
@@ -71,6 +93,24 @@ class AdServices extends HttpBaseClient {
             console.log(response);
         return response.data;
     };
+
+    loadImage = async payload => {
+        console.log("SERVICEEE LOAD SRC")
+        console.log(payload);
+        const response = await this.getApiClient().get(
+            FINALPOINTS.IMAGE_BASE + "/getSrc", {
+                params: {
+                    ad_id: payload.ad_id,
+                    name: payload.name,
+                   
+                }
+            }
+        );
+            console.log(response);
+        return response.data;
+    };
 }
+
+    
 
 export default new AdServices();

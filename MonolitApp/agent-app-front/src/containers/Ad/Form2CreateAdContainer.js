@@ -50,9 +50,9 @@ const Form2CreateAdContainer = (props) => {
 
             props.setFormData({
                 ...props.formData,
-                gearboxType: form.gearboxType.value,
-                fuelType: form.fuelType.value,
-                childrenSeatNum: form.childrenSeatNum.value,
+                gearboxType: props.gearboxType,
+                fuelType: props.fuelType,
+                childrenSeatNum: props.childrenSeatNum,
                 cdw: props.cdw,
                 androidFlag: props.androidFlag
             });
@@ -65,25 +65,44 @@ const Form2CreateAdContainer = (props) => {
     const handleCDW = (event) => {
         props.setCdw(event.target.checked);
     };
-
     const handleAndroidFlag = (event) => {
         props.setAndroidFlag(event.target.checked);
+    };
+
+    const handleGearboxType = (event) => {
+        props.setGearboxType(event.target.value);
+    };
+    const handleFuelType = (event) => {
+        props.setFuelType(event.target.value);
+    };
+    const handleChildrenSeatNum = (event) => {
+        props.setChildrenSeatNum(event.target.value);
     };
 
     return (
         <Form2CreateAd
             onSubmit={handleForm2}
             validated={validated}
-            androidFlag={props.androidFlag}
-            handleAndroidFlag={handleAndroidFlag}
-            cdw={props.cdw}
-            handleCDW={handleCDW}
             activeStep={props.activeStep}
             steps={props.steps}
             isStepOptional={props.isStepOptional}
             handleBack={props.handleBack}
             handleSkip={props.handleSkip}
             handleReset={props.handleReset}
+
+            androidFlag={props.androidFlag}
+            cdw={props.cdw}
+            gearboxType={props.gearboxType} 
+            fuelType={props.fuelType} 
+            childrenSeatNum={props.childrenSeatNum}
+
+            handleAndroidFlag={handleAndroidFlag}
+            handleCDW={handleCDW}
+            handleGearboxType={handleGearboxType}
+            handleFuelType={handleFuelType}
+            handleChildrenSeatNum={handleChildrenSeatNum}
+
+
             getGearboxTypes={getGearboxTypes}
             getFuelTypes={getFuelTypes}
 

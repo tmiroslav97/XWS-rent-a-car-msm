@@ -6,44 +6,44 @@ import { Typography } from '@material-ui/core';
 const Form6CreateAd = (props) => {
     return (
         <Container>
-            <Form id="step6" onSubmit={props.onSubmit} noValidate validated={props.validated}>
-
-
+            <Form id="step6" onSubmit={props.handleCreatedAd} noValidate validated={props.validated}>
                 <Form.Row>
                     <Col>
                         <Form.Group as={Col} >
                             {props.activeStep === props.steps.length ? (
                                 <div>
-                                    <Typography
-                                    // className={classes.instructions}
-                                    >
-                                        Svi koraci su zavrseni. Uspesno ste dodadali oglas!
+                                    <Typography>
+                                        Potvrdite dodavanje
                                     </Typography>
 
-                                    <Button onClick={props.handleReset}
-                                    //  className={classes.button} 
-                                    >
+                                    {/* <Button onClick={props.handleReset} >
                                         Reset
-                                    </Button>
+                                    </Button> */}
                                     <Button
                                         // variant="contained"
                                         // color="primary"
-                                        onClick={props.handleForm6}
+                                        onClick={props.handleCreatedAd}
+                                        // onClick={props.handleForm6}
                                         // className={classes.button}
                                         // type="submit"
                                         className="float-right"
                                     >
                                         Dodaj
-                                            </Button>
+                                    </Button>
                                 </div>
-                            ) : (
+                            ) :
+                                (
                                     <div>
+
+                                        <Typography>
+                                            Pritisnite dodaj ako zelite da dodate oglas.
+                                        </Typography>
                                         <div>
                                             <Button disabled={props.activeStep === 0} onClick={props.handleBack} className="float-left" >
                                                 Nazad
                                             </Button>
 
-                                            {props.isStepOptional(props.activeStep) && (
+                                            {/* {props.isStepOptional(props.activeStep) && (
                                                 <Button
                                                     variant="contained"
                                                     // color="primary"
@@ -53,21 +53,22 @@ const Form6CreateAd = (props) => {
                                                 >
                                                     Preskoci
                                                 </Button>
-                                            )}
+                                            )} */}
 
                                             <Button
                                                 // variant="contained"
                                                 // color="primary"
-                                                // onClick={props.handleNext}
+                                                onClick={props.handleForm6}
                                                 // className={classes.button}
-                                                type="submit"
+                                                // type="submit"
                                                 className="float-right"
                                             >
                                                 Dodaj
                                             </Button>
                                         </div>
                                     </div>
-                                )}
+                                )
+                            }
                         </Form.Group>
                     </Col>
                 </Form.Row>

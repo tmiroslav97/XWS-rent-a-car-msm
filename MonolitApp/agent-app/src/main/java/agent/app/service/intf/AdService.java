@@ -15,6 +15,8 @@ public interface AdService {
 
     AdPageContentDTO findAll(Integer page, Integer size);
 
+    AdPageContentDTO findAll(Integer page, Integer size, String email);
+
     Ad save(Ad ad);
 
     void delete(Ad ad);
@@ -25,11 +27,7 @@ public interface AdService {
 
     Integer deleteById(Long id);
 
-    Integer createAd(AdCreateDTO adCreateDTO);
-
-    String getImageName();
-
-    Integer addImage(String imageName);
+    Integer createAd(AdCreateDTO adCreateDTO, String email);
 
     void syncData();
 

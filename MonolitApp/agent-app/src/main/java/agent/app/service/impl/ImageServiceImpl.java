@@ -1,5 +1,6 @@
 package agent.app.service.impl;
 
+import agent.app.dto.image.ImageDTO;
 import agent.app.exception.ExistsException;
 import agent.app.exception.NotFoundException;
 import agent.app.model.Image;
@@ -7,8 +8,13 @@ import agent.app.repository.CarRepository;
 import agent.app.repository.ImageRepository;
 import agent.app.service.intf.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,7 +24,7 @@ public class ImageServiceImpl implements ImageService {
     private ImageRepository imageRepository;
 
     @Override
-    public Image finById(Long id) {
+    public Image findById(Long id) {
         return imageRepository.findById(id).orElseThrow(()-> new NotFoundException("Slika ne postoji"));
     }
 
@@ -52,13 +58,13 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image editImage(Image image) {
-        this.finById(image.getId());
+        this.findById(image.getId());
         return this.save(image);
     }
 
     @Override
     public Integer deleteById(Long id) {
-        Image image = this.finById(id);
+        Image image = this.findById(id);
         this.delete(image);
         return 1;
     }
@@ -71,4 +77,51 @@ public class ImageServiceImpl implements ImageService {
         Integer i = this.findAll().size();
         return i;
     }
+
+
+    @Override
+    public ImageDTO findImageLocationByName(String name, Long ad_id)   {
+        System.out.println("SERVICE METODA ZA SRC LOAD SLIKE");
+        Image image = imageRepository.findByName(name);
+
+        File folder = new File("images");
+        File[] listOfFiles = folder.listFiles();
+
+        for (File file : listOfFiles) {
+            String namePhoto = stripExtension(file.getName());
+            if(file.isFile() && namePhoto.equals(image.getName())){
+                System.out.println(namePhoto);
+                ImageDTO.builder()
+                        .src(file.getAbsolutePath())
+                        .build();
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public String getImageName() {
+        Integer broj = this.getImageSize() + 1;
+        String imageName = "slika" + broj;
+        return imageName;
+    }
+
+    @Override
+    public Integer addImage(String imageName) {
+        Image img = this.createImage(imageName);
+        System.out.println(img.getId() + " " + img.getName());
+        return 1;
+    }
+
+
+    static String stripExtension (String str) {
+
+        if (str == null) return null;
+        int pos = str.lastIndexOf(".");
+        if (pos == -1) return str;
+        return str.substring(0, pos);
+    }
+
+
 }
