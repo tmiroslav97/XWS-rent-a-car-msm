@@ -47,7 +47,8 @@ public class AdController {
         CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
         System.out.println(adCreateDTO);
 
-//        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
+        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getEmail());
+
         Integer flag = adService.createAd(adCreateDTO, principal.getEmail());
 
         if (flag == 1) {

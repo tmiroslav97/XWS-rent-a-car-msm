@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import services.app.authenticationservice.dto.VerificationResponse;
 import services.app.authenticationservice.service.intf.EndUserService;
 
 @RestController
@@ -39,5 +40,15 @@ public class EndUserController {
         } else {
             return new ResponseEntity<>("Los zahtjev", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @RequestMapping(value = "/limit-num", method = RequestMethod.POST)
+    public Integer getAdLimitNum(@RequestBody String email) {
+        return endUserService.getAdLimitNum(email);
+    }
+
+    @RequestMapping(value = "/reduce-limit-num", method = RequestMethod.POST)
+    public Integer reduceLimitNum(@RequestBody String email) {
+        return endUserService.reduceAdLimitNum(email);
     }
 }

@@ -6,6 +6,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import services.app.adservice.client.AuthenticationClient;
+import services.app.adservice.client.PricelistAndDiscountClient;
 import services.app.adservice.converter.AdConverter;
 import services.app.adservice.converter.CarCalendarTermConverter;
 import services.app.adservice.dto.car.StatisticCarDTO;
@@ -38,6 +40,9 @@ public class AdServiceImpl implements AdService {
     
     @Autowired
     private CarCalendarTermService carCalendarTermService;
+
+    private PricelistAndDiscountClient pricelistAndDiscountClient;
+    private AuthenticationClient authenticationClient;
 
     @Override
     public Ad findById(Long id) {
@@ -122,49 +127,48 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Integer createAd(AdCreateDTO adCreateDTO , String email) {
-//        Integer rez = endUserService.getAdLimitNum(email);
-//        if(rez == 4){
-//            System.out.println("nije end userrrr");
-//        }else if(rez == 0){
-//            System.out.println("end user");
-//            System.out.println("ne sme dodavati vise oglasa");
-//            return 2;
-//        }
-//
-//
-//        Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
-//
-//        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
-//        ad.setCar(car);
-//
-//        if (adCreateDTO.getPriceListCreateDTO().getId() == null) {
-//            //pravljenje novog cenovnika
-//            PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
-//            //TODO 1: DODATI PUBLISHERA I DODATI OGLAS TAJ PRICE LISTI
-//            ad.setPriceList(priceList);
-//        } else {
-//            //dodavanje vec postojeceg cenovnika
-//            PriceList priceList = priceListService.findById(adCreateDTO.getPriceListCreateDTO().getId());
-//            //TODO 2: DODATI OGLAS TAJ PRICE LISTI
-//            ad.setPriceList(priceList);
-//        }
-//
-//        if (adCreateDTO.getCarCalendarTermCreateDTOList() != null) {
-//            List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
-//            for (CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList) {
-//                CarCalendarTerm carCalendarTerm = CarCalendarTermConverter.toCreateCarCalendarTermFromRequest(carCalendarTermCreateDTO);
-//                carCalendarTerm = carCalendarTermService.save(carCalendarTerm);
-//                ad.getCarCalendarTerms().add(carCalendarTerm);
-//            }
-//        }
-//        PublisherUser publisherUser = publisherUserService.findByEmail(email);
-//        ad.setPublisherUser(publisherUser);
-//        ad = this.save(ad);
-//
-//        if(rez != 4){
-//            Integer r = endUserService.reduceAdLimitNum(email);
-//            System.out.println("Limit num: "+ r);
-//        }
+
+        Integer rez = authenticationClient.getAdLimitNum(email);
+
+        if(rez == 4){
+            System.out.println("nije end userrrr");
+        }else if(rez == 0){
+            System.out.println("end user");
+            System.out.println("ne sme dodavati vise oglasa");
+            return 2;
+        }
+        Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
+
+        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
+        ad.setCar(car);
+
+        if (adCreateDTO.getPriceListCreateDTO().getId() == null) {
+            //pravljenje novog cenovnika
+            Long priceList = pricelistAndDiscountClient.createPricelist(adCreateDTO.getPriceListCreateDTO());
+            //TODO 1: DODATI PUBLISHERA I DODATI OGLAS TAJ PRICE LISTI
+            ad.setPriceList(priceList);
+        } else {
+            //dodavanje vec postojeceg cenovnika
+            Long priceList = pricelistAndDiscountClient.findPriceList(adCreateDTO.getPriceListCreateDTO().getId());
+            ad.setPriceList(priceList);
+        }
+
+        if (adCreateDTO.getCarCalendarTermCreateDTOList() != null) {
+            List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
+            for (CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList) {
+                CarCalendarTerm carCalendarTerm = CarCalendarTermConverter.toCreateCarCalendarTermFromRequest(carCalendarTermCreateDTO);
+                carCalendarTerm = carCalendarTermService.save(carCalendarTerm);
+                ad.getCarCalendarTerms().add(carCalendarTerm);
+            }
+        }
+        Long publisherUser = authenticationClient.findPublishUserByEmail(email);
+        ad.setPublisherUser(publisherUser);
+        ad = this.save(ad);
+
+        if(rez != 4){
+            Integer r = authenticationClient.reduceLimitNum(email);
+            System.out.println("Limit num: "+ r);
+        }
         return 1;
     }
 
