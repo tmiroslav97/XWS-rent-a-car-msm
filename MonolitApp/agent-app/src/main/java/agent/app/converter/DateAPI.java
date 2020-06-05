@@ -5,14 +5,19 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 
 public class DateAPI {
 
     public static DateTime DateTimeNow() {
         return new DateTime(DateTimeZone.UTC);
+    }
+
+    public static DateTime dateTimeNow() {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm dd-MM-yyyy");
+        DateTime date = new DateTime(DateTimeZone.UTC);
+        String dateStr = date.toString("HH:mm dd-MM-yyyy");
+        DateTime dateTime = DateTime.parse(dateStr, formatter);
+        return dateTime;
     }
 
     public static DateTime DateTimeFromString(String date) {
