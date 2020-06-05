@@ -1,11 +1,11 @@
-package services.app.codebookservice.authentication;
+package services.app.adservice.authentication;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import services.app.codebookservice.model.CustomPrincipal;
+import services.app.adservice.model.CustomPrincipal;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

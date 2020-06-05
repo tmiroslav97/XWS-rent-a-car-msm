@@ -1,4 +1,4 @@
-package services.app.codebookservice.config;
+package services.app.adservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
-import services.app.codebookservice.authentication.TokenAuthenticationFilter;
+import services.app.adservice.authentication.TokenAuthenticationFilter;
 
 
 @Configuration

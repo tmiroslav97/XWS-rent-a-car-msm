@@ -1,4 +1,4 @@
-package services.app.codebookservice.model;
+package services.app.adservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -5,11 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import services.app.adservice.converter.AdConverter;
 import services.app.adservice.converter.DateAPI;
 import services.app.adservice.dto.ad.AdCreateDTO;
+import services.app.adservice.model.CustomPrincipal;
 import services.app.adservice.service.intf.AdService;
 
 import java.net.InetAddress;
@@ -39,11 +42,13 @@ public class AdController {
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createAd(@RequestBody AdCreateDTO adCreateDTO, Principal principal) {
+    public ResponseEntity<?> createAd(@RequestBody AdCreateDTO adCreateDTO) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
         System.out.println(adCreateDTO);
 
 //        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getName());
-        Integer flag = adService.createAd(adCreateDTO, principal.getName());
+        Integer flag = adService.createAd(adCreateDTO, principal.getEmail());
 
         if (flag == 1) {
             return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
@@ -71,10 +76,10 @@ public class AdController {
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(value="/publisher",method = RequestMethod.GET)
     public ResponseEntity<?> findAllPageAdFromPublisher(@RequestParam(value = "nextPage", required = false) Integer nextPage,
-                                                        @RequestParam(value = "size", required = false) Integer size,
-                                                        Principal principal) {
-
-        return new ResponseEntity<>(adService.findAll(nextPage, size, principal.getName()), HttpStatus.OK);
+                                                        @RequestParam(value = "size", required = false) Integer size) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
+        return new ResponseEntity<>(adService.findAll(nextPage, size, principal.getEmail()), HttpStatus.OK);
     }
 
 }
