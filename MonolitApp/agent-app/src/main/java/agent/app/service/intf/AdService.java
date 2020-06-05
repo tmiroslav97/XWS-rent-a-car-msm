@@ -7,6 +7,7 @@ import agent.app.model.Ad;
 import org.joda.time.DateTime;
 
 import java.util.List;
+import java.util.Set;
 
 public interface AdService {
     Ad findById(Long id);
@@ -16,6 +17,8 @@ public interface AdService {
     AdPageContentDTO findAll(Integer page, Integer size);
 
     AdPageContentDTO findAll(Integer page, Integer size, String email);
+
+    Set<Ad> findAllByIds(List<Long> adIds);
 
     Ad save(Ad ad);
 
