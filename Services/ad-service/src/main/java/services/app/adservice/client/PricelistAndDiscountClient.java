@@ -1,7 +1,7 @@
 package services.app.adservice.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import services.app.adservice.dto.pricelist.PriceListCreateDTO;
 
 
@@ -9,9 +9,17 @@ import services.app.adservice.dto.pricelist.PriceListCreateDTO;
 public interface PricelistAndDiscountClient {
 
     @PostMapping("/pricelist/create-pricelist")
-    Long createPricelist(PriceListCreateDTO priceListCreateDTO);
+    Long createPricelist(@RequestBody PriceListCreateDTO priceListCreateDTO,
+                         @RequestHeader("userId")String userId,
+                         @RequestHeader("email")String email,
+                         @RequestHeader("roles")String roles,
+                         @RequestHeader("Auth")String token);
 
-    @PostMapping("/pricelist/find-pricelist")
-    Long findPriceList(Long id);
+    @GetMapping("/pricelist/find-pricelist/{id}")
+    Long findPriceList(@PathVariable Long id,
+                       @RequestHeader("userId")String userId,
+                       @RequestHeader("email")String email,
+                       @RequestHeader("roles")String roles,
+                       @RequestHeader("Auth")String token);
 
 }

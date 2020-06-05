@@ -4,9 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import services.app.authenticationservice.dto.VerificationResponse;
 import services.app.authenticationservice.service.intf.EndUserService;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/end-user", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -43,12 +47,14 @@ public class EndUserController {
     }
 
     @RequestMapping(value = "/limit-num", method = RequestMethod.POST)
-    public Integer getAdLimitNum(@RequestBody String email) {
-        return endUserService.getAdLimitNum(email);
+    public Integer getAdLimitNum(Principal principal) {
+
+        return endUserService.getAdLimitNum(principal.getName());
     }
 
     @RequestMapping(value = "/reduce-limit-num", method = RequestMethod.POST)
-    public Integer reduceLimitNum(@RequestBody String email) {
-        return endUserService.reduceAdLimitNum(email);
+    public Integer reduceLimitNum(Principal principal) {
+
+        return endUserService.reduceAdLimitNum(principal.getName());
     }
 }
