@@ -14,11 +14,11 @@ public class AdPageDTO {
     private String coverPhoto;
     private String location;
     private Float price;
-//    private String carManufacturer;
-//    private String carModel;
-//    private String fuelType;
-//    private Integer childrenSeatNum;
-//    private Float mileage;
+    private String carManufacturer;
+    private String carModel;
+    private String fuelType;
+    private Integer childrenSeatNum;
+    private Float mileage;
 
 
 }

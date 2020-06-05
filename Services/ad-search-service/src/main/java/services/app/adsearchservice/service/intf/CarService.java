@@ -7,10 +7,6 @@ import services.app.adsearchservice.model.Car;
 import java.util.List;
 
 public interface CarService {
-    Car findById(Long id);
+    Car finById(Long id);
     List<Car> findAll();
-    Car save(Car car);
-    void delete(Car car);
-    Integer deleteById(Long id);
-    Car editCar(Car car);
 }
