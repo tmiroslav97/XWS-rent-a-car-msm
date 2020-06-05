@@ -2,9 +2,11 @@ package agent.app.dto.ad;
 
 import agent.app.dto.car.CarCalendarTermCreateDTO;
 import agent.app.dto.car.CarCreateDTO;
+import agent.app.model.Image;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
