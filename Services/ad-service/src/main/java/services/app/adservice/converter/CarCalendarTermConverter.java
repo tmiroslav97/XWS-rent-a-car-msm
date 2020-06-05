@@ -9,8 +9,8 @@ public class CarCalendarTermConverter {
     public static CarCalendarTerm toCreateCarCalendarTermFromRequest(CarCalendarTermCreateDTO carCalendarTermCreateDTO){
 
         return CarCalendarTerm.builder()
-                .startDate(DateAPI.DateTimeNow())
-                .endDate(DateAPI.DateTimeNow())
+                .startDate(DateAPI.dateStringToDateTime(carCalendarTermCreateDTO.getStartDate()))
+                .endDate(DateAPI.dateStringToDateTime(carCalendarTermCreateDTO.getEndDate()))
                 .build();
     }
 }

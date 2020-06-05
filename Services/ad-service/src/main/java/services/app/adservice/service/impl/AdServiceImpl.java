@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import services.app.adservice.converter.AdConverter;
 import services.app.adservice.converter.CarCalendarTermConverter;
 import services.app.adservice.dto.car.StatisticCarDTO;
@@ -26,6 +27,7 @@ import services.app.adservice.service.intf.CarService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class AdServiceImpl implements AdService {
 
     @Autowired
@@ -46,6 +48,24 @@ public class AdServiceImpl implements AdService {
     public List<Ad> findAll() {
         return adRepository.findAll();
     }
+
+//    @Override
+//    public AdPageContentDTO findAll(Integer page, Integer size, String email) {
+////        User pu = userService.findByEmail(email);
+//
+//        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+//        Page<Ad> ads = adRepository.findAllByDeletedAndPublisherUserEmail(false, email, pageable);
+//
+//        List<AdPageDTO> ret = ads.stream().map(AdConverter::toCreateAdPageDTOFromAd).collect(Collectors.toList());
+//        System.out.println(ret.size());
+//        AdPageContentDTO adPageContentDTO = AdPageContentDTO.builder()
+//                .totalPageCnt(ads.getTotalPages())
+//                .ads(ret)
+//                .build();
+//
+//
+//        return adPageContentDTO;
+//    }
 
     @Override
     public Ad save(Ad ad) {
@@ -101,33 +121,50 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Integer createAd(AdCreateDTO adCreateDTO) {
-        Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
-
-        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
-        ad.setCar(car);
-
-//        if(adCreateDTO.getPriceListCreateDTO().getId() == 0){
+    public Integer createAd(AdCreateDTO adCreateDTO , String email) {
+//        Integer rez = endUserService.getAdLimitNum(email);
+//        if(rez == 4){
+//            System.out.println("nije end userrrr");
+//        }else if(rez == 0){
+//            System.out.println("end user");
+//            System.out.println("ne sme dodavati vise oglasa");
+//            return 2;
+//        }
+//
+//
+//        Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
+//
+//        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
+//        ad.setCar(car);
+//
+//        if (adCreateDTO.getPriceListCreateDTO().getId() == null) {
 //            //pravljenje novog cenovnika
 //            PriceList priceList = priceListService.createPriceList(adCreateDTO.getPriceListCreateDTO());
+//            //TODO 1: DODATI PUBLISHERA I DODATI OGLAS TAJ PRICE LISTI
 //            ad.setPriceList(priceList);
-//        }else{
+//        } else {
 //            //dodavanje vec postojeceg cenovnika
 //            PriceList priceList = priceListService.findById(adCreateDTO.getPriceListCreateDTO().getId());
+//            //TODO 2: DODATI OGLAS TAJ PRICE LISTI
 //            ad.setPriceList(priceList);
 //        }
-
-        if(adCreateDTO.getCarCalendarTermCreateDTOList() != null){
-            List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
-            for(CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList){
-                CarCalendarTerm carCalendarTerm = CarCalendarTermConverter.toCreateCarCalendarTermFromRequest(carCalendarTermCreateDTO);
-                carCalendarTerm = carCalendarTermService.save(carCalendarTerm);
-                ad.getCarCalendarTerms().add(carCalendarTerm);
-            }
-        }
-
-        ad = this.save(ad);
-
+//
+//        if (adCreateDTO.getCarCalendarTermCreateDTOList() != null) {
+//            List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
+//            for (CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList) {
+//                CarCalendarTerm carCalendarTerm = CarCalendarTermConverter.toCreateCarCalendarTermFromRequest(carCalendarTermCreateDTO);
+//                carCalendarTerm = carCalendarTermService.save(carCalendarTerm);
+//                ad.getCarCalendarTerms().add(carCalendarTerm);
+//            }
+//        }
+//        PublisherUser publisherUser = publisherUserService.findByEmail(email);
+//        ad.setPublisherUser(publisherUser);
+//        ad = this.save(ad);
+//
+//        if(rez != 4){
+//            Integer r = endUserService.reduceAdLimitNum(email);
+//            System.out.println("Limit num: "+ r);
+//        }
         return 1;
     }
 
@@ -144,5 +181,18 @@ public class AdServiceImpl implements AdService {
     @Override
     public void setRating(AdRatingDTO ad) {
 
+    }
+
+    @Override
+    public void logicalDeleteOrRevertAds(List<Ad> ads, Boolean status) {
+        for (Ad ad : ads) {
+            this.logicalDeleteOrRevert(ad, status);
+        }
+    }
+
+    @Override
+    public void logicalDeleteOrRevert(Ad ad, Boolean status) {
+        ad.setDeleted(status);
+        this.save(ad);
     }
 }
