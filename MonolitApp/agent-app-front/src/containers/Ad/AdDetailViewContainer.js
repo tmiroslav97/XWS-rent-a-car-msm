@@ -25,7 +25,7 @@ const AdDetailViewContainer = (props) => {
         );
     }, []);
     
-    console.log(ad.data);
+    console.log(ad);
     
     const handleDateFormat = (event) => {
         var datum = new Date(event);
