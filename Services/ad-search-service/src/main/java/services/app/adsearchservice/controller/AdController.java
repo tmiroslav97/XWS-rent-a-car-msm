@@ -5,13 +5,10 @@ import org.joda.time.DateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import services.app.adsearchservice.converter.AdConverter;
 import services.app.adsearchservice.converter.DateAPI;
 import services.app.adsearchservice.service.intf.AdService;
 
-import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/ad", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -23,7 +20,8 @@ public class AdController {
         this.adService = adService;
     }
 
-    //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
+    ObjectMapper objectMapper = new ObjectMapper();
+
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage,
                                            @RequestParam(value = "size", required = false) Integer size) {
@@ -37,8 +35,6 @@ public class AdController {
 
     }
 
-
-    //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(path = "/search", method = RequestMethod.GET)
     public ResponseEntity<?> findAllSearch(@RequestParam(value = "nextPage", required = false) Integer nextPage,
                                            @RequestParam(value = "size", required = false) Integer size,
