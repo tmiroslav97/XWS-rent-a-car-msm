@@ -3,7 +3,7 @@
 ### Docker containers
 
 Builds, (re)creates, starts, and attaches to containers for a service
-`docker compose up --build` 
+`docker-compose up --build` 
 
 List containers
 `docker container ls`
