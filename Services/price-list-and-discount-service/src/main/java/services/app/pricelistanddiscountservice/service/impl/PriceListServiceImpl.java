@@ -3,6 +3,7 @@ package services.app.pricelistanddiscountservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import services.app.pricelistanddiscountservice.client.AuthenticationClient;
 import services.app.pricelistanddiscountservice.converter.PriceListConverter;
 import services.app.pricelistanddiscountservice.dto.pricelist.PriceListCreateDTO;
 import services.app.pricelistanddiscountservice.exception.ExistsException;
@@ -22,6 +23,7 @@ public class PriceListServiceImpl implements PriceListService {
 
 //    @Autowired
 //    private PublisherUserService publisherUserService;
+    private AuthenticationClient authenticationClient;
 
     @Override
     public PriceList findById(Long id) {
@@ -68,8 +70,8 @@ public class PriceListServiceImpl implements PriceListService {
     @Override
     public PriceList createPriceList(PriceListCreateDTO priceListCreateDTO) {
         PriceList priceList = PriceListConverter.toCreatePriceListFromRequest(priceListCreateDTO);
-//        PublisherUser publisherUser = publisherUserService.findByEmail(priceListCreateDTO.getPublisherUsername());
-//        priceList.setPublisherUser(publisherUser);
+        Long publisherUser = authenticationClient.findPublishUserByEmail(priceListCreateDTO.getPublisherUsername());
+        priceList.setPublisherUser(publisherUser);
         priceList = this.priceListRepository.save(priceList);
         return priceList;
     }
