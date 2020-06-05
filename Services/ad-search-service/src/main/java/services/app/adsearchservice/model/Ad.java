@@ -65,13 +65,14 @@ public class Ad {
     @Column(name = DbColumnConstants.RENTCNT, nullable = false)
     private Long rentCnt = 0L;
 
+    @Column(name = DbColumnConstants.PRICE, nullable = false)
+    private Float price;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinTable(name = DbTableConstants.ADCAR,
             joinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "car_id", referencedColumnName = "id"))
     private Car car;
 
-    @Column(name = DbColumnConstants.PRICE, nullable = false)
-    private Float price;
 
 }

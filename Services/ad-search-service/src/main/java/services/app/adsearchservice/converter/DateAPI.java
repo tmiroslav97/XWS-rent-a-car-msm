@@ -1,4 +1,4 @@
-package agent.app.converter;
+package services.app.adsearchservice.converter;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -10,14 +10,6 @@ public class DateAPI {
 
     public static DateTime DateTimeNow() {
         return new DateTime(DateTimeZone.UTC);
-    }
-
-    public static DateTime dateTimeNow() {
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm dd-MM-yyyy");
-        DateTime date = new DateTime(DateTimeZone.UTC);
-        String dateStr = date.toString("HH:mm dd-MM-yyyy");
-        DateTime dateTime = DateTime.parse(dateStr, formatter);
-        return dateTime;
     }
 
     public static DateTime DateTimeFromString(String date) {

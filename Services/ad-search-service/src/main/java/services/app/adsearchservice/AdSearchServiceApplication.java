@@ -6,6 +6,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
+//@EnableFeignClients
 public class AdSearchServiceApplication {
 
 	public static void main(String[] args) {

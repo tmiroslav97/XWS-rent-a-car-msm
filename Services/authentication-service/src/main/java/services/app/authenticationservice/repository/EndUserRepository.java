@@ -6,4 +6,6 @@ import services.app.authenticationservice.model.EndUser;
 
 @Repository
 public interface EndUserRepository extends JpaRepository<EndUser, Long> {
+    EndUser findByEmail(String email);
+    Boolean existsByEmail(String email);
 }
