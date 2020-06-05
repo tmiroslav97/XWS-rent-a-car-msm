@@ -13,13 +13,16 @@ public interface AdService {
 
     Ad findById(Long id);
     List<Ad> findAll();
+//    AdPageContentDTO findAll(Integer page, Integer size, String email);
     Ad save(Ad ad);
     void delete(Ad ad);
     Integer deleteById(Long id);
     AdPageContentDTO findAll(Integer page, Integer size);
-    Integer createAd(AdCreateDTO adCreateDTO);
+    Integer createAd(AdCreateDTO adCreateDTO, String email);
     List<StatisticCarDTO> getCarsWithBestRating(Long publisherId);
     void syncData();
     void setRating(AdRatingDTO ad);
+    void logicalDeleteOrRevertAds(List<Ad> ads, Boolean status);
+    void logicalDeleteOrRevert(Ad ad, Boolean status);
 
 }

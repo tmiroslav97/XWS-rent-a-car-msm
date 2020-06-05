@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button, Table, Card } from 'react-bootstrap'
+import { Container, Row, Col, Button, Card, Carousel } from 'react-bootstrap'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 const AdDetailViewComponent = (props) => {
@@ -35,6 +35,19 @@ const AdDetailViewComponent = (props) => {
                         <Row>
                             <Col md={5}>
                                 <Card.Img src="/img-ad/fiat.jpg" />   
+                                
+                                {/* <Carousel>
+                                    <Carousel.Item>
+                                        <img
+                                            className="d-block w-100"
+                                            src="img/rent1.png"
+                                            alt="First slide"
+                                        />
+                                        <Carousel.Caption>
+                                            <h3>Dobro dosli na rent a car!</h3>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
+                                </Carousel> */}
                                 <>
                                 <br/>
                              

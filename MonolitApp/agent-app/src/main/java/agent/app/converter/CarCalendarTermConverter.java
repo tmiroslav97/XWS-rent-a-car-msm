@@ -6,11 +6,10 @@ import agent.app.model.CarCalendarTerm;
 public class CarCalendarTermConverter {
 
     public static CarCalendarTerm toCreateCarCalendarTermFromRequest(CarCalendarTermCreateDTO carCalendarTermCreateDTO){
-//        DateTime sdt = DateAPI.DateTimeFromString(carCalendarTermCreateDTO.getStartDate());
-//        DateTime edt = DateAPI.DateTimeFromString(carCalendarTermCreateDTO.getEndDate());
+//
         return CarCalendarTerm.builder()
-                .startDate(DateAPI.DateTimeNow())
-                .endDate(DateAPI.DateTimeNow())
+                .startDate(DateAPI.dateStringToDateTime(carCalendarTermCreateDTO.getStartDate()))
+                .endDate(DateAPI.dateStringToDateTime(carCalendarTermCreateDTO.getEndDate()))
                 .build();
     }
 }
