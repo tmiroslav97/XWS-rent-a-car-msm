@@ -7,7 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@ToString
 public class AdPageDTO {
     private Long id;
     private String name;
