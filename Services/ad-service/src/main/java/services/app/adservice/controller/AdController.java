@@ -11,6 +11,9 @@ import services.app.adservice.converter.AdConverter;
 import services.app.adservice.converter.DateAPI;
 import services.app.adservice.dto.ad.AdCreateDTO;
 import services.app.adservice.service.intf.AdService;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.security.Principal;
 
 
