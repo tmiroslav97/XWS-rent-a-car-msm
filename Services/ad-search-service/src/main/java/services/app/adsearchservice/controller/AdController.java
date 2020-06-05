@@ -43,11 +43,7 @@ public class AdController {
 
         DateTime startD = DateAPI.dateStringToDateTime(startDate);
         DateTime endD = DateAPI.dateStringToDateTime(endDate);
-//        System.out.println(startD);
-//        System.out.println(endD);
-//        System.out.println(startD.toString(DateTimeFormat.forPattern("HH:mm dd-MM-yyyy")));
-//        System.out.println(endD.toString(DateTimeFormat.forPattern("HH:mm dd-MM-yyyy")));
-//        System.out.println(location);
+
 
         return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startD, endD), HttpStatus.OK);
     }

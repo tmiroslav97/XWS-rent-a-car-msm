@@ -2,10 +2,8 @@ package services.app.adsearchservice.converter;
 
 
 
-import services.app.adsearchservice.dto.AdPageDTO;
+import services.app.adsearchservice.dto.ad.AdPageDTO;
 import services.app.adsearchservice.model.Ad;
-
-import java.util.HashSet;
 
 public class AdConverter {
 
