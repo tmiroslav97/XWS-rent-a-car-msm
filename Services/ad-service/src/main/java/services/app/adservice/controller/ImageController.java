@@ -1,6 +1,5 @@
 package services.app.adservice.controller;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

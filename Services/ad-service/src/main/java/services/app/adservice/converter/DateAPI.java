@@ -22,6 +22,20 @@ public class DateAPI {
         return dtf.parseDateTime(date);
     }
 
+    public static DateTime dateStringToYear(String date) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MM-yyyy");
+        String[] dio = date.split("-");
+        String yyyy = dio[0];
+        String MM = dio[1];
+        String dd = dio[2];
+
+        String newDate = dd + "-" + MM + "-" + yyyy;
+        System.out.println(newDate);
+        DateTime dateTime = DateTime.parse(newDate, formatter);
+
+        return dateTime;
+    }
+
     //za datume sa fronta koji stizu u formatu: 2020-06-03T03:03
     public static DateTime dateStringToDateTime(String date) {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm dd-MM-yyyy");
