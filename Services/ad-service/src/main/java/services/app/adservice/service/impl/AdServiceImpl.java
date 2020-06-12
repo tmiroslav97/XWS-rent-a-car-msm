@@ -155,11 +155,6 @@ public class AdServiceImpl implements AdService {
             System.out.println("Limit num : "+ r);
         }
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
-
-        //kreirana klasa za automobil
-        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
-        ad.setCar(car);
-
         //dodeljen cenovnik
         if (adCreateDTO.getPriceListCreateDTO().getId() == null) {
             //pravljenje novog cenovnika
@@ -183,6 +178,9 @@ public class AdServiceImpl implements AdService {
                 ad.getCarCalendarTerms().add(carCalendarTerm);
             }
         }
+        //kreirana klasa za automobil
+        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
+        ad.setCar(car);
         //dodeljen publisherUser za oglas
         Long publisherUser = authenticationClient.findPublishUserByEmail(principal.getToken());
         ad.setPublisherUser(publisherUser);
