@@ -43,14 +43,8 @@ public class AdController {
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createAd(@RequestBody AdCreateDTO adCreateDTO) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
         System.out.println(adCreateDTO);
-
-        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getEmail());
-
-        Integer flag = adService.createAd(adCreateDTO, principal.getEmail());
-
+        Integer flag = adService.createAd(adCreateDTO);
         if (flag == 1) {
             return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
         }else if (flag == 2){

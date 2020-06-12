@@ -24,6 +24,11 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    public Image findByName(String name) {
+        return imageRepository.findByName(name);
+    }
+
+    @Override
     public List<Image> findAll() {
         return imageRepository.findAll();
     }
@@ -54,7 +59,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Image editImage(Image image) {
         this.findById(image.getId());
-        return this.save(image);
+        return imageRepository.save(image);
     }
 
     @Override

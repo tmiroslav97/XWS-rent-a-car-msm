@@ -32,8 +32,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car save(Car car) {
-        if(carRepository.existsById(car.getId())){
-            throw new ExistsException(String.format("Automobil vec postoji."));
+        if(car.getId() != null){
+            if(carRepository.existsById(car.getId())){
+                throw new ExistsException(String.format("Automobil vec postoji."));
+            }
         }
         return carRepository.save(car);    }
 

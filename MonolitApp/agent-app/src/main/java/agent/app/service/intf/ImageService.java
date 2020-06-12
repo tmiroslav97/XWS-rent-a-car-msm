@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface ImageService {
     Image findById(Long id);
+    Image findByName(String name);
     List<Image> findAll();
     Image save(Image image);
     void delete(Image image);

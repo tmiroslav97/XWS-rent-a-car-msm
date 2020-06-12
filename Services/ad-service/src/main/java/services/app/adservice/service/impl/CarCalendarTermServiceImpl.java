@@ -30,8 +30,10 @@ public class CarCalendarTermServiceImpl implements CarCalendarTermService {
 
     @Override
     public CarCalendarTerm save(CarCalendarTerm carCalendarTerm) {
-        if(carCalendarTermRepository.existsById(carCalendarTerm.getId())){
-            throw new ExistsException(String.format("Termin u kalendaru vec postoji."));
+        if(carCalendarTerm.getId() != null){
+            if(carCalendarTermRepository.existsById(carCalendarTerm.getId())){
+                throw new ExistsException(String.format("Termin u kalendaru vec postoji."));
+            }
         }
         return carCalendarTermRepository.save(carCalendarTerm);
     }

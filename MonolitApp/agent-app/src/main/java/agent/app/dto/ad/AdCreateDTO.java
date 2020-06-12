@@ -16,7 +16,6 @@ import java.util.List;
 public class AdCreateDTO {
 
     private String name;
-
     private String location;
     private String distanceLimitFlag;
     private Float distanceLimit;

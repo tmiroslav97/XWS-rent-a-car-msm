@@ -18,7 +18,7 @@ public interface AdService {
     void delete(Ad ad);
     Integer deleteById(Long id);
     AdPageContentDTO findAll(Integer page, Integer size);
-    Integer createAd(AdCreateDTO adCreateDTO, String email);
+    Integer createAd(AdCreateDTO adCreateDTO);
     List<StatisticCarDTO> getCarsWithBestRating(Long publisherId);
     void syncData();
     void setRating(AdRatingDTO ad);
