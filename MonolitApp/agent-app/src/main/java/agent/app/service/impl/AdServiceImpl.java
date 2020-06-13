@@ -145,7 +145,7 @@ public class AdServiceImpl implements AdService {
         PublisherUser publisherUser = publisherUserService.findByEmail(email);
         ad.setPublisherUser(publisherUser);
         ad = this.save(ad);
-        
+
         //dodeljene slike
         if(adCreateDTO.getImagesDTO() != null){
             List<String> slike = adCreateDTO.getImagesDTO();

@@ -8,4 +8,5 @@ export const PUT_IMAGE_NAME = 'putImageName';
 export const PUT_AD = 'put_ad';
 export const SEARCH_AD ='search_ad';
 export const PUT_IMAGE_SRC ='put_image_src';
+export const CREATED_AD_PHOTOS ='createdAdPhotos';
 

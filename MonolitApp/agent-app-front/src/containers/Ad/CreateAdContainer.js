@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateAd from '../../components/Ad/CreateAd';
-import { createdAd, uploadImage } from '../../store/ad/actions';
+import { createdAd, uploadImage, createdAdPhotos } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
 import Form2CreateAdContainer from './Form2CreateAdContainer';
 import Form3CreateAdContainer from './Form3CreateAdContainer';
@@ -103,7 +103,18 @@ const CreateAdContainer = () => {
             
             
         }
-        dispatch(createdAd(JSON.stringify(data)));
+        let form = new FormData();
+        for(const i in photos){
+
+            form.append("photos", photos[i]);
+            console.log(photos[i]);
+
+        }
+        form.append('data', JSON.stringify(data));
+        console.log("ispis");
+        console.log(form.values.toString);
+        dispatch(createdAdPhotos(form));
+        // dispatch(createdAd(JSON.stringify(data)));
 
     };
  

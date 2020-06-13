@@ -7,6 +7,17 @@ const FINALPOINTS = {
 };
 
 class AdServices extends HttpBaseClient {
+    
+    createdAdPhotos = async payload => {
+        console.log("********************")
+        console.log(payload);
+        const response = await this.getApiClient().post(
+            FINALPOINTS.AD_BASE + "/withImages",
+            payload
+        );
+        
+        return response.data;
+    };
 
     createdAd = async payload => {
         console.log("********************")

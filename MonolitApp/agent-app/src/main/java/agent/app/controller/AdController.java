@@ -46,7 +46,25 @@ public class AdController {
         return new ResponseEntity<>(AdConverter.toAdDetailViewDTOFromAd(adService.findById(id)), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+    @RequestMapping(value="/withImages", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createAdWithPhotos(@RequestPart("photos") MultipartFile[] photos ,
+                                                @RequestPart("data") String data,
+                                                Principal principal) {
+        System.out.println("///////////////////////////////////////////////////");
+        System.out.println(data);
+        for(MultipartFile mf : photos){
+            System.out.println("usao u forrr");
+            if(!mf.isEmpty()){
+                System.out.println(mf.getOriginalFilename());
+            }
+        };
 
+
+        return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+
+    }
     
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
