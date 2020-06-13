@@ -77,6 +77,7 @@ const CreateAdContainer = () => {
         let data = {
             "name": name,
             "coverPhoto": coverPhoto,
+            "imagesDTO": imagesDTO,
             "location": location,
             "distanceLimitFlag": distanceLimitFlag,
             "distanceLimit": distanceLimit,
@@ -93,13 +94,13 @@ const CreateAdContainer = () => {
                 "androidFlag":androidFlag
             },
             "priceListCreateDTO":{
-                // "creationDate":"2014-01-01",
                 "pricePerKm":pricePerKm,
                 "pricePerKmCWD":pricePerKmCDW,
                 "pricePerDay":pricePerDay,
                 "id":id
             },
             "carCalendarTermCreateDTOList": carCalendarTermList
+            
             
         }
         dispatch(createdAd(JSON.stringify(data)));

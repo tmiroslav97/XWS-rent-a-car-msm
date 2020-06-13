@@ -22,34 +22,37 @@ const Form3CreateAdContainer = (props) => {
         const list = [];
         if (pricelists.isFetch) {
             console.log(pricelists);
-            pricelists.data.map((pricelist) => {
-                let ss = pricelist.creationDate.substring(0, 10);
-                let ss2 = pricelist.creationDate.substring(11, 16);
-                ss = ss + " " + ss2;
-
-                list.push(
-                    <tr key={pricelist.id}>
-                        <td>{ss}</td>
-                        <td>{pricelist.pricePerDay}</td>
-                        <td>{pricelist.pricePerKm}</td>
-                        <td>{pricelist.pricePerKmCDW}</td>
-                        {props.id === pricelist.id ?
-                            <td align="right">
-                                <Button variant="outline-success"
-                                    onClick={() => { handlePriceListDeleteId(pricelist.id); }}
-                                >Ukloni</Button>
-                            </td>
-                            :
-                            <td align="right">
-                                <Button variant="outline-primary"
-                                    onClick={() => { handlePriceListChooseId(pricelist.id); }}
-                                >Izaberi</Button>
-                            </td>
-                        }
-
-
-                    </tr>);
-            })
+            if(pricelists.data != null){
+                pricelists.data.map((pricelist) => {
+                    let ss = pricelist.creationDate.substring(0, 10);
+                    let ss2 = pricelist.creationDate.substring(11, 16);
+                    ss = ss + " " + ss2;
+    
+                    list.push(
+                        <tr key={pricelist.id}>
+                            <td>{ss}</td>
+                            <td>{pricelist.pricePerDay}</td>
+                            <td>{pricelist.pricePerKm}</td>
+                            <td>{pricelist.pricePerKmCDW}</td>
+                            {props.id === pricelist.id ?
+                                <td align="right">
+                                    <Button variant="outline-success"
+                                        onClick={() => { handlePriceListDeleteId(pricelist.id); }}
+                                    >Ukloni</Button>
+                                </td>
+                                :
+                                <td align="right">
+                                    <Button variant="outline-primary"
+                                        onClick={() => { handlePriceListChooseId(pricelist.id); }}
+                                    >Izaberi</Button>
+                                </td>
+                            }
+    
+    
+                        </tr>);
+                })
+            }
+            
 
         }
         return list;

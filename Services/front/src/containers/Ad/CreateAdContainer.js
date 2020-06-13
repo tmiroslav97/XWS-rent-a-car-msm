@@ -77,6 +77,7 @@ const CreateAdContainer = () => {
         let data = {
             "name": name,
             "coverPhoto": coverPhoto,
+            "imagesDTO": imagesDTO,
             "location": location,
             "distanceLimitFlag": distanceLimitFlag,
             "distanceLimit": distanceLimit,

@@ -36,9 +36,20 @@ public class ImageController {
         String name = imageService.getImageName();
         System.out.println("slika : " + photo.getOriginalFilename());
         System.out.println("slika u bazi : " + name);
-        try{
-            File file = new File("photos");
+        System.out.println("DIREKTORIJUM");
 
+        try{
+            File file = new File("C:\\XMLPhotos\\adService");
+
+            if(!file.exists()){
+                if(!file.mkdirs()){
+                    System.out.println("Direktorijum nije kreiran");
+                    return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
+                }
+            }
+
+            System.out.println("DIREKTORIJUM");
+            System.out.println(file.getAbsolutePath());
             String uploadDirectory = file.getAbsolutePath() + "\\" + name;
             File convertFile = new File(uploadDirectory.toString());
             convertFile.createNewFile();
@@ -49,6 +60,7 @@ public class ImageController {
             Integer rez = imageService.addImage(name);
             if(rez != 1){
                 System.out.println("desila se greska prilikom dodavanja slike");
+                return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
             }
             System.out.println("dodata slika");
             return new ResponseEntity<>(name, HttpStatus.CREATED);

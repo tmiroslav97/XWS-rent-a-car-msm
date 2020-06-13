@@ -52,6 +52,9 @@ public class AdServiceImpl implements AdService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ImageService imageService;
+
 
     @Override
     public Ad findById(Long id) {
@@ -109,12 +112,12 @@ public class AdServiceImpl implements AdService {
             System.out.println("ne sme dodavati vise oglasa");
             return 2;
         }
-
+        if(rez != 4){
+            Integer r = endUserService.reduceAdLimitNum(email);
+            System.out.println("Limit num: "+ r);
+        }
 
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
-
-        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
-        ad.setCar(car);
 
         if (adCreateDTO.getPriceListCreateDTO().getId() == null) {
             //pravljenje novog cenovnika
@@ -136,14 +139,26 @@ public class AdServiceImpl implements AdService {
                 ad.getCarCalendarTerms().add(carCalendarTerm);
             }
         }
+        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
+        ad.setCar(car);
+
         PublisherUser publisherUser = publisherUserService.findByEmail(email);
         ad.setPublisherUser(publisherUser);
         ad = this.save(ad);
-
-        if(rez != 4){
-            Integer r = endUserService.reduceAdLimitNum(email);
-            System.out.println("Limit num: "+ r);
+        
+        //dodeljene slike
+        if(adCreateDTO.getImagesDTO() != null){
+            List<String> slike = adCreateDTO.getImagesDTO();
+            for(String slika : slike){
+                Image image = imageService.findByName(slika);
+                if(image != null){
+                    System.out.println("slika: " + image.getName());
+                    image.setAd(ad);
+                    image = imageService.editImage(image);
+                }
+            }
         }
+
         return 1;
     }
 
