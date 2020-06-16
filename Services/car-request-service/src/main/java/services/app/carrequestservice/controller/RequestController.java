@@ -23,6 +23,14 @@ public class RequestController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
+    @RequestMapping(value = "/end-user", method = RequestMethod.GET)
+    public ResponseEntity<?> getEndUserRequests() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal cp = (CustomPrincipal) auth.getPrincipal();
+        return  new ResponseEntity<>(requestService.findAllByEndUserId(Long.valueOf(cp.getUserId())), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> submitRequest(@RequestBody MapSubmitRequestDTO mapSubmitRequestDTO) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

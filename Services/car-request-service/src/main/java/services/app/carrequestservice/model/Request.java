@@ -1,10 +1,12 @@
 package services.app.carrequestservice.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import services.app.carrequestservice.common.db.DbColumnConstants;
 import services.app.carrequestservice.common.db.DbTableConstants;
+import services.app.carrequestservice.converter.DateAPI;
 import services.app.carrequestservice.model.enumeration.RequestStatusEnum;
 
 import javax.persistence.*;
@@ -64,4 +66,19 @@ public class Request {
             joinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "request_id", referencedColumnName = "id"))
     private Set<Ad> ads = new HashSet<>();
+
+    @JsonProperty("submitDate")
+    public String getTheSubmitDate() {
+        return DateAPI.StringDateFromDateTime(submitDate);
+    }
+
+    @JsonProperty("startDate")
+    public String getTheStartDate() {
+        return DateAPI.StringDateFromDateTime(startDate);
+    }
+
+    @JsonProperty("endDate")
+    public String getTheEndDate() {
+        return DateAPI.StringDateFromDateTime(endDate);
+    }
 }

@@ -12,6 +12,8 @@ public interface RequestService {
 
     List<Request> findAll();
 
+    List<Request> findAllByEndUserId(Long id);
+
     Integer deleteById(Long id);
 
     Integer submitRequest(HashMap<Long, List<SubmitRequestDTO>> submitRequestDTOS, Long userId);

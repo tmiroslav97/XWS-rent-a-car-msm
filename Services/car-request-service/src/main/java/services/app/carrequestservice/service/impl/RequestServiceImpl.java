@@ -36,6 +36,11 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public List<Request> findAllByEndUserId(Long id) {
+        return requestRepository.findAllByEndUser(id);
+    }
+
+    @Override
     public Integer deleteById(Long id) {
         Request request = this.findById(id);
         this.delete(request);
