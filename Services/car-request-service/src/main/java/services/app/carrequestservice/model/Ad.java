@@ -3,6 +3,7 @@ package services.app.carrequestservice.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.stereotype.Repository;
+import services.app.carrequestservice.common.db.DbColumnConstants;
 import services.app.carrequestservice.common.db.DbTableConstants;
 
 import javax.persistence.*;
@@ -23,4 +24,6 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = DbColumnConstants.ADNAME, nullable = false)
+    private String adName;
 }

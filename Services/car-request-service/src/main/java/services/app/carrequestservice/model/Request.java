@@ -43,9 +43,6 @@ public class Request {
     @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
     private Long publisherUser;
 
-    @Column(name = DbColumnConstants.ADNAME, nullable = false)
-    private String adName;
-
     @Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
             @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
@@ -62,7 +59,9 @@ public class Request {
     @Column(name = DbColumnConstants.ENDDATE, nullable = false)
     private DateTime endDate;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = DbTableConstants.REQUESTAD,
+            joinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "request_id", referencedColumnName = "id"))
     private Set<Ad> ads = new HashSet<>();
-
 }

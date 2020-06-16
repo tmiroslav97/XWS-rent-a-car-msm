@@ -5,5 +5,5 @@ public class DbTableConstants {
     public static final String REQUEST = "request";
     public static final String REPORT = "report";
     public static final String ADREPORT = "adReport";
-    public static final String BUNDLE = "bundle";
+    public static final String REQUESTAD = "requestAd";
 }

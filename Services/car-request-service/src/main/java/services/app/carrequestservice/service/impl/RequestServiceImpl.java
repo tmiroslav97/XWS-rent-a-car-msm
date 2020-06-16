@@ -10,6 +10,7 @@ import services.app.carrequestservice.model.Ad;
 import services.app.carrequestservice.model.Request;
 import services.app.carrequestservice.model.enumeration.RequestStatusEnum;
 import services.app.carrequestservice.repository.RequestRepository;
+import services.app.carrequestservice.service.intf.AdService;
 import services.app.carrequestservice.service.intf.RequestService;
 
 import java.util.*;
@@ -21,6 +22,8 @@ public class RequestServiceImpl implements RequestService {
     @Autowired
     private RequestRepository requestRepository;
 
+    @Autowired
+    private AdService adService;
 
     @Override
     public Request findById(Long id) {
@@ -46,10 +49,17 @@ public class RequestServiceImpl implements RequestService {
                 Request request = null;
                 if (itemSubmitRequestDTO.getBundle()) {
                     Set<Ad> ads = new HashSet<>();
-                    for (Long adId : itemSubmitRequestDTO.getAdIds()) {
-                        Ad ad = Ad.builder()
-                                .id(adId)
-                                .build();
+                    for (Ad adItem : itemSubmitRequestDTO.getAds()) {
+                        Ad ad = null;
+                        if (adService.existsById(adItem.getId())) {
+                            ad = adService.findById(adItem.getId());
+                        } else {
+                            ad = Ad.builder()
+                                    .id(adItem.getId())
+                                    .adName(adItem.getAdName())
+                                    .build();
+                            adService.save(ad);
+                        }
                         ads.add(ad);
                     }
                     request = Request.builder()
@@ -58,17 +68,23 @@ public class RequestServiceImpl implements RequestService {
                             .submitDate(DateAPI.DateTimeNow())
                             .status(RequestStatusEnum.PENDING)
                             .ads(ads)
-                            .adName(itemSubmitRequestDTO.getAdName())
                             .publisherUser(entry.getKey())
                             .endUser(userId)
                             .build();
                     this.save(request);
                 } else {
-                    for (Long adId : itemSubmitRequestDTO.getAdIds()) {
+                    for (Ad adItem : itemSubmitRequestDTO.getAds()) {
                         Set<Ad> ads = new HashSet<>();
-                        Ad ad = Ad.builder()
-                                .id(adId)
-                                .build();
+                        Ad ad = null;
+                        if (adService.existsById(adItem.getId())) {
+                            ad = adService.findById(adItem.getId());
+                        } else {
+                            ad = Ad.builder()
+                                    .id(adItem.getId())
+                                    .adName(adItem.getAdName())
+                                    .build();
+                            adService.save(ad);
+                        }
                         ads.add(ad);
                         request = Request.builder()
                                 .startDate(DateAPI.dateStringToDateTime(itemSubmitRequestDTO.getStartDate()))
@@ -76,7 +92,6 @@ public class RequestServiceImpl implements RequestService {
                                 .submitDate(DateAPI.dateTimeNow())
                                 .status(RequestStatusEnum.PENDING)
                                 .ads(ads)
-                                .adName(itemSubmitRequestDTO.getAdName())
                                 .publisherUser(entry.getKey())
                                 .endUser(userId)
                                 .build();
