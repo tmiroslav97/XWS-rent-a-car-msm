@@ -31,6 +31,18 @@ public class RequestController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_AGENT')")
+    @RequestMapping(value = "/publisher_user", method = RequestMethod.GET)
+    public ResponseEntity<?> getPublisherUserRequests(@RequestHeader(value = "status", required = false) String status) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal cp = (CustomPrincipal) auth.getPrincipal();
+        if (status == null) {
+            return new ResponseEntity<>(requestService.findAllByPublisherUserId(Long.valueOf(cp.getUserId())), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(requestService.findAllByPublisherUserIdAndByStatus(Long.valueOf(cp.getUserId()), status), HttpStatus.OK);
+        }
+    }
+
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> submitRequest(@RequestBody MapSubmitRequestDTO mapSubmitRequestDTO) {

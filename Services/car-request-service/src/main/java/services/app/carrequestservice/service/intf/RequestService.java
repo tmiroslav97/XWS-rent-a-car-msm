@@ -16,6 +16,10 @@ public interface RequestService {
 
     List<Request> findAllByEndUserIdAndByStatus(Long id, String status);
 
+    List<Request> findAllByPublisherUserId(Long id);
+
+    List<Request> findAllByPublisherUserIdAndByStatus(Long id, String status);
+
     Integer deleteById(Long id);
 
     Integer submitRequest(HashMap<Long, List<SubmitRequestDTO>> submitRequestDTOS, Long userId);

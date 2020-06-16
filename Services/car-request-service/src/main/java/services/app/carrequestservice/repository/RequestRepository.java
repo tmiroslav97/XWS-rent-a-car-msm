@@ -15,4 +15,8 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     @Query("SELECT req FROM Request req where req.endUser=(?1) and req.status=(?2)")
     List<Request> findAllByEndUserAndByStatus(Long id, RequestStatusEnum status);
 
+    List<Request> findAllByPublisherUser(Long id);
+
+    @Query("SELECT req FROM Request req where req.publisherUser=(?1) and req.status=(?2)")
+    List<Request> findAllByPublisherUserAndByStatus(Long id, RequestStatusEnum status);
 }
