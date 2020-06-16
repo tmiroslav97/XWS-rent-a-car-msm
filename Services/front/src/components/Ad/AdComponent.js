@@ -6,7 +6,7 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 const AdComponent = (props) => {
 
     var disable = false;
-    if(props.token === null){
+    if (props.token === null) {
         disable = true;
     }
 
@@ -15,7 +15,7 @@ const AdComponent = (props) => {
         props.ads.map((variant, idx) => (
             <>
                 <br />
-              
+
                 <Card
                     key={idx}
                     border="secondary"
@@ -73,16 +73,16 @@ const AdComponent = (props) => {
                                         {variant.mileage}
                                     </Card.Text>
                                 </Row>
-                                <Card.Link href={'/agent-firm/ad-detail-view/' + variant.id} >Vise detalja ></Card.Link>
+                                <Card.Link href={'/agent-firm/ad-detail-view/' + variant.id} >Vise detalja</Card.Link>
 
                             </Col>
-                              
+
                             <Col>
                                 {
-                                    disable ?  null :  <Button variant="outline-success" >Dodaj u korpu</Button>
+                                    disable ? null : <Button variant="outline-success" >Dodaj u korpu</Button>
                                 }
                             </Col>
-                        
+
                         </Row>
                     </Card.Body>
                 </Card>
