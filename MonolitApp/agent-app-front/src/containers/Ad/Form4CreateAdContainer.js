@@ -25,8 +25,8 @@ const Form4CreateAdContainer = (props) => {
             cctl.push(temp);
             props.setCarCalendarTermList(cctl);
             // props.setCarCalendarTermList([...props.carCalendarTermList, temp]);
-            console.log("--------------------------")
-            console.log(props.carCalendarTermList)
+            console.log("FORMA 4")
+            console.log(props.carCalendarTermList);
             props.setFormData({
                 ...props.formData,
                 carCalendarTermCreateDTOList: props.carCalendarTermList

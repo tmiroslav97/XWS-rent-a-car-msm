@@ -50,11 +50,11 @@ public class AdController {
     @RequestMapping(value="/withImages", method = RequestMethod.POST,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createAdWithPhotos(@RequestPart("photos0") MultipartFile photos0 ,
-                                                @RequestPart("photos1") MultipartFile photos1 ,
-                                                @RequestPart("photos2") MultipartFile photos2 ,
-                                                @RequestPart("photos3") MultipartFile photos3 ,
-                                                @RequestPart("data") String data,
+    public ResponseEntity<?> createAdWithPhotos(@RequestParam(value = "photos0") MultipartFile photos0 ,
+                                                @RequestParam(value = "photos1") MultipartFile photos1 ,
+                                                @RequestParam(value = "photos2") MultipartFile photos2 ,
+                                                @RequestParam(value = "photos3") MultipartFile photos3 ,
+                                                @RequestParam(value = "data") String data,
                                                 Principal principal) {
         System.out.println("///////////////////////////////////////////////////");
         System.out.println(data);
@@ -62,14 +62,15 @@ public class AdController {
         System.out.println(photos1.getOriginalFilename());
         System.out.println(photos2.getOriginalFilename());
         System.out.println(photos3.getOriginalFilename());
-        System.out.println("///////////////////////////////////////////////////");
-
 //        for(MultipartFile mf : photos){
 //            System.out.println("usao u forrr");
 //            if(!mf.isEmpty()){
 //                System.out.println(mf.getOriginalFilename());
 //            }
 //        };
+        System.out.println("///////////////////////////////////////////////////");
+
+
 
 
         return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);

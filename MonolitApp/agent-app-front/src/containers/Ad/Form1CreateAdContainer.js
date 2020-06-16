@@ -29,20 +29,34 @@ const Form1CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-            props.setFormData({
-                ...props.formData,
-                name: props.name,
-                location: props.location,
-                distanceLimitFlag: props.distanceLimitFlag,
-                distanceLimit: props.distanceLimit,
-                carManufacturer: props.carManufacturer,
-                carModel: props.carModel,
-                carType: props.carType,
-                year: props.year,
-                mileage: props.mileage
-            });
+            let data = {
+                "name": props.name,
+                "location": props.location,
+                "distanceLimitFlag": props.distanceLimitFlag,
+                "distanceLimit": props.distanceLimit,
+                "carCreateDTO" : {
+                    "year": props.year,
+                    "carManufacturer": props.carManufacturer,
+                    "carModel": props.carModel,
+                    "carType":props.carType,
+                    "mileage":props.mileage,
+                }
+            }
+            console.log("FORMA 1");
+            console.log(data);
+            // props.setFormData({
+            //     ...props.formData,
+            //     name: props.name,
+            //     location: props.location,
+            //     distanceLimitFlag: props.distanceLimitFlag,
+            //     distanceLimit: props.distanceLimit,
+            //     carManufacturer: props.carManufacturer,
+            //     carModel: props.carModel,
+            //     carType: props.carType,
+            //     year: props.year,
+            //     mileage: props.mileage
+            // });
             props.handleNext();
-            console.log(props.formData);
             setValidated(false);
         }
     };
@@ -125,6 +139,10 @@ const Form1CreateAdContainer = (props) => {
 
     const handleCarModel = (event) => {
         // let index = event.target.options.selectedIndex;
+        // props.setFormData({
+        //     ...props.formData,
+        //     carModel: props.carModel,
+        // });
         props.setCarModel(event.target.value);
     };
 
@@ -177,6 +195,7 @@ const Form1CreateAdContainer = (props) => {
             handleDistanceLimitFlag={handleDistanceLimitFlag}
             handleDistanceLimit={handleDistanceLimit}
             handleCarManufacturers={handleCarManufacturers}
+            handleCarModel={handleCarModel}
             handleName={handleName}
             handleLocation={handleLocation}
             handleCarType={handleCarType}
