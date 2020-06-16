@@ -4,6 +4,7 @@ import agent.app.dto.car.CarCreateDTO;
 import agent.app.dto.image.ImageDTO;
 import agent.app.model.Car;
 import agent.app.model.Image;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,5 +23,6 @@ public interface ImageService {
 
     String getImageName();
     Integer addImage(String imageName);
+    String uploadImage(MultipartFile photo);
 
 }

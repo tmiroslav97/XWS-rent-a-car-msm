@@ -1,6 +1,6 @@
 package services.app.adservice.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import services.app.adservice.service.intf.ImageService;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 @RestController
@@ -26,49 +23,20 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    ObjectMapper objectMapper = new ObjectMapper();
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadImage(@RequestParam(value = "photo", required = true) MultipartFile photo,
                                          @RequestParam(value = "data", required = true) String data
     ) throws IOException {
         System.out.println("-----------------------UPLOAD FILE---------------------");
-        String name = imageService.getImageName();
-        System.out.println("slika : " + photo.getOriginalFilename());
-        System.out.println("slika u bazi : " + name);
-        System.out.println("DIREKTORIJUM");
-
-        try{
-            File file = new File("C:\\XMLPhotos\\adService");
-
-            if(!file.exists()){
-                if(!file.mkdirs()){
-                    System.out.println("Direktorijum nije kreiran");
-                    return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
-                }
-            }
-
-            System.out.println("DIREKTORIJUM");
-            System.out.println(file.getAbsolutePath());
-            String uploadDirectory = file.getAbsolutePath() + "\\" + name;
-            File convertFile = new File(uploadDirectory.toString());
-            convertFile.createNewFile();
-            FileOutputStream fout = new FileOutputStream(convertFile);
-            fout.write(photo.getBytes());
-            fout.close();
-
-            Integer rez = imageService.addImage(name);
-            if(rez != 1){
-                System.out.println("desila se greska prilikom dodavanja slike");
-                return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
-            }
-            System.out.println("dodata slika");
+        String name = imageService.uploadImage(photo);
+        if(name != null){
             return new ResponseEntity<>(name, HttpStatus.CREATED);
-        }catch(Exception e){
+        }else{
             return new ResponseEntity<>("Slika nije dodata.", HttpStatus.BAD_REQUEST);
         }
-
     }
+
     @RequestMapping(path = "/load", method = RequestMethod.GET)
     public ResponseEntity<?> loadImage(@RequestParam(value = "ad_id", required = true) Long ad_id,
                                          @RequestParam(value = "name", required = true) String name

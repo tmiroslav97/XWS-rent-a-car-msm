@@ -2,6 +2,7 @@ package services.app.adservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import services.app.adservice.dto.image.ImageDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
@@ -10,6 +11,7 @@ import services.app.adservice.repository.ImageRepository;
 import services.app.adservice.service.intf.ImageService;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 @Service
@@ -112,6 +114,41 @@ public class ImageServiceImpl implements ImageService {
         Image img = this.createImage(imageName);
         System.out.println(img.getId() + " " + img.getName());
         return 1;
+    }
+
+    @Override
+    public String uploadImage(MultipartFile photo) {
+        try{
+            File file = new File("C:\\XMLPhotos\\adService");
+            if(!file.exists()){
+                if(!file.mkdirs()){
+                    System.out.println("Direktorijum nije kreiran");
+                    return null;
+                }
+            }
+            String name = this.getImageName();
+            System.out.println("slika : " + photo.getOriginalFilename());
+            System.out.println("slika u bazi : " + name);
+
+            System.out.println("DIREKTORIJUM");
+            System.out.println(file.getAbsolutePath());
+            String uploadDirectory = file.getAbsolutePath() + "\\" + name;
+            File convertFile = new File(uploadDirectory);
+            convertFile.createNewFile();
+            FileOutputStream fout = new FileOutputStream(convertFile);
+            fout.write(photo.getBytes());
+            fout.close();
+
+            Integer rez = this.addImage(name);
+            if(rez != 1){
+                System.out.println("desila se greska prilikom dodavanja slike");
+                return null;
+            }
+            System.out.println("dodata slika");
+            return name;
+        }catch(Exception e){
+            return null;
+        }
     }
 
 

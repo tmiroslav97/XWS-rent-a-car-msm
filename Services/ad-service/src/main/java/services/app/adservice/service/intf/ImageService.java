@@ -1,6 +1,7 @@
 package services.app.adservice.service.intf;
 
 
+import org.springframework.web.multipart.MultipartFile;
 import services.app.adservice.dto.image.ImageDTO;
 import services.app.adservice.model.Image;
 
@@ -21,5 +22,6 @@ public interface ImageService {
 
     String getImageName();
     Integer addImage(String imageName);
+    String uploadImage(MultipartFile photo);
 
 }
