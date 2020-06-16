@@ -35,33 +35,38 @@ services:
       - eureka-serviceregistry
       - mysql
       
-  # message-service:
-  #   image: message-service
-  #   container_name: message-service
-  #   build: 
-  #     context: ./Services/message-service
-  #     dockerfile: Dockerfile
-  #   tty: true
-  #   restart: on-failure
-  #   networks:
-  #     - static-network
-  #   ports:
-  #     - "8091:8091"
-  #   environment:
-  #     REGISTRY_HOST: eureka-serviceregistry
-  #     DATABASE_USERNAME: root
-  #     DATABASE_PASSWORD: root
-  #     DATABASE_DOMAIN: mysql
-  #     DATABASE_SCHEMA: msg_db?createDatabaseIfNotExist=true&serverTimezone=UTC
-  #   depends_on: 
-  #     - eureka-serviceregistry
-  #     - mysql
+  message-service:
+    image: message-service
+    container_name: message-service
+    build: 
+      context: ./Services/message-service
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
+    ports:
+      - "8091:8091"
+    environment:
+      REGISTRY_HOST: eureka-serviceregistry
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: msg_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on: 
+      - eureka-serviceregistry
+      - mysql
 
   ad-service:
     image: ad-service
     container_name: ad-service
     build:
       context: ./Services/ad-service
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
     ports:
       - "8086:8086"
     environment:
@@ -79,6 +84,11 @@ services:
     container_name: car-request-service
     build:
       context: ./Services/car-request-service
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
     ports:
       - "8090:8090"
     environment:
@@ -96,6 +106,11 @@ services:
     container_name: price-list-and-discount-service
     build:
       context: ./Services/price-list-and-discount-service
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - static-network
     ports:
       - "8088:8088"
     environment:
@@ -181,7 +196,7 @@ services:
     depends_on:
       - eureka-serviceregistry
       - authentication-service
-      #- message-service
+      - message-service
       - codebook-service
       - ad-search-service
       - price-list-and-discount-service
