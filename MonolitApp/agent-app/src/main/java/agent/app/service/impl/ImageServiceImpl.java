@@ -8,6 +8,7 @@ import agent.app.repository.CarRepository;
 import agent.app.repository.ImageRepository;
 import agent.app.service.intf.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,9 @@ public class ImageServiceImpl implements ImageService {
 
     @Autowired
     private ImageRepository imageRepository;
+
+    @Value("${directory.prop}")
+    private String photoDir;
 
     @Override
     public Image findById(Long id) {
@@ -127,6 +131,7 @@ public class ImageServiceImpl implements ImageService {
     public String uploadImage(MultipartFile photo) {
 
         try{
+            System.out.println("DIREKTORIJUM: "+ photoDir);
             File file = new File("C:\\XMLPhotos\\agent");
             if(!file.exists()){
                 if(!file.mkdirs()){
@@ -135,10 +140,6 @@ public class ImageServiceImpl implements ImageService {
                 }
             }
             String name = this.getImageName();
-            System.out.println("slika : " + photo.getOriginalFilename());
-            System.out.println("slika u bazi : " + name);
-
-            System.out.println("DIREKTORIJUM");
             System.out.println(file.getAbsolutePath());
             String uploadDirectory = file.getAbsolutePath() + "\\" + name;
             File convertFile = new File(uploadDirectory);

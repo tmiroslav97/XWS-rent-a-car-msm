@@ -23,7 +23,7 @@ const Form3CreateAdContainer = (props) => {
         if (pricelists.isFetch) {
             console.log("CENOVNICI")
             console.log(pricelists);
-            if(pricelists.data != null){
+            if(pricelists.data != ""){
                 pricelists.data.map((pricelist) => {
                     let ss = pricelist.creationDate.substring(0, 10);
                     let ss2 = pricelist.creationDate.substring(11, 16);
