@@ -41,7 +41,9 @@ export function* createdAd(){
 export function* createdAdPhotos(){
     const { payload } = yield take(CREATED_AD_PHOTOS);
     const data = yield call(AdServices.createdAdPhotos, payload); 
-    yield put(putSuccessMsg(data));
+    console.log("sagicaaa");
+    console.log(data);
+    // yield put(putSuccessMsg(data));
     // history.push('/');
 }
 

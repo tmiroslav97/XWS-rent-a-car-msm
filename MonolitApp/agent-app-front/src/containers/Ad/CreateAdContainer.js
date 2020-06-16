@@ -103,18 +103,19 @@ const CreateAdContainer = () => {
             
             
         }
-        let form = new FormData();
-        for(const i in photos){
-
-            form.append("photos", photos[i]);
-            console.log(photos[i]);
-
-        }
-        form.append('data', JSON.stringify(data));
-        console.log("ispis");
-        console.log(form.values.toString);
-        dispatch(createdAdPhotos(form));
-        // dispatch(createdAd(JSON.stringify(data)));
+        // let form = new FormData();
+        
+        // for(const i in photos){
+        //     let naziv = "photos" + i;
+        //     form.append(naziv, photos[i]);
+        //     console.log(photos[i]);
+        // }
+        
+        // form.append("data", JSON.stringify(data));
+        // console.log("ispis");
+        // console.log(form.values.toString);
+        // dispatch(createdAdPhotos(form));
+        dispatch(createdAd(JSON.stringify(data)));
 
     };
  
