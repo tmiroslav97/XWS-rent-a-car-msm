@@ -3,6 +3,7 @@ package services.app.carrequestservice.service.intf;
 import services.app.carrequestservice.dto.carreq.SubmitRequestDTO;
 import services.app.carrequestservice.model.Request;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface RequestService {
@@ -13,7 +14,7 @@ public interface RequestService {
 
     Integer deleteById(Long id);
 
-    Integer submitRequest(List<SubmitRequestDTO> submitRequestDTOS, Long userId);
+    Integer submitRequest(HashMap<Long, List<SubmitRequestDTO>> submitRequestDTOS, Long userId);
 
     void delete(Request request);
 

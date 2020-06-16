@@ -20,6 +20,7 @@ import java.util.Set;
 @Entity
 @Table(name = DbTableConstants.REQUEST)
 public class Request {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,6 +40,9 @@ public class Request {
     @Column(name = DbColumnConstants.ENDUSER, nullable = false)
     private Long endUser;
 
+    @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
+    private Long publisherUser;
+
     @Column(name = DbColumnConstants.ADNAME, nullable = false)
     private String adName;
 
@@ -57,9 +61,6 @@ public class Request {
     })
     @Column(name = DbColumnConstants.ENDDATE, nullable = false)
     private DateTime endDate;
-
-    @Column(name = DbColumnConstants.BUNDLE, nullable = false)
-    private Boolean bundle;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Ad> ads = new HashSet<>();

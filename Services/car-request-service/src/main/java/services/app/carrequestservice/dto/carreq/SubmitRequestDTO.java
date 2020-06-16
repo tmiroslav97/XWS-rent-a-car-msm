@@ -10,10 +10,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubmitRequestDTO {
-    //id objavljivaca
-    Long userId;
     Boolean bundle;
     String startDate;
     String endDate;
+    String adName;
     List<Long> adIds;
 }

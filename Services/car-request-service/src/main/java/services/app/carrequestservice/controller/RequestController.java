@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import services.app.carrequestservice.dto.carreq.ListSubmitRequestDTO;
+import services.app.carrequestservice.dto.carreq.MapSubmitRequestDTO;
 import services.app.carrequestservice.model.CustomPrincipal;
 import services.app.carrequestservice.service.intf.RequestService;
 
@@ -24,10 +24,10 @@ public class RequestController {
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> submitRequest(@RequestBody ListSubmitRequestDTO listSubmitRequestDTO) {
+    public ResponseEntity<?> submitRequest(@RequestBody MapSubmitRequestDTO mapSubmitRequestDTO) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomPrincipal cp = (CustomPrincipal) auth.getPrincipal();
-        Integer flag = requestService.submitRequest(listSubmitRequestDTO.getSubmitRequestDTOS(), Long.valueOf(cp.getUserId()));
+        Integer flag = requestService.submitRequest(mapSubmitRequestDTO.getSubmitRequestDTOS(), Long.valueOf(cp.getUserId()));
         if (flag == 1) {
             return new ResponseEntity<>("Zahtjev uspjesno kreiran.", HttpStatus.OK);
         } else {
