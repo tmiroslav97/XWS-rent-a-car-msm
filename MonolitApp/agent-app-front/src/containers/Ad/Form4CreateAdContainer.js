@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Form4CreateAd from '../../components/Ad/Form4CreateAd'
+import { imageNameSelector } from '../../store/ad/selectors';
 
 const Form4CreateAdContainer = (props) => {
     const dispatch = useDispatch();
@@ -9,6 +10,8 @@ const Form4CreateAdContainer = (props) => {
     const [endDate, setEndDate] = useState(null);
     const [flag, setFlag] = useState(true);
 
+    const imageName = useSelector(imageNameSelector);
+
     const addTerm = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -16,7 +19,7 @@ const Form4CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-            
+
             let temp = {
                 'startDate': startDate,
                 'endDate': endDate
@@ -95,14 +98,38 @@ const Form4CreateAdContainer = (props) => {
         if (props.carCalendarTermList.length == 0) {
             setFlag(0);
         } else {
-            setFlag(1);
-            console.log(props.formData);
-            props.handleNext();
+            // setFlag(1);
+
+            if (imageName != null) {
+                console.log(imageName);
+
+                console.log(JSON.stringify(imageName));
+                props.setImagesDTO(imageName);
+                console.log(imageName[props.flagCover])
+                props.setCoverPhoto(imageName[props.flagCover]);
+                // if(props.carModel === null){
+                //     props.setCarModel("");
+                // }
+                props.setFormData({
+                    ...props.formData,
+                    imagesDTO: JSON.stringify(imageName),
+                });
+
+
+                setFlag(1);
+                console.log(props.formData);
+                props.handleNext();
+            }
+
+
+            // console.log(props.formData);
+            // props.handleNext();
         }
     }
 
     return (
         <Form4CreateAd
+            handleCreatedAd={props.handleCreatedAd}
             addTerm={addTerm}
             handlerForm4={handlerForm4}
             validated={validated}

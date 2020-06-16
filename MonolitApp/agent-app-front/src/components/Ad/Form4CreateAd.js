@@ -65,11 +65,17 @@ const Form4CreateAd = (props) => {
                                     >
                                         Svi koraci su zavrseni. Uspesno ste dodadali oglas!
                                     </Typography>
+                                    <Typography>
+                                        Potvrdite dodavanje
+                                    </Typography>
 
-                                    <Button onClick={props.handleReset}
+
+                                    <Button 
+                                        // onClick={props.handleReset}
+                                        onClick={props.handleCreatedAd}
                                     //  className={classes.button} 
                                     >
-                                        Reset
+                                        Dodaj
                                     </Button>
                                 </div>
                             ) : (

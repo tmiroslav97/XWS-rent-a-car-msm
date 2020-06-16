@@ -15,7 +15,7 @@ const CreateAdContainer = () => {
     const [validated, setValidated] = useState(false);
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
-    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike', "Kraj"];
+    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Slike', 'Dostupnost'];
     //forma 1 
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
@@ -282,7 +282,7 @@ const CreateAdContainer = () => {
                     handleReset={handleReset}
                     carCalendarTermList={carCalendarTermList}
                     setCarCalendarTermList={setCarCalendarTermList}
-                    
+
                     imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
                     flagCover={flagCover} setFlagCover={setFlagCover}
                     coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
@@ -290,6 +290,7 @@ const CreateAdContainer = () => {
                 ></Form4CreateAdContainer>
                 : null
             }
+
             {activeStep === 5 ?
                 <Form6CreateAdContainer
                     formData={formData} setFormData={setFormData}
@@ -300,6 +301,7 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
+                    
                     handleCreatedAd={handleCreatedAd}
                     imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
                     flagCover={flagCover} setFlagCover={setFlagCover}
@@ -310,7 +312,7 @@ const CreateAdContainer = () => {
 
                 : null
             }
-            {
+            {/* {
                 activeStep === 6 ?
                     <Form6CreateAdContainer
                         formData={formData} setFormData={setFormData}
@@ -325,7 +327,7 @@ const CreateAdContainer = () => {
                     >
                     </Form6CreateAdContainer>
                     : null
-            }
+            } */}
 
         </Container>
 
