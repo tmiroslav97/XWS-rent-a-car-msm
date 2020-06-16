@@ -39,6 +39,9 @@ public class Request {
     @Column(name = DbColumnConstants.ENDUSER, nullable = false)
     private Long endUser;
 
+    @Column(name = DbColumnConstants.ADNAME, nullable = false)
+    private String adName;
+
     @Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
             @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
@@ -60,6 +63,5 @@ public class Request {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Ad> ads = new HashSet<>();
-    
 
 }

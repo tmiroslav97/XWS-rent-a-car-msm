@@ -23,6 +23,4 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Request> requests = new HashSet<>();
 }
