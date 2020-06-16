@@ -21,6 +21,7 @@ const Form3CreateAdContainer = (props) => {
     const getPriceLists = () => {
         const list = [];
         if (pricelists.isFetch) {
+            console.log("CENOVNICI")
             console.log(pricelists);
             if(pricelists.data != null){
                 pricelists.data.map((pricelist) => {
@@ -59,11 +60,9 @@ const Form3CreateAdContainer = (props) => {
     }
 
     const handlePriceListChooseId = (id) => {
-        console.log(id);
         props.setId(id);
     }
     const handlePriceListDeleteId = (id) => {
-        console.log(id)
         props.setId();
     }
 
@@ -74,14 +73,14 @@ const Form3CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-            props.setFormData({
-                ...props.formData,
-                id: props.id,
-                pricePerDay: props.pricePerDay,
-                pricePerKm: props.pricePerKm,
-                pricePerKmCDW: props.pricePerKmCDW,
-            });
-            console.log(props.formData);
+            let data = {    
+                "pricePerKm":props.pricePerKm,
+                "pricePerKmCWD":props.pricePerKmCDW,
+                "pricePerDay":props.pricePerDay,
+                "id":props.id
+            }
+            console.log("FORMA 3");
+            console.log(data);
             setValidated(false);
             props.handleNext();
         }

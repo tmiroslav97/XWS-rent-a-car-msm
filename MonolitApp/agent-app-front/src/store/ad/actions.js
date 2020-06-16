@@ -16,6 +16,7 @@ export const createdAd = payload => ({
     type: CREATED_AD,
     payload
 });
+
 export const createdAdPhotos = payload => ({
     type: CREATED_AD_PHOTOS,
     payload

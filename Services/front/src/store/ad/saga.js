@@ -6,6 +6,7 @@ import AdServices from '../../services/AdServices';
 
 import {
     CREATED_AD,
+    CREATED_AD_PHOTOS,
     FETCH_ADS,
     FETCH_ADS_FROM_PUBLISHER,
     FETCH_AD,
@@ -34,6 +35,16 @@ export function* createdAd(){
     const { payload } = yield take(CREATED_AD);
     const data = yield call(AdServices.createdAd, payload); 
     yield put(putSuccessMsg(data));
+    history.push('/');
+}
+
+//pokusaj poziva metode sa slikom 
+export function* createdAdPhotos(){
+    const { payload } = yield take(CREATED_AD_PHOTOS);
+    const data = yield call(AdServices.createdAdPhotos, payload); 
+    console.log("sagicaaa");
+    console.log(data);
+    // yield put(putSuccessMsg(data));
     // history.push('/');
 }
 

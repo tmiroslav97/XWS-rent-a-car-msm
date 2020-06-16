@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateAd from '../../components/Ad/CreateAd';
-import { createdAd, uploadImage } from '../../store/ad/actions';
+import { createdAd, uploadImage, createdAdPhotos } from '../../store/ad/actions';
 import Form1CreateAdContainer from './Form1CreateAdContainer';
 import Form2CreateAdContainer from './Form2CreateAdContainer';
 import Form3CreateAdContainer from './Form3CreateAdContainer';
@@ -15,8 +15,8 @@ const CreateAdContainer = () => {
     const [validated, setValidated] = useState(false);
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
-    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Dostupnost', 'Slike', "Kraj"];
-//forma 1 
+    const steps = ['Osnovne informacije', 'Dodatne informacije', 'Cena', 'Slike', 'Dostupnost'];
+    //forma 1 
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
     const [distanceLimitFlag, setDistanceLimitFlag] = useState(false);
@@ -26,27 +26,27 @@ const CreateAdContainer = () => {
     const [carType, setCarType] = useState("");
     const [year, setYear] = useState();
     const [mileage, setMileage] = useState();
-//forma 2
+    //forma 2
     const [gearboxType, setGearboxType] = useState("");
     const [fuelType, setFuelType] = useState("");
     const [childrenSeatNum, setChildrenSeatNum] = useState();
     const [cdw, setCdw] = useState(false);
     const [androidFlag, setAndroidFlag] = useState(false);
-//forma 3
+    //forma 3
     const [pricePerDay, setPricePerDay] = useState(null);
     const [pricePerKm, setPricePerKm] = useState(null);
     const [pricePerKmCDW, setPricePerKmCDW] = useState(null);
     const [id, setId] = useState(null);
     const [activeToggle, setActiveToggle] = useState(1);
-//forma 4
+    //forma 4
     const [carCalendarTermList, setCarCalendarTermList] = useState([]);
-//forma 5
+    //forma 5
     const [coverPhoto, setCoverPhoto] = useState();
     const [flagCover, setFlagCover] = useState();
     const [imagesDTO, setImagesDTO] = useState([]);
     const [photos, setPhotos] = useState([]);
     const [brPhotos, setBrPhotos] = useState(0);
-//konacna forma
+    //konacna forma
     const [formData, setFormData] = useState({
         name: null,
         location: null,
@@ -81,32 +81,46 @@ const CreateAdContainer = () => {
             "location": location,
             "distanceLimitFlag": distanceLimitFlag,
             "distanceLimit": distanceLimit,
-            "carCreateDTO" : {
+            "carCreateDTO": {
                 "year": year,
                 "carManufacturer": carManufacturer,
                 "carModel": carModel,
-                "gearboxType":gearboxType,
+                "gearboxType": gearboxType,
                 "fuelType": fuelType,
-                "carType":carType,
-                "mileage":mileage,
-                "childrenSeatNum":childrenSeatNum,
-                "cdw":cdw,
-                "androidFlag":androidFlag
+                "carType": carType,
+                "mileage": mileage,
+                "childrenSeatNum": childrenSeatNum,
+                "cdw": cdw,
+                "androidFlag": androidFlag
             },
-            "priceListCreateDTO":{
-                // "creationDate":"2014-01-01",
-                "pricePerKm":pricePerKm,
-                "pricePerKmCWD":pricePerKmCDW,
-                "pricePerDay":pricePerDay,
-                "id":id
+            "priceListCreateDTO": {
+                "pricePerKm": pricePerKm,
+                "pricePerKmCWD": pricePerKmCDW,
+                "pricePerDay": pricePerDay,
+                "id": id
             },
             "carCalendarTermCreateDTOList": carCalendarTermList
-            
         }
+        //POKUSAJ POZIVANJA DRUGE METODE
+        // let form = new FormData(); 
+        // for(const i in photos){
+        //     let naziv = "photos" + i;
+        //     form.append(naziv, photos[i]);
+        //     console.log(photos[i]);
+        // }
+        // // for(const i in photos){
+        // //     form.append("photos", photos[i]);
+        // // }
+
+        // form.append("data", JSON.stringify(data));
+        // console.log("ispis");
+        // console.log(form.values.toString);
+        // dispatch(createdAdPhotos(form));
+
         dispatch(createdAd(JSON.stringify(data)));
 
     };
- 
+
     const handleDistanceLimitFlag = (event) => {
         setDistanceLimitFlag(event.target.checked);
         setDistanceLimit(null);
@@ -239,21 +253,6 @@ const CreateAdContainer = () => {
                 : null
             }
             {activeStep === 3 ?
-                <Form4CreateAdContainer
-                    formData={formData} setFormData={setFormData}
-                    activeStep={activeStep} setActiveStep={setActiveStep}
-                    steps={steps}
-                    isStepOptional={isStepOptional}
-                    handleNext={handleNext}
-                    handleBack={handleBack}
-                    handleSkip={handleSkip}
-                    handleReset={handleReset}
-                    carCalendarTermList={carCalendarTermList}
-                    setCarCalendarTermList={setCarCalendarTermList}
-                ></Form4CreateAdContainer>
-                : null
-            }
-            {activeStep === 4 ?
                 <Form5CreateAdContainer
                     formData={formData} setFormData={setFormData}
                     activeStep={activeStep} setActiveStep={setActiveStep}
@@ -266,11 +265,32 @@ const CreateAdContainer = () => {
                     coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
                     imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
                     flagCover={flagCover} setFlagCover={setFlagCover}
-                    photos={photos} setPhotos={setPhotos} 
+                    photos={photos} setPhotos={setPhotos}
                     brPhotos={brPhotos} setBrPhotos={setBrPhotos}
                 ></Form5CreateAdContainer>
                 : null
             }
+            {activeStep === 4 ?
+                <Form4CreateAdContainer
+                    formData={formData} setFormData={setFormData}
+                    activeStep={activeStep} setActiveStep={setActiveStep}
+                    steps={steps}
+                    isStepOptional={isStepOptional}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleSkip={handleSkip}
+                    handleReset={handleReset}
+                    carCalendarTermList={carCalendarTermList}
+                    setCarCalendarTermList={setCarCalendarTermList}
+
+                    imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
+                    flagCover={flagCover} setFlagCover={setFlagCover}
+                    coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
+                    carModel={carModel} setCarModel={setCarModel}
+                ></Form4CreateAdContainer>
+                : null
+            }
+
             {activeStep === 5 ?
                 <Form6CreateAdContainer
                     formData={formData} setFormData={setFormData}
@@ -281,32 +301,33 @@ const CreateAdContainer = () => {
                     handleBack={handleBack}
                     handleSkip={handleSkip}
                     handleReset={handleReset}
+                    
                     handleCreatedAd={handleCreatedAd}
                     imagesDTO={imagesDTO} setImagesDTO={setImagesDTO}
                     flagCover={flagCover} setFlagCover={setFlagCover}
                     coverPhoto={coverPhoto} setCoverPhoto={setCoverPhoto}
                     carModel={carModel} setCarModel={setCarModel}
-                    >
+                >
                 </Form6CreateAdContainer>
 
                 : null
             }
-            {
+            {/* {
                 activeStep === 6 ?
-                <Form6CreateAdContainer
-                    formData={formData} setFormData={setFormData}
-                    activeStep={activeStep} setActiveStep={setActiveStep}
-                    steps={steps}
-                    isStepOptional={isStepOptional}
-                    handleNext={handleNext}
-                    handleBack={handleBack}
-                    handleSkip={handleSkip}
-                    handleReset={handleReset}
-                    handleCreatedAd={handleCreatedAd}
+                    <Form6CreateAdContainer
+                        formData={formData} setFormData={setFormData}
+                        activeStep={activeStep} setActiveStep={setActiveStep}
+                        steps={steps}
+                        isStepOptional={isStepOptional}
+                        handleNext={handleNext}
+                        handleBack={handleBack}
+                        handleSkip={handleSkip}
+                        handleReset={handleReset}
+                        handleCreatedAd={handleCreatedAd}
                     >
-                </Form6CreateAdContainer>
-                :null
-            }
+                    </Form6CreateAdContainer>
+                    : null
+            } */}
 
         </Container>
 

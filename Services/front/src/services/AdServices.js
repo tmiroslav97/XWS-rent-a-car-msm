@@ -8,6 +8,32 @@ const FINALPOINTS = {
 };
 
 class AdServices extends HttpBaseClient {
+    
+    createdAdPhotos = async payload => {
+        console.log("********************")
+        console.log(payload);
+        console.log("********************")
+        const response = await this.getApiClient().post(
+            FINALPOINTS.AD_BASE + "/withImages", 
+            // payload,
+            { 
+                params: {
+                    photos0: payload.photos0,
+                    photos1: payload.photos1,
+                    photos2: payload.photos2,
+                    photos3: payload.photos3,
+                    data: payload.data
+                } 
+            }
+            // {
+            //     headers : {
+            //         'Content-Type': 'multipart/form-data',
+            //     },
+            // }
+        );
+        
+        return response.data;
+    };
 
     createdAd = async payload => {
         console.log("********************")

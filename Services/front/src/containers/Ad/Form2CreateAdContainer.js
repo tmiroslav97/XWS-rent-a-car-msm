@@ -47,16 +47,16 @@ const Form2CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-
-            props.setFormData({
-                ...props.formData,
-                gearboxType: props.gearboxType,
-                fuelType: props.fuelType,
-                childrenSeatNum: props.childrenSeatNum,
-                cdw: props.cdw,
-                androidFlag: props.androidFlag
-            });
-            console.log(props.formData);
+            let data = {
+                
+                "gearboxType":props.gearboxType,
+                "fuelType": props.fuelType,
+                "childrenSeatNum":props.childrenSeatNum,
+                "cdw":props.cdw,
+                "androidFlag":props.androidFlag
+            }
+            console.log("FORMA 2");
+            console.log(data);
             setValidated(false);
             props.handleNext();
         }
