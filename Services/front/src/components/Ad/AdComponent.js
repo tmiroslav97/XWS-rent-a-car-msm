@@ -1,14 +1,25 @@
 import React from 'react';
 import { Row, Col, Card, Button } from 'react-bootstrap';
-
+import { history } from '../../index';
+import jwt_decode from 'jwt-decode';
 
 
 const AdComponent = (props) => {
 
-    var disable = false;
-    if (props.token === null) {
-        disable = true;
-    }
+    // <Card.Link onClick={() => { history.push('/agent-firm/ad-detail-view/' + variant.id); }}>
+    //     Vise detalja
+    // </Card.Link>
+
+    const hasRole = (accessRole) => {
+
+        if (props.token != null) {
+            const roles = jwt_decode(props.token).roles;
+            const role = roles.filter(val => accessRole.includes(val));
+            return role.length > 0;
+        } else {
+            return false;
+        }
+    };
 
     return (
 
@@ -72,13 +83,12 @@ const AdComponent = (props) => {
                                     {variant.mileage}
                                 </Card.Text>
                             </Row>
-                            <Card.Link href={'/agent-firm/ad-detail-view/' + variant.id} >Vise detalja</Card.Link>
-
+                            <Button variant="link" onClick={() => { history.push('/ad-detail-view/' + variant.id); }}>Vise detalja</Button>
                         </Col>
 
                         <Col>
                             {
-                                disable ? null : <Button variant="outline-success" >Dodaj u korpu</Button>
+                                hasRole(['ROLE_USER']) ? <Button variant="outline-success" >Dodaj u korpu</Button> : null
                             }
                         </Col>
 

@@ -39,11 +39,11 @@ const AppRouter = () => {
       <Route exact path="/" component={HomePage} />
       <Route exact path="/login" render={props => token == null ? (<LoginContainter {...props} />) : (<Redirect to="/" />)} />
       <Route exact path="/sign-up" render={props => token == null ? (<RegContainer {...props} />) : (<Redirect to="/" />)} />
+      <Route exact path="/ad-detail-view/:ad" component={AdDetailViewContainer} />
 
       <PrivateRoute exact path="/agent-firm" component={AgentFirmHomePage} token={token} hasRightRole={hasRightRole} accessRole={["ROLE_AGENT"]} />
       <PrivateRoute exact path="/agent-firm/create-ad" component={CreateAdContainer} token={token} hasRightRole={hasRightRole} accessRole={["ROLE_AGENT", "ROLE_USER"]} />
       <PrivateRoute exact path="/agent-firm/ads" component={AdListContainer} token={token} hasRightRole={hasRightRole} />
-      <Route exact path="/agent-firm/ad-detail-view/:ad" component={AdDetailViewContainer} />
       <PrivateRoute path="/panel" component={PanelContainer} token={token} hasRightRole={hasRightRole} accessRole={["ROLE_AGENT", "ROLE_USER", "ROLE_ADMIN"]} />
 
       <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />

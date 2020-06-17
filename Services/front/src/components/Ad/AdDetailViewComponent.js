@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container, Row, Col, Button, Card, Carousel } from 'react-bootstrap'
 import ListGroup from 'react-bootstrap/ListGroup'
+import jwt_decode from 'jwt-decode';
 
 const AdDetailViewComponent = (props) => {
 
     var androidFlag = props.ad.androidFlag;
-    var disable = false;
 
     if (androidFlag === false) {
         androidFlag = "Ne"
@@ -13,10 +13,16 @@ const AdDetailViewComponent = (props) => {
         androidFlag = "Da"
     }
 
+    const hasRole = (accessRole) => {
 
-    if (props.token === null) {
-        disable = true;
-    }
+        if (props.token != null) {
+            const roles = jwt_decode(props.token).roles;
+            const role = roles.filter(val => accessRole.includes(val));
+            return role.length > 0;
+        } else {
+            return false;
+        }
+    };
 
     return (
 
@@ -73,7 +79,7 @@ const AdDetailViewComponent = (props) => {
                 <Row>
                     <Col>
                         {
-                            disable ? null : <Button variant="outline-success" >Dodaj u korpu</Button>
+                            hasRole(['ROLE_USER']) ? <Button variant="outline-success" >Dodaj u korpu</Button> : null
                         }
                     </Col>
                 </Row>
