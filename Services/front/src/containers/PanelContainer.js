@@ -11,6 +11,7 @@ import GearboxTypeContainer from '../containers/Codebooks/GearboxTypeContainer';
 import EndUsersContainer from '../containers/Users/EndUsersContainer';
 import CreateAdContainer from './Ad/CreateAdContainer';
 import MyAdsContainer from './Ad/MyAdsContainer';
+import EndUserRequestsContainer from './Request/EndUserRequestsContainer';
 
 const PanelContainer = () => {
     const token = useSelector(tokenSelector);
@@ -71,6 +72,11 @@ const PanelContainer = () => {
                                     <Nav.Link eventKey="my-ads">Moji oglasi</Nav.Link>
                                 </Nav.Item>
                             }
+                            {hasRole(['ROLE_USER'])  &&
+                                <Nav.Item>
+                                    <Nav.Link eventKey="my-req">Moji zahtjevi</Nav.Link>
+                                </Nav.Item>
+                            }
                         </Nav>
                     </Col>
                     <Col md={10} sm={10} xs={12}>
@@ -98,6 +104,9 @@ const PanelContainer = () => {
                             </Tab.Pane>
                             <Tab.Pane eventKey="my-ads">
                                 <MyAdsContainer />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="my-req">
+                                <EndUserRequestsContainer />
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>
