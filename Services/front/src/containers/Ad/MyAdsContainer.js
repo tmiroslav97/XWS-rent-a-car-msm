@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import AdComponent from '../../components/Ad/AdComponent';
+import MyAdComponent from '../../components/Ad/MyAdComponent';
+import Availability from '../../components/Ad/Availability';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import { adsSelector } from '../../store/ad/selectors';
@@ -17,6 +18,9 @@ const MyAdsContainer = () => {
     const [size, setSize] = useState(ads.size);
     const token = localStorage.getItem('token');
 
+    const [flagAvailability, setFlagAvailability] = useState(false);
+    const [adId, setAdId] = useState(null);
+
     useEffect(() => {
         dispatch(
             fetchAdsFromPublisher({
@@ -26,31 +30,56 @@ const MyAdsContainer = () => {
         );
     }, [nextPage, size]);
 
+    const definingAvailability = (event) => {
+        console.log(event);
+        setAdId(event);
+        console.log("definisanje dostupnosti");
+        setFlagAvailability(true);
 
-    return(
-       
+    }
+    const handleBack = () =>{
+        setFlagAvailability(false);
+    }
+
+    return (
         <Container>
-            
-            <Row>
-                <Col md={{ span: 12, offset: 3 }} xs={12}>
-    
-                    <PaginationSize size={size} setSize={setSize} />
-                </Col>
-            </Row>
-            <Row>
-                <Col >
+            {flagAvailability ?
+                <Availability 
+                adId = {adId} setAdId={setAdId}
+                flagAvailability={flagAvailability} setFlagAvailability={setFlagAvailability}
+                handleBack={handleBack}
+                />
+                :
+                <Container>
 
-                    {
-                        isFetchAds ?  <AdComponent ads={ads.data} token={token}/> : <SpinnerContainer />
-                    }
-                </Col>
-            </Row>
-            <Row>
-                <PaginationContainer setNextPage={setNextPage} totalPageCnt={ads.totalPageCnt} nextPage={nextPage}></PaginationContainer>
-            </Row>
-        </Container>
+                    <Row>
+                        <Col md={{ span: 12, offset: 3 }} xs={12}>
 
-       
+                            <PaginationSize size={size} setSize={setSize} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col >
+
+                            {
+                                isFetchAds ?
+                                    <MyAdComponent
+                                        ads={ads.data}
+                                        token={token}
+                                        definingAvailability={definingAvailability}
+                                    />
+                                    : <SpinnerContainer />
+                            }
+                        </Col>
+                    </Row>
+                    <Row>
+                        <PaginationContainer setNextPage={setNextPage} totalPageCnt={ads.totalPageCnt} nextPage={nextPage}></PaginationContainer>
+                    </Row>
+                </Container>
+            }
+
+        </Container >
+
     );
 }
 
