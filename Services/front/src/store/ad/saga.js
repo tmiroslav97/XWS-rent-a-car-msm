@@ -12,14 +12,17 @@ import {
     FETCH_AD,
     UPLOAD_IMAGE,
     SEARCH_AD,
-    PUT_IMAGE_SRC
+    PUT_IMAGE_SRC,
+    PUT_CALENDAR,
+    FETCH_CALENDAR
 } from './constants';
 
 import {
     putAds,
     putImageName,
     putAd,
-    putImageSrc
+    putImageSrc,
+    putCalendar
 } from './actions';
 
 import {
@@ -122,4 +125,15 @@ export function* loadImage(){
     //     'isFetch': true
     // }));
     
+}
+
+export function* fetchCalendar() {
+    const { payload } = yield take(FETCH_CALENDAR);
+    console.log("SAGA "+ payload.id)
+    yield put(putCalendar({ 'isFetch': false }));
+    const data = yield call(AdServices.fetchCalendar, payload.id);
+    yield put(putCalendar({
+        'data': data,
+        'isFetch': true
+    }));
 }

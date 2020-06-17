@@ -32,7 +32,6 @@ public class AdController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
         System.out.println("Service ad !!!!!");
@@ -76,5 +75,6 @@ public class AdController {
         CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
         return new ResponseEntity<>(adService.findAll(nextPage, size, principal.getUserId()), HttpStatus.OK);
     }
+
 
 }

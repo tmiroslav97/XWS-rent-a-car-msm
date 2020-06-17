@@ -15,7 +15,7 @@ const MyAdComponent = (props) => {
         props.ads.map((variant, idx) => (
 
             <Card
-                key={idx}
+                key={variant.id}
                 border="secondary"
                 className="mb-5"
             >
@@ -86,7 +86,7 @@ const MyAdComponent = (props) => {
                             {
                                 disable ? null : 
                                 <Button variant="outline-success"
-                                    onClick={() => { props.definingAvailability(idx); }}
+                                    onClick={() => { props.definingAvailability(variant.id); }}
                                 >Definisi dostupnost</Button>
                             }
                         </Col>

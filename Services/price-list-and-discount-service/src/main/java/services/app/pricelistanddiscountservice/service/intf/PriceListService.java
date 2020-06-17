@@ -11,7 +11,6 @@ public interface PriceListService {
     PriceList findById(Long id);
     List<PriceList> findAll();
     List<PriceListCreateDTO> findAllListDTO();
-    Page<PriceList> findAllPricelistFromPublisher(Long id);
     List<PriceListCreateDTO> findAllListDTOFromPublisher();
     PriceList save(PriceList priceList);
     void delete(PriceList priceList);

@@ -5,8 +5,8 @@ import { Typography } from '@material-ui/core';
 const Availability = (props) => {
     return (
         <Container>
-            <Form id="step4"
-            // onSubmit={props.addTerm} noValidate validated={props.validated}
+            <Form id="availability"
+            onSubmit={props.addTerm} noValidate validated={props.validated}
             >
                 <Form.Row>
                     <Col>
@@ -14,16 +14,15 @@ const Availability = (props) => {
                     </Col>
                     <Col>
                         <Form.Control required name="startDate" id="startDate" type="datetime-local"
-                            // min={props.getCurrentDate()}
-                            // onChange={props.handleStartDate}
-
+                            min={props.getCurrentDate()}
+                            onChange={props.handleStartDate}
                             placeholder="Datum pocetka"
                         />
                     </Col>
                     <Col>
                         <Form.Control required name="endDate" id="endDate" type="datetime-local"
-                            // min={props.startDate}
-                            // onChange={props.handleEndDate}
+                            min={props.startDate}
+                            onChange={props.handleEndDate}
 
                             placeholder="Datum kraja"
                         />
@@ -51,7 +50,7 @@ const Availability = (props) => {
                             </thead>
 
                             <tbody>
-                                {/* {props.getCarCalentarTermList()} */}
+                                {props.previewCalendar()}
 
                             </tbody>
                         </Table>

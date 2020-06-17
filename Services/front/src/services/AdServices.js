@@ -3,7 +3,8 @@ import HttpBaseClient from './HttpBaseClient';
 const FINALPOINTS = {
     AD_SEARCH_BASE: '/ad-search',
     AD_BASE: '/ad/ad',
-    IMAGE_BASE: '/ad/image'
+    IMAGE_BASE: '/ad/image',
+    CALENDAR_BASE: 'ad/calendar'
 
 };
 
@@ -134,6 +135,15 @@ class AdServices extends HttpBaseClient {
         }
         );
         console.log(response);
+        return response.data;
+    };
+
+    fetchCalendar = async payload => {
+        console.log("FETCH AD")
+        console.log(payload)
+        const response = await this.getApiClient().get(
+            FINALPOINTS.CALENDAR_BASE + "/" + payload
+        );
         return response.data;
     };
 }

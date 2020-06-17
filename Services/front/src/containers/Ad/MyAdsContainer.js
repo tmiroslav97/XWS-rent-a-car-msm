@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MyAdComponent from '../../components/Ad/MyAdComponent';
-import Availability from '../../components/Ad/Availability';
+import AvailabilityContainer from '../Ad/AvailabilityContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import { adsSelector } from '../../store/ad/selectors';
@@ -44,7 +44,7 @@ const MyAdsContainer = () => {
     return (
         <Container>
             {flagAvailability ?
-                <Availability 
+                <AvailabilityContainer 
                 adId = {adId} setAdId={setAdId}
                 flagAvailability={flagAvailability} setFlagAvailability={setFlagAvailability}
                 handleBack={handleBack}

@@ -49,12 +49,6 @@ public class PriceListServiceImpl implements PriceListService {
     }
 
     @Override
-    public Page<PriceList> findAllPricelistFromPublisher(Long id) {
-        Pageable pageable = PageRequest.of(10, 10);
-        return  priceListRepository.findAllByPublisherUser(id, pageable);
-    }
-
-    @Override
     public List<PriceListCreateDTO> findAllListDTOFromPublisher() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();

@@ -4,19 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import services.app.adservice.converter.CarCalendarTermConverter;
 import services.app.adservice.dto.car.CarCalendarTermCreateDTO;
+import services.app.adservice.dto.car.CarCalendarTermDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
+import services.app.adservice.model.Ad;
 import services.app.adservice.model.CarCalendarTerm;
 import services.app.adservice.repository.CarCalendarTermRepository;
+import services.app.adservice.service.intf.AdService;
 import services.app.adservice.service.intf.CarCalendarTermService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CarCalendarTermServiceImpl implements CarCalendarTermService {
 
     @Autowired
     public CarCalendarTermRepository carCalendarTermRepository;
+
+    @Autowired
+    public AdService adService;
 
     @Override
     public CarCalendarTerm findById(Long id) {
@@ -58,10 +66,46 @@ public class CarCalendarTermServiceImpl implements CarCalendarTermService {
     }
 
     @Override
+    public Integer addCarCalendarTerm(CarCalendarTermDTO carCalendarTermDTO) {
+        CarCalendarTerm carCalendarTerm =  CarCalendarTermConverter.toCarCalendarTermFromRequest(carCalendarTermDTO);
+        if(carCalendarTerm != null){
+            Ad ad = adService.findById(carCalendarTermDTO.getAdId());
+            if(ad != null){
+                ad.getCarCalendarTerms().add(carCalendarTerm);
+                ad = adService.save(ad);
+                System.out.println("usloo u if");
+                System.out.println(ad.getCarCalendarTerms());
+//                carCalendarTerm.setAd(ad);
+                return 1;
+            }
+        }
+        return 2;
+    }
+
+    @Override
     public CarCalendarTerm editCarCalendarTerm(CarCalendarTerm carCalendarTerm) {
         this.findById(carCalendarTerm.getId());
         CarCalendarTerm carCalendarTerm1 = carCalendarTermRepository.save(carCalendarTerm);
         return carCalendarTerm1;
+    }
+
+    @Override
+    public List<CarCalendarTermCreateDTO> findByAdId(Long id) {
+        List<CarCalendarTermCreateDTO> list = new ArrayList<>();
+        Ad ad = adService.findById(id);
+        if(ad != null){
+            System.out.println("naziv oglasa: "+ad.getName());
+            Set<CarCalendarTerm> carCalendarTerms = ad.getCarCalendarTerms();
+            for(CarCalendarTerm carCalendarTerm: carCalendarTerms){
+                CarCalendarTermCreateDTO dto = new CarCalendarTermCreateDTO();
+                dto.setEndDate(carCalendarTerm.getEndDate().toString());
+                dto.setStartDate(carCalendarTerm.getStartDate().toString());
+                list.add(dto);
+                System.out.println("termin: " + carCalendarTerm.getStartDate() + carCalendarTerm.getEndDate() );
+            }
+        }
+
+        return list;
     }
 
 }

@@ -9,7 +9,9 @@ import{
     PUT_IMAGE_NAME,
     PUT_AD,
     SEARCH_AD,
-    PUT_IMAGE_SRC
+    PUT_IMAGE_SRC,
+    PUT_CALENDAR,
+    FETCH_CALENDAR
 } from './constants';
 
 export const createdAd = payload => ({
@@ -63,5 +65,15 @@ export const searchAd = payload => ({
 
 export const putImagesSrc = payload => ({
     type: PUT_IMAGE_SRC,
+    payload
+});
+
+export const putCalendar = payload => ({
+    type: PUT_CALENDAR,
+    payload
+});
+
+export const fetchCalendar = payload => ({
+    type: FETCH_CALENDAR,
     payload
 });
