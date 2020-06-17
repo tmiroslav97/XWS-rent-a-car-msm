@@ -14,16 +14,20 @@ const EndUserRequestsComponent = (props) => {
             <Row>
                 <Col md={6} xs={12}>
                     {
-                        props.pendingRequests.map((pendingReq, idx) => {
+                        props.requests.map((req, idx) => {
                             return (
                                 <Card border="secondary" key={idx} className="mt-2">
                                     <Card.Body>
                                         <Row>
                                             <Col>
                                                 <ListGroup variant="flush">
-                                                    <ListGroup.Item>Datum podnosenja zahtjeva: {pendingReq.submitDate}</ListGroup.Item>
-                                                    <ListGroup.Item>Datum pocetka rentiranja: {pendingReq.startDate}</ListGroup.Item>
-                                                    <ListGroup.Item>Datum zavrsetka rentiranja: {pendingReq.endDate}</ListGroup.Item>
+                                                    <ListGroup.Item>Datum podnosenja zahtjeva: {req.submitDate}</ListGroup.Item>
+                                                    <ListGroup.Item>Datum pocetka rentiranja: {req.startDate}</ListGroup.Item>
+                                                    <ListGroup.Item>Datum zavrsetka rentiranja: {req.endDate}</ListGroup.Item>
+                                                    {
+                                                        req.bundle ?
+                                                            <ListGroup.Item>Bundle zahtjev</ListGroup.Item> : null
+                                                    }
                                                 </ListGroup>
                                             </Col>
                                         </Row>
@@ -31,10 +35,8 @@ const EndUserRequestsComponent = (props) => {
                                             <Col>
                                                 <ListGroup variant="flush">
                                                     <ListGroup.Item>Naziv oglasa:</ListGroup.Item>
-
                                                     {
-                                                        pendingReq.ads.map((ad, idx) => {
-                                                            console.log(ad.id);
+                                                        req.ads.map((ad, idx) => {
                                                             return (
                                                                 <OverlayTrigger key={idx} overlay={<Tooltip id="tooltip-disabled">Klikni za detaljno</Tooltip>}>
                                                                     <span className="d-inline-block">
