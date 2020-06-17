@@ -88,6 +88,7 @@ public class RequestServiceImpl implements RequestService {
                             .submitDate(DateAPI.DateTimeNow())
                             .status(RequestStatusEnum.PENDING)
                             .ads(ads)
+                            .bundle(itemSubmitRequestDTO.getBundle())
                             .publisherUser(entry.getKey())
                             .endUser(userId)
                             .build();
@@ -112,6 +113,7 @@ public class RequestServiceImpl implements RequestService {
                                 .submitDate(DateAPI.dateTimeNow())
                                 .status(RequestStatusEnum.PENDING)
                                 .ads(ads)
+                                .bundle(itemSubmitRequestDTO.getBundle())
                                 .publisherUser(entry.getKey())
                                 .endUser(userId)
                                 .build();

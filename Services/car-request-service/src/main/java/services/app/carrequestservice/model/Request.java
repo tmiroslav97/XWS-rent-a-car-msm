@@ -45,6 +45,9 @@ public class Request {
     @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
     private Long publisherUser;
 
+    @Column(name = DbColumnConstants.BUNDLE, nullable = false)
+    private Boolean bundle;
+
     @Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
             @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
