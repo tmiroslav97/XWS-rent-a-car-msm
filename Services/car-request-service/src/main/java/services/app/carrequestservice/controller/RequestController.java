@@ -32,7 +32,7 @@ public class RequestController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_AGENT')")
-    @RequestMapping(value = "/publisher_user", method = RequestMethod.GET)
+    @RequestMapping(value = "/publisher-user", method = RequestMethod.GET)
     public ResponseEntity<?> getPublisherUserRequests(@RequestHeader(value = "status", required = false) String status) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomPrincipal cp = (CustomPrincipal) auth.getPrincipal();

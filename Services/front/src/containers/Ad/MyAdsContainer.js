@@ -30,16 +30,13 @@ const MyAdsContainer = () => {
     return(
        
         <Container>
-            
             <Row>
-                <Col md={{ span: 12, offset: 3 }} xs={12}>
-    
+                <Col md={12} xs={12}>
                     <PaginationSize size={size} setSize={setSize} />
                 </Col>
             </Row>
             <Row>
-                <Col >
-
+                <Col>
                     {
                         isFetchAds ?  <AdComponent ads={ads.data} token={token}/> : <SpinnerContainer />
                     }

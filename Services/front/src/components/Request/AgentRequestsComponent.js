@@ -2,7 +2,7 @@ import React from 'react';
 import { history } from '../../index';
 import { Row, Col, OverlayTrigger, Tooltip, ListGroup, Card } from 'react-bootstrap'
 
-const EndUserRequestsComponent = (props) => {
+const AgentRequestsComponent = (props) => {
 
     return (
         <div>
@@ -60,4 +60,4 @@ const EndUserRequestsComponent = (props) => {
     );
 }
 
-export default EndUserRequestsComponent;
+export default AgentRequestsComponent;
