@@ -90,6 +90,12 @@ public class AdServiceImpl implements AdService {
         return adRepository.save(ad);    }
 
     @Override
+    public Ad edit(Ad ad) {
+        this.findById(ad.getId());
+        return adRepository.save(ad);
+    }
+
+    @Override
     public void delete(Ad ad) {
         adRepository.delete(ad);
 

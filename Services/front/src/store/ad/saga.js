@@ -31,7 +31,8 @@ import {
 } from '../common/actions';
 
 import {
-    imageNameSelector
+    imageNameSelector,
+    calendarSelector
 } from './selectors';
 
 
@@ -141,13 +142,15 @@ export function* fetchCalendar() {
 
 export function* addTerm(){
     const { payload } = yield take(ADD_TERM);
+    const temp = yield select(calendarSelector);
     yield put(putCalendar({ 'isFetch': false }));
+    console.log("sagaaa")
     console.log(payload);
-    const data = yield call(AdServices.addTerm, payload.data);
-    yield put(putCalendar({
-        'data': data,
-        'isFetch': true
-    }));
+    const data = yield call(AdServices.addTerm, payload); 
     console.log(data);
-    
+    // yield temp.push(data);
+    // yield put(putCalendar({
+    //     'data': temp,
+    //     'isFetch': true
+    // }));    
 }

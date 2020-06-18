@@ -11,6 +11,7 @@ public interface CarCalendarTermService {
     List<CarCalendarTerm> findAll();
     CarCalendarTerm save(CarCalendarTerm carCalendarTerm);
     void delete(CarCalendarTerm carCalendarTerm);
+    CarCalendarTerm edit(CarCalendarTerm carCalendarTerm);
     Integer deleteById(Long id);
     CarCalendarTerm createCarCalendarTerm(CarCalendarTermCreateDTO carCalendarTermCreateDTO);
     Integer addCarCalendarTerm(CarCalendarTermDTO carCalendarTermDTO);

@@ -6,7 +6,8 @@ const Availability = (props) => {
     return (
         <Container>
             <Form id="availability"
-            onSubmit={props.addTerm} noValidate validated={props.validated}
+            // onSubmit={props.addTerm} 
+            noValidate validated={props.validated}
             >
                 <Form.Row>
                     <Col>
@@ -28,7 +29,9 @@ const Availability = (props) => {
                         />
                     </Col>
                     <Col>
-                        <Button type="submit" >Dodaj</Button>
+                        <Button //type="submit"
+                        onClick={props.addTermToCalendar}
+                         >Dodaj</Button>
                     </Col>
                 </Form.Row>
 

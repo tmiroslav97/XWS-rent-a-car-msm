@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
 import { calendarSelector } from '../../store/ad/selectors';
-import { fetchCalendar } from '../../store/ad/actions';
+import { fetchCalendar, addTerm } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
 import Availability from '../../components/Ad/Availability';
 
@@ -27,104 +27,132 @@ const AvailabilityContainer = (props) => {
                 'id': props.adId
             })
         );
-        
     }, []);
 
-    console.log(calendar);
-
-    const getCalendar = () => {
-        if (calendar.isFetch) {
-            if (calendar.data != "") {
-                calendar.data.map((term) => {
-                    console.log(term);
-                    carCalendarTermList.push(term);
-                    console.log("--------------------");
-                    console.log(carCalendarTermList)
-                })
-            }
-
-        }
-    }
 
     const previewCalendar = () => {
-        // if (calendar.isFetch) {
-        //     if (calendar.data != "") {
-        //         calendar.data.map((term) => {
-        //             console.log(term);
-        //             carCalendarTermList.push(term);
-        //             console.log("--------------------");
-        //             console.log(carCalendarTermList)
-        //         })
-        //     }
-
-        // }
-
         let list = [];
         let i = 1;
-        if (carCalendarTermList != "") {
-            carCalendarTermList.map((term) => {
-                let ss = term.startDate.substring(0, 10);
-                let ss2 = term.startDate.substring(11, 16);
-                let ee = term.endDate.substring(0, 10);
-                let ee2 = term.endDate.substring(11, 16);
-                ss = ss + " " + ss2;
-                ee = ee + " " + ee2;
-                list.push(
-                    <tr key={i}>
-                        <td>{i}</td>
-                        <td>{ss}</td>
-                        <td>{ee}</td>
+        if (calendar.isFetch) {
+            if (calendar.data != "") {
+                // setCarCalendarTermList(calendar.data);
+                // console.log("--------------------");
+                // console.log(carCalendarTermList)
 
-                        {/* <td align="right">
+                calendar.data.map((term) => {
+                    console.log(term);
+
+                    let ss = term.startDate.substring(0, 10);
+                    let ss2 = term.startDate.substring(11, 16);
+                    let ee = term.endDate.substring(0, 10);
+                    let ee2 = term.endDate.substring(11, 16);
+                    ss = ss + " " + ss2;
+                    ee = ee + " " + ee2;
+                    list.push(
+                        <tr key={i}>
+                            <td>{i}</td>
+                            <td>{ss}</td>
+                            <td>{ee}</td>
+
+                            {/* <td align="right">
                             <Button variant="outline-success" onClick={() => { props.handleEdit(carManufacturer); }}>Izmjeni</Button>
                         </td>
                         <td align="right">
                             <Button variant="outline-danger" onClick={() => { props.handleDelete(carManufacturer.id); }}>Obriši</Button>
                         </td> */}
-                    </tr>
-                );
-                i++;
-            })
-        }
-
-
-        return list;
-    }
-    const addTerm = (event) => {
-        event.preventDefault();
-        const form = event.target;
-
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-            setValidated(true);
-        } else {
-            let flag = false;
-            if (carCalendarTermList != "") {
-                carCalendarTermList.map((temp) => {
-                    if (temp.startDate <= startDate && startDate <= temp.endDate) {
-                        flag = true;
-                        console.log("start date je izmedju")
-                    } else if (temp.startDate <= endDate && endDate <= temp.endDate) {
-                        flag = true;
-                        console.log("end date je izmedju")
-                    }
+                        </tr>
+                    );
+                    i++;
                 })
             }
+
+        }
+        return list;
+    }
+
+
+    // const addTerm = (event) => {
+    //     event.preventDefault();
+    //     const form = event.target;
+
+    //     if (form.checkValidity() === false) {
+    //         event.stopPropagation();
+    //         setValidated(true);
+    //     } else {
+    //         let flag = false;
+    //         if (calendar.isFetch) {
+    //             if (calendar.data != "") {
+    //                 calendar.data.map((temp) => {
+    //                     if (temp.startDate <= startDate && startDate <= temp.endDate) {
+    //                         flag = true;
+    //                         console.log("start date je izmedju")
+    //                     } else if (temp.startDate <= endDate && endDate <= temp.endDate) {
+    //                         flag = true;
+    //                         console.log("end date je izmedju")
+    //                     }
+    //                 });
+    //             }
+    //         }
+
+    //         if (flag === true) {
+    //             console.log("ne mozes da dodas datum.");
+    //             alert("Datumi se ne smeju preklapati.");
+    //         } else {
+
+    //             console.log("DODAJ DATUM.");
+    //             let temp = {
+    //                 'adId': props.adId,
+    //                 'startDate': startDate,
+    //                 'endDate': endDate
+    //             };
+    //             console.log(temp);
+    //             add(temp);
+    //             setValidated(false);
+    //         }
+
+    //     }
+    // }
+
+    const addTermToCalendar = () => {
+        if (startDate != null && endDate != null) {
+            let flag = false;
+            if (calendar.isFetch) {
+                if (calendar.data != "") {
+                    calendar.data.map((temp) => {
+                        if (temp.startDate <= startDate && startDate <= temp.endDate) {
+                            flag = true;
+                            console.log("start date je izmedju")
+                        } else if (temp.startDate <= endDate && endDate <= temp.endDate) {
+                            flag = true;
+                            console.log("end date je izmedju")
+                        }
+                    });
+                }
+            }
+
             if (flag === true) {
                 console.log("ne mozes da dodas datum.");
                 alert("Datumi se ne smeju preklapati.");
             } else {
-                let temp = {
-                    'startDate': startDate,
-                    'endDate': endDate
-                };
-                carCalendarTermList.push(temp);
-                console.log(carCalendarTermList);
-                setValidated(false);
-            }
+                console.log("DODAJ DATUM.");
+                add();
 
+                // setValidated(false);
+            }
         }
     }
+
+    const add = () => {
+        
+        let temp = {
+            'adId': props.adId,
+            'startDate': startDate,
+            'endDate': endDate
+        };
+        console.log(temp);
+        dispatch(addTerm(JSON.stringify(temp)));
+    }
+
     const getCurrentDate = () => {
         let newDate = new Date()
         let date = newDate.getDate();
@@ -159,15 +187,15 @@ const AvailabilityContainer = (props) => {
         <Container >
             <Row>
                 <Col >
-                
+
                     <Availability
                         adId={props.adId} setAdId={props.setAdId}
                         flagAvailability={props.flagAvailability}
                         setFlagAvailability={props.setFlagAvailability}
                         handleBack={props.handleBack}
-                        getCalendar={getCalendar}
+                        // getCalendar={getCalendar}
                         previewCalendar={previewCalendar}
-                        addTerm={addTerm}
+                        addTermToCalendar={addTermToCalendar}
                         getCurrentDate={getCurrentDate}
                         handleStartDate={handleStartDate}
                         handleEndDate={handleEndDate}

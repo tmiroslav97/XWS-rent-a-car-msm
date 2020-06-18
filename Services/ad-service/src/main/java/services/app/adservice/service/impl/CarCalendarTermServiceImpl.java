@@ -52,6 +52,12 @@ public class CarCalendarTermServiceImpl implements CarCalendarTermService {
     }
 
     @Override
+    public CarCalendarTerm edit(CarCalendarTerm carCalendarTerm) {
+        this.findById(carCalendarTerm.getId());
+        return carCalendarTermRepository.save(carCalendarTerm);
+    }
+
+    @Override
     public Integer deleteById(Long id) {
         CarCalendarTerm carCalendarTerm = this.findById(id);
         this.delete(carCalendarTerm);
@@ -72,9 +78,9 @@ public class CarCalendarTermServiceImpl implements CarCalendarTermService {
             Ad ad = adService.findById(carCalendarTermDTO.getAdId());
             if(ad != null){
                 ad.getCarCalendarTerms().add(carCalendarTerm);
-                ad = adService.save(ad);
+                ad = adService.edit(ad);
                 System.out.println("usloo u if");
-                System.out.println(ad.getCarCalendarTerms());
+//                System.out.println(ad);
 //                carCalendarTerm.setAd(ad);
                 return 1;
             }

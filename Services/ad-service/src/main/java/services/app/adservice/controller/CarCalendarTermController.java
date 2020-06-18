@@ -42,7 +42,7 @@ public class CarCalendarTermController {
 
         Integer flag = carCalendarTermService.addCarCalendarTerm(carCalendarTermDTO);
         if (flag == 1) {
-            return new ResponseEntity<>("Termin dodat uspesno.", HttpStatus.CREATED);
+            return new ResponseEntity<>(carCalendarTermDTO, HttpStatus.CREATED);
         }else {
             return new ResponseEntity<>("Desila se greska.", HttpStatus.BAD_REQUEST);
         }
