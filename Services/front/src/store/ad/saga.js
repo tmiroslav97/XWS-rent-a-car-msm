@@ -6,19 +6,24 @@ import AdServices from '../../services/AdServices';
 
 import {
     CREATED_AD,
+    CREATED_AD_PHOTOS,
     FETCH_ADS,
     FETCH_ADS_FROM_PUBLISHER,
     FETCH_AD,
     UPLOAD_IMAGE,
     SEARCH_AD,
-    PUT_IMAGE_SRC
+    PUT_IMAGE_SRC,
+    PUT_CALENDAR,
+    FETCH_CALENDAR,
+    ADD_TERM
 } from './constants';
 
 import {
     putAds,
     putImageName,
     putAd,
-    putImageSrc
+    putImageSrc,
+    putCalendar
 } from './actions';
 
 import {
@@ -26,7 +31,8 @@ import {
 } from '../common/actions';
 
 import {
-    imageNameSelector
+    imageNameSelector,
+    calendarSelector
 } from './selectors';
 
 
@@ -34,6 +40,16 @@ export function* createdAd(){
     const { payload } = yield take(CREATED_AD);
     const data = yield call(AdServices.createdAd, payload); 
     yield put(putSuccessMsg(data));
+    history.push('/');
+}
+
+//pokusaj poziva metode sa slikom 
+export function* createdAdPhotos(){
+    const { payload } = yield take(CREATED_AD_PHOTOS);
+    const data = yield call(AdServices.createdAdPhotos, payload); 
+    console.log("sagicaaa");
+    console.log(data);
+    // yield put(putSuccessMsg(data));
     // history.push('/');
 }
 
@@ -111,4 +127,45 @@ export function* loadImage(){
     //     'isFetch': true
     // }));
     
+}
+
+export function* fetchCalendar() {
+    // const { payload } = yield take(FETCH_CALENDAR);
+    // console.log("SAGA "+ payload.id)
+    // const temp = yield select(calendarSelector);
+    // console.log(temp);
+    // yield put(putCalendar({ 'isFetch': false }));
+    // const data = yield call(AdServices.fetchCalendar, payload.id);
+    // data.map((term)=>{
+    //     console.log(term);
+    //     temp.data.push({
+    //         'startDate': term.startDate,
+    //         'endDate': term.endDate
+    //     });
+    // })
+    // yield put(putCalendar({
+    //     'data': temp,
+    //     'isFetch': true
+    // }));
+}
+
+export function* addTerm(){
+    // const { payload } = yield take(ADD_TERM);
+    // const temp = yield select(calendarSelector);
+    // yield put(putCalendar({ 'isFetch': false }));
+    // console.log("sagaaa")
+    // console.log(payload);
+    // const data = yield call(AdServices.addTerm, payload); 
+    // console.log(data.adId);
+    // console.log(data.startDate);
+    // console.log(data.endDate);
+    // yield temp.data.push({
+    //     'startDate': data.startDate,
+    //     'endDate': data.endDate
+    // });
+    // yield put(putCalendar({
+    //     'data': temp,
+    //     'isFetch': true
+    // }));    
+    // console.log(temp);
 }

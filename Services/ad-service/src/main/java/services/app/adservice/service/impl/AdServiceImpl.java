@@ -20,14 +20,12 @@ import services.app.adservice.dto.ad.AdRatingDTO;
 import services.app.adservice.dto.car.CarCalendarTermCreateDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
-import services.app.adservice.model.Ad;
-import services.app.adservice.model.Car;
-import services.app.adservice.model.CarCalendarTerm;
-import services.app.adservice.model.CustomPrincipal;
+import services.app.adservice.model.*;
 import services.app.adservice.repository.AdRepository;
 import services.app.adservice.service.intf.AdService;
 import services.app.adservice.service.intf.CarCalendarTermService;
 import services.app.adservice.service.intf.CarService;
+import services.app.adservice.service.intf.ImageService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +41,9 @@ public class AdServiceImpl implements AdService {
     
     @Autowired
     private CarCalendarTermService carCalendarTermService;
+
+    @Autowired
+    private ImageService imageService;
 
     @Autowired
     private PricelistAndDiscountClient pricelistAndDiscountClient;
@@ -89,6 +90,12 @@ public class AdServiceImpl implements AdService {
         return adRepository.save(ad);    }
 
     @Override
+    public Ad edit(Ad ad) {
+        this.findById(ad.getId());
+        return adRepository.save(ad);
+    }
+
+    @Override
     public void delete(Ad ad) {
         adRepository.delete(ad);
 
@@ -132,12 +139,16 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Integer createAd(AdCreateDTO adCreateDTO , String email) {
+    public Integer createAd(AdCreateDTO adCreateDTO) {
+        System.out.println("***************************************************************");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
 
-        Integer rez = authenticationClient.getAdLimitNum(principal.getToken());
+        //postavljen publish user
+        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getEmail());
 
+        //provereno za end user-a koliko oglasa moze da dodaje
+        Integer rez = authenticationClient.getAdLimitNum(principal.getToken());
         if(rez == 4){
             System.out.println("nije end userrrr");
         }else if(rez == 0){
@@ -145,24 +156,26 @@ public class AdServiceImpl implements AdService {
             System.out.println("ne sme dodavati vise oglasa");
             return 2;
         }
+        if(rez != 4){
+            Integer r = authenticationClient.reduceLimitNum(principal.getToken());
+            System.out.println("Limit num : "+ r);
+        }
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
-
-        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
-        ad.setCar(car);
-
+        //dodeljen cenovnik
         if (adCreateDTO.getPriceListCreateDTO().getId() == null) {
             //pravljenje novog cenovnika
             Long priceList = pricelistAndDiscountClient.createPricelist(adCreateDTO.getPriceListCreateDTO(),principal.getUserId(), principal.getEmail(),
                     principal.getRoles(), principal.getToken());
-            //TODO 1: DODATI PUBLISHERA I DODATI OGLAS TAJ PRICE LISTI
+            System.out.println("ID nove price liste: "+ priceList);
             ad.setPriceList(priceList);
         } else {
             //dodavanje vec postojeceg cenovnika
             Long priceList = pricelistAndDiscountClient.findPriceList(adCreateDTO.getPriceListCreateDTO().getId(), principal.getUserId(), principal.getEmail(),
                     principal.getRoles(), principal.getToken());
+            System.out.println("ID stare price liste od tog publisher-a: "+ priceList);
             ad.setPriceList(priceList);
         }
-
+        //dodeljeni termini
         if (adCreateDTO.getCarCalendarTermCreateDTOList() != null) {
             List<CarCalendarTermCreateDTO> carCalendarTermCreateDTOList = adCreateDTO.getCarCalendarTermCreateDTOList();
             for (CarCalendarTermCreateDTO carCalendarTermCreateDTO : carCalendarTermCreateDTOList) {
@@ -171,14 +184,33 @@ public class AdServiceImpl implements AdService {
                 ad.getCarCalendarTerms().add(carCalendarTerm);
             }
         }
+        //kreirana klasa za automobil
+        Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
+        ad.setCar(car);
+        //dodeljen publisherUser za oglas
         Long publisherUser = authenticationClient.findPublishUserByEmail(principal.getToken());
         ad.setPublisherUser(publisherUser);
         ad = this.save(ad);
-
-        if(rez != 4){
-            Integer r = authenticationClient.reduceLimitNum(principal.getToken());
-            System.out.println("Limit num: "+ r);
+        //dodeljene slike
+        if(adCreateDTO.getImagesDTO() != null){
+            List<String> slike = adCreateDTO.getImagesDTO();
+            for(String slika : slike){
+                Image image = imageService.findByName(slika);
+                if(image != null){
+                    System.out.println("slika: " + image.getName());
+                    image.setAd(ad);
+                    image = imageService.editImage(image);
+                }
+            }
         }
+
+//        car.setAd(ad);
+//        car = carService.editCar(car);
+        for (CarCalendarTerm carCalendarTerm : ad.getCarCalendarTerms()) {
+                carCalendarTerm.setAd(ad);
+                carCalendarTerm = carCalendarTermService.editCarCalendarTerm(carCalendarTerm);
+        }
+        System.out.println("***************************************************************");
         return 1;
     }
 

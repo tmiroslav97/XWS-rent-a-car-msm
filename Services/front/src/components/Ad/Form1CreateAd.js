@@ -28,7 +28,7 @@ const Form1CreateAd = (props) => {
                         <Form.Group as={Col}>
                             <Form.Label>Model</Form.Label>
                             <Form.Control as="select" name="carModel" id="txtCarModel" placeholder="Model"
-                                value={props.carModel} onChange={props.handleCarModel}>
+                                defaultValue={props.carModel} onChange={props.handleCarModel}>
                                 {props.getCarModels()}
                             </Form.Control>
                         </Form.Group>

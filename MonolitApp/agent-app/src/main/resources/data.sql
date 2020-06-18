@@ -96,11 +96,11 @@ INSERT INTO car_manufacturer(id, name)
 VALUES (21, 'Proche');
 
 INSERT INTO price_list(id, creation_date, price_per_day, price_per_km, price_per_cwd, publisher_user_id)
-VALUES (1, '20.04.2020', 20, 10, 0, 2);
+VALUES (1, '20.04.2020', 20, 10, 0, 3);
 INSERT INTO price_list(id, creation_date, price_per_day, price_per_km, price_per_cwd, publisher_user_id)
 VALUES (2, '25.05.2020', 20, 10, 0, 2);
 INSERT INTO price_list(id, creation_date, price_per_day, price_per_km, price_per_cwd, publisher_user_id)
-VALUES (3, '24.04.2020', 20, 10, 0, 2);
+VALUES (3, '24.04.2020', 20, 10, 0, 4);
 
 INSERT INTO car (id, android_flag, car_manufacturer, car_model, car_type, cdw, children_seat_num, fuel_type, gearbox_type, mileage, token, year)
 VALUES (1, false, 'Fiat', '500', 'Limuzina', false, 2, 'Dizel', 'Automatski', 120, null, '2020-05-20');
@@ -185,42 +185,34 @@ INSERT INTO car_calendar_term(start_date, end_date, ad_id)
 VALUES ('2020.06.08.', '2020.08.08.', 4);
 
 INSERT INTO image(id, name, ad_id)
-VALUES (1, 'slika0', 1);
+VALUES (1, 'slika1', 1);
 INSERT INTO image(id, name, ad_id)
-VALUES (2, 'slika1', 1);
+VALUES (2, 'slika2', 1);
 INSERT INTO image(id, name, ad_id)
-VALUES (3, 'slika2', 1);
+VALUES (3, 'slika3', 1);
 INSERT INTO image(id, name, ad_id)
-VALUES (4, 'slika3', 1);
+VALUES (4, 'slika4', 1);
 INSERT INTO image(id, name, ad_id)
-VALUES (5, 'slika4', 2);
+VALUES (5, 'slika5', 2);
 INSERT INTO image(id, name, ad_id)
-VALUES (6, 'slika5', 2);
+VALUES (6, 'slika6', 2);
 INSERT INTO image(id, name, ad_id)
-VALUES (7, 'slika6', 2);
+VALUES (7, 'slika7', 2);
 INSERT INTO image(id, name, ad_id)
-VALUES (8, 'slika7', 2);
+VALUES (8, 'slika8', 2);
 INSERT INTO image(id, name, ad_id)
-VALUES (9, 'slika8', 2);
+VALUES (9, 'slika9', 3);
 INSERT INTO image(id, name, ad_id)
-VALUES (10, 'slika9', 3);
+VALUES (10, 'slika10', 3);
 INSERT INTO image(id, name, ad_id)
-VALUES (11, 'slika10', 3);
+VALUES (11, 'slika11', 3);
 INSERT INTO image(id, name, ad_id)
-VALUES (12, 'slika11', 3);
+VALUES (12, 'slika12', 3);
 INSERT INTO image(id, name, ad_id)
-VALUES (13, 'slika12', 3);
+VALUES (13, 'slika13', 4);
 INSERT INTO image(id, name, ad_id)
-VALUES (14, 'slika13', 3);
+VALUES (14, 'slika14', 4);
 INSERT INTO image(id, name, ad_id)
-VALUES (15, 'slika14', 3);
+VALUES (15, 'slika15', 4);
 INSERT INTO image(id, name, ad_id)
-VALUES (16, 'slika15', 4);
-INSERT INTO image(id, name, ad_id)
-VALUES (17, 'slika16', 4);
-INSERT INTO image(id, name, ad_id)
-VALUES (18, 'slika17', 4);
-INSERT INTO image(id, name, ad_id)
-VALUES (19, 'slika18', 4);
-INSERT INTO image(id, name, ad_id)
-VALUES (20, 'slika19', 4);
+VALUES (16, 'slika16', 4);

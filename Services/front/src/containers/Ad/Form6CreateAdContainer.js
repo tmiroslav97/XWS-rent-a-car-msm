@@ -18,7 +18,7 @@ const Form6CreateAdContainer = (props) => {
             console.log(imageName);
 
             console.log(JSON.stringify(imageName));
-            props.setImagesDTO(JSON.stringify(imageName));
+            props.setImagesDTO(imageName);
             console.log(imageName[props.flagCover])
             props.setCoverPhoto(imageName[props.flagCover]);
             // if(props.carModel === null){

@@ -9,7 +9,31 @@ import org.joda.time.format.DateTimeFormatter;
 public class DateAPI {
 
     public static DateTime DateTimeNow() {
-        return new DateTime(DateTimeZone.UTC);
+        DateTime dateTime = new DateTime(DateTimeZone.UTC);
+        String date = dateTime.toString();
+
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm dd-MM-yyyy");
+        String dateString = date.replace("T", " ");
+        String[] res = dateString.split(" ");
+
+        String datum = res[0];
+        String[] dio = datum.split("-");
+        String yyyy = dio[0];
+        String MM = dio[1];
+        String dd = dio[2];
+
+        String vreme = res[1];
+        dio = vreme.split(":");
+        String hh = dio[0];
+        String mm = dio[1];
+        String ostatak = dio[2];
+
+        String newDate = hh+ ":" + mm + " " + dd + "-" + MM + "-" + yyyy;
+        System.out.println(newDate);
+
+        DateTime dateTime1 = DateTime.parse(newDate, formatter);
+        System.out.println("datum nakon parsiranja: " + dateTime1.toString());
+        return dateTime1;
     }
 
     public static DateTime DateTimeFromString(String date) {
@@ -61,4 +85,5 @@ public class DateAPI {
 
         return dateTime;
     }
+
 }

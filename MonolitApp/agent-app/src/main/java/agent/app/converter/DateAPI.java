@@ -32,7 +32,7 @@ public class DateAPI {
 
     //za datume sa fronta koji stizu u formatu: 2020-06-03T03:03
     public static DateTime dateStringToDateTime(String date) {
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MM-yyyy");
 //        DateFormat formatter = new SimpleDateFormat("hh:mm dd-MM-yyyy");
         String dateString = date.replace("T", " ");
 //        System.out.println(dateString);
@@ -44,12 +44,12 @@ public class DateAPI {
         String MM = dio[1];
         String dd = dio[2];
 
-        String vrijeme = res[1];
-        dio = vrijeme.split(":");
-        String hh = dio[0]; // 004
-        String mm = dio[1];
+//        String vrijeme = res[1];
+//        dio = vrijeme.split(":");
+//        String hh = dio[0]; // 004
+//        String mm = dio[1];
 
-        String newDate = vrijeme + " " + dd + "-" + MM + "-" + yyyy;
+        String newDate =  dd + "-" + MM + "-" + yyyy;
         System.out.println(newDate);
         DateTime dateTime = DateTime.parse(newDate, formatter);
 

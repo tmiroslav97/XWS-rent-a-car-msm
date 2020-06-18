@@ -6,8 +6,6 @@ import services.app.pricelistanddiscountservice.model.PriceList;
 public class PriceListConverter extends AbstractConverter{
 
     public static PriceList toCreatePriceListFromRequest(PriceListCreateDTO priceListCreateDTO){
-//        DateTime dt = DateAPI.DateTimeFromDateString(priceListCreateDTO.getCreationDate());
-
         return PriceList.builder()
                 .creationDate(DateAPI.DateTimeNow())
                 .pricePerKm(priceListCreateDTO.getPricePerKm())

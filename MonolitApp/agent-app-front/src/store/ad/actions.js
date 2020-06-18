@@ -1,5 +1,6 @@
 import{
     CREATED_AD,
+    CREATED_AD_PHOTOS,
     FETCH_ADS,
     FETCH_ADS_FROM_PUBLISHER,
     FETCH_AD,
@@ -8,11 +9,19 @@ import{
     PUT_IMAGE_NAME,
     PUT_AD,
     SEARCH_AD,
-    PUT_IMAGE_SRC
+    PUT_IMAGE_SRC,
+    PUT_CALENDAR,
+    FETCH_CALENDAR,
+    ADD_TERM
 } from './constants';
 
 export const createdAd = payload => ({
     type: CREATED_AD,
+    payload
+});
+
+export const createdAdPhotos = payload => ({
+    type: CREATED_AD_PHOTOS,
     payload
 });
 
@@ -57,5 +66,20 @@ export const searchAd = payload => ({
 
 export const putImagesSrc = payload => ({
     type: PUT_IMAGE_SRC,
+    payload
+});
+
+export const putCalendar = payload => ({
+    type: PUT_CALENDAR,
+    payload
+});
+
+export const fetchCalendar = payload => ({
+    type: FETCH_CALENDAR,
+    payload
+});
+
+export const addTerm = payload => ({
+    type: ADD_TERM,
     payload
 });
