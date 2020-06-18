@@ -71,7 +71,6 @@ const CartComponent = (props) => {
                 </Row> :
                 <Row className="justify-content-center mt-2">
                     <Col md={6} xs={12}>
-                        <Form noValidate id="cartForm" onSubmit={props.onSubmit}>
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Form.Label>Datum pocetka rentiranja {props.startDate} </Form.Label>
@@ -84,7 +83,7 @@ const CartComponent = (props) => {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} >
-                                    <Button variant="primary" id="createReq" type="submit">
+                                    <Button variant="primary" id="createReq" onClick={props.handleCreateReq}>
                                         Kreiraj zahtjev
                                 </Button>
                                 </Form.Group>
@@ -96,7 +95,6 @@ const CartComponent = (props) => {
                                     </Button>
                                 </Form.Group>
                             </Form.Row>
-                        </Form>
                     </Col>
                 </Row>
             }
