@@ -96,6 +96,7 @@ export function* signOut() {
     yield take(SIGN_OUT);
     yield put(putToken(null));
     localStorage.removeItem('token');
+    localStorage.removeItem('cart');
     history.push('/');
 }
 
