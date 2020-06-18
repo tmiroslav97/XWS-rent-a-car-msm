@@ -15,27 +15,47 @@ const Form4CreateAdContainer = (props) => {
     const addTerm = (event) => {
         event.preventDefault();
         const form = event.target;
+
+
+
         if (form.checkValidity() === false) {
             event.stopPropagation();
             setValidated(true);
         } else {
-
-            let temp = {
-                'startDate': startDate,
-                'endDate': endDate
-            };
-            let cctl = props.carCalendarTermList;
-            cctl.push(temp);
-            props.setCarCalendarTermList(cctl);
-            // props.setCarCalendarTermList([...props.carCalendarTermList, temp]);
-            console.log("FORMA 4")
-            console.log(props.carCalendarTermList);
-            props.setFormData({
-                ...props.formData,
-                carCalendarTermCreateDTOList: props.carCalendarTermList
-            });
-            console.log(props.formData);
-            setValidated(false);
+            let flag = false;
+            if (props.carCalendarTermList != "") {
+                props.carCalendarTermList.map((temp) => {
+                    if (temp.startDate <= startDate && startDate <= temp.endDate) {
+                        flag = true;
+                        console.log("start date je izmedju")
+                    } else if (temp.startDate <= endDate && endDate <= temp.endDate) {
+                        flag = true;
+                        console.log("end date je izmedju")
+                    } 
+                })
+            }
+            if(flag === true){
+                console.log("ne mozes da dodas datum.");
+                alert("Datumi se ne smeju preklapati.");
+            }else{
+                let temp = {
+                    'startDate': startDate,
+                    'endDate': endDate
+                };
+                let cctl = props.carCalendarTermList;
+                cctl.push(temp);
+                props.setCarCalendarTermList(cctl);
+                // props.setCarCalendarTermList([...props.carCalendarTermList, temp]);
+                console.log("FORMA 4")
+                console.log(props.carCalendarTermList);
+                props.setFormData({
+                    ...props.formData,
+                    carCalendarTermCreateDTOList: props.carCalendarTermList
+                });
+                console.log(props.formData);
+                setValidated(false);
+            }
+            
         }
     }
     const getCurrentDate = () => {
@@ -62,7 +82,6 @@ const Form4CreateAdContainer = (props) => {
         return rez;
     }
     const handleStartDate = (event) => {
-        
         setStartDate(event.target.value);
     }
     const handleEndDate = (event) => {
@@ -71,7 +90,7 @@ const Form4CreateAdContainer = (props) => {
     const getCarCalentarTermList = () => {
         let list = [];
         let i = 1;
-        if(props.carCalendarTermList != ""){
+        if (props.carCalendarTermList != "") {
             props.carCalendarTermList.map((term) => {
                 let ss = term.startDate.substring(0, 10);
                 let ss2 = term.startDate.substring(11, 16);
@@ -95,6 +114,7 @@ const Form4CreateAdContainer = (props) => {
                 i++;
             })
         }
+
         return list;
     }
     const handlerForm4 = () => {

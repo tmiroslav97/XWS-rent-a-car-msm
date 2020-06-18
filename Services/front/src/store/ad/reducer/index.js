@@ -32,7 +32,7 @@ const initialState = {
         isFetch: false
     },
     calendar:{
-        data:[],
+        data: [],
         isFetch: false
     }
 

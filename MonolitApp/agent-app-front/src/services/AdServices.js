@@ -2,7 +2,8 @@ import HttpBaseClient from './HttpBaseClient';
 
 const FINALPOINTS = {
     AD_BASE: '/ad',
-    IMAGE_BASE: 'image'
+    IMAGE_BASE: 'image',
+    CALENDAR_BASE: '/calendar'
     
 };
 
@@ -133,6 +134,32 @@ class AdServices extends HttpBaseClient {
             }
         );
             console.log(response);
+        return response.data;
+    };
+
+    fetchCalendar = async payload => {
+        console.log("FETCH AD")
+        console.log(payload)
+        const response = await this.getApiClient().get(
+            FINALPOINTS.CALENDAR_BASE + "/" + payload
+        );
+        return response.data;
+    };
+
+    addTerm = async payload => {
+        console.log("********* DODAVANJE TERM-A ***********")
+        console.log(payload);
+        const response = await this.getApiClient().post(
+            FINALPOINTS.CALENDAR_BASE,
+            payload,
+            {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }
+
+        );
+
         return response.data;
     };
 }

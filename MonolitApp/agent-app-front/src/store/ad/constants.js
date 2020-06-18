@@ -9,4 +9,9 @@ export const PUT_AD = 'put_ad';
 export const SEARCH_AD ='search_ad';
 export const PUT_IMAGE_SRC ='put_image_src';
 export const CREATED_AD_PHOTOS ='createdAdPhotos';
+export const PUT_CALENDAR = 'put_calendar';
+export const FETCH_CALENDAR = 'fetch_calendar';
+export const ADD_TERM = 'add_term';
+
+
 

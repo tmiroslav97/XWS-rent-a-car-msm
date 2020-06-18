@@ -12,14 +12,18 @@ import {
     FETCH_AD,
     UPLOAD_IMAGE,
     SEARCH_AD,
-    PUT_IMAGE_SRC
+    PUT_IMAGE_SRC,
+    PUT_CALENDAR,
+    FETCH_CALENDAR,
+    ADD_TERM
 } from './constants';
 
 import {
     putAds,
     putImageName,
     putAd,
-    putImageSrc
+    putImageSrc,
+    putCalendar
 } from './actions';
 
 import {
@@ -27,7 +31,8 @@ import {
 } from '../common/actions';
 
 import {
-    imageNameSelector
+    imageNameSelector,
+    calendarSelector
 } from './selectors';
 
 
@@ -49,11 +54,9 @@ export function* createdAdPhotos(){
 }
 
 export function* fetchAds() {
-    console.log("Dobavaljenje oglasa sagaaa")
     const { payload } = yield take(FETCH_ADS);
     yield put(putAds({ 'isFetch': false }));
     const data = yield call(AdServices.fetchAdsPaginated, payload);
-    console.log(data);
     yield put(putAds({
         'data': data.ads,
         'totalPageCnt': data.totalPageCnt,
@@ -64,11 +67,9 @@ export function* fetchAds() {
 }
 
 export function* fetchAdsFromPublisher() {
-    console.log("Dobavaljenje oglasa sagaaa")
     const { payload } = yield take(FETCH_ADS_FROM_PUBLISHER);
     yield put(putAds({ 'isFetch': false }));
     const data = yield call(AdServices.fetchAdsPaginatedfFromPublisher, payload);
-    console.log(data);
     yield put(putAds({
         'data': data.ads,
         'totalPageCnt': data.totalPageCnt,
@@ -80,11 +81,9 @@ export function* fetchAdsFromPublisher() {
 
 export function* fetchAd() {
     const { payload } = yield take(FETCH_AD);
-    console.log("SAGA  ADDDD")
     var id = payload.adId
     yield put(putAd({ 'isFetch': false }));
     const data = yield call(AdServices.fetchAd, id);
-    console.log(data);
     yield put(putAd({
         'data': data,
         'isFetch': true
@@ -97,8 +96,6 @@ export function* uploadImage(){
     yield put(putImageName({ 'isFetch': false }));
     const data = yield call(AdServices.uploadImage, payload); 
     yield temp.push(data);
-    console.log("listaaaaa u sagiiii")
-    console.log(temp);
     yield put(putImageName({
         'data': temp,
         'isFetch': true
@@ -107,14 +104,9 @@ export function* uploadImage(){
 }
 
 export function* searchAd(){
-    console.log("SAGA PRETRAGAAA")
     const { payload } = yield take(SEARCH_AD);
     yield put(putAds({ 'isFetch': false }));
-    console.log("Payload objekat");
-    console.log(payload.data)
     const data = yield call(AdServices.fetchAdsPaginatedSearch, payload.data);
-    console.log(data);
-    console.log("PODACII ISPISANI III");
     yield put(putAds({
         'data': data.ads,
         'totalPageCnt': data.totalPageCnt,
@@ -126,17 +118,41 @@ export function* searchAd(){
 }
 
 export function* loadImage(){
-    console.log("SAGA LOAD")
     const { payload } = yield take(PUT_IMAGE_SRC);
-    console.log(payload);
     const data = yield call(AdServices.loadImage, payload); 
 
     // yield temp.push(data);
-    // console.log("listaaaaa u sagiiii")
-    // console.log(temp);
     // yield put(putImageName({
     //     'data': temp,
     //     'isFetch': true
     // }));
     
+}
+
+//PROVERITI
+export function* fetchCalendar() {
+    // const { payload } = yield take(FETCH_CALENDAR);
+    // console.log("SAGA "+ payload.id)
+    // yield put(putCalendar({ 'isFetch': false }));
+    // const data = yield call(AdServices.fetchCalendar, payload.id);
+    // yield put(putCalendar({
+    //     'data': data,
+    //     'isFetch': true
+    // }));
+}
+
+export function* addTerm(){
+    // const { payload } = yield take(ADD_TERM);
+    // const temp = yield select(calendarSelector);
+    // yield put(putCalendar({ 'isFetch': false }));
+    // console.log("sagaaa")
+    // console.log(payload);
+    // const data = yield call(AdServices.addTerm, payload); 
+    // console.log(data);
+    // yield temp.push(data);
+    // yield put(putCalendar({
+    //     'data': temp,
+    //     'isFetch': true
+    // }));    
+    // console.log(temp); 
 }
