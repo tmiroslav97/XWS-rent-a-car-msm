@@ -89,3 +89,18 @@ Import the contents from a tarball to create a filesystem image
    https://docs.docker.com/engine/reference/commandline/container/
    https://docs.docker.com/engine/reference/commandline/docker/
    https://docs.docker.com/engine/reference/commandline/ps/
+
+See if volume is mounted with docker container with id ddb7
+`docker inspect -f "{{ .Mounts }}" ddb7`
+
+List all containers (only IDs)
+`docker ps -aq`
+
+Stop all running containers
+`docker stop $(docker ps -aq)`
+
+Remove all containers
+`docker rm $(docker ps -aq)`
+
+Remove all images
+`docker rmi $(docker images -q)`
