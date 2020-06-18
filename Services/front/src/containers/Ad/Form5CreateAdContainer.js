@@ -17,12 +17,8 @@ const Form5CreateAdContainer = (props) => {
         const form = event.target;
         if (props.brPhotos === 4 && props.flagCover != null) {
             let dto = [];
-
-            // props.setFormData({
-            //     ...props.formData,
-            //     imagesDTO: JSON.stringify(props.imagesDTO)
-            // });
-            console.log(props.formData);
+            // console.log(props.formData);
+            console.log("FORMA 5")
             setValidated(false);
             props.handleNext();
         } else {
@@ -44,12 +40,12 @@ const Form5CreateAdContainer = (props) => {
             let name = e.target.files[0].name;
 
             let flag = 0;
-            props.photos.map((image) => {
-                if (image.name === name) {
-                    flag = 1;
-                    console.log("postoji vec slika");
-                }
-            })
+            // props.photos.map((image) => {
+            //     if (image.name === name) {
+            //         flag = 1;
+            //         console.log("postoji vec slika");
+            //     }
+            // })
 
             if (flag === 0) {
                 reader.onloadend = () => {
@@ -61,11 +57,7 @@ const Form5CreateAdContainer = (props) => {
                     };
                     let prom = props.photos;
                     prom.push(temp);
-                    // props.setPhotos([...props.photos, temp]);
-                    console.log("------");
-                    console.log(props.photos);
                     props.setPhotos(prom);
-                    console.log(props.photos);
 
                     props.setBrPhotos(props.brPhotos + 1);
                     if (props.brPhotos === 4) {
@@ -73,7 +65,6 @@ const Form5CreateAdContainer = (props) => {
                     }
                 }
                 reader.readAsDataURL(e.target.files[0])
-                // console.log(props.photos);
 
                 let formData = new FormData();
                 formData.append('photo', e.target.files[0]);
@@ -90,12 +81,7 @@ const Form5CreateAdContainer = (props) => {
     };
 
     const removeImage = (id) => {
-        console.log("brisanje")
-        console.log(id);
         let temp = [];
-        // let t = [];
-        // props.setImagesDTO([]);
-
         props.photos.map((photo) => {
             if (photo.id === id) {
                 console.log(photo.name + " " + photo.id);
@@ -108,23 +94,15 @@ const Form5CreateAdContainer = (props) => {
                     "name": photo.name
                 };
                 temp.push(p);
-                // t.push(naziv);
             }
         })
-        console.log(temp);
         props.setPhotos(temp);
-        // props.setImagesDTO(t);
         props.setBrPhotos(props.brPhotos - 1);
-        console.log(props.photos);
     };
 
     const setCoverPhoto = (id) => {
-        console.log("stisnuto dugme");
-        console.log(id);
         props.photos.map((photo) => {
             if (photo.id === id) {
-                console.log(photo.name + " " + photo.id);
-                // props.setCoverPhoto(photo.name);
                 props.setFlagCover(id);
                 setFlag2(false);
                 
@@ -132,12 +110,8 @@ const Form5CreateAdContainer = (props) => {
         })
     };
     const removeCoverPhoto = (id) => {
-        console.log("stisnuto dugme");
-        console.log(id);
         props.photos.map((photo) => {
             if (photo.id === id) {
-                console.log(photo.name + " " + photo.id);
-                // props.setCoverPhoto();
                 props.setFlagCover();
             }
         })

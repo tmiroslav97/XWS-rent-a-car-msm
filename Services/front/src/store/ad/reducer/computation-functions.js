@@ -23,4 +23,10 @@ export function putImageSrc(state, payload) {
         imagesSrc: payload
     };
 }
+export function putCalendar(state, payload) {
+    return {
+        ...state,
+        calendar: payload
+    };
+}
 

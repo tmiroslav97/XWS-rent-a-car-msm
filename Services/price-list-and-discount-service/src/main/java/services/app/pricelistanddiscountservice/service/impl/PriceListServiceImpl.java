@@ -2,6 +2,10 @@ package services.app.pricelistanddiscountservice.service.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -15,7 +19,9 @@ import services.app.pricelistanddiscountservice.model.PriceList;
 import services.app.pricelistanddiscountservice.repository.PriceListRepository;
 import services.app.pricelistanddiscountservice.service.intf.PriceListService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -43,14 +49,23 @@ public class PriceListServiceImpl implements PriceListService {
     }
 
     @Override
-    public List<PriceListCreateDTO> findAllListDTOFromPublisher(String publisherUsername) {
-//        List<PriceList> priceLists = publisherUserService.findPriceListsFromPublishUser(publisherUsername);
-//        if(priceLists.isEmpty()){
-//            return null;
-//        }
-//        List<PriceListCreateDTO> ret = priceLists.stream().map(PriceListConverter::toCreatePriceListCreateDTOFromPriceList).collect(Collectors.toList());
-//        return ret;
-        return null;
+    public List<PriceListCreateDTO> findAllListDTOFromPublisher() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
+        Long publishUser = authenticationClient.findPublishUserByEmail(principal.getToken());
+        System.out.println("PUBLISH USER " + publishUser);
+        List<PriceList> priceLists = this.findAll();
+        List<PriceList> priceListsFromPublishUser = new ArrayList<>();
+        if(!priceLists.isEmpty()){
+            for(PriceList pl : priceLists){
+                if(pl.getPublisherUser().equals(publishUser)){
+                    System.out.println("dodata price lista");
+                    priceListsFromPublishUser.add(pl);
+                }
+            }
+        }
+        List<PriceListCreateDTO> ret = priceListsFromPublishUser.stream().map(PriceListConverter::toCreatePriceListCreateDTOFromPriceList).collect(Collectors.toList());
+        return ret;
     }
 
     @Override

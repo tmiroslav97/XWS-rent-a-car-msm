@@ -21,46 +21,48 @@ const Form3CreateAdContainer = (props) => {
     const getPriceLists = () => {
         const list = [];
         if (pricelists.isFetch) {
+            console.log("CENOVNICI")
             console.log(pricelists);
-            pricelists.data.map((pricelist) => {
-                let ss = pricelist.creationDate.substring(0, 10);
-                let ss2 = pricelist.creationDate.substring(11, 16);
-                ss = ss + " " + ss2;
-
-                list.push(
-                    <tr key={pricelist.id}>
-                        <td>{ss}</td>
-                        <td>{pricelist.pricePerDay}</td>
-                        <td>{pricelist.pricePerKm}</td>
-                        <td>{pricelist.pricePerKmCDW}</td>
-                        {props.id === pricelist.id ?
-                            <td align="right">
-                                <Button variant="outline-success"
-                                    onClick={() => { handlePriceListDeleteId(pricelist.id); }}
-                                >Ukloni</Button>
-                            </td>
-                            :
-                            <td align="right">
-                                <Button variant="outline-primary"
-                                    onClick={() => { handlePriceListChooseId(pricelist.id); }}
-                                >Izaberi</Button>
-                            </td>
-                        }
-
-
-                    </tr>);
-            })
+            if(pricelists.data != ""){
+                pricelists.data.map((pricelist) => {
+                    let ss = pricelist.creationDate.substring(0, 10);
+                    let ss2 = pricelist.creationDate.substring(11, 16);
+                    ss = ss + " " + ss2;
+    
+                    list.push(
+                        <tr key={pricelist.id}>
+                            <td>{ss}</td>
+                            <td>{pricelist.pricePerDay}</td>
+                            <td>{pricelist.pricePerKm}</td>
+                            <td>{pricelist.pricePerKmCDW}</td>
+                            {props.id === pricelist.id ?
+                                <td align="right">
+                                    <Button variant="outline-success"
+                                        onClick={() => { handlePriceListDeleteId(pricelist.id); }}
+                                    >Ukloni</Button>
+                                </td>
+                                :
+                                <td align="right">
+                                    <Button variant="outline-primary"
+                                        onClick={() => { handlePriceListChooseId(pricelist.id); }}
+                                    >Izaberi</Button>
+                                </td>
+                            }
+    
+    
+                        </tr>);
+                })
+            }
+            
 
         }
         return list;
     }
 
     const handlePriceListChooseId = (id) => {
-        console.log(id);
         props.setId(id);
     }
     const handlePriceListDeleteId = (id) => {
-        console.log(id)
         props.setId();
     }
 
@@ -71,14 +73,14 @@ const Form3CreateAdContainer = (props) => {
             event.stopPropagation();
             setValidated(true);
         } else {
-            props.setFormData({
-                ...props.formData,
-                id: props.id,
-                pricePerDay: props.pricePerDay,
-                pricePerKm: props.pricePerKm,
-                pricePerKmCDW: props.pricePerKmCDW,
-            });
-            console.log(props.formData);
+            let data = {    
+                "pricePerKm":props.pricePerKm,
+                "pricePerKmCWD":props.pricePerKmCDW,
+                "pricePerDay":props.pricePerDay,
+                "id":props.id
+            }
+            console.log("FORMA 3");
+            console.log(data);
             setValidated(false);
             props.handleNext();
         }
