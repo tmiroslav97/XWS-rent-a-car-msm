@@ -77,6 +77,9 @@ public class CarCalendarTermServiceImpl implements CarCalendarTermService {
         if(carCalendarTerm != null){
             Ad ad = adService.findById(carCalendarTermDTO.getAdId());
             if(ad != null){
+                carCalendarTerm.setAd(ad);
+                carCalendarTerm = this.save(carCalendarTerm);
+
                 ad.getCarCalendarTerms().add(carCalendarTerm);
                 ad = adService.edit(ad);
                 System.out.println("usloo u if");
