@@ -49,6 +49,13 @@ const CartComponent = (props) => {
                                                 </ListGroup>
                                             </Col>
                                         </Row>
+                                        <Row>
+                                            <Col>
+                                            <Button variant="outline-danger" id="deleteItem" onClick={()=> {props.handleRemoveItem(item);}  }>
+                                                Ukloni iz korpe
+                                            </Button>
+                                            </Col>
+                                        </Row>
                                     </Card.Body>
                                 </Card>
                             );
@@ -56,37 +63,43 @@ const CartComponent = (props) => {
                     }
                 </Col>
             </Row>
-            <Row className="justify-content-center mt-2">
-                <Col md={6} xs={12}>
-                    <Form noValidate validated={props.validated} id="cartForm" onSubmit={props.onSubmit}>
-                        <Form.Row>
-                            <Form.Group as={Col}>
-                                <Form.Label>Izaberite datum i vrijeme pocetka rentiranja</Form.Label>
-                                <Form.Control type="datetime-local" required name="startDateTime"
-                                    min={props.getCurrentDate()}
-                                    onChange={props.handleChange1}
-                                />
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row >
-                            <Form.Group as={Col}>
-                                <Form.Label>Izaberite datum i vrijeme zavrsetka rentiranja</Form.Label>
-                                <Form.Control type="datetime-local" required name="startDateTime"
-                                    min={props.getCurrentDate()}
-                                    onChange={props.handleChange1}
-                                />
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-                            <Form.Group as={Col} >
-                                <Button variant="primary" id="btnLogin" type="submit">
-                                    Kreiraj zahtjev
+            {props.cart.size == 0 ?
+                <Row className="justify-content-center mt-2">
+                    <Col md={6} xs={12}>
+                        <p>Korpa je prazna</p>
+                    </Col>
+                </Row> :
+                <Row className="justify-content-center mt-2">
+                    <Col md={6} xs={12}>
+                        <Form noValidate id="cartForm" onSubmit={props.onSubmit}>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Datum pocetka rentiranja {props.startDate} </Form.Label>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row >
+                                <Form.Group as={Col}>
+                                    <Form.Label>Datum zavrsetka rentiranja {props.endDate}</Form.Label>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} >
+                                    <Button variant="primary" id="createReq" type="submit">
+                                        Kreiraj zahtjev
                                 </Button>
-                            </Form.Group>
-                        </Form.Row>
-                    </Form>
-                </Col>
-            </Row>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} >
+                                    <Button variant="danger" id="delete" onClick={props.handleClearCart}>
+                                        Isprazni korpu
+                                    </Button>
+                                </Form.Group>
+                            </Form.Row>
+                        </Form>
+                    </Col>
+                </Row>
+            }
         </Container >
     );
 }
