@@ -21,26 +21,23 @@ const AdListContainer = () => {
     const [namePhoto, setNamePhoto] = useState();
     const token = localStorage.getItem('token');
 
-    useEffect(() => {
-        dispatch(
-            fetchAds({
-                nextPage,
-                size
-            })
-        );
-    
-    }, [nextPage, size]);
+    // useEffect(() => {
+    //     dispatch(
+    //         fetchAds({
+    //             nextPage,
+    //             size
+    //         })
+    //     );
+
+    // }, [nextPage, size]);
 
 
-    const handleCoverPh =  (event) => {
-        console.log("ISPISIIIIIII")
-        console.log(event);
+    const handleCoverPh = (event) => {
         setNamePhoto(event)
-        console.log(namePhoto)
     }
 
-    return(
-       
+    return (
+
         <Container>
             <Row>
                 <Col>
@@ -56,16 +53,18 @@ const AdListContainer = () => {
                 <Col >
 
                     {
-                        isFetchAds ?  <AdComponent ads={ads.data} token={token} handleCoverPh={handleCoverPh}/> : <SpinnerContainer />
+                        isFetchAds ? <AdComponent ads={ads.data} token={token} handleCoverPh={handleCoverPh} /> : <SpinnerContainer />
                     }
                 </Col>
             </Row>
             <Row>
-                <PaginationContainer setNextPage={setNextPage} totalPageCnt={ads.totalPageCnt} nextPage={nextPage}></PaginationContainer>
+                <Col md={12} xs={12}>
+                    <PaginationContainer setNextPage={setNextPage} totalPageCnt={ads.totalPageCnt} nextPage={nextPage}></PaginationContainer>
+                </Col>
             </Row>
         </Container>
 
-       
+
     );
 }
 

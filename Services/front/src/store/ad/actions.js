@@ -12,8 +12,14 @@ import{
     PUT_IMAGE_SRC,
     PUT_CALENDAR,
     FETCH_CALENDAR,
-    ADD_TERM
+    ADD_TERM,
+    PUT_SEARCH_DATA
 } from './constants';
+
+export const putSearchData = payload => ({
+    type: PUT_SEARCH_DATA,
+    payload
+});
 
 export const createdAd = payload => ({
     type: CREATED_AD,

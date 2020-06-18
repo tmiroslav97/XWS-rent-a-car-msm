@@ -57,6 +57,7 @@ public class AdConverter extends AbstractConverter{
 
     public static AdDetailViewDTO toAdDetailViewDTOFromAd(Ad ad){
         return AdDetailViewDTO.builder()
+                .id(ad.getId())
                 .name(ad.getName())
                 .location(ad.getLocation())
                 .coverPhoto(ad.getCoverPhoto())
@@ -79,7 +80,7 @@ public class AdConverter extends AbstractConverter{
 //                .pricePerKm(ad.getPriceList().getPricePerKm())
 //                .pricePerKmCDW(ad.getPriceList().getPricePerKmCDW())
 //                .pricePerDay(ad.getPriceList().getPricePerDay())
-//                .publisherUserId(ad.getPublisherUser().getId())
+               .publisherUserId(ad.getPublisherUser())
 //                .publisherUserFirstName(ad.getPublisherUser().getFirstName())
 //                .publisherUserLastName(ad.getPublisherUser().getLastName())
                 .build();

@@ -88,7 +88,7 @@ const AdComponent = (props) => {
 
                         <Col>
                             {
-                                hasRole(['ROLE_USER']) ? <Button variant="outline-success" >Dodaj u korpu</Button> : null
+                                //hasRole(['ROLE_USER']) ? <Button variant="outline-success" >Dodaj u korpu</Button> : null
                             }
                         </Col>
 

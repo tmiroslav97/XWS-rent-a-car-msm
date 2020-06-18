@@ -6,6 +6,7 @@ import { carManufacturersSelector, carTypesSelector, carModelsSelector, gearboxT
 import { fetchAllCarManufacturers, fetchAllCarTypes, fetchAllCarModels, fetchAllGearboxTypes, fetchAllFuelTypes, putCarManufacturers, putCarModels, putCarTypes, putFuelTypes, putGearboxTypes } from '../../store/codebook/actions';
 import { searchAd } from '../../store/ad/actions';
 import { adsSelector } from '../../store/ad/selectors';
+import { putSearchData } from '../../store/ad/actions';
 
 const OrdinarySearchContainer = () => {
     const dispatch = useDispatch();
@@ -101,7 +102,7 @@ const OrdinarySearchContainer = () => {
                 "id": carManufacturers.data[index].id
             })
         );
-       
+
     };
 
     const getCarModels = () => {
@@ -175,8 +176,8 @@ const OrdinarySearchContainer = () => {
         setLowValue(e[0]);
         setHighValue(e[1]);
         //kasni za jedan  
-        console.log(lowValue);
-        console.log(highValue);
+        //console.log(lowValue);
+        //console.log(highValue);
     }
 
     const handleSeat = (e) => {
@@ -211,28 +212,28 @@ const OrdinarySearchContainer = () => {
             minutes = "0" + minutes;
         }
         rez = year + "-" + month + "-" + date + "T" + hours + ":" + minutes;
-  
+
         return rez;
     }
 
     const handleForm = (event) => {
         event.preventDefault();
         const form = event.target;
-        console.log(form);
+        //console.log(form);
         let data = null;
         if (form.checkValidity() === false) {
             event.stopPropagation();
             setValidated(true);
         } else {
-            if(toggleAdvancedSearch === false){
+            if (toggleAdvancedSearch === false) {
                 data = {
                     'location': form.location.value,
                     'startDate': startDate,
                     'endDate': endDate,
                     'nextPage': nextPage,
-                    'size' : size
+                    'size': size
                 }
-            }else{
+            } else {
                 data = {
                     'location': form.location.value,
                     'startDate': startDate,
@@ -246,14 +247,16 @@ const OrdinarySearchContainer = () => {
                     'fuelType': form.fuelType.value,
                     'childrenSeatNum': form.childrenSeatNum.value,
                     'cdw': cdw
-                } 
+                }
             }
-          
-            console.log(data)
+
+            //console.log(data)
             dispatch(searchAd({
                 data
             }));
-           
+            dispatch(putSearchData(
+                data
+            ));
             setValidated(false);
         }
     };

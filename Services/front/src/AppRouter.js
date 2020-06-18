@@ -12,6 +12,7 @@ import CreateAdContainer from './containers/Ad/CreateAdContainer';
 import AdListContainer from './containers/Ad/AdListContainer';
 import AdDetailViewContainer from './containers/Ad/AdDetailViewContainer';
 import PanelContainer from './containers/PanelContainer';
+import CartContainer from './containers/Request/CartContainer';
 
 const AppRouter = () => {
   const token = useSelector(tokenSelector);
@@ -41,6 +42,7 @@ const AppRouter = () => {
       <Route exact path="/sign-up" render={props => token == null ? (<RegContainer {...props} />) : (<Redirect to="/" />)} />
       <Route exact path="/ad-detail-view/:ad" component={AdDetailViewContainer} />
 
+      <PrivateRoute exact path="/cart" component={CartContainer} token={token} hasRightRole={hasRightRole} accessRole={["ROLE_USER"]} />
       <PrivateRoute exact path="/agent-firm" component={AgentFirmHomePage} token={token} hasRightRole={hasRightRole} accessRole={["ROLE_AGENT"]} />
       <PrivateRoute exact path="/agent-firm/create-ad" component={CreateAdContainer} token={token} hasRightRole={hasRightRole} accessRole={["ROLE_AGENT", "ROLE_USER"]} />
       <PrivateRoute exact path="/agent-firm/ads" component={AdListContainer} token={token} hasRightRole={hasRightRole} />

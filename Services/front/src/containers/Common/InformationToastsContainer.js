@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useToasts } from 'react-toast-notifications';
 import { putErrorMsg, putSuccessMsg, putWarnMsg, putInfoMsg } from '../../store/common/actions';
-import { errorSelector, successSelector, warnSeletor, infoSelector } from '../../store/common/selectors';
+import { errorSelector, successSelector, warnSelector, infoSelector } from '../../store/common/selectors';
 
 const InformationToastsContainer = () => {
     const dispatch = useDispatch();
     const error = useSelector(errorSelector);
     const success = useSelector(successSelector);
-    const warn = useSelector(warnSeletor);
+    const warn = useSelector(warnSelector);
     const info = useSelector(infoSelector);
     const { addToast } = useToasts();
 
