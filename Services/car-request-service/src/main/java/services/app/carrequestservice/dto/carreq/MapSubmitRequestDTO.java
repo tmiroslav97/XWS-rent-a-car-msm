@@ -2,6 +2,7 @@ package services.app.carrequestservice.dto.carreq;
 
 import lombok.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Builder
@@ -9,6 +10,6 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListSubmitRequestDTO {
-    List<SubmitRequestDTO> submitRequestDTOS;
+public class MapSubmitRequestDTO {
+    HashMap<Long, List<SubmitRequestDTO>> submitRequestDTOS;
 }

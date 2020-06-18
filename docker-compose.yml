@@ -78,6 +78,8 @@ services:
     depends_on: 
       - eureka-serviceregistry
       - mysql
+    volumes:
+      - img-ad:/img-ad
 
   car-request-service:
     image: car-request-service
@@ -179,6 +181,8 @@ services:
       - static-network
     ports:
       - "80:80"
+    volumes:
+      - img-ad:/img-ad
       
   zuul:
     image: zuul
@@ -232,6 +236,12 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: rent_a_car
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  img-ad:
+  db-data:
 
 networks:
   static-network:

@@ -48,8 +48,7 @@ const AdListContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 12, offset: 3 }} xs={12}>
-    
+                <Col md={12} xs={12}>
                     <PaginationSize size={size} setSize={setSize} />
                 </Col>
             </Row>

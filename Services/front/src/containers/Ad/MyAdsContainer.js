@@ -37,24 +37,22 @@ const MyAdsContainer = () => {
         setFlagAvailability(true);
 
     }
-    const handleBack = () =>{
+    const handleBack = () => {
         setFlagAvailability(false);
     }
 
     return (
         <Container>
             {flagAvailability ?
-                <AvailabilityContainer 
-                adId = {adId} setAdId={setAdId}
-                flagAvailability={flagAvailability} setFlagAvailability={setFlagAvailability}
-                handleBack={handleBack}
+                <AvailabilityContainer
+                    adId={adId} setAdId={setAdId}
+                    flagAvailability={flagAvailability} setFlagAvailability={setFlagAvailability}
+                    handleBack={handleBack}
                 />
                 :
                 <Container>
-
                     <Row>
-                        <Col md={{ span: 12, offset: 3 }} xs={12}>
-
+                        <Col md={12} xs={12}>
                             <PaginationSize size={size} setSize={setSize} />
                         </Col>
                     </Row>
