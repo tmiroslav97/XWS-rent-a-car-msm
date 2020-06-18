@@ -14,7 +14,8 @@ import {
     SEARCH_AD,
     PUT_IMAGE_SRC,
     PUT_CALENDAR,
-    FETCH_CALENDAR
+    FETCH_CALENDAR,
+    ADD_TERM
 } from './constants';
 
 import {
@@ -136,4 +137,17 @@ export function* fetchCalendar() {
         'data': data,
         'isFetch': true
     }));
+}
+
+export function* addTerm(){
+    const { payload } = yield take(ADD_TERM);
+    yield put(putCalendar({ 'isFetch': false }));
+    console.log(payload);
+    const data = yield call(AdServices.addTerm, payload.data);
+    yield put(putCalendar({
+        'data': data,
+        'isFetch': true
+    }));
+    console.log(data);
+    
 }

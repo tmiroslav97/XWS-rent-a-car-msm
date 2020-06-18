@@ -146,6 +146,23 @@ class AdServices extends HttpBaseClient {
         );
         return response.data;
     };
+
+    addTerm = async payload => {
+        console.log("********* DODAVANJE TERM-A ***********")
+        console.log(payload);
+        const response = await this.getApiClient().post(
+            FINALPOINTS.CALENDAR_BASE,
+            payload,
+            {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }
+
+        );
+
+        return response.data;
+    };
 }
 
 
