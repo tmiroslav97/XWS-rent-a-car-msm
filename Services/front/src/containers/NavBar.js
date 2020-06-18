@@ -9,9 +9,9 @@ import jwt_decode from 'jwt-decode';
 const NavBar = () => {
     const token = useSelector(tokenSelector);
     const dispatch = useDispatch();
-    var role = null;
+    var roles = null;
     if (token != null) {
-        role = jwt_decode(token).role;
+        roles = jwt_decode(token).roles;
     }
 
     const handleSignOut = () => {
@@ -29,6 +29,7 @@ const NavBar = () => {
                     <Nav.Link onClick={() => { history.push('/') }}>Početna stranica</Nav.Link>
                 </Nav>
                 <Nav className="ml-auto">
+                    {token != null && roles.includes('ROLE_USER') && <Nav.Link href="#" onClick={() => { history.push('/cart') }}>Korpa</Nav.Link>}
                     {token != null && <Nav.Link href="#" onClick={() => { history.push('/panel') }}>Radni panel</Nav.Link>}
                     {token == null && <Nav.Link href="#" onClick={() => { history.push('/login') }}>Prijava</Nav.Link>}
                     {token == null && <Nav.Link href="#" onClick={() => { history.push('/sign-up') }}>Registracija</Nav.Link>}
