@@ -13,9 +13,11 @@ import services.app.adservice.client.AuthenticationClient;
 import services.app.adservice.client.PricelistAndDiscountClient;
 import services.app.adservice.converter.AdConverter;
 import services.app.adservice.converter.CarCalendarTermConverter;
+import services.app.adservice.converter.ImageConverter;
 import services.app.adservice.dto.ad.*;
 import services.app.adservice.dto.car.StatisticCarDTO;
 import services.app.adservice.dto.car.CarCalendarTermCreateDTO;
+import services.app.adservice.dto.image.ImagesSynchronizeDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
 import services.app.adservice.model.*;
@@ -25,6 +27,7 @@ import services.app.adservice.service.intf.CarCalendarTermService;
 import services.app.adservice.service.intf.CarService;
 import services.app.adservice.service.intf.ImageService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -200,8 +203,10 @@ public class AdServiceImpl implements AdService {
         //dodeljen publisherUser za oglas
         Long publisherUser = authenticationClient.findPublishUserByEmail(principal.getToken());
         ad.setPublisherUser(publisherUser);
+
         ad = this.save(ad);
         //dodeljene slike
+        List<Image> images = new ArrayList<>();
         if(adCreateDTO.getImagesDTO() != null){
             List<String> slike = adCreateDTO.getImagesDTO();
             for(String slika : slike){
@@ -210,12 +215,13 @@ public class AdServiceImpl implements AdService {
                     System.out.println("slika: " + image.getName());
                     image.setAd(ad);
                     image = imageService.editImage(image);
+                    images.add(image);
+//                    ad.getImages().add(image);
+//                    ad = this.edit(ad);
                 }
             }
         }
 
-//        car.setAd(ad);
-//        car = carService.editCar(car);
         for (CarCalendarTerm carCalendarTerm : ad.getCarCalendarTerms()) {
                 carCalendarTerm.setAd(ad);
                 carCalendarTerm = carCalendarTermService.editCarCalendarTerm(carCalendarTerm);
@@ -225,7 +231,15 @@ public class AdServiceImpl implements AdService {
 
         AdSynchronizeDTO adSynchronizeDTO = AdConverter.toAdSynchronizeDTOFromAd(ad);
         adSynchronizeDTO.setPricePerDay(adCreateDTO.getPriceListCreateDTO().getPricePerDay());
-        adSearchClient.synchronizeDatabase(adSynchronizeDTO);
+        List<ImagesSynchronizeDTO> imagesSynchronizeDTOS = new ArrayList<>();
+        for(Image im : images){
+            System.out.println("slika "+ im.getName());
+            ImagesSynchronizeDTO imDTO = ImageConverter.toImagesSynchronizeDTOFromImage(im);
+            imagesSynchronizeDTOS.add(imDTO);
+        }
+        adSynchronizeDTO.setImagesSynchronizeDTOS(imagesSynchronizeDTOS);
+        adSearchClient.synchronizeDatabase(adSynchronizeDTO, principal.getUserId(), principal.getEmail(),
+                                            principal.getRoles(), principal.getToken());
 
         System.out.println("***************************************************************");
 

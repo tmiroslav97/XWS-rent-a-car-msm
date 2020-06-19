@@ -11,7 +11,11 @@ import services.app.adservice.model.Ad;
 public interface AdSearchClient {
 
     @PostMapping("/ad/synchronize")
-    Integer synchronizeDatabase(@RequestBody AdSynchronizeDTO adSynchronizeDTO);
+    Integer synchronizeDatabase(@RequestBody AdSynchronizeDTO adSynchronizeDTO,
+                                @RequestHeader("userId")String userId,
+                                @RequestHeader("email")String email,
+                                @RequestHeader("roles")String roles,
+                                @RequestHeader("Auth")String token);
 
 
 

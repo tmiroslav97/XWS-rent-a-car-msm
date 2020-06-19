@@ -52,8 +52,9 @@ public class AdController {
     @RequestMapping(value = "/synchronize", method = RequestMethod.POST)
     public Integer synchronizeDatabase(@RequestBody AdSynchronizeDTO adSynchronizeDTO) {
         System.out.println("SINHRONIZACIJA");
-        Integer rez = adService.syncData(adSynchronizeDTO);
-        System.out.println("REZULTAT: " + rez);
+        System.out.println(adSynchronizeDTO);
+//        Integer rez = adService.syncData(adSynchronizeDTO);
+//        System.out.println("REZULTAT: " + rez);
         return 1;
     }
 

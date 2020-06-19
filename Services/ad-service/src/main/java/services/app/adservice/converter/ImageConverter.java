@@ -9,10 +9,12 @@ import java.util.Set;
 
 public class ImageConverter {
 
-    public static List<ImagesSynchronizeDTO> toImagesSynchronizeDTOFromImages(Set<Image> images){
+    public static List<ImagesSynchronizeDTO> toImagesSynchronizeDTOlistFromImages(Set<Image> images){
 
         List<ImagesSynchronizeDTO> imagesSynchronizeDTOS = new ArrayList<>();
+        System.out.println("SLIKE ");
         for(Image im : images){
+            System.out.println(im.getName());
             ImagesSynchronizeDTO imagesSynchronizeDTO = ImagesSynchronizeDTO.builder()
                     .id(im.getId())
                     .name(im.getName())
@@ -23,5 +25,16 @@ public class ImageConverter {
 
         return imagesSynchronizeDTOS;
 
+    }
+
+    public static ImagesSynchronizeDTO toImagesSynchronizeDTOFromImage(Image images){
+        System.out.println("SLIKA ");
+
+        System.out.println(images.getName());
+        return ImagesSynchronizeDTO.builder()
+                .id(images.getId())
+                .name(images.getName())
+                .adId(images.getAd().getId())
+                .build();
     }
 }

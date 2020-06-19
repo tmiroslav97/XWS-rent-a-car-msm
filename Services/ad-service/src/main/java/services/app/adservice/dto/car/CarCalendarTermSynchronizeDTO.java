@@ -11,7 +11,7 @@ import org.joda.time.DateTime;
 @ToString
 public class CarCalendarTermSynchronizeDTO {
     private Long id;
-    private DateTime startDate;
-    private DateTime endDate;
+    private String startDate;
+    private String endDate;
     private Long adId;
 }

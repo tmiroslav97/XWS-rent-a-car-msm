@@ -33,8 +33,8 @@ public class CarCalendarTermConverter {
         for(CarCalendarTerm cct : carCalendarTermSet){
             CarCalendarTermSynchronizeDTO cctDTO = CarCalendarTermSynchronizeDTO.builder()
                     .id(cct.getId())
-                    .startDate(cct.getStartDate())
-                    .endDate(cct.getEndDate())
+                    .startDate(cct.getStartDate().toString())
+                    .endDate(cct.getEndDate().toString())
                     .adId(cct.getAd().getId())
                     .build();
             carCalendarTermSynchronizeDTOS.add(cctDTO);

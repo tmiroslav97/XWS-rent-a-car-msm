@@ -22,7 +22,7 @@ public class AdSynchronizeDTO {
     private List<ImagesSynchronizeDTO> imagesSynchronizeDTOS;
     private String distanceLimitFlag;
     private Float distanceLimit;
-    private DateTime publishedDate;
+    private String publishedDate;
     private Long ratingNum;
     private Long ratingCnt;
     private Boolean deleted;

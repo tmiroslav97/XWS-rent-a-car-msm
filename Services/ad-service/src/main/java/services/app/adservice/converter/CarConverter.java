@@ -27,7 +27,7 @@ public class CarConverter {
     public static CarSynchronizeDTO toCarSynchronizeDTOFromCar(Car car){
         return CarSynchronizeDTO.builder()
                 .id(car.getId())
-                .year(car.getYear())
+                .year(car.getYear().toString())
                 .carManufacturer(car.getCarManufacturer())
                 .carModel(car.getCarModel())
                 .gearboxType(car.getGearboxType())

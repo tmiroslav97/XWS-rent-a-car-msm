@@ -11,7 +11,7 @@ import org.joda.time.DateTime;
 @ToString
 public class CarSynchronizeDTO {
     private Long id;
-    private DateTime year;
+    private String year;
     private String carManufacturer;
     private String carModel;
     private String gearboxType;
