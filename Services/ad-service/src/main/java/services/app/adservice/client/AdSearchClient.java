@@ -12,10 +12,10 @@ public interface AdSearchClient {
 
     @PostMapping("/ad/synchronize")
     Integer synchronizeDatabase(@RequestBody AdSynchronizeDTO adSynchronizeDTO,
-                           @RequestHeader("userId")String userId,
-                           @RequestHeader("email")String email,
-                           @RequestHeader("roles")String roles,
-                           @RequestHeader("Auth")String token);
+                                @RequestHeader("userId")String userId,
+                                @RequestHeader("email")String email,
+                                @RequestHeader("roles")String roles,
+                                @RequestHeader("Auth")String token);
 
 
 
