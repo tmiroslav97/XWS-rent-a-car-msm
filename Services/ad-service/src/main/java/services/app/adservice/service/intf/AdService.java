@@ -26,5 +26,7 @@ public interface AdService {
     void setRating(AdRatingDTO ad);
     void logicalDeleteOrRevertAds(List<Ad> ads, Boolean status);
     void logicalDeleteOrRevert(Ad ad, Boolean status);
+    String generateToken();
+    Integer isExistToken(String token);
 
 }

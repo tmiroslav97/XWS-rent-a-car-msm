@@ -5,6 +5,9 @@ import services.app.adservice.model.Car;
 
 public class CarConverter {
     public static Car toCreateCarFromRequest(CarCreateDTO carCreateDTO){
+
+        System.out.println("android flag "+carCreateDTO.getAndroidFlag());
+//        System.out.println("android flag "+ carCreateDTO.getAndroidFlag());
         return Car.builder()
                 .year(DateAPI.dateStringToYear(carCreateDTO.getYear()))
                 .carManufacturer(carCreateDTO.getCarManufacturer())
@@ -15,7 +18,7 @@ public class CarConverter {
                 .mileage(carCreateDTO.getMileage())
                 .childrenSeatNum(carCreateDTO.getChildrenSeatNum())
                 .cdw(carCreateDTO.getCdw())
-                .androidFlag(carCreateDTO.getAndroidFlag())
+                .androidFlag(Boolean.valueOf(carCreateDTO.getAndroidFlag()))
                 .build();
     }
 }

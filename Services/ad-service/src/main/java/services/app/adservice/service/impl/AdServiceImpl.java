@@ -161,6 +161,7 @@ public class AdServiceImpl implements AdService {
             System.out.println("Limit num : "+ r);
         }
         Ad ad = AdConverter.toCreateAdFromRequest(adCreateDTO);
+
         //dodeljen cenovnik
         if (adCreateDTO.getPriceListCreateDTO().getId() == null) {
             //pravljenje novog cenovnika
@@ -187,6 +188,14 @@ public class AdServiceImpl implements AdService {
         //kreirana klasa za automobil
         Car car = carService.createCar(adCreateDTO.getCarCreateDTO());
         ad.setCar(car);
+        //token ako ima android uredjaj
+        System.out.println("-------------------------------------------");
+        if(adCreateDTO.getCarCreateDTO().getAndroidFlag() == true){
+            String token = this.generateToken();
+            System.out.println("token: " + token);
+            ad.getCar().setToken(token);
+        }
+        System.out.println("-------------------------------------------");
         //dodeljen publisherUser za oglas
         Long publisherUser = authenticationClient.findPublishUserByEmail(principal.getToken());
         ad.setPublisherUser(publisherUser);
@@ -240,5 +249,46 @@ public class AdServiceImpl implements AdService {
     public void logicalDeleteOrRevert(Ad ad, Boolean status) {
         ad.setDeleted(status);
         this.save(ad);
+    }
+
+    @Override
+    public String generateToken() {
+        String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder builder = new StringBuilder();
+        int count = 20;
+        while (count-- != 0) {
+            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+        }
+        System.out.println("IZGENERISAN TOKEN: " + builder.toString());
+
+
+        while(this.isExistToken(builder.toString()) != 1){
+            System.out.println("USLO U WHILE");
+            builder = new StringBuilder();
+            while (count-- != 0) {
+                System.out.println("USLO U DRUGI WHILE");
+                int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+                builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+            }
+        }
+        System.out.println("USPELO");
+        return builder.toString();
+    }
+
+    @Override
+    public Integer isExistToken(String token) {
+        List<Ad> ads = this.findAll();
+        if(ads != null){
+            for(Ad ad : ads){
+                if(ad.getCar().getAndroidFlag()){
+                    System.out.println("token: " + ad.getCar().getToken() );
+                    if(ad.getCar().getToken().equals(token)){
+                        return 2;
+                    }
+                }
+            }
+        }
+        return 1;
     }
 }
