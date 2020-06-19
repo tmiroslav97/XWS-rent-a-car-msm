@@ -14,7 +14,7 @@ public class AdConverter {
                 .name(ad.getName())
                 .location(ad.getLocation())
                 .coverPhoto(ad.getCoverPhoto())
-                .price(ad.getPrice())
+                .price(ad.getPricePerDay())
                 .carManufacturer(ad.getCar().getCarManufacturer())
                 .carModel(ad.getCar().getCarModel())
                 .childrenSeatNum(ad.getCar().getChildrenSeatNum())
