@@ -33,42 +33,34 @@ VALUES (4, '2020.06.08.', '2020.08.08.', 4);
 
 
 INSERT INTO image(id, name, ad_id)
-VALUES (1, 'slika0', 1);
+VALUES (1, 'slika1', 1);
 INSERT INTO image(id, name, ad_id)
-VALUES (2, 'slika1', 1);
+VALUES (2, 'slika2', 1);
 INSERT INTO image(id, name, ad_id)
-VALUES (3, 'slika2', 1);
+VALUES (3, 'slika3', 1);
 INSERT INTO image(id, name, ad_id)
-VALUES (4, 'slika3', 1);
+VALUES (4, 'slika4', 1);
 INSERT INTO image(id, name, ad_id)
-VALUES (5, 'slika4', 2);
+VALUES (5, 'slika5', 2);
 INSERT INTO image(id, name, ad_id)
-VALUES (6, 'slika5', 2);
+VALUES (6, 'slika6', 2);
 INSERT INTO image(id, name, ad_id)
-VALUES (7, 'slika6', 2);
+VALUES (7, 'slika7', 2);
 INSERT INTO image(id, name, ad_id)
-VALUES (8, 'slika7', 2);
+VALUES (8, 'slika8', 2);
 INSERT INTO image(id, name, ad_id)
-VALUES (9, 'slika8', 2);
+VALUES (9, 'slika9', 3);
 INSERT INTO image(id, name, ad_id)
-VALUES (10, 'slika9', 3);
+VALUES (10, 'slika10', 3);
 INSERT INTO image(id, name, ad_id)
-VALUES (11, 'slika10', 3);
+VALUES (11, 'slika11', 3);
 INSERT INTO image(id, name, ad_id)
-VALUES (12, 'slika11', 3);
+VALUES (12, 'slika12', 3);
 INSERT INTO image(id, name, ad_id)
-VALUES (13, 'slika12', 3);
+VALUES (13, 'slika13', 4);
 INSERT INTO image(id, name, ad_id)
-VALUES (14, 'slika13', 3);
+VALUES (14, 'slika14', 4);
 INSERT INTO image(id, name, ad_id)
-VALUES (15, 'slika14', 3);
+VALUES (15, 'slika15', 4);
 INSERT INTO image(id, name, ad_id)
-VALUES (16, 'slika15', 4);
-INSERT INTO image(id, name, ad_id)
-VALUES (17, 'slika16', 4);
-INSERT INTO image(id, name, ad_id)
-VALUES (18, 'slika17', 4);
-INSERT INTO image(id, name, ad_id)
-VALUES (19, 'slika18', 4);
-INSERT INTO image(id, name, ad_id)
-VALUES (20, 'slika19', 4);
+VALUES (16, 'slika16', 4);

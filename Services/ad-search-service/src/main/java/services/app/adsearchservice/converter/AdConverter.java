@@ -27,7 +27,7 @@ public class AdConverter {
     }
 
     public static Ad toCreateAdFromAdSynchronizeDTO(AdSynchronizeDTO dto){
-
+        System.out.println("publish date: "+ dto.getPublishedDate());
         return Ad.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -43,8 +43,6 @@ public class AdConverter {
                 .rentCnt(dto.getRentCnt())
                 .pricePerDay(dto.getPricePerDay())
                 .publisherUser(dto.getPublisherUser())
-                .car(CarConverter.toCarFromCarSyncDTO(dto.getCarSynchronizeDTO()))
-//                .carCalendarTerms()
                 .build();
     }
 
