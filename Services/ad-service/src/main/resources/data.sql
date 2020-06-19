@@ -22,23 +22,16 @@ INSERT INTO ad_car(ad_id, car_id) VALUES (2,2);
 INSERT INTO ad_car(ad_id, car_id) VALUES (3,3);
 INSERT INTO ad_car(ad_id, car_id) VALUES (4,4);
 
-INSERT INTO car_calendar_term(start_date, end_date, ad_id)
-VALUES ('2020.06.02.', '2020.09.02', 1);
-INSERT INTO car_calendar_term(start_date, end_date, ad_id)
-VALUES ('2020.06.03.', '2020.06.08.', 2);
-INSERT INTO car_calendar_term(start_date, end_date, ad_id)
-VALUES ('2020.07.02.', '2020.07.29', 3);
-INSERT INTO car_calendar_term(start_date, end_date, ad_id)
-VALUES ('2020.06.08.', '2020.08.08.', 4);
+INSERT INTO car_calendar_term(id, start_date, end_date, ad_id)
+VALUES (1, '2020.06.02.', '2020.09.02', 1);
+INSERT INTO car_calendar_term(id, start_date, end_date, ad_id)
+VALUES (2, '2020.06.03.', '2020.06.08.', 2);
+INSERT INTO car_calendar_term(id, start_date, end_date, ad_id)
+VALUES (3, '2020.07.02.', '2020.07.29', 3);
+INSERT INTO car_calendar_term(id, start_date, end_date, ad_id)
+VALUES (4, '2020.06.08.', '2020.08.08.', 4);
 
--- INSERT INTO image(id, name, ad_id)
--- VALUES (1, 'auto1', 1);
--- INSERT INTO image(id, name, ad_id)
--- VALUES (2, 'auto2', 1);
--- INSERT INTO image(id, name, ad_id)
--- VALUES (3, 'auto3', 1);
--- INSERT INTO image(id, name, ad_id)
--- VALUES (4, 'auto4', 1);
+
 INSERT INTO image(id, name, ad_id)
 VALUES (1, 'slika0', 1);
 INSERT INTO image(id, name, ad_id)
