@@ -3,7 +3,9 @@ package services.app.adsearchservice.converter;
 
 
 import services.app.adsearchservice.dto.ad.AdPageDTO;
+import services.app.adsearchservice.dto.ad.AdSynchronizeDTO;
 import services.app.adsearchservice.model.Ad;
+import services.app.adsearchservice.model.enumeration.DistanceLimitEnum;
 
 public class AdConverter {
 
@@ -24,5 +26,26 @@ public class AdConverter {
                 .build();
     }
 
+    public static Ad toCreateAdFromAdSynchronizeDTO(AdSynchronizeDTO dto){
+
+        return Ad.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .location(dto.getLocation())
+                .coverPhoto(dto.getCoverPhoto())
+                .distanceLimitFlag(DistanceLimitEnum.valueOf(dto.getDistanceLimitFlag()))
+                .distanceLimit(dto.getDistanceLimit())
+                .publishedDate(DateAPI.dateStringToDateTime(dto.getPublishedDate()))
+                .ratingNum(dto.getRatingNum())
+                .ratingCnt(dto.getRatingCnt())
+                .deleted(dto.getDeleted())
+                .enabled(dto.getEnabled())
+                .rentCnt(dto.getRentCnt())
+                .pricePerDay(dto.getPricePerDay())
+                .publisherUser(dto.getPublisherUser())
+                .car(CarConverter.toCarFromCarSyncDTO(dto.getCarSynchronizeDTO()))
+//                .carCalendarTerms()
+                .build();
+    }
 
 }

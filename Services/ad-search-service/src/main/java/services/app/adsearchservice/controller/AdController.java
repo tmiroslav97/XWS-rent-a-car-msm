@@ -1,6 +1,5 @@
 package services.app.adsearchservice.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.joda.time.DateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,8 +52,8 @@ public class AdController {
     public Integer synchronizeDatabase(@RequestBody AdSynchronizeDTO adSynchronizeDTO) {
         System.out.println("SINHRONIZACIJA");
         System.out.println(adSynchronizeDTO);
-//        Integer rez = adService.syncData(adSynchronizeDTO);
-//        System.out.println("REZULTAT: " + rez);
+        Integer rez = adService.syncData(adSynchronizeDTO);
+        System.out.println("REZULTAT: " + rez);
         return 1;
     }
 

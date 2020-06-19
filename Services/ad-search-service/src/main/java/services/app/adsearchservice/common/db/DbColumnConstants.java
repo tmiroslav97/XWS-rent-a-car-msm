@@ -50,5 +50,4 @@ public class DbColumnConstants {
     public static final String CANCELEDCNT = "canceledCnt";
     public static final String PUBLISHERUSER = "publisherUser";
     public static final String COVERPHOTO = "coverPhoto";
-    public static final String PUBLISHERUSER = "publisherUser";
 }
