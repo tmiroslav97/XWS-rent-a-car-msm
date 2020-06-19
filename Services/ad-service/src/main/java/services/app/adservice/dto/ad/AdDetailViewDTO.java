@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 @ToString
 public class AdDetailViewDTO {
+    private Long id;
     private String name;
     private String coverPhoto;
     private String location;

@@ -1,6 +1,7 @@
 package services.app.carrequestservice.dto.carreq;
 
 import lombok.*;
+import services.app.carrequestservice.model.Ad;
 
 import java.util.List;
 
@@ -10,10 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubmitRequestDTO {
-    //id objavljivaca
-    Long userId;
     Boolean bundle;
     String startDate;
     String endDate;
-    List<Long> adIds;
+    List<Ad> ads;
 }

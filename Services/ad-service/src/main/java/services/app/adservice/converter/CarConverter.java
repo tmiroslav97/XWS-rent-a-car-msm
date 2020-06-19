@@ -6,7 +6,7 @@ import services.app.adservice.model.Car;
 public class CarConverter {
     public static Car toCreateCarFromRequest(CarCreateDTO carCreateDTO){
         return Car.builder()
-                .year(DateAPI.dateStringToDateTime(carCreateDTO.getYear()))
+                .year(DateAPI.dateStringToYear(carCreateDTO.getYear()))
                 .carManufacturer(carCreateDTO.getCarManufacturer())
                 .carModel(carCreateDTO.getCarModel())
                 .gearboxType(carCreateDTO.getGearboxType())

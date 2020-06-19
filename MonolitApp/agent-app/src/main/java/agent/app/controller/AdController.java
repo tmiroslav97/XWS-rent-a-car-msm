@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping(value = "/ad", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/ad")
 public class AdController {
 
     private final AdService adService;
@@ -40,17 +40,47 @@ public class AdController {
     ObjectMapper objectMapper = new ObjectMapper();
 
     //    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
         System.out.println("Service ad !!!!!");
         return new ResponseEntity<>(AdConverter.toAdDetailViewDTOFromAd(adService.findById(id)), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+    @RequestMapping(value="/withImages", method = RequestMethod.POST,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createAdWithPhotos(@RequestParam(value = "photos0") MultipartFile photos0 ,
+                                                @RequestParam(value = "photos1") MultipartFile photos1 ,
+                                                @RequestParam(value = "photos2") MultipartFile photos2 ,
+                                                @RequestParam(value = "photos3") MultipartFile photos3 ,
+                                                @RequestParam(value = "data") String data,
+                                                Principal principal) {
+        System.out.println("///////////////////////////////////////////////////");
+        System.out.println(data);
+        System.out.println(photos0.getOriginalFilename());
+        System.out.println(photos1.getOriginalFilename());
+        System.out.println(photos2.getOriginalFilename());
+        System.out.println(photos3.getOriginalFilename());
+//        for(MultipartFile mf : photos){
+//            System.out.println("usao u forrr");
+//            if(!mf.isEmpty()){
+//                System.out.println(mf.getOriginalFilename());
+//            }
+//        };
+        System.out.println("///////////////////////////////////////////////////");
 
+
+
+
+        return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
+
+    }
     
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createAd(@RequestBody AdCreateDTO adCreateDTO, Principal principal) {
         System.out.println(adCreateDTO);
 
@@ -67,7 +97,7 @@ public class AdController {
     }
 
     //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findAllPageAd(@RequestParam(value = "nextPage", required = false) Integer nextPage,
                                            @RequestParam(value = "size", required = false) Integer size) {
 
@@ -81,7 +111,7 @@ public class AdController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-    @RequestMapping(value="/publisher",method = RequestMethod.GET)
+    @RequestMapping(value="/publisher",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findAllPageAdFromPublisher(@RequestParam(value = "nextPage", required = false) Integer nextPage,
                                                         @RequestParam(value = "size", required = false) Integer size,
                                                         Principal principal) {
@@ -91,7 +121,7 @@ public class AdController {
 
 
     //@PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT') or hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(path = "/search", method = RequestMethod.GET)
+    @RequestMapping(path = "/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findAllSearch(@RequestParam(value = "nextPage", required = false) Integer nextPage,
                                            @RequestParam(value = "size", required = false) Integer size,
                                            @RequestParam(value = "location") String location,

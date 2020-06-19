@@ -47,12 +47,11 @@ public class Ad {
             @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
             @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
     })
+    @Column(name = DbColumnConstants.PUBLISHDATE, nullable = false)
+    private DateTime publishedDate;
 
     @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY )
     private Set<Image> images = new HashSet<>();
-
-    @Column(name = DbColumnConstants.PUBLISHDATE, nullable = false)
-    private DateTime publishedDate;
 
     @Column(name = DbColumnConstants.RATINGNUM, nullable = false)
     private Long ratingNum = 0L;

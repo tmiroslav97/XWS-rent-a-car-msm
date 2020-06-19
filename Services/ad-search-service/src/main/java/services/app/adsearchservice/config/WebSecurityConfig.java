@@ -63,8 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(HttpMethod.GET, "/ad/search");
-        web.ignoring().antMatchers(HttpMethod.GET, "/ad");
+        web.ignoring().antMatchers(HttpMethod.GET, "/ad/search/**");
+        web.ignoring().antMatchers(HttpMethod.GET, "/ad/**");
 
     }
 }

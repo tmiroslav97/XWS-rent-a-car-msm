@@ -31,25 +31,18 @@ public class AdController {
     }
 
 
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
 
-        return new ResponseEntity<>(AdConverter.toAdDetailViewDTOFromAd(adService.findById(id)), HttpStatus.OK);
+        return new ResponseEntity<>(adService.getAdDetailView(id), HttpStatus.OK);
     }
 
 
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createAd(@RequestBody AdCreateDTO adCreateDTO) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
         System.out.println(adCreateDTO);
-
-        adCreateDTO.getPriceListCreateDTO().setPublisherUsername(principal.getEmail());
-
-        Integer flag = adService.createAd(adCreateDTO, principal.getEmail());
-
+        Integer flag = adService.createAd(adCreateDTO);
         if (flag == 1) {
             return new ResponseEntity<>("Oglas uspesno kreiran.", HttpStatus.CREATED);
         }else if (flag == 2){
@@ -73,13 +66,14 @@ public class AdController {
 
     }
 
-//    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
-//    @RequestMapping(value="/publisher",method = RequestMethod.GET)
-//    public ResponseEntity<?> findAllPageAdFromPublisher(@RequestParam(value = "nextPage", required = false) Integer nextPage,
-//                                                        @RequestParam(value = "size", required = false) Integer size) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
-//        return new ResponseEntity<>(adService.findAll(nextPage, size, principal.getEmail()), HttpStatus.OK);
-//    }
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_AGENT')")
+    @RequestMapping(value="/publisher",method = RequestMethod.GET)
+    public ResponseEntity<?> findAllPageAdFromPublisher(@RequestParam(value = "nextPage", required = false) Integer nextPage,
+                                                        @RequestParam(value = "size", required = false) Integer size) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
+        return new ResponseEntity<>(adService.findAll(nextPage, size, principal.getUserId()), HttpStatus.OK);
+    }
+
 
 }

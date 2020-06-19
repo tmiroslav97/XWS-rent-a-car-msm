@@ -57,7 +57,4 @@ public class Car {
     @Column(name = DbColumnConstants.CDW, nullable = false)
     private Boolean cdw;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.EAGER)
-    private Ad ad;
 }

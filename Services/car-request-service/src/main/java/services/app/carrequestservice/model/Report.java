@@ -29,9 +29,12 @@ public class Report {
     @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
     private Long publisherUser;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = DbTableConstants.ADREPORT,
-            joinColumns = @JoinColumn(name = "report_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"))
-    private Ad ad;
+//    @OneToOne(fetch = FetchType.EAGER)
+//    @JoinTable(name = DbTableConstants.ADREPORT,
+//            joinColumns = @JoinColumn(name = "report_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"))
+//    private Ad ad;
+
+    @Column(name = DbColumnConstants.ADID, nullable = false)
+    private Long adId;
 }

@@ -5,11 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import services.app.carrequestservice.dto.carreq.ListSubmitRequestDTO;
+import org.springframework.web.bind.annotation.*;
+import services.app.carrequestservice.dto.carreq.MapSubmitRequestDTO;
 import services.app.carrequestservice.model.CustomPrincipal;
 import services.app.carrequestservice.service.intf.RequestService;
 
@@ -23,11 +20,35 @@ public class RequestController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> submitRequest(@RequestBody ListSubmitRequestDTO listSubmitRequestDTO) {
+    @RequestMapping(value = "/end-user", method = RequestMethod.GET)
+    public ResponseEntity<?> getEndUserRequests(@RequestHeader(value = "status", required = false) String status) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomPrincipal cp = (CustomPrincipal) auth.getPrincipal();
-        Integer flag = requestService.submitRequest(listSubmitRequestDTO.getSubmitRequestDTOS(), Long.valueOf(cp.getUserId()));
+        if (status == null) {
+            return new ResponseEntity<>(requestService.findAllByEndUserId(Long.valueOf(cp.getUserId())), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(requestService.findAllByEndUserIdAndByStatus(Long.valueOf(cp.getUserId()), status), HttpStatus.OK);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_AGENT')")
+    @RequestMapping(value = "/publisher-user", method = RequestMethod.GET)
+    public ResponseEntity<?> getPublisherUserRequests(@RequestHeader(value = "status", required = false) String status) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal cp = (CustomPrincipal) auth.getPrincipal();
+        if (status == null) {
+            return new ResponseEntity<>(requestService.findAllByPublisherUserId(Long.valueOf(cp.getUserId())), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(requestService.findAllByPublisherUserIdAndByStatus(Long.valueOf(cp.getUserId()), status), HttpStatus.OK);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<?> submitRequest(@RequestBody MapSubmitRequestDTO mapSubmitRequestDTO) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal cp = (CustomPrincipal) auth.getPrincipal();
+        Integer flag = requestService.submitRequest(mapSubmitRequestDTO.getSubmitRequestDTOS(), Long.valueOf(cp.getUserId()));
         if (flag == 1) {
             return new ResponseEntity<>("Zahtjev uspjesno kreiran.", HttpStatus.OK);
         } else {

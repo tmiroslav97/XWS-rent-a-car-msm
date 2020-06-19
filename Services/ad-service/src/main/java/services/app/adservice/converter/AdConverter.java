@@ -11,11 +11,21 @@ import java.util.HashSet;
 public class AdConverter extends AbstractConverter{
 
     public static Ad toCreateAdFromRequest(AdCreateDTO adCreateDTO){
+        DistanceLimitEnum distanceLimitEnum = null;
+        if(adCreateDTO.getDistanceLimitFlag().equals("false")){
+            System.out.println("izabrano je unlimited");
+            distanceLimitEnum = DistanceLimitEnum.UNLIMITED;
+        }else if(adCreateDTO.getDistanceLimitFlag().equals("true")){
+            System.out.println("izabrano je limited");
+            distanceLimitEnum = DistanceLimitEnum.LIMITED;
+        }else{
+            System.out.println("Nije nista");
+        }
         return Ad.builder()
                 .name(adCreateDTO.getName())
                 .location(adCreateDTO.getLocation())
                 .coverPhoto(adCreateDTO.getCoverPhoto())
-                .distanceLimitFlag(DistanceLimitEnum.LIMITED)
+                .distanceLimitFlag(distanceLimitEnum)
                 .distanceLimit(adCreateDTO.getDistanceLimit())
                 .publishedDate(DateAPI.DateTimeNow())
                 .deleted(false)
@@ -47,6 +57,7 @@ public class AdConverter extends AbstractConverter{
 
     public static AdDetailViewDTO toAdDetailViewDTOFromAd(Ad ad){
         return AdDetailViewDTO.builder()
+                .id(ad.getId())
                 .name(ad.getName())
                 .location(ad.getLocation())
                 .coverPhoto(ad.getCoverPhoto())
@@ -70,6 +81,7 @@ public class AdConverter extends AbstractConverter{
 //                .pricePerKmCDW(ad.getPriceList().getPricePerKmCDW())
 //                .pricePerDay(ad.getPriceList().getPricePerDay())
                 .publisherUserId(ad.getPublisherUser())
+
                 .build();
     }
 }

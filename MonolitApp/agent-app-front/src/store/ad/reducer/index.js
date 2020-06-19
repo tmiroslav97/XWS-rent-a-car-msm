@@ -4,7 +4,8 @@ import {
     PUT_ADS,
     PUT_IMAGE_NAME,
     PUT_AD,
-    PUT_IMAGE_SRC
+    PUT_IMAGE_SRC,
+    PUT_CALENDAR
 } from '../constants';
 
 const initialState = {
@@ -29,6 +30,10 @@ const initialState = {
         ad_id: 0,
         name: null,
         isFetch: false
+    },
+    calendar:{
+        data:[],
+        isFetch: false
     }
 
 };
@@ -44,7 +49,8 @@ const actionHandler = {
     [PUT_ADS]: computationFunctions.putAds,
     [PUT_IMAGE_NAME]: computationFunctions.putImageName,
     [PUT_AD]: computationFunctions.putAd,
-    [PUT_IMAGE_SRC]: computationFunctions.putImageSrc
+    [PUT_IMAGE_SRC]: computationFunctions.putImageSrc,
+    [PUT_CALENDAR]: computationFunctions.putCalendar
 
 
 };
