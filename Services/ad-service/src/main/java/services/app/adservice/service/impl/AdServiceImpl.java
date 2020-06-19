@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,10 @@ import services.app.adservice.client.AuthenticationClient;
 import services.app.adservice.client.PricelistAndDiscountClient;
 import services.app.adservice.converter.AdConverter;
 import services.app.adservice.converter.CarCalendarTermConverter;
+import services.app.adservice.dto.ad.*;
 import services.app.adservice.dto.car.StatisticCarDTO;
-import services.app.adservice.dto.ad.AdCreateDTO;
-import services.app.adservice.dto.ad.AdPageContentDTO;
-import services.app.adservice.dto.ad.AdPageDTO;
-import services.app.adservice.dto.ad.AdRatingDTO;
 import services.app.adservice.dto.car.CarCalendarTermCreateDTO;
+import services.app.adservice.dto.user.PublisherUserDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
 import services.app.adservice.model.Ad;
@@ -207,5 +206,19 @@ public class AdServiceImpl implements AdService {
     public void logicalDeleteOrRevert(Ad ad, Boolean status) {
         ad.setDeleted(status);
         this.save(ad);
+    }
+
+    @Override
+    public AdDetailViewDTO getAdDetailView(Long ad_id) {
+
+        AdDetailViewDTO adDV = AdConverter.toAdDetailViewDTOFromAd(findById(ad_id));
+        PublisherUserDTO puDTO = authenticationClient.findPublishUserById(adDV.getPublisherUserId());
+        adDV.setPublisherUserFirstName(puDTO.getPublisherUserFirstName());
+        adDV.setPublisherUserLastName(puDTO.getPublisherUserLastName());
+        System.out.println(adDV);
+        System.out.println(puDTO.getPublisherUserId());
+        System.out.println(puDTO.getPublisherUserFirstName());
+        System.out.println(puDTO.getPublisherUserLastName());
+        return  adDV;
     }
 }

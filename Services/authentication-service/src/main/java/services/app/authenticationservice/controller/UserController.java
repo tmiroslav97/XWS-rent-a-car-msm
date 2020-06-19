@@ -1,10 +1,12 @@
 package services.app.authenticationservice.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import services.app.authenticationservice.converter.PublisherUserConverter;
 import services.app.authenticationservice.dto.VerificationResponse;
 import services.app.authenticationservice.service.intf.EndUserService;
 import services.app.authenticationservice.service.intf.UserService;
@@ -24,5 +26,10 @@ public class UserController {
     @RequestMapping(value = "/find-publish-user", method = RequestMethod.POST)
     public Long findPublishUserByEmail(Principal principal) {
         return userService.findByEmail(principal.getName()).getId();
+    }
+
+    @RequestMapping(value = "/find-publish-user-by-id", method = RequestMethod.GET)
+    public PublisherUserDTO findPublishUserById(Long id) {
+        return PublisherUserConverter.fromPublisherUserToPublisherUserDTO(userService.findById(id));
     }
 }
