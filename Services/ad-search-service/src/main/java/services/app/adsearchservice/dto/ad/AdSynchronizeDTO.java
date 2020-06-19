@@ -1,12 +1,12 @@
-package services.app.adservice.dto.ad;
+package services.app.adsearchservice.dto.ad;
 
 import lombok.*;
 import org.joda.time.DateTime;
-import services.app.adservice.dto.car.CarCalendarTermSynchronizeDTO;
-import services.app.adservice.dto.car.CarSynchronizeDTO;
-import services.app.adservice.dto.image.ImagesSynchronizeDTO;
-
+import services.app.adsearchservice.dto.car.CarCalendarTermSynchronizeDTO;
+import services.app.adsearchservice.dto.car.CarSynchronizeDTO;
+import services.app.adsearchservice.dto.image.ImagesSynchronizeDTO;
 import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor

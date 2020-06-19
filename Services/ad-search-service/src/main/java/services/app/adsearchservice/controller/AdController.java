@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import services.app.adsearchservice.converter.DateAPI;
+import services.app.adsearchservice.dto.ad.AdSynchronizeDTO;
 import services.app.adsearchservice.service.intf.AdService;
 
 
@@ -48,9 +49,9 @@ public class AdController {
     }
 
 
-//    @RequestMapping(value = "/synchronize", method = RequestMethod.POST)
-//    public Integer synchronizeDatabase(@RequestBody AdSynchronizeDTO adSynchronizeDTO) {
-//        return 1;
-//    }
+    @RequestMapping(value = "/synchronize", method = RequestMethod.POST)
+    public Integer synchronizeDatabase(@RequestBody AdSynchronizeDTO adSynchronizeDTO) {
+        return 1;
+    }
 
 }

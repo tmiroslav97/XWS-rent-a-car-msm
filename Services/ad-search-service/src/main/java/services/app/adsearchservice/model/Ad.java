@@ -71,12 +71,6 @@ public class Ad {
     @Column(name = DbColumnConstants.PRICEPERDAY, nullable = false)
     private Float pricePerDay;
 
-    @Column(name = DbColumnConstants.PRICEPERKM)
-    private Float pricePerKm;
-
-    @Column(name = DbColumnConstants.PRICEPERCWD)
-    private Float pricePerKmCDW;
-
     @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
     private Long publisherUser;
 
