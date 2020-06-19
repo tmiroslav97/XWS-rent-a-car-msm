@@ -1,6 +1,6 @@
 import React from 'react';
 import { history } from '../../index';
-import { Row, Col, OverlayTrigger, Tooltip, ListGroup, Card, Container, Form, Button } from 'react-bootstrap'
+import { Row, Col, OverlayTrigger, Tooltip, ListGroup, Table, Container, Form, Button } from 'react-bootstrap'
 
 const CartComponent = (props) => {
     return (
@@ -12,13 +12,19 @@ const CartComponent = (props) => {
             </Row>
             <Row className="justify-content-center">
                 <Col md={6} xs={12}>
-                    {
-                        [...props.cart.keys()].map((item, idx) => {
-                            return (
-                                <Card border="secondary" key={idx} className="mt-2">
-                                    <Card.Body>
-                                        <Row>
-                                            <Col>
+                    <Table responsive>
+                        <thead>
+                            <tr>
+                                <th>Bundle</th>
+                                <th>Naziv oglasa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                [...props.cart.keys()].map((item, idx) => {
+                                    return (
+                                        <tr key={idx}>
+                                            <td>
                                                 <ListGroup variant="flush">
                                                     {
                                                         props.cart.get(item).ads.length > 1 ?
@@ -29,12 +35,9 @@ const CartComponent = (props) => {
                                                             </ListGroup.Item> : null
                                                     }
                                                 </ListGroup>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col>
+                                            </td>
+                                            <td>
                                                 <ListGroup variant="flush">
-                                                    <ListGroup.Item>Naziv oglasa:</ListGroup.Item>
                                                     {
                                                         props.cart.get(item).ads.map((ad, idx) => {
                                                             return (
@@ -47,20 +50,15 @@ const CartComponent = (props) => {
                                                         })
                                                     }
                                                 </ListGroup>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col>
-                                            <Button variant="outline-danger" id="deleteItem" onClick={()=> {props.handleRemoveItem(item);}  }>
-                                                Ukloni iz korpe
-                                            </Button>
-                                            </Col>
-                                        </Row>
-                                    </Card.Body>
-                                </Card>
-                            );
-                        })
-                    }
+                                            </td>
+
+                                        </tr>
+
+                                    );
+                                })
+                            }
+                        </tbody>
+                    </Table>
                 </Col>
             </Row>
             {props.cart.size == 0 ?
@@ -71,30 +69,30 @@ const CartComponent = (props) => {
                 </Row> :
                 <Row className="justify-content-center mt-2">
                     <Col md={6} xs={12}>
-                            <Form.Row>
-                                <Form.Group as={Col}>
-                                    <Form.Label>Datum pocetka rentiranja {props.startDate} </Form.Label>
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row >
-                                <Form.Group as={Col}>
-                                    <Form.Label>Datum zavrsetka rentiranja {props.endDate}</Form.Label>
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col} >
-                                    <Button variant="primary" id="createReq" onClick={props.handleCreateReq}>
-                                        Kreiraj zahtjev
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>Datum pocetka rentiranja {props.startDate} </Form.Label>
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row >
+                            <Form.Group as={Col}>
+                                <Form.Label>Datum zavrsetka rentiranja {props.endDate}</Form.Label>
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} >
+                                <Button variant="primary" id="createReq" onClick={props.handleCreateReq}>
+                                    Kreiraj zahtjev
                                 </Button>
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col} >
-                                    <Button variant="danger" id="delete" onClick={props.handleClearCart}>
-                                        Isprazni korpu
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} >
+                                <Button variant="danger" id="delete" onClick={props.handleClearCart}>
+                                    Isprazni korpu
                                     </Button>
-                                </Form.Group>
-                            </Form.Row>
+                            </Form.Group>
+                        </Form.Row>
                     </Col>
                 </Row>
             }
