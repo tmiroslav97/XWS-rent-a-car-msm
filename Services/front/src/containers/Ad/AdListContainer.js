@@ -21,15 +21,15 @@ const AdListContainer = () => {
     const [namePhoto, setNamePhoto] = useState();
     const token = localStorage.getItem('token');
 
-    // useEffect(() => {
-    //     dispatch(
-    //         fetchAds({
-    //             nextPage,
-    //             size
-    //         })
-    //     );
+    useEffect(() => {
+        dispatch(
+            fetchAds({
+                nextPage,
+                size
+            })
+        );
 
-    // }, [nextPage, size]);
+    }, [nextPage, size]);
 
 
     const handleCoverPh = (event) => {

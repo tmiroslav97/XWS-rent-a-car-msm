@@ -1,4 +1,4 @@
-package services.app.authenticationservice.controller;
+package services.app.authenticationservice.dto;
 
 import lombok.*;
 

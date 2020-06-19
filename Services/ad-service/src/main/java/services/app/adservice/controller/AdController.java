@@ -33,7 +33,6 @@ public class AdController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
-
         return new ResponseEntity<>(adService.getAdDetailView(id), HttpStatus.OK);
     }
 

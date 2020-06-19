@@ -245,6 +245,14 @@ public class AdServiceImpl implements AdService {
     public AdDetailViewDTO getAdDetailView(Long ad_id) {
 
         AdDetailViewDTO adDV = AdConverter.toAdDetailViewDTOFromAd(findById(ad_id));
+        System.out.println("GET DETAIL VIEW ");
+
+
+        Float priceList = pricelistAndDiscountClient.findPricePerDay(adDV.getPriceId());
+        System.out.println("ID price liste : "+ priceList);
+        adDV.setPricePerDay(priceList);
+
+        System.out.println(adDV.getPublisherUserId());
         PublisherUserDTO puDTO = authenticationClient.findPublishUserById(adDV.getPublisherUserId());
         adDV.setPublisherUserFirstName(puDTO.getPublisherUserFirstName());
         adDV.setPublisherUserLastName(puDTO.getPublisherUserLastName());
@@ -252,6 +260,8 @@ public class AdServiceImpl implements AdService {
         System.out.println(puDTO.getPublisherUserId());
         System.out.println(puDTO.getPublisherUserFirstName());
         System.out.println(puDTO.getPublisherUserLastName());
+
+
         return  adDV;
     }
 }

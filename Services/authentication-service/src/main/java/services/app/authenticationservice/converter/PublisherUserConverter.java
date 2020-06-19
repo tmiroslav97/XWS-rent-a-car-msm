@@ -1,8 +1,6 @@
 package services.app.authenticationservice.converter;
 
-import services.app.authenticationservice.controller.PublisherUserDTO;
-import services.app.authenticationservice.dto.EndUserDTO;
-import services.app.authenticationservice.model.EndUser;
+import services.app.authenticationservice.dto.PublisherUserDTO;
 import services.app.authenticationservice.model.User;
 
 public class PublisherUserConverter {

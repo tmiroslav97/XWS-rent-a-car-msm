@@ -20,7 +20,7 @@ const AdComponent = (props) => {
             return false;
         }
     };
-
+console.log(props.ads)
     return (
 
         props.ads.map((variant, idx) => (
