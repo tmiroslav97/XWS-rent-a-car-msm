@@ -46,4 +46,11 @@ public class AdController {
 
         return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startD, endD), HttpStatus.OK);
     }
+
+
+//    @RequestMapping(value = "/synchronize", method = RequestMethod.POST)
+//    public Integer synchronizeDatabase(@RequestBody AdSynchronizeDTO adSynchronizeDTO) {
+//        return 1;
+//    }
+
 }
