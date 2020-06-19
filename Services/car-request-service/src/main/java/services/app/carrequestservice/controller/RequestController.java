@@ -6,9 +6,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import services.app.carrequestservice.dto.carreq.MapSubmitRequestDTO;
+import services.app.carrequestservice.dto.carreq.SubmitRequestDTO;
 import services.app.carrequestservice.model.CustomPrincipal;
 import services.app.carrequestservice.service.intf.RequestService;
+
+import java.util.HashMap;
 
 @RestController
 public class RequestController {
@@ -45,10 +47,10 @@ public class RequestController {
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> submitRequest(@RequestBody MapSubmitRequestDTO mapSubmitRequestDTO) {
+    public ResponseEntity<?> submitRequest(@RequestBody HashMap<Long, SubmitRequestDTO> submitRequestDTOS) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomPrincipal cp = (CustomPrincipal) auth.getPrincipal();
-        Integer flag = requestService.submitRequest(mapSubmitRequestDTO.getSubmitRequestDTOS(), Long.valueOf(cp.getUserId()));
+        Integer flag = requestService.submitRequest(submitRequestDTOS, Long.valueOf(cp.getUserId()));
         if (flag == 1) {
             return new ResponseEntity<>("Zahtjev uspjesno kreiran.", HttpStatus.OK);
         } else {
