@@ -22,7 +22,7 @@ public interface RequestService {
 
     Integer deleteById(Long id);
 
-    Integer submitRequest(HashMap<Long, List<SubmitRequestDTO>> submitRequestDTOS, Long userId);
+    Integer submitRequest(HashMap<Long, SubmitRequestDTO> submitRequestDTOS, Long userId);
 
     void delete(Request request);
 

@@ -20,6 +20,7 @@ public class AdConverter {
                 .childrenSeatNum(ad.getCar().getChildrenSeatNum())
                 .fuelType(ad.getCar().getFuelType())
                 .mileage(ad.getCar().getMileage())
+                .publisherUserId(ad.getPublisherUser())
                 .build();
     }
 

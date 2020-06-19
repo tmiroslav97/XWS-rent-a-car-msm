@@ -74,6 +74,9 @@ public class Ad {
     @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
     private Long publisherUser;
 
+    @Column(name = DbColumnConstants.PUBLISHERUSER, nullable = false)
+    private Long publisherUser;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinTable(name = DbTableConstants.ADCAR,
             joinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"),
