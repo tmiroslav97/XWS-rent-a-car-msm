@@ -1,40 +1,44 @@
 import React from 'react';
 import { history } from '../../index';
-import { Row, Col, OverlayTrigger, Tooltip, ListGroup, Card } from 'react-bootstrap'
+import { Row, Col, OverlayTrigger, Tooltip, ListGroup, Table } from 'react-bootstrap'
 
 const EndUserRequestsComponent = (props) => {
 
     return (
         <div>
             <Row>
-                <Col md={6} xs={12}>
+                <Col md={10} xs={12}>
                     <h3 className="border-bottom mt-5">Zahtjevi sa statusom {props.status}</h3>
                 </Col>
             </Row>
             <Row>
-                <Col md={6} xs={12}>
-                    {
-                        props.requests.map((req, idx) => {
-                            return (
-                                <Card border="secondary" key={idx} className="mt-2">
-                                    <Card.Body>
-                                        <Row>
-                                            <Col>
+                <Col md={10} xs={12}>
+                    <Table responsive>
+                        <thead>
+                            <tr>
+                                <th>Datum podnosenja zahtjeva</th>
+                                <th>Datum pocetka rentiranja</th>
+                                <th>Datum zavrsetka rentiranja</th>
+                                <th>Bundle zahtjev</th>
+                                <th>Naziv oglasa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                props.requests.map((req, idx) => {
+                                    return (
+                                        <tr key={idx}>
+                                            <td>{req.submitDate}</td>
+                                            <td>{req.startDate}</td>
+                                            <td>{req.endDate}</td>
+                                            <td> {
+                                                req.bundle ?
+                                                    <p>Da</p> : <p>Ne</p>
+                                            }
+                                            </td>
+
+                                            <td>
                                                 <ListGroup variant="flush">
-                                                    <ListGroup.Item>Datum podnosenja zahtjeva: {req.submitDate}</ListGroup.Item>
-                                                    <ListGroup.Item>Datum pocetka rentiranja: {req.startDate}</ListGroup.Item>
-                                                    <ListGroup.Item>Datum zavrsetka rentiranja: {req.endDate}</ListGroup.Item>
-                                                    {
-                                                        req.bundle ?
-                                                            <ListGroup.Item>Bundle zahtjev</ListGroup.Item> : null
-                                                    }
-                                                </ListGroup>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col>
-                                                <ListGroup variant="flush">
-                                                    <ListGroup.Item>Naziv oglasa:</ListGroup.Item>
                                                     {
                                                         req.ads.map((ad, idx) => {
                                                             return (
@@ -47,13 +51,13 @@ const EndUserRequestsComponent = (props) => {
                                                         })
                                                     }
                                                 </ListGroup>
-                                            </Col>
-                                        </Row>
-                                    </Card.Body>
-                                </Card>
-                            );
-                        })
-                    }
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                            }
+                        </tbody>
+                    </Table>
                 </Col>
             </Row>
         </div >
