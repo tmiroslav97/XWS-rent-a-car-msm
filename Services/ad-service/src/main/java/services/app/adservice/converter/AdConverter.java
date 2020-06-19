@@ -3,6 +3,8 @@ package services.app.adservice.converter;
 import services.app.adservice.dto.ad.AdCreateDTO;
 import services.app.adservice.dto.ad.AdDetailViewDTO;
 import services.app.adservice.dto.ad.AdPageDTO;
+import services.app.adservice.dto.ad.AdSynchronizeDTO;
+import services.app.adservice.dto.car.CarSynchronizeDTO;
 import services.app.adservice.model.Ad;
 import services.app.adservice.model.enumeration.DistanceLimitEnum;
 
@@ -84,5 +86,29 @@ public class AdConverter extends AbstractConverter{
 //                .publisherUserFirstName(ad.getPublisherUser().getFirstName())
 //                .publisherUserLastName(ad.getPublisherUser().getLastName())
                 .build();
+    }
+
+    public static AdSynchronizeDTO toAdSynchronizeDTOFromAd(Ad ad){
+
+        return AdSynchronizeDTO.builder()
+                .id(ad.getId())
+                .name(ad.getName())
+                .location(ad.getLocation())
+                .coverPhoto(ad.getCoverPhoto())
+                .imagesSynchronizeDTOS(ImageConverter.toImagesSynchronizeDTOFromImages(ad.getImages()))
+                .distanceLimitFlag(ad.getDistanceLimitFlag().toString())
+                .distanceLimit(ad.getDistanceLimit())
+                .publishedDate(ad.getPublishedDate())
+                .ratingNum(ad.getRatingNum())
+                .ratingCnt(ad.getRatingCnt())
+                .deleted(ad.getDeleted())
+                .enabled(ad.getEnabled())
+                .rentCnt(ad.getRentCnt())
+//                .pricePerDay()
+                .publisherUser(ad.getPublisherUser())
+                .carSynchronizeDTO(CarConverter.toCarSynchronizeDTOFromCar(ad.getCar()))
+                .carCalendarTermSynchronizeDTOS(CarCalendarTermConverter.toListCarCalendarTermSyncDTOFromListCarCalendarTerm(ad.getCarCalendarTerms()))
+                .build();
+
     }
 }

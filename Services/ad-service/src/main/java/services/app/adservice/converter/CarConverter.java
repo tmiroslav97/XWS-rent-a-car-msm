@@ -1,9 +1,11 @@
 package services.app.adservice.converter;
 
 import services.app.adservice.dto.car.CarCreateDTO;
+import services.app.adservice.dto.car.CarSynchronizeDTO;
 import services.app.adservice.model.Car;
 
 public class CarConverter {
+
     public static Car toCreateCarFromRequest(CarCreateDTO carCreateDTO){
 
         System.out.println("android flag "+carCreateDTO.getAndroidFlag());
@@ -21,4 +23,20 @@ public class CarConverter {
                 .androidFlag(Boolean.valueOf(carCreateDTO.getAndroidFlag()))
                 .build();
     }
+
+    public static CarSynchronizeDTO toCarSynchronizeDTOFromCar(Car car){
+        return CarSynchronizeDTO.builder()
+                .id(car.getId())
+                .year(car.getYear())
+                .carManufacturer(car.getCarManufacturer())
+                .carModel(car.getCarModel())
+                .gearboxType(car.getGearboxType())
+                .fuelType(car.getFuelType())
+                .carType(car.getCarType())
+                .mileage(car.getMileage())
+                .childrenSeatNum(car.getChildrenSeatNum())
+                .cdw(car.getCdw())
+                .build();
+    }
+
 }

@@ -19,10 +19,10 @@ public class AdSynchronizeDTO {
     private String name;
     private String location;
     private String coverPhoto;
+    private List<ImagesSynchronizeDTO> imagesSynchronizeDTOS;
     private String distanceLimitFlag;
     private Float distanceLimit;
     private DateTime publishedDate;
-    private List<ImagesSynchronizeDTO> imagesSynchronizeDTOS;
     private Long ratingNum;
     private Long ratingCnt;
     private Boolean deleted;

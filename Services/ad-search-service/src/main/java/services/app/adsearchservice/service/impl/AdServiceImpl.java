@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import services.app.adsearchservice.converter.AdConverter;
 import services.app.adsearchservice.dto.ad.AdPageContentDTO;
 import services.app.adsearchservice.dto.ad.AdPageDTO;
+import services.app.adsearchservice.dto.ad.AdSynchronizeDTO;
 import services.app.adsearchservice.exception.ExistsException;
 import services.app.adsearchservice.exception.NotFoundException;
 import services.app.adsearchservice.model.Ad;
@@ -37,8 +38,10 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public void syncData() {
+    public Integer syncData(AdSynchronizeDTO adSynchronizeDTO) {
+        System.out.println(adSynchronizeDTO);
 
+        return 1;
     }
 
     @Override

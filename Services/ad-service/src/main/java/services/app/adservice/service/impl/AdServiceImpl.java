@@ -8,15 +8,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import services.app.adservice.client.AdSearchClient;
 import services.app.adservice.client.AuthenticationClient;
 import services.app.adservice.client.PricelistAndDiscountClient;
 import services.app.adservice.converter.AdConverter;
 import services.app.adservice.converter.CarCalendarTermConverter;
+import services.app.adservice.dto.ad.*;
 import services.app.adservice.dto.car.StatisticCarDTO;
-import services.app.adservice.dto.ad.AdCreateDTO;
-import services.app.adservice.dto.ad.AdPageContentDTO;
-import services.app.adservice.dto.ad.AdPageDTO;
-import services.app.adservice.dto.ad.AdRatingDTO;
 import services.app.adservice.dto.car.CarCalendarTermCreateDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
@@ -50,6 +48,9 @@ public class AdServiceImpl implements AdService {
 
     @Autowired
     private AuthenticationClient authenticationClient;
+
+    @Autowired
+    private AdSearchClient adSearchClient;
 
     @Override
     public Ad findById(Long id) {
@@ -220,6 +221,15 @@ public class AdServiceImpl implements AdService {
                 carCalendarTerm = carCalendarTermService.editCarCalendarTerm(carCalendarTerm);
         }
         System.out.println("***************************************************************");
+        System.out.println("SINHRONIZACIJA AD SERVICE");
+
+        AdSynchronizeDTO adSynchronizeDTO = AdConverter.toAdSynchronizeDTOFromAd(ad);
+        adSynchronizeDTO.setPricePerDay(adCreateDTO.getPriceListCreateDTO().getPricePerDay());
+        adSearchClient.synchronizeDatabase(adSynchronizeDTO);
+
+        System.out.println("***************************************************************");
+
+
         return 1;
     }
 
