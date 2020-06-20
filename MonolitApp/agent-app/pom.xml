@@ -106,7 +106,7 @@
 						<source>${project.basedir}/src/main/resources/agent.xsd</source>
 					</sources>
 					<xjbSources>
-						<xjbSource>${project.basedir}/src/main/resources/request.xjb</xjbSource>
+						<xjbSource>${project.basedir}/src/main/resources/agent.xjb</xjbSource>
 					</xjbSources>
 					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
 					<clearOutputDir>false</clearOutputDir>
