@@ -82,9 +82,9 @@ public class AdConverter extends AbstractConverter{
 //                .pricePerKm(ad.getPriceList().getPricePerKm())
 //                .pricePerKmCDW(ad.getPriceList().getPricePerKmCDW())
 //                .pricePerDay(ad.getPriceList().getPricePerDay())
-                .priceId(ad.getPriceList())
-                .publisherUserId(ad.getPublisherUser())
-
+               .publisherUserId(ad.getPublisherUser())
+//                .publisherUserFirstName(ad.getPublisherUser().getFirstName())
+//                .publisherUserLastName(ad.getPublisherUser().getLastName())
                 .build();
     }
 

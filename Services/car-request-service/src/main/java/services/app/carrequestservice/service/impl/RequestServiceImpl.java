@@ -3,17 +3,21 @@ package services.app.carrequestservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import services.app.carrequestservice.client.AuthenticationClient;
 import services.app.carrequestservice.converter.DateAPI;
 import services.app.carrequestservice.dto.carreq.SubmitRequestDTO;
 import services.app.carrequestservice.exception.NotFoundException;
 import services.app.carrequestservice.model.Ad;
 import services.app.carrequestservice.model.Request;
-import services.app.carrequestservice.model.enumeration.RequestStatusEnum;
+import services.app.carrequestservice.model.RequestStatusEnum;
 import services.app.carrequestservice.repository.RequestRepository;
 import services.app.carrequestservice.service.intf.AdService;
 import services.app.carrequestservice.service.intf.RequestService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -24,6 +28,9 @@ public class RequestServiceImpl implements RequestService {
 
     @Autowired
     private AdService adService;
+
+    @Autowired
+    private AuthenticationClient authenticationClient;
 
     @Override
     public Request findById(Long id) {
@@ -51,6 +58,16 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public List<Request> findAllByPublisherUserEmail(String email) {
+        return this.findAllByPublisherUserId(authenticationClient.findPublishUserByEmailWS(email));
+    }
+
+    @Override
+    public List<Request> findAllByPublisherUserEmailAndStatus(String email, String status) {
+        return this.findAllByPublisherUserIdAndByStatus(authenticationClient.findPublishUserByEmailWS(email), status);
+    }
+
+    @Override
     public List<Request> findAllByPublisherUserIdAndByStatus(Long id, String status) {
         return requestRepository.findAllByPublisherUserAndByStatus(id, RequestStatusEnum.valueOf(status));
     }
@@ -68,7 +85,7 @@ public class RequestServiceImpl implements RequestService {
             SubmitRequestDTO itemSubmitRequestDTO = entry.getValue();
             Request request = null;
             if (itemSubmitRequestDTO.getBundle()) {
-                Set<Ad> ads = new HashSet<>();
+                List<Ad> ads = new ArrayList<>();
                 for (Ad adItem : itemSubmitRequestDTO.getAds()) {
                     Ad ad = null;
                     if (adService.existsById(adItem.getId())) {
@@ -95,7 +112,7 @@ public class RequestServiceImpl implements RequestService {
                 this.save(request);
             } else {
                 for (Ad adItem : itemSubmitRequestDTO.getAds()) {
-                    Set<Ad> ads = new HashSet<>();
+                    List<Ad> ads = new ArrayList<>();
                     Ad ad = null;
                     if (adService.existsById(adItem.getId())) {
                         ad = adService.findById(adItem.getId());
