@@ -10,17 +10,17 @@ package org.w3._2001.xmlschema;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-public class Adapter1
-    extends XmlAdapter<String, Boolean>
+public class Adapter5
+    extends XmlAdapter<String, Long>
 {
 
 
-    public Boolean unmarshal(String value) {
-        return (services.app.carrequestservice.converter.TypeConverter.parseBoolean(value));
+    public Long unmarshal(String value) {
+        return (services.app.carrequestservice.converter.TypeConverter.parseLong(value));
     }
 
-    public String marshal(Boolean value) {
-        return (services.app.carrequestservice.converter.TypeConverter.printBoolean(value));
+    public String marshal(Long value) {
+        return (services.app.carrequestservice.converter.TypeConverter.printLong(value));
     }
 
 }

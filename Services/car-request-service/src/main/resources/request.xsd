@@ -2,14 +2,22 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://www.app.services/carrequestservice/model"
     xmlns:tns="http://www.app.services/carrequestservice/model">
-    <xs:element name="getAllReqeustsByPublisherIdRequest">
+    <xs:element name="getPublisherRequestsRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="publisherUser" type="xs:long"/>
+                <xs:element name="publisherUser" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="getAllRequestsByPublisherIdResponse">
+    <xs:element name="getPublisherRequestsByStatusRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="publisherUser" type="xs:string"/>
+                <xs:element name="status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getPublisherRequestsResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="requests" type="tns:Request"/>
@@ -40,7 +48,16 @@
     <xs:complexType name="Ad">
         <xs:sequence>
             <xs:element name="id" type="xs:long" maxOccurs="1"/>
-            <xs:element name="adName" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="adName" type="xs:string" maxOccurs="1" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Report">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element minOccurs="0" name="description" type="xs:string"/>
+            <xs:element name="distanceTraveled" type="xs:float"/>
+            <xs:element name="publisherUser" type="xs:long"/>
+            <xs:element name="adId" type="xs:long"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

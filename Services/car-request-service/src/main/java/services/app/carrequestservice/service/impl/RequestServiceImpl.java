@@ -3,6 +3,7 @@ package services.app.carrequestservice.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import services.app.carrequestservice.client.AuthenticationClient;
 import services.app.carrequestservice.converter.DateAPI;
 import services.app.carrequestservice.dto.carreq.SubmitRequestDTO;
 import services.app.carrequestservice.exception.NotFoundException;
@@ -13,7 +14,10 @@ import services.app.carrequestservice.repository.RequestRepository;
 import services.app.carrequestservice.service.intf.AdService;
 import services.app.carrequestservice.service.intf.RequestService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -24,6 +28,9 @@ public class RequestServiceImpl implements RequestService {
 
     @Autowired
     private AdService adService;
+
+    @Autowired
+    private AuthenticationClient authenticationClient;
 
     @Override
     public Request findById(Long id) {
@@ -48,6 +55,16 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public List<Request> findAllByPublisherUserId(Long id) {
         return requestRepository.findAllByPublisherUser(id);
+    }
+
+    @Override
+    public List<Request> findAllByPublisherUserEmail(String email) {
+        return this.findAllByPublisherUserId(authenticationClient.findPublishUserByEmailWS(email));
+    }
+
+    @Override
+    public List<Request> findAllByPublisherUserEmailAndStatus(String email, String status) {
+        return this.findAllByEndUserIdAndByStatus(authenticationClient.findPublishUserByEmailWS(email), status);
     }
 
     @Override
