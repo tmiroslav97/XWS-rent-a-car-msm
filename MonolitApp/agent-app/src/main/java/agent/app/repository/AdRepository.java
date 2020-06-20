@@ -20,6 +20,4 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
             "AND ad.id = calendar.ad.id AND ad.deleted=(?1) AND ad.location=(?2)")
     Page<Ad> findByDeletedAndLocationAndCarCalendarTermsStartDateBeforeAndCarCalendarTermsEndDateAfter(Boolean deleted, String location, DateTime startDate, DateTime endDate, Pageable pageable);
 
-    @Query("SELECT ad FROM Ad ad WHERE  (ad.ratingNum/ad.ratingCnt)=(?1)")
-    Ad findAdWithGrade(Double max_grade);
 }

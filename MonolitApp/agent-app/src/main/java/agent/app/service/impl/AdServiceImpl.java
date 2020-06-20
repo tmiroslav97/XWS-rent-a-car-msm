@@ -245,7 +245,7 @@ public class AdServiceImpl implements AdService {
     public AdPageDTO findBestAverageGrade(String email) {
         double averageGrade = 0.0;
         double max = 0.0;
-
+        System.out.println("Average method");
         for(Ad ad:adRepository.findAll()){
             averageGrade = ad.getRatingNum()/ad.getRatingCnt();
             if(averageGrade>max){
@@ -253,10 +253,22 @@ public class AdServiceImpl implements AdService {
                 max=averageGrade;
             }
         }
-        Ad maxAd = adRepository.findAdWithGrade(max);
+        System.out.println("repository .... ");
+        Ad maxAd = findAdWithGrade(max);
         System.out.println("Id tog oglasa: " + maxAd.getId());
         AdPageDTO adPage = AdConverter.toCreateAdPageDTOFromAd(maxAd);
         return adPage;
     }
 
+
+    @Override
+    public Ad findAdWithGrade(Double max_grade) {
+        System.out.println("Metodaaa ... ");
+        for(Ad ad:adRepository.findAll()){
+            if((ad.getRatingNum()/ad.getRatingCnt())==max_grade){
+                return ad;
+            }
+        }
+        return null;
+    }
 }
