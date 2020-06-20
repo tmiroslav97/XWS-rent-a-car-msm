@@ -22,7 +22,4 @@ public interface PricelistAndDiscountClient {
                        @RequestHeader("roles")String roles,
                        @RequestHeader("Auth")String token);
 
-    @GetMapping("/pricelist/find-price-per-day/{id}")
-    Float findPricePerDay(@PathVariable Long id);
-
 }

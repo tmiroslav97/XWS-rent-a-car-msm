@@ -30,10 +30,12 @@ public class AdController {
         this.adService = adService;
     }
 
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getAd(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(adService.getAdDetailView(id), HttpStatus.OK);
+        System.out.println("Service ad !!!!!");
+        return new ResponseEntity<>(AdConverter.toAdDetailViewDTOFromAd(adService.findById(id)), HttpStatus.OK);
     }
 
 
