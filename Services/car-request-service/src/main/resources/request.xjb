@@ -1,0 +1,19 @@
+<jxb:bindings version="2.0"
+              xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                jxb:extensionBindingPrefixes="xjc">
+    <jxb:globalBindings mapSimpleTypeDef="false" choiceContentProperty="true">
+            <jxb:javaType name="java.lang.Long" xmlType="xs:long"
+                      parseMethod="services.app.carrequestservice.converter.TypeConverter.parseLong"
+                      printMethod="services.app.carrequestservice.converter.TypeConverter.printLong"/>
+            <jxb:javaType name="java.lang.Integer" xmlType="xs:int"
+                      parseMethod="services.app.carrequestservice.converter.TypeConverter.parseInteger"
+                      printMethod="services.app.carrequestservice.converter.TypeConverter.printInteger"/>
+            <jxb:javaType name="java.lang.Boolean" xmlType="xs:boolean"
+                      parseMethod="services.app.carrequestservice.converter.TypeConverter.parseBoolean"
+                      printMethod="services.app.carrequestservice.converter.TypeConverter.printBoolean"/>
+            <jxb:javaType name="org.joda.time.DateTime" xmlType="xs:dateTime"
+                          parseMethod="services.app.carrequestservice.converter.DateAPI.parse"
+                          printMethod="services.app.carrequestservice.converter.DateAPI.print"/>
+    </jxb:globalBindings>
+</jxb:bindings>

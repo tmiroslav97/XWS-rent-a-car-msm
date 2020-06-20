@@ -8,32 +8,27 @@
 
 package services.app.carrequestservice.model;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import lombok.*;
 import org.w3._2001.xmlschema.Adapter3;
-import services.app.carrequestservice.common.db.DbColumnConstants;
-import services.app.carrequestservice.common.db.DbTableConstants;
 
 
 /**
- * <p>Java class for Ad complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Ad"&gt;
+ * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
- *         &lt;element name="adName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="publisherUser" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -42,77 +37,40 @@ import services.app.carrequestservice.common.db.DbTableConstants;
  * 
  * 
  */
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
-@Entity
-@Table(name = DbTableConstants.AD)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Ad", propOrder = {
-    "id",
-    "adName"
+@XmlType(name = "", propOrder = {
+    "publisherUser"
 })
-public class Ad {
+@XmlRootElement(name = "getAllReqeustsByPublisherIdRequest")
+public class GetAllReqeustsByPublisherIdRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(Adapter3 .class)
     @XmlSchemaType(name = "long")
-    protected Long id;
-
-    @Column(name = DbColumnConstants.ADNAME, nullable = false)
-    protected String adName;
+    protected Long publisherUser;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the publisherUser property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public Long getId() {
-        return id;
+    public Long getPublisherUser() {
+        return publisherUser;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the publisherUser property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setId(Long value) {
-        this.id = value;
-    }
-
-    /**
-     * Gets the value of the adName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAdName() {
-        return adName;
-    }
-
-    /**
-     * Sets the value of the adName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAdName(String value) {
-        this.adName = value;
+    public void setPublisherUser(Long value) {
+        this.publisherUser = value;
     }
 
 }

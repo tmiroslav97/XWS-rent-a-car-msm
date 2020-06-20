@@ -25,12 +25,22 @@ public class DateAPI {
         return dtf.parseDateTime(date);
     }
 
+    public static DateTime parse(String date) {
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("hh:mm dd-MM-yyyy");
+        return dtf.parseDateTime(date);
+    }
+
     public static DateTime DateTimeFromDateString(String date) {
         DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
         return dtf.parseDateTime(date);
     }
 
     public static String StringDateFromDateTime(DateTime dateTime){
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("dd.MM.YYYY HH:mm:ss");
+        return dtf.print(dateTime);
+    }
+
+    public static String print(DateTime dateTime){
         DateTimeFormatter dtf = DateTimeFormat.forPattern("dd.MM.YYYY HH:mm:ss");
         return dtf.print(dateTime);
     }

@@ -8,7 +8,7 @@ import services.app.carrequestservice.dto.carreq.SubmitRequestDTO;
 import services.app.carrequestservice.exception.NotFoundException;
 import services.app.carrequestservice.model.Ad;
 import services.app.carrequestservice.model.Request;
-import services.app.carrequestservice.model.enumeration.RequestStatusEnum;
+import services.app.carrequestservice.model.RequestStatusEnum;
 import services.app.carrequestservice.repository.RequestRepository;
 import services.app.carrequestservice.service.intf.AdService;
 import services.app.carrequestservice.service.intf.RequestService;
@@ -68,7 +68,7 @@ public class RequestServiceImpl implements RequestService {
             SubmitRequestDTO itemSubmitRequestDTO = entry.getValue();
             Request request = null;
             if (itemSubmitRequestDTO.getBundle()) {
-                Set<Ad> ads = new HashSet<>();
+                List<Ad> ads = new ArrayList<>();
                 for (Ad adItem : itemSubmitRequestDTO.getAds()) {
                     Ad ad = null;
                     if (adService.existsById(adItem.getId())) {
@@ -95,7 +95,7 @@ public class RequestServiceImpl implements RequestService {
                 this.save(request);
             } else {
                 for (Ad adItem : itemSubmitRequestDTO.getAds()) {
-                    Set<Ad> ads = new HashSet<>();
+                    List<Ad> ads = new ArrayList<>();
                     Ad ad = null;
                     if (adService.existsById(adItem.getId())) {
                         ad = adService.findById(adItem.getId());
