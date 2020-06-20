@@ -20,6 +20,7 @@ public class CommentConverter {
                 .content(comment.getContent())
                 .creationDate(comment.getCreationDate().toString())
                 .publisherUserId(comment.getPublisherUser())
+                .approved(comment.getApproved())
                 .build();
     }
 

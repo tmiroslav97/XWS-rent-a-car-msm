@@ -15,6 +15,7 @@ public class CommentDTO {
     private Long publisherUserId;
     private String publisherUserFirstName;
     private String publisherUserLastName;
+    private Boolean approved;
 
 
 }

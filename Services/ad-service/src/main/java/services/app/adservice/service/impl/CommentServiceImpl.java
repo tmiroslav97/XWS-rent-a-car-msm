@@ -120,6 +120,35 @@ public class CommentServiceImpl implements CommentService {
                 list.add(commentDTO);
             }
         }
+
+
+        return list;
+    }
+
+    @Override
+    public List<CommentDTO> findAllApprovedCommentAndUserCommentFromAd(Long id) {
+        Ad ad = adService.findById(id);
+        List<CommentDTO> list = new ArrayList<>();
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomPrincipal principal = (CustomPrincipal) auth.getPrincipal();
+        Long publisherUser = authenticationClient.findPublishUserByEmail(principal.getToken());
+
+        Set<Comment> commentSet = ad.getComments();
+        for(Comment comment: commentSet){
+            if(comment.getApproved()){
+                CommentDTO commentDTO = CommentConverter.toCommentDTOFromComment(comment);
+                //dobiti publish usera iz authentication servisa i dodati komentaru
+//                PublishUserDTO publishUserDTO = authenticationClient
+                list.add(commentDTO);
+            }else if(comment.getPublisherUser().equals(publisherUser)){
+                CommentDTO commentDTO = CommentConverter.toCommentDTOFromComment(comment);
+
+                //dobiti publish usera iz authentication servisa i dodati komentaru
+//                PublishUserDTO publishUserDTO = authenticationClient
+                list.add(commentDTO);
+            }
+        }
         return list;
     }
 }

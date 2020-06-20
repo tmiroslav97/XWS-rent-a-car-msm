@@ -21,5 +21,6 @@ public interface CommentService {
     Integer createComment(CommentCreateDTO comment);
 
     List<CommentDTO> findAllApprovedCommentFromAd(Long id);
+    List<CommentDTO> findAllApprovedCommentAndUserCommentFromAd(Long id);
 
 }
