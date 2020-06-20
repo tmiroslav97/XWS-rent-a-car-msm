@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="publisherUser" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -36,13 +37,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "publisherUser"
+    "publisherUser",
+    "status"
 })
-@XmlRootElement(name = "getPublisherRequestsRequest")
-public class GetPublisherRequestsRequest {
+@XmlRootElement(name = "getPublisherRequestsByStatusRequest")
+public class GetPublisherRequestsByStatusRequest {
 
     @XmlElement(required = true)
     protected String publisherUser;
+    @XmlElement(required = true)
+    protected String status;
 
     /**
      * Gets the value of the publisherUser property.
@@ -66,6 +70,30 @@ public class GetPublisherRequestsRequest {
      */
     public void setPublisherUser(String value) {
         this.publisherUser = value;
+    }
+
+    /**
+     * Gets the value of the status property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the value of the status property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setStatus(String value) {
+        this.status = value;
     }
 
 }

@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="requests" type="{http://www.app.services/carrequestservice/model}Request" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="reports" type="{http://www.app.services/carrequestservice/model}Report" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -37,40 +37,40 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "requests"
+    "reports"
 })
-@XmlRootElement(name = "getPublisherRequestsResponse")
-public class GetPublisherRequestsResponse {
+@XmlRootElement(name = "getPublisherReportsResponse")
+public class GetPublisherReportsResponse {
 
-    protected List<Request> requests;
+    protected List<Report> reports;
 
     /**
-     * Gets the value of the requests property.
+     * Gets the value of the reports property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the requests property.
+     * This is why there is not a <CODE>set</CODE> method for the reports property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRequests().add(newItem);
+     *    getReports().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Request }
+     * {@link Report }
      * 
      * 
      */
-    public List<Request> getRequests() {
-        if (requests == null) {
-            requests = new ArrayList<Request>();
+    public List<Report> getReports() {
+        if (reports == null) {
+            reports = new ArrayList<Report>();
         }
-        return this.requests;
+        return this.reports;
     }
 
 }

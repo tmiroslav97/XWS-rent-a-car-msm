@@ -64,7 +64,7 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public List<Request> findAllByPublisherUserEmailAndStatus(String email, String status) {
-        return this.findAllByEndUserIdAndByStatus(authenticationClient.findPublishUserByEmailWS(email), status);
+        return this.findAllByPublisherUserIdAndByStatus(authenticationClient.findPublishUserByEmailWS(email), status);
     }
 
     @Override

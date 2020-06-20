@@ -17,10 +17,38 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:element name="getPublisherReportsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="publisherUser" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAdReportsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="adId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     <xs:element name="getPublisherRequestsResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="requests" type="tns:Request"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getPublisherReportsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="reports" type="tns:Report"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAdReportsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="reports" type="tns:Report"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
