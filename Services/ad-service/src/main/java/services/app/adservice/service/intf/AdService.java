@@ -1,7 +1,6 @@
 package services.app.adservice.service.intf;
 
 import services.app.adservice.dto.ad.AdCreateDTO;
-import services.app.adservice.dto.ad.AdDetailViewDTO;
 import services.app.adservice.dto.ad.AdPageContentDTO;
 
 import services.app.adservice.dto.car.StatisticCarDTO;
@@ -27,6 +26,5 @@ public interface AdService {
     void setRating(AdRatingDTO ad);
     void logicalDeleteOrRevertAds(List<Ad> ads, Boolean status);
     void logicalDeleteOrRevert(Ad ad, Boolean status);
-    AdDetailViewDTO getAdDetailView(Long ad_id);
 
 }

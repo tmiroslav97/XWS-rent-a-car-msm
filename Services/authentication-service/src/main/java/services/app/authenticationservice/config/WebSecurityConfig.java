@@ -57,10 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers( "user/find-publish-user-by-id/{id}").permitAll()
-                .antMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated()
-//                .antMatchers(HttpMethod.POST).permitAll()
                 .and()
                 .cors()
                 .and()
@@ -75,7 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.POST, "/verify");
         web.ignoring().antMatchers(HttpMethod.GET, "/end-user");
         web.ignoring().antMatchers(HttpMethod.PUT, "/end-user/**");
-        web.ignoring().antMatchers(HttpMethod.GET, "user/find-publish-user-by-id/{id}");
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js", "/**/assets/**");
     }

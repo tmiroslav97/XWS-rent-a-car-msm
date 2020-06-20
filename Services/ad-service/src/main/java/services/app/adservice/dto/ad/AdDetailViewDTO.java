@@ -29,9 +29,8 @@ public class AdDetailViewDTO {
     private Integer childrenSeatNum;
     private Boolean cdw;
     private Boolean androidFlag;
-//    private Float pricePerKm;
-//    private Float pricePerKmCDW;
-    private Long priceId;
+    private Float pricePerKm;
+    private Float pricePerKmCDW;
     private Float pricePerDay;
     private Long publisherUserId;
     private String publisherUserFirstName;
