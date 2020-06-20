@@ -36,5 +36,6 @@ public interface AdService {
     void syncData();
 
     AdPageContentDTO findAllOrdinarySearch(Integer page, Integer size, String location, DateTime startDate, DateTime endDate);
-    AdPageDTO findBestAverageGrade();
+
+    Double findMaxAverageGrade(String max);
 }

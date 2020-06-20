@@ -241,5 +241,19 @@ public class AdServiceImpl implements AdService {
         return ads;
     }
 
+    @Override
+    public Double findMaxAverageGrade(String email) {
+        double averageGrade = 0.0;
+        double max = 0.0;
+
+        for(Ad ad:adRepository.findAll()){
+            averageGrade = ad.getRatingNum()/ad.getRatingCnt();
+            if(averageGrade>max){
+                System.out.println("Average: " + averageGrade);
+                max=averageGrade;
+            }
+        }
+        return max;
+    }
 
 }
