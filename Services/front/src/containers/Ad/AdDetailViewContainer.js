@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import jwt_decode from 'jwt-decode';
 import PaginationContainer from '../Pagination/PaginationContainer';
 import PaginationSize from '../../components/Pagination/PaginationSize';
-import { adSelector } from '../../store/ad/selectors';
+import { adSelector, searchDataSelector } from '../../store/ad/selectors';
 import { putSuccessMsg, putWarnMsg } from '../../store/common/actions';
 import { fetchAd } from '../../store/ad/actions';
 import SpinnerContainer from '../Common/SpinnerContainer';
@@ -13,6 +13,7 @@ import SpinnerContainer from '../Common/SpinnerContainer';
 
 const AdDetailViewContainer = (props) => {
     const dispatch = useDispatch();
+    const searchData = useSelector(searchDataSelector);
     const ad = useSelector(adSelector);
     const isFetchAd = ad.isFetch;
     const adId = props.match.params.ad;
@@ -42,7 +43,7 @@ const AdDetailViewContainer = (props) => {
             cart = new Map(JSON.parse(localStorage.getItem('cart')));
         }
         if (cart.get(ad.publisherUserId) == null) {
-            cart.set(ad.publisherUserId, { bundle: false, startDate: "", endDate: "", ads: [{ id: ad.id, adName: ad.name }] });
+            cart.set(ad.publisherUserId, { bundle: false, startDate: searchData.startDate, endDate: searchData.endDate, ads: [{ id: ad.id, adName: ad.name }] });
             dispatch(putSuccessMsg('Oglas uspjesno dodat u korpu'));
         } else {
             var temp = cart.get(ad.publisherUserId);
