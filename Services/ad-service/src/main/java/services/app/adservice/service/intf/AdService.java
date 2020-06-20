@@ -30,7 +30,7 @@ public interface AdService {
 
     String generateToken();
     Integer isExistToken(String token);
-    Integer addRatingToAd(Long rating);
+    Integer addRatingToAd(AdRatingDTO adRatingDTO);
 
     AdDetailViewDTO getAdDetailView(Long ad_id);
 

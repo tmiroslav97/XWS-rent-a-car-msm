@@ -325,8 +325,12 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Integer addRatingToAd(Long rating) {
-        return null;
+    public Integer addRatingToAd(AdRatingDTO adRatingDTO) {
+        Ad ad = this.findById(adRatingDTO.getAdId());
+        ad.setRatingNum(ad.getRatingNum() + adRatingDTO.getRating());
+        ad.setRatingCnt(ad.getRatingCnt() + 1);
+        ad = this.edit(ad);
+        return 1;
 
     }
 

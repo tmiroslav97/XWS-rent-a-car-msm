@@ -24,7 +24,7 @@ public class CommentController {
         return new ResponseEntity<>(commentService.findAllApprovedCommentFromAd(id), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER'))")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @RequestMapping(value = "/from-user/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getAllApprovedCommentAndAllUserCommentFromAd(@PathVariable("id") Long id) {
         System.out.println("Comment !!!!!");

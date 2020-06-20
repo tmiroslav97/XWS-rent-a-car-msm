@@ -9,6 +9,7 @@ import services.app.adservice.converter.CommentConverter;
 import services.app.adservice.dto.car.StatisticCarDTO;
 import services.app.adservice.dto.comment.CommentCreateDTO;
 import services.app.adservice.dto.comment.CommentDTO;
+import services.app.adservice.dto.user.PublisherUserDTO;
 import services.app.adservice.exception.ExistsException;
 import services.app.adservice.exception.NotFoundException;
 import services.app.adservice.model.Ad;
@@ -115,8 +116,9 @@ public class CommentServiceImpl implements CommentService {
         for(Comment comment: commentSet){
             if(comment.getApproved()){
                 CommentDTO commentDTO = CommentConverter.toCommentDTOFromComment(comment);
-                //dobiti publish usera iz authentication servisa i dodati komentaru
-//                PublishUserDTO publishUserDTO = authenticationClient
+                PublisherUserDTO publishUserDTO = authenticationClient.findPublishUserById(comment.getId());
+                commentDTO.setPublisherUserFirstName(publishUserDTO.getPublisherUserFirstName());
+                commentDTO.setPublisherUserLastName(publishUserDTO.getPublisherUserLastName());
                 list.add(commentDTO);
             }
         }
@@ -138,14 +140,15 @@ public class CommentServiceImpl implements CommentService {
         for(Comment comment: commentSet){
             if(comment.getApproved()){
                 CommentDTO commentDTO = CommentConverter.toCommentDTOFromComment(comment);
-                //dobiti publish usera iz authentication servisa i dodati komentaru
-//                PublishUserDTO publishUserDTO = authenticationClient
+                PublisherUserDTO publishUserDTO = authenticationClient.findPublishUserById(comment.getId());
+                commentDTO.setPublisherUserFirstName(publishUserDTO.getPublisherUserFirstName());
+                commentDTO.setPublisherUserLastName(publishUserDTO.getPublisherUserLastName());
                 list.add(commentDTO);
             }else if(comment.getPublisherUser().equals(publisherUser)){
                 CommentDTO commentDTO = CommentConverter.toCommentDTOFromComment(comment);
-
-                //dobiti publish usera iz authentication servisa i dodati komentaru
-//                PublishUserDTO publishUserDTO = authenticationClient
+                PublisherUserDTO publishUserDTO = authenticationClient.findPublishUserById(comment.getId());
+                commentDTO.setPublisherUserFirstName(publishUserDTO.getPublisherUserFirstName());
+                commentDTO.setPublisherUserLastName(publishUserDTO.getPublisherUserLastName());
                 list.add(commentDTO);
             }
         }
