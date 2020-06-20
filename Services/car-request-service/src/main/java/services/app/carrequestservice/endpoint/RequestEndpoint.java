@@ -18,9 +18,9 @@ public class RequestEndpoint {
         this.requestService = requestService;
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllReqeustsByPublisherIdRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPublisherRequestsRequest")
     @ResponsePayload
-    public GetPublisherRequestsResponse getAllRequestsByPublisherIdResponse(@RequestPayload GetPublisherRequestsRequest request) {
+    public GetPublisherRequestsResponse getAllRequestsByPublisherEmail(@RequestPayload GetPublisherRequestsRequest request) {
         GetPublisherRequestsResponse response = new GetPublisherRequestsResponse();
         response.getRequests().addAll(requestService.findAllByPublisherUserEmail(request.getPublisherUser()));
         return response;
