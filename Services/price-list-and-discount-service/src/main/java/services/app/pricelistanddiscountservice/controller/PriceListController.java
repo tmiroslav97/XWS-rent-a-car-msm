@@ -86,6 +86,11 @@ public class PriceListController {
         return priceListService.findById(id).getId();
     }
 
+    @RequestMapping(value = "/find-price-per-day/{id}", method = RequestMethod.GET)
+    public Float findPricePerDay(@PathVariable Long id) {
+        return priceListService.findById(id).getPricePerDay();
+    }
+
 
 
 }
