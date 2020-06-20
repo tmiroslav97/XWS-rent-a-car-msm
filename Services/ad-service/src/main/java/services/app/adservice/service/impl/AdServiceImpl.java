@@ -249,7 +249,7 @@ public class AdServiceImpl implements AdService {
 
 
         Float priceList = pricelistAndDiscountClient.findPricePerDay(adDV.getPriceId());
-        System.out.println("ID price liste : "+ priceList);
+        System.out.println("Cijena : "+ priceList);
         adDV.setPricePerDay(priceList);
 
         System.out.println(adDV.getPublisherUserId());

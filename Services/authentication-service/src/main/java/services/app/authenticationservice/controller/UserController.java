@@ -1,6 +1,7 @@
 package services.app.authenticationservice.controller;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,8 @@ public class UserController {
         return userService.findByEmail(principal.getName()).getId();
     }
 
-    @RequestMapping(value = "/find-publish-user-by-id", method = RequestMethod.POST)
-    public PublisherUserDTO findPublishUserById(Long id) {
+    @RequestMapping(value = "/find-publish-user-by-id/{id}", method = RequestMethod.GET)
+    public PublisherUserDTO findPublishUserById(@PathVariable Long id) {
         System.out.println("METODA FIND PUBLISHER NAME AND LAST NAME");
         return PublisherUserConverter.fromPublisherUserToPublisherUserDTO(userService.findById(id));
     }

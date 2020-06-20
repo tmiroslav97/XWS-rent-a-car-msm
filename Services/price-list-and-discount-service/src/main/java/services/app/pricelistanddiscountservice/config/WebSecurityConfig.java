@@ -53,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers( "pricelist/find-price-per-day/{id}").permitAll()
                 .antMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated();
 
