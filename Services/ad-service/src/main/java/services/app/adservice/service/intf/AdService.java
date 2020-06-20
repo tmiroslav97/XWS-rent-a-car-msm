@@ -28,5 +28,6 @@ public interface AdService {
     void logicalDeleteOrRevert(Ad ad, Boolean status);
     String generateToken();
     Integer isExistToken(String token);
+    Integer addRatingToAd(Long rating);
 
 }

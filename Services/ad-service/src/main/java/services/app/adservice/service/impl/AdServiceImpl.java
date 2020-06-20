@@ -315,4 +315,9 @@ public class AdServiceImpl implements AdService {
         }
         return 1;
     }
+
+    @Override
+    public Integer addRatingToAd(Long rating) {
+        return null;
+    }
 }
