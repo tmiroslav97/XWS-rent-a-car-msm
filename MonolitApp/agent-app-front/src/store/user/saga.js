@@ -104,7 +104,7 @@ export function* loginUser() {
     const data = yield call(AuthSecurity.login, payload);
     yield put(putToken(data));
     const roles = jwt_decode(data).roles;
-    history.push('/panel');
+    history.push('/panel/home');
 }
 
 export function* registerUser() {
