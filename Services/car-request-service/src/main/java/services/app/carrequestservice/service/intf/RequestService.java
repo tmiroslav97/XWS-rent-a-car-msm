@@ -18,6 +18,10 @@ public interface RequestService {
 
     List<Request> findAllByPublisherUserId(Long id);
 
+    List<Request> findAllByPublisherUserEmail(String email);
+
+    List<Request> findAllByPublisherUserEmailAndStatus(String email, String status);
+
     List<Request> findAllByPublisherUserIdAndByStatus(Long id, String status);
 
     Integer deleteById(Long id);

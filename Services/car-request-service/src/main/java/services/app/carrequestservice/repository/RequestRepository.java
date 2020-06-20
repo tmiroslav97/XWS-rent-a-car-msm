@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import services.app.carrequestservice.model.Request;
-import services.app.carrequestservice.model.enumeration.RequestStatusEnum;
+import services.app.carrequestservice.model.RequestStatusEnum;
 
 import java.util.List;
 
