@@ -139,4 +139,11 @@ public class AdController {
 
         return new ResponseEntity<>(adService.findAllOrdinarySearch(nextPage, size, location, startD, endD), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/best-average-grade", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findBestAverageGradeAd(Principal principal) {
+        System.out.println("Best average grade");
+        return new ResponseEntity<>(adService.findBestAverageGrade(principal.getName()), HttpStatus.OK);
+    }
+
 }

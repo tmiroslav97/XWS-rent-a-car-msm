@@ -242,7 +242,7 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public Double findMaxAverageGrade(String email) {
+    public AdPageDTO findBestAverageGrade(String email) {
         double averageGrade = 0.0;
         double max = 0.0;
 
@@ -253,7 +253,10 @@ public class AdServiceImpl implements AdService {
                 max=averageGrade;
             }
         }
-        return max;
+        Ad maxAd = adRepository.findAdWithGrade(max);
+        System.out.println("Id tog oglasa: " + maxAd.getId());
+        AdPageDTO adPage = AdConverter.toCreateAdPageDTOFromAd(maxAd);
+        return adPage;
     }
 
 }
