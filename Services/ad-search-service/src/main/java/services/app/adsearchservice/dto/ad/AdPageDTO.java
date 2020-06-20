@@ -19,6 +19,5 @@ public class AdPageDTO {
     private String fuelType;
     private Integer childrenSeatNum;
     private Float mileage;
-
-
+    private Long publisherUserId;
 }
