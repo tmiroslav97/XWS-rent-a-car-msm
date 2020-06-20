@@ -3,14 +3,13 @@ import { history } from '../../index';
 import { Row, Col, OverlayTrigger, Tooltip, ListGroup, Table, Button } from 'react-bootstrap'
 import FormModalContainer from '../../containers/Common/FormModalContainer';
 import CommentComponent from '../CommentAndRating/CommentComponent';
-import RatingComponent from '../CommentAndRating/RatingComponent';
+import ReactStars from "react-rating-stars-component";
 
 const EndUserRequestsPaidComponent = (props) => {
-    
+
     return (
         <div>
             <FormModalContainer show={props.flagComment} setShow={props.setFlagComment} name={'Komentar'} footer={false} data={props.adId} onSubmit={props.handleCommentForm} validated={props.validated} component={CommentComponent} />
-            <FormModalContainer show={props.flagRating} setShow={props.setFlagRating} name={'Ocena'} footer={false} data={props.adId} onSubmit={props.handleRatingForm} validated={props.validated} component={RatingComponent} />
             <Row>
                 <Col md={10} xs={12}>
                     <h3 className="border-bottom mt-5">Zahtjevi sa statusom {props.status}</h3>
@@ -26,8 +25,8 @@ const EndUserRequestsPaidComponent = (props) => {
                                 <th>Datum zavrsetka rentiranja</th>
                                 <th>Bundle zahtjev</th>
                                 <th>Naziv oglasa</th>
-                                <th></th>
-                                <th></th>
+                                <th>Ostavi komentar</th>
+                                <th>Ostavi ocenu</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,9 +63,9 @@ const EndUserRequestsPaidComponent = (props) => {
                                                     {
                                                         req.ads.map((ad, idx) => {
                                                             return (
-                                                                <OverlayTrigger key={idx} overlay={<Tooltip id="tooltip-disabled">Klikni za detaljno</Tooltip>}>
+                                                                <OverlayTrigger key={idx} overlay={<Tooltip id="tooltip-disabled">Ostavi komentar</Tooltip>}>
                                                                     <span className="d-inline-block">
-                                                                        <Button onClick={()=> {props.addComment(ad.id)}}>Ostavi komentar</Button>
+                                                                        <Button onClick={() => { props.addComment(ad.id) }}>Ostavi komentar</Button>
                                                                     </span>
                                                                 </OverlayTrigger>
                                                             );
@@ -79,9 +78,16 @@ const EndUserRequestsPaidComponent = (props) => {
                                                     {
                                                         req.ads.map((ad, idx) => {
                                                             return (
-                                                                <OverlayTrigger key={idx} overlay={<Tooltip id="tooltip-disabled">Klikni za detaljno</Tooltip>}>
+                                                                <OverlayTrigger key={idx} overlay={<Tooltip id="tooltip-disabled">Oceni</Tooltip>}>
                                                                     <span className="d-inline-block">
-                                                                    <Button onClick={()=> {props.addRating(ad.id)}}>Oceni</Button>
+                                                                        <ReactStars
+                                                                            count={5}
+                                                                            onChange={(newRating) => { props.handleRatingForm(ad.id, newRating) }}
+                                                                            size={18}
+                                                                            half={false}
+                                                                            color2={"#ffd700"}
+                                                                        />
+                                                                        
                                                                     </span>
                                                                 </OverlayTrigger>
                                                             );

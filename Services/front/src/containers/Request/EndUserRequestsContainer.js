@@ -35,7 +35,6 @@ const EndUserRequestsContainer = () => {
     }
 
     const [flagComment, setFlagComment] = useState(false);
-    const [flagRating, setFlagRating] = useState(false);
     const [adId, setAdId] = useState(false);
     const [validated, setValidated]= useState(false);
     
@@ -45,17 +44,15 @@ const EndUserRequestsContainer = () => {
         setAdId(event);
     }
 
-    const addRating = (event) =>{
-        setFlagRating(true);
-        console.log(event)
-        setAdId(event);
-    }
+    
     const handleCommentForm =(event)=>{
         console.log("komentar");
     }
 
-    const handleRatingForm =(event)=>{
+    const handleRatingForm =(adId, newRating)=>{
         console.log("ocena");
+        console.log(adId);
+        console.log(newRating);
     }
 
     useEffect(() => {
@@ -82,8 +79,6 @@ const EndUserRequestsContainer = () => {
                             <EndUserRequestsPaidComponent requests={paidRequests} status="paid"
                             flagComment={flagComment} setFlagComment={setFlagComment}
                             addComment={addComment}
-                            flagRating={flagRating} setFlagRating={setFlagRating}
-                            addRating={addRating}
                             adId={adId} setAdId={setAdId}
                             validated={validated}
                             handleCommentForm={handleCommentForm}
